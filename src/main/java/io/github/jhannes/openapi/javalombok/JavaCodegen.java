@@ -3,6 +3,7 @@ package io.github.jhannes.openapi.javalombok;
 import io.swagger.v3.oas.models.media.Schema;
 import org.openapitools.codegen.CodegenConstants;
 import org.openapitools.codegen.CodegenModel;
+import org.openapitools.codegen.CodegenProperty;
 import org.openapitools.codegen.api.TemplatingEngineAdapter;
 import org.openapitools.codegen.languages.AbstractJavaCodegen;
 import org.openapitools.codegen.model.ModelMap;
@@ -53,10 +54,20 @@ public class JavaCodegen extends AbstractJavaCodegen {
     public ModelsMap postProcessModels(ModelsMap objs) {
         var modelsMap = super.postProcessModels(objs);
         for (ModelMap model : modelsMap.getModels()) {
-            if (!model.getModel().isEnum && (model.getModel().oneOf != null || model.getModel().oneOf.isEmpty())) {
-                Map<String, String> item = new HashMap<>();
-                item.put("import", "lombok.Data");
-                objs.getImports().add(item);
+            if (model.getModel().isEnum) {
+                objs.getImports().add(Map.of("import", "lombok.Getter"));
+                objs.getImports().add(Map.of("import", "lombok.ToString"));
+                objs.getImports().add(Map.of("import", "lombok.RequiredArgsConstructor"));
+            } else if (!model.getModel().isEnum && (model.getModel().oneOf != null || model.getModel().oneOf.isEmpty())) {
+                objs.getImports().add(Map.of("import", "lombok.Data"));
+                for (CodegenProperty property : model.getModel().getVars()) {
+                    if (property.isEnum) {
+                        objs.getImports().add(Map.of("import", "lombok.Getter"));
+                        objs.getImports().add(Map.of("import", "lombok.ToString"));
+                        objs.getImports().add(Map.of("import", "lombok.RequiredArgsConstructor"));
+                    }
+                }
+
             }
         }
 

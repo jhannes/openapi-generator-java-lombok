@@ -3,10 +3,8 @@
  * {{description}}
  */
 {{/if}}
-@Getter
-@RequiredArgsConstructor
-@ToString
-public enum {{classname}} {
+@Getter @ToString @RequiredArgsConstructor
+public enum {{datatypeWithEnum}} {
 {{#allowableValues}}
 {{#enumVars}}
 {{#if enumDescription}}

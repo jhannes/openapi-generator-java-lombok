@@ -4,7 +4,7 @@ package {{package}};
 import {{import}};
 {{/imports}}
 
-{{~#models~}}
+{{#models~}}
 {{#model~}}
 {{#if isEnum~}}
 {{>modelEnum}}
@@ -13,5 +13,5 @@ import {{import}};
 {{else~}}
 {{>modelGeneric}}
 {{/if~}}
-{{/model}}
-{{/models}}
+{{/model~}}
+{{/models~}}

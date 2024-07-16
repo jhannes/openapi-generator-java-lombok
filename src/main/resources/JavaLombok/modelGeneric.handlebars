@@ -1,4 +1,25 @@
 @Data
 public class {{classname}} {
+{{#vars}}
+{{#if isEnum and not isInherited}}
+{{#if isContainer}}
+{{#mostInnerItems}}
+    {{>modelInnerEnum}}
+{{/mostInnerItems}}
+{{else}}
+    {{>modelInnerEnum}}
+{{/if}}
+
+{{/if}}
+{{/vars}}
+
+{{#vars}}
+{{#if description}}
+    /**
+     * {{description}}
+    */
+{{/if}}
+    private {{{datatypeWithEnum}}} {{baseName}}{{#if defaultValue}} = {{{defaultValue}}}{{else unless required}} = null{{/if}};
+{{/vars}}
 
 }

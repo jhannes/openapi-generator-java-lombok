@@ -67,6 +67,7 @@ class PatchedHandlebarsEngineAdapter extends HandlebarsEngineAdapter {
         StringHelpers.register(handlebars);
         handlebars.registerHelpers(ConditionalHelpers.class);
         handlebars.registerHelpers(org.openapitools.codegen.templating.handlebars.StringHelpers.class);
+        handlebars.prettyPrint(true);
         Template tmpl = handlebars.compile(templateFile);
         return tmpl.apply(context);
     }
