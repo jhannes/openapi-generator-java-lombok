@@ -91,7 +91,7 @@ public class CompilerTest {
                     null,
                     fileManager,
                     diagnosticListener,
-                    List.of("-Xlint:deprecation", "-d", "target/testCompile/" + path.getFileName()),
+                    List.of("-Xlint:deprecation", "-d", "target/testCompile/" + path.getFileName(), "-proc:full"),
                     null,
                     fileManager.getJavaFileObjectsFromPaths(files)
             );
