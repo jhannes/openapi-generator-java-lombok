@@ -12,6 +12,7 @@ import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -83,7 +84,16 @@ public class CompilerTest {
                     (p, fa) -> p.getFileName().toString().endsWith(".java") && fa.isRegularFile()
             ).collect(Collectors.toList());
 
-            List<String> options = List.of("-Xlint:deprecation", "-d", path.resolve("target/compile").toString());
+            String classpath = Stream.of(
+                    System.getProperty("java.class.path").split(File.pathSeparator)
+            ).filter(p -> p.contains("projectlombok"))
+                    .collect(Collectors.joining(File.pathSeparator));
+            List<String> options = List.of(
+                    "-Xlint:deprecation",
+                    "-d", "target/testCompile/" + path.getFileName(),
+                    "-proc:full",
+                    "-classpath", classpath
+            );
             System.out.println("javac " + String.join(" " , options) + " " + files.stream().map(Path::toString).collect(Collectors.joining(" ")));
 
             DiagnosticCollector<JavaFileObject> diagnosticListener = new DiagnosticCollector<>();
@@ -91,7 +101,7 @@ public class CompilerTest {
                     null,
                     fileManager,
                     diagnosticListener,
-                    List.of("-Xlint:deprecation", "-d", "target/testCompile/" + path.getFileName(), "-proc:full"),
+                    options,
                     null,
                     fileManager.getJavaFileObjectsFromPaths(files)
             );

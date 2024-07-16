@@ -1,20 +1,34 @@
 package io.github.jhannes.openapi.javalombok;
 
+import io.swagger.v3.oas.models.media.Schema;
 import org.openapitools.codegen.CodegenConstants;
+import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.api.TemplatingEngineAdapter;
 import org.openapitools.codegen.languages.AbstractJavaCodegen;
-import org.openapitools.codegen.templating.HandlebarsEngineAdapter;
+import org.openapitools.codegen.model.ModelMap;
+import org.openapitools.codegen.model.ModelsMap;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class JavaCodegen extends AbstractJavaCodegen {
 
     public JavaCodegen() {
         templateDir = "JavaLombok";
-        super.setTemplatingEngine(new HandlebarsEngineAdapter());
+        super.setTemplatingEngine(new PatchedHandlebarsEngineAdapter());
 
         apiDocTemplateFiles.clear();
         apiTestTemplateFiles.clear();
         modelTestTemplateFiles.clear();
         modelDocTemplateFiles.clear();
+    }
+
+    @Override
+    public CodegenModel fromModel(String name, Schema model) {
+        CodegenModel cm = super.fromModel(name, model);
+        cm.imports.remove("ApiModel");
+        cm.imports.remove("ApiModelProperty");
+        return cm;
     }
 
     @Override
@@ -33,6 +47,20 @@ public class JavaCodegen extends AbstractJavaCodegen {
 
     @Override
     public void setTemplatingEngine(TemplatingEngineAdapter templatingEngine) {
+    }
+
+    @Override
+    public ModelsMap postProcessModels(ModelsMap objs) {
+        var modelsMap = super.postProcessModels(objs);
+        for (ModelMap model : modelsMap.getModels()) {
+            if (!model.getModel().isEnum && (model.getModel().oneOf != null || model.getModel().oneOf.isEmpty())) {
+                Map<String, String> item = new HashMap<>();
+                item.put("import", "lombok.Data");
+                objs.getImports().add(item);
+            }
+        }
+
+        return modelsMap;
     }
 
     @Override

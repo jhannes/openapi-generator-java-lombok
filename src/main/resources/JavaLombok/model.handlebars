@@ -1,0 +1,17 @@
+package {{package}};
+
+{{#imports~}}
+import {{import}};
+{{/imports}}
+
+{{~#models~}}
+{{#model~}}
+{{#if isEnum~}}
+{{>modelEnum}}
+{{else if oneOf~}}
+{{>modelOneOf}}
+{{else~}}
+{{>modelGeneric}}
+{{/if~}}
+{{/model}}
+{{/models}}
