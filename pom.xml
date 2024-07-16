@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>openapi-generator-lombok</artifactId>
+    <name>openapi-generator-lombok</name>
+    <groupId>io.github.jhannes.openapi</groupId>
+    <description>
+        OpenAPI-generator for Java client APIs and DTOs avoiding annotations.
+        Generates direct mapping of APIs as interfaces and test-data generators for DTOs
+    </description>
+    <version>0.6.1-SNAPSHOT</version>
+
+    <url>https://github.com/jhannes/openapi-generator-java-annotationfree/blob/main/README.md</url>
+    <licenses>
+        <license>
+            <name>The Apache Licence, version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Johannes Brodwall</name>
+            <email>jhannes@gmail.com</email>
+            <organizationUrl>https://github.com/jhannes</organizationUrl>
+        </developer>
+    </developers>
+
+    <properties>
+        <maven.compiler.source>10</maven.compiler.source>
+        <maven.compiler.target>10</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>openapi-generator</artifactId>
+            <version>7.7.0</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>
