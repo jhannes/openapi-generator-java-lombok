@@ -5,14 +5,19 @@ import {{import}};
 {{/imports}}
 import lombok.*;
 
-{{#models~}}
-{{#model~}}
-{{#if isEnum~}}
+{{#models}}
+{{#model}}
+{{#if description}}
+/**
+ * {{description}}
+ */
+{{/if}}
+{{#if isEnum}}
 {{>modelEnum}}
-{{else if oneOf~}}
+{{else if oneOf}}
 {{>modelOneOf}}
-{{else~}}
+{{else}}
 {{>modelGeneric}}
-{{/if~}}
-{{/model~}}
-{{/models~}}
+{{/if}}
+{{/model}}
+{{/models}}

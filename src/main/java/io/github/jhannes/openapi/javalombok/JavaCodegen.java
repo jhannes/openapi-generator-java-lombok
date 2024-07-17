@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 public class JavaCodegen extends AbstractJavaCodegen {
 
     public JavaCodegen() {
+        openApiNullable = false;
         templateDir = "JavaLombok";
         super.setTemplatingEngine(new PatchedHandlebarsEngineAdapter());
 
