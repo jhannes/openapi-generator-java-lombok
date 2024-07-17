@@ -7,3 +7,4 @@ src/main/java/io/github/jhannes/openapi/infectionTracker/model/ExposureDto.java
 src/main/java/io/github/jhannes/openapi/infectionTracker/model/InfectionDto.java
 src/main/java/io/github/jhannes/openapi/infectionTracker/model/InfectionInformationDto.java
 src/main/java/io/github/jhannes/openapi/infectionTracker/model/UserRoleDto.java
+src/main/java/io/github/jhannes/openapi/infectionTracker/model/lombok.config

@@ -16,3 +16,4 @@ src/main/java/io/github/jhannes/openapi/conversations/model/RequestToServerDto.j
 src/main/java/io/github/jhannes/openapi/conversations/model/SnapshotSetDto.java
 src/main/java/io/github/jhannes/openapi/conversations/model/SubscribeRequestDto.java
 src/main/java/io/github/jhannes/openapi/conversations/model/UpdateConversationDeltaDto.java
+src/main/java/io/github/jhannes/openapi/conversations/model/lombok.config

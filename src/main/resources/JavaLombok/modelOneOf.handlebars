@@ -3,6 +3,8 @@ public sealed interface {{classname}}
  	{{~#children}}{{#if @first}} permits {{else}}, {{/if}}{{{classname}}}{{/children}} {
 
 {{#discriminator}}
+    {{{propertyType}}} {{propertyGetter}}();
+
     static Class<? extends {{{classname}}}> getType(String {{propertyName}}) {
         return switch ({{propertyName}}) {
 {{#mappedModels}}
@@ -11,5 +13,11 @@ public sealed interface {{classname}}
             default -> throw new IllegalArgumentException("Illegal {{propertyName}} " + {{propertyName}});
         };
     }
+    {{#mappedModels}}
+
+    static {{{modelName}}} create{{mappingName}}() {
+        return new {{{modelName}}}().set{{capitalizeFirst propertyName}}("{{mappingName}}");
+    }
+    {{/mappedModels}}
 {{/discriminator}}
 }

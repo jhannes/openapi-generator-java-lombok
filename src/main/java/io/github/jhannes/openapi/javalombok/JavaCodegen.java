@@ -7,11 +7,13 @@ import org.openapitools.codegen.CodegenDiscriminator;
 import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenProperty;
 import org.openapitools.codegen.IJsonSchemaValidationProperties;
+import org.openapitools.codegen.SupportingFile;
 import org.openapitools.codegen.api.TemplatingEngineAdapter;
 import org.openapitools.codegen.languages.AbstractJavaCodegen;
 import org.openapitools.codegen.model.ModelsMap;
 import org.openapitools.codegen.utils.ModelUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -132,6 +134,8 @@ public class JavaCodegen extends AbstractJavaCodegen {
             additionalProperties.put(CodegenConstants.MODEL_PACKAGE, additionalProperties.get(CodegenConstants.PACKAGE_NAME) + ".model");
         }
         super.processOpts();
+
+        supportingFiles.add(new SupportingFile("lombok.config", sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar), "lombok.config"));
     }
 
     @Override
@@ -198,22 +202,27 @@ public class JavaCodegen extends AbstractJavaCodegen {
     public void postProcessOneOf(CodegenModel codegenModel, Map<String, List<CodegenModel>> interfacesOfSubtypes, Map<String, CodegenModel> allModels) {
         Set<CodegenDiscriminator.MappedModel> mappedModels = new HashSet<>();
         HashMap<String, String> mapping = new HashMap<>();
+        CodegenDiscriminator discriminator = codegenModel.discriminator;
+        if (discriminator != null) {
+            discriminator.setPropertyName(discriminator.getPropertyBaseName());
+            discriminator.setPropertyGetter("get" + capitalizeFirst(discriminator.getPropertyBaseName()));
+        }
         for (String className : codegenModel.oneOf) {
             CodegenModel subModel = allModels.get(className);
             if (subModel.oneOf.isEmpty()) {
                 mappedModels.add(new CodegenDiscriminator.MappedModel(subModel.name, className));
                 mapping.put(subModel.name, className);
             } else if (
-                    codegenModel.discriminator != null
+                    discriminator != null
                     && subModel.discriminator != null
-                    && subModel.discriminator.getPropertyName().equals(codegenModel.discriminator.getPropertyName())
+                    && subModel.discriminator.getPropertyName().equals(discriminator.getPropertyName())
             ) {
                 if (subModel.discriminator.getMapping() == null) {
                     postProcessOneOf(subModel, interfacesOfSubtypes, allModels);
                 }
                 mappedModels.addAll(subModel.discriminator.getMappedModels());
                 mapping.putAll(subModel.discriminator.getMapping());
-            } else if (codegenModel.discriminator != null && subModel.discriminator != null) {
+            } else if (discriminator != null && subModel.discriminator != null) {
                 //not matching discriminators, cannot be matched from spec
                 continue;
             }
@@ -225,15 +234,29 @@ public class JavaCodegen extends AbstractJavaCodegen {
             if (!subtypeInterfaces.contains(codegenModel)) {
                 subtypeInterfaces.add(codegenModel);
             }
+            if (codegenModel.getDiscriminatorName() != null && subModel.allVars.stream().noneMatch(v -> v.baseName.equals(codegenModel.getDiscriminatorName()))) {
+                CodegenProperty property = new CodegenProperty();
+                property.name = property.baseName = codegenModel.getDiscriminatorName();
+                property.isString = true;
+                property.dataType = property.datatypeWithEnum = "String";
+                property.required = true;
+                property.defaultValue = "\"" + subModel.name + "\"";
+                subModel.vars.addFirst(property);
+                subModel.allVars.addFirst(property);
+            }
         }
         codegenModel.allVars.removeIf(var -> codegenModel.interfaceModels.stream().anyMatch(model -> varNotInImplementation(var, model)));
-        if (codegenModel.discriminator != null && codegenModel.discriminator.getMapping() == null) {
-            codegenModel.discriminator.setMapping(mapping);
-            codegenModel.discriminator.setMappedModels(mappedModels);
+        if (discriminator != null && discriminator.getMapping() == null) {
+            discriminator.setMapping(mapping);
+            discriminator.setMappedModels(mappedModels);
         }
-        if (codegenModel.discriminator != null) {
-            codegenModel.allVars.removeIf(v -> v.name.equals(codegenModel.discriminator.getPropertyName()));
+        if (discriminator != null) {
+            codegenModel.allVars.removeIf(v -> v.name.equals(discriminator.getPropertyName()));
         }
+    }
+
+    private static String capitalizeFirst(String s) {
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
     }
 
     private static boolean varNotInImplementation(CodegenProperty var, CodegenModel model) {

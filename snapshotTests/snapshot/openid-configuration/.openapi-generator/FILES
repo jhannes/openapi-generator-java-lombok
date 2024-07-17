@@ -12,3 +12,4 @@ src/main/java/io/github/jhannes/openapi/openid_configuration/model/OauthErrorDto
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/ResponseTypeDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/TokenResponseDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/UserinfoDto.java
+src/main/java/io/github/jhannes/openapi/openid_configuration/model/lombok.config
