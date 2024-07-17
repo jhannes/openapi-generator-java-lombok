@@ -153,6 +153,9 @@ public class JavaCodegen extends AbstractJavaCodegen {
     @Override
     public Map<String, ModelsMap> postProcessAllModels(Map<String, ModelsMap> objs) {
         Map<String, ModelsMap> result = super.postProcessAllModels(objs);
+        for (CodegenModel codegenModel : getAllModels(result).values()) {
+            codegenModel.children = null;
+        }
         processOneOfInterfaces(result);
         processSealedClassed(result);
         return result;
@@ -160,10 +163,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
 
     private void processSealedClassed(Map<String, ModelsMap> objs) {
         Map<String, List<String>> subclassesOfType = new HashMap<>();
-        for (CodegenModel codegenModel : getAllModels(objs).values()) {
-            codegenModel.children = null;
-        }
-
         for (CodegenModel codegenModel : getAllModels(objs).values()) {
             if (codegenModel.parentModel != null) {
                 subclassesOfType.computeIfAbsent(codegenModel.parentModel.classname, ignored -> new ArrayList<>())
@@ -218,6 +217,10 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 //not matching discriminators, cannot be matched from spec
                 continue;
             }
+            if (codegenModel.children == null) {
+                codegenModel.children = new ArrayList<>();
+            }
+            codegenModel.children.add(subModel);
             List<CodegenModel> subtypeInterfaces = interfacesOfSubtypes.computeIfAbsent(className, k -> new ArrayList<>());
             if (!subtypeInterfaces.contains(codegenModel)) {
                 subtypeInterfaces.add(codegenModel);

@@ -1,5 +1,6 @@
 public sealed interface {{classname}}
-{{~#discriminator}}{{#mappedModels}}{{#if @first}} permits {{else}}, {{/if}}{{modelName}}{{/mappedModels}}{{/discriminator}} {
+ 	{{~#interfaces}}{{#if @first}} extends {{else}}, {{/if}}{{{.}}}{{/interfaces}}
+ 	{{~#children}}{{#if @first}} permits {{else}}, {{/if}}{{{classname}}}{{/children}} {
 
 {{#discriminator}}
     static Class<? extends {{{classname}}}> getType(String {{propertyName}}) {
