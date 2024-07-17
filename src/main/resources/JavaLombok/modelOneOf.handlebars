@@ -15,7 +15,7 @@ public sealed interface {{classname}}
     }
     {{#mappedModels}}
 
-    static {{{modelName}}} create{{mappingName}}() {
+    static {{{modelName}}} create{{capitalizeFirst mappingName}}() {
         return new {{{modelName}}}().set{{capitalizeFirst propertyName}}("{{mappingName}}");
     }
     {{/mappedModels}}

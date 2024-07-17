@@ -8,32 +8,32 @@ public sealed interface UpdateErrorDto permits DuplicateIdentifierErrorDto, Gene
 
     static Class<? extends UpdateErrorDto> getType(String code) {
         return switch (code) {
-            case "duplicateIdentifier" -> DuplicateIdentifierErrorDto.class;
-            case "generalError" -> GeneralErrorDto.class;
-            case "illegalAddress" -> IllegalEmailAddressErrorDto.class;
-            case "networkError" -> GeneralErrorDto.class;
-            case "notFound" -> NotFoundErrorDto.class;
+            case "duplicate_identifier" -> DuplicateIdentifierErrorDto.class;
+            case "general_error" -> GeneralErrorDto.class;
+            case "illegal_address" -> IllegalEmailAddressErrorDto.class;
+            case "network_error" -> GeneralErrorDto.class;
+            case "not_found" -> NotFoundErrorDto.class;
             default -> throw new IllegalArgumentException("Illegal code " + code);
         };
     }
 
-    static DuplicateIdentifierErrorDto createduplicateIdentifier() {
-        return new DuplicateIdentifierErrorDto().setCode("duplicateIdentifier");
+    static DuplicateIdentifierErrorDto createDuplicate_identifier() {
+        return new DuplicateIdentifierErrorDto().setCode("duplicate_identifier");
     }
 
-    static GeneralErrorDto creategeneralError() {
-        return new GeneralErrorDto().setCode("generalError");
+    static GeneralErrorDto createGeneral_error() {
+        return new GeneralErrorDto().setCode("general_error");
     }
 
-    static IllegalEmailAddressErrorDto createillegalAddress() {
-        return new IllegalEmailAddressErrorDto().setCode("illegalAddress");
+    static IllegalEmailAddressErrorDto createIllegal_address() {
+        return new IllegalEmailAddressErrorDto().setCode("illegal_address");
     }
 
-    static GeneralErrorDto createnetworkError() {
-        return new GeneralErrorDto().setCode("networkError");
+    static GeneralErrorDto createNetwork_error() {
+        return new GeneralErrorDto().setCode("network_error");
     }
 
-    static NotFoundErrorDto createnotFound() {
-        return new NotFoundErrorDto().setCode("notFound");
+    static NotFoundErrorDto createNot_found() {
+        return new NotFoundErrorDto().setCode("not_found");
     }
 }

@@ -14,11 +14,11 @@ public sealed interface AnyPartyDto permits OrganizationDto, PersonDto {
         };
     }
 
-    static OrganizationDto createorganization() {
+    static OrganizationDto createOrganization() {
         return new OrganizationDto().setType("organization");
     }
 
-    static PersonDto createperson() {
+    static PersonDto createPerson() {
         return new PersonDto().setType("person");
     }
 }
