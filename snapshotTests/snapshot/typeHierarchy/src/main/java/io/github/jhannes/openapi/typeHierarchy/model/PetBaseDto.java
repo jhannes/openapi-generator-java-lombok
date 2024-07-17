@@ -1,10 +1,9 @@
 package io.github.jhannes.openapi.typeHierarchy.model;
 
-import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
-import lombok.Data;
+import lombok.*;
 
 @Data
-public class PetBaseDto {
+public sealed class PetBaseDto permits CatDto, DogDto {
 
     private String id = null;
     private String name;

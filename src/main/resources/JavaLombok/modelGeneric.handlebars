@@ -1,7 +1,14 @@
 @Data
-public class {{classname}} {
+{{#parent}}
+@EqualsAndHashCode(callSuper = true)
+{{/parent}}
+public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
+	{{~#parent}} extends {{{parent}}}{{/parent}}
+ 	{{~#interfaces}}{{#if @first}} implements {{else}}, {{/if}}{{{.}}}{{/interfaces}}
+ 	{{~#children}}{{#if @first}} permits {{else}}, {{/if}}{{{classname}}}{{/children}} {
 {{#vars}}
 {{#if isEnum and not isInherited}}
+
 {{#if isContainer}}
 {{#mostInnerItems}}
     {{>modelInnerEnum}}

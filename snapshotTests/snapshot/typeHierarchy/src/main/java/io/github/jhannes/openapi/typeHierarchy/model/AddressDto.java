@@ -1,15 +1,12 @@
 package io.github.jhannes.openapi.typeHierarchy.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import lombok.Data;
-import lombok.Getter;
-import lombok.ToString;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Data
-public class AddressDto {
+public final class AddressDto {
+
     @Getter @ToString @RequiredArgsConstructor
     public enum AddressTypesEnum {
         SHIPPING("SHIPPING"),

@@ -1,2 +1,14 @@
-public interface {{classname}} {
+public sealed interface {{classname}}
+{{~#discriminator}}{{#mappedModels}}{{#if @first}} permits {{else}}, {{/if}}{{modelName}}{{/mappedModels}}{{/discriminator}} {
+
+{{#discriminator}}
+    static Class<? extends {{{classname}}}> getType(String {{propertyName}}) {
+        return switch ({{propertyName}}) {
+{{#mappedModels}}
+            case "{{mappingName}}" -> {{modelName}}.class;
+{{/mappedModels}}
+            default -> throw new IllegalArgumentException("Illegal {{propertyName}} " + {{propertyName}});
+        };
+    }
+{{/discriminator}}
 }

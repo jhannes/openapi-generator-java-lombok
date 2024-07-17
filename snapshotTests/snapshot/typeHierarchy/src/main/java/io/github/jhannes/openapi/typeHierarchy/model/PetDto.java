@@ -1,21 +1,16 @@
 package io.github.jhannes.openapi.typeHierarchy.model;
 
-import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
-import io.github.jhannes.openapi.typeHierarchy.model.CatDto;
-import io.github.jhannes.openapi.typeHierarchy.model.DogDto;
-import io.github.jhannes.openapi.typeHierarchy.model.GoldfishDto;
-import io.github.jhannes.openapi.typeHierarchy.model.WorkingDogCapabilityDto;
-import io.github.jhannes.openapi.typeHierarchy.model.WorkingDogDto;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import lombok.Data;
-import lombok.Getter;
-import lombok.ToString;
-import lombok.RequiredArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
-public interface PetDto {
+public sealed interface PetDto permits WorkingDogDto, CatDto, GoldfishDto, DogDto {
+
+    static Class<? extends PetDto> getType(String petType) {
+        return switch (petType) {
+            case "WorkingDog" -> WorkingDogDto.class;
+            case "Cat" -> CatDto.class;
+            case "Goldfish" -> GoldfishDto.class;
+            case "Dog" -> DogDto.class;
+            default -> throw new IllegalArgumentException("Illegal petType " + petType);
+        };
+    }
 }

@@ -1,16 +1,11 @@
 package io.github.jhannes.openapi.typeHierarchy.model;
 
-import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
-import lombok.Data;
-import lombok.Getter;
-import lombok.ToString;
-import lombok.RequiredArgsConstructor;
-import lombok.Getter;
-import lombok.ToString;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Data
-public class DogDto {
+@EqualsAndHashCode(callSuper = true)
+public sealed class DogDto extends PetBaseDto implements PetDto permits WorkingDogDto {
+
     @Getter @ToString @RequiredArgsConstructor
     public enum BreedEnum {
         DINGO("Dingo"),
@@ -20,19 +15,9 @@ public class DogDto {
     
         private final String name;
     }
-    @Getter @ToString @RequiredArgsConstructor
-    public enum PetTypeEnum {
-        DOG("Dog");
-    
-        private final String name;
-    }
 
-    private String id = null;
-    private String name;
-    private String birth_date = null;
-    private AddressDto ownerAddress = null;
+    private String pet_type = "Dog";
     private Boolean bark = null;
     private BreedEnum breed = null;
-    private PetTypeEnum pet_type;
 
 }

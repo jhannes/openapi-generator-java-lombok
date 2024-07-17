@@ -1,8 +1,6 @@
 package io.github.jhannes.openapi.typeHierarchy.model;
 
-import lombok.Getter;
-import lombok.ToString;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 @Getter
 @RequiredArgsConstructor
