@@ -36,7 +36,7 @@ public class CompilerTest {
     Stream<DynamicNode> outputsFromSpecsShouldCompile() throws IOException {
         List<DynamicNode> testSuites = new ArrayList<>();
         testSuites.add(compileSpec(AbstractSnapshotTest.SNAPSHOT_ROOT));
-        if (Files.isDirectory(AbstractSnapshotTest.LOCAL_SNAPSHOT_ROOT)) {
+        if (Files.isDirectory(AbstractSnapshotTest.LOCAL_SNAPSHOT_ROOT.resolve("input"))) {
             testSuites.add(compileSpec(AbstractSnapshotTest.LOCAL_SNAPSHOT_ROOT));
         }
         return testSuites.stream();
