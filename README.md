@@ -39,18 +39,19 @@ Add to your `pom.xml`:
                 <version>7.7.0</version>
                 <executions>
                     <execution>
-                        <id>petstore-java</id>
+                        <id>openapi-java</id>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
+                            <generatorName>java-lombok</generatorName>
+                            <!-- REPLACE WITH YOUR OWN SPECIFICATION -->
                             <inputSpec>${project.basedir}/src/main/openapi-spec/openapi.yaml</inputSpec>
-                            <generatorName>java-annotationfree</generatorName>
+                            <!-- REPLACE WITH YOUR OWN PACKAGE NAME -->
+                            <packageName>io.example.openapi</packageName>
                             <modelNameSuffix>Dto</modelNameSuffix>
+                            <!-- IF YOU WANT TO GENERATE FROM MORE THAN ONE SPEC, YOU PROBABLY WANT SEVERAL OUTPUTS -->
                             <output>target/generated-sources/openapi-java</output>
-                            <configOptions>
-                                <generateModelTests>true</generateModelTests>
-                            </configOptions>
                         </configuration>
                     </execution>
                 </executions>
@@ -58,7 +59,7 @@ Add to your `pom.xml`:
                     <dependency>
                         <groupId>io.github.jhannes.openapi</groupId>
                         <artifactId>openapi-generator-java-lombok</artifactId>
-                        <version>0.6.0</version>
+                        <version>0.1.2</version>
                     </dependency>
                 </dependencies>
             </plugin>
