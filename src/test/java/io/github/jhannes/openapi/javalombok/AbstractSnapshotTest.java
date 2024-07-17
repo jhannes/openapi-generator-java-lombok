@@ -12,6 +12,10 @@ import java.util.Comparator;
 import java.util.stream.Stream;
 
 public class AbstractSnapshotTest {
+    static {
+        System.setProperty("org.slf4j.simpleLogger.defaultLogLevel", "WARN");
+    }
+
     public static final Path SNAPSHOT_ROOT = Paths.get("snapshotTests");
     public static final Path LOCAL_SNAPSHOT_ROOT = Paths.get("localSnapshotTests");
 

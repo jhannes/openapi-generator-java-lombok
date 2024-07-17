@@ -14,11 +14,11 @@ public sealed interface WebSocketMessageDto permits WebSocketCommandDto {
         };
     }
 
-    static UpdatePersonCommandDto createupdatePerson() {
+    static UpdatePersonCommandDto createUpdatePerson() {
         return new UpdatePersonCommandDto().setCommand("updatePerson");
     }
 
-    static CreatePersonCommandDto createcreatePerson() {
+    static CreatePersonCommandDto createCreatePerson() {
         return new CreatePersonCommandDto().setCommand("createPerson");
     }
 }

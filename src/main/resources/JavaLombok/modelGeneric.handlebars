@@ -1,9 +1,9 @@
 @Data
-{{#parent}}
+{{#if parent}}
 @EqualsAndHashCode(callSuper = true)
-{{/parent}}
+{{/if}}
 public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
-	{{~#parent}} extends {{{parent}}}{{/parent}}
+	{{~#if parent}} extends {{{parent}}}{{/if}}
  	{{~#interfaces}}{{#if @first}} implements {{else}}, {{/if}}{{{.}}}{{/interfaces}}
  	{{~#children}}{{#if @first}} permits {{else}}, {{/if}}{{{classname}}}{{/children}} {
 {{#vars}}

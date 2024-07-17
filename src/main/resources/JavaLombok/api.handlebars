@@ -18,25 +18,25 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public interface {{classname}} {
 {{#operation}}
     /**
-    {{#summary}}
+    {{#if summary}}
      * {{summary}}
-    {{/summary}}
-    {{#notes}}
+    {{/if}}
+    {{#if notes}}
      * {{notes}}
-    {{/notes}}
+    {{/if}}
     {{#allParams}}
-     * @param {{baseName}} {{description}}{{#isQueryParam}} (query){{/isQueryParam}}{{#isPathParam}} (path){{/isPathParam}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/isContainer}}{{/required}}
+     * @param {{baseName}} {{#if description}}{{description}}{{/if}}{{#isQueryParam}} (query){{/isQueryParam}}{{#isPathParam}} (path){{/isPathParam}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#if defaultValue}}, default to {{defaultValue}}{{/if}}){{/isContainer}}{{/required}}
     {{/allParams}}
-    {{#returnType}}
+    {{#if returnType}}
      * @return {{returnType}}
-    {{/returnType}}
+    {{/if}}
     {{#isDeprecated}}
      * @deprecated
     {{/isDeprecated}}
-    {{#externalDocs}}
-     * {{description}}
-     * @see <a href="{{url}}">{{summary}} Documentation</a>
-    {{/externalDocs}}
+    {{#if externalDocs}}
+     * {{externalDocs.description}}
+     * @see <a href="{{externalDocs.url}}">{{externalDocs.summary}} Documentation</a>
+    {{/if}}
      */
     {{#isDeprecated}}
     @Deprecated

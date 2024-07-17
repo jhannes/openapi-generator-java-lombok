@@ -87,7 +87,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
     @Override
     public CodegenModel fromModel(String name, Schema model) {
         CodegenModel cm = super.fromModel(name, model);
-        cm.interfaces = null;
+        cm.interfaces = new ArrayList<>();
         cm.interfaceModels = new ArrayList<>();
 
         for (CodegenProperty property : cm.getVars()) {
@@ -158,7 +158,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
     public Map<String, ModelsMap> postProcessAllModels(Map<String, ModelsMap> objs) {
         Map<String, ModelsMap> result = super.postProcessAllModels(objs);
         for (CodegenModel codegenModel : getAllModels(result).values()) {
-            codegenModel.children = null;
+            codegenModel.children = new ArrayList<>();
         }
         processOneOfInterfaces(result);
         processSealedClassed(result);
@@ -194,7 +194,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
                         .map(CodegenModel::getClassname)
                         .collect(Collectors.toList());
             } else if (!modelEntry.getValue().oneOf.isEmpty()) {
-                modelEntry.getValue().interfaces = null;
+                modelEntry.getValue().interfaces.clear();
             }
         }
     }
