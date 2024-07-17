@@ -7,12 +7,18 @@ import lombok.*;
 @Data
 public final class AddressDto {
 
-    @Getter @ToString @RequiredArgsConstructor
+    @Getter
+    @RequiredArgsConstructor
     public enum AddressTypesEnum {
         SHIPPING("SHIPPING"),
         BILLING("BILLING");
     
-        private final String name;
+        private final String value;
+    
+        @Override
+        public String toString() {
+            return value;
+        }
     }
 
     private String addressLine1 = null;

@@ -6,14 +6,20 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 public sealed class DogDto extends PetBaseDto implements PetDto permits WorkingDogDto {
 
-    @Getter @ToString @RequiredArgsConstructor
+    @Getter
+    @RequiredArgsConstructor
     public enum BreedEnum {
         DINGO("Dingo"),
         HUSKY("Husky"),
         RETRIEVER("Retriever"),
         SHEPHERD("Shepherd");
     
-        private final String name;
+        private final String value;
+    
+        @Override
+        public String toString() {
+            return value;
+        }
     }
 
     private String pet_type = "Dog";

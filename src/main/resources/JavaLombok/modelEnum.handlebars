@@ -1,7 +1,11 @@
+{{#if description}}
+/**
+ * {{description}}
+ */
+{{/if}}
 @Getter
 @RequiredArgsConstructor
-@ToString
-public enum {{classname}} {
+public enum {{#if datatypeWithEnum}}{{datatypeWithEnum}}{{else}}{{classname}}{{/if}} {
 {{#allowableValues}}
 {{#enumVars}}
 {{#if enumDescription}}
@@ -13,5 +17,14 @@ public enum {{classname}} {
 {{/enumVars}}
 {{/allowableValues}}
 
-    private final String name;
+    private final {{{dataType}}} value;
+
+    @Override
+    public String toString() {
+{{#if isString}}
+        return value;
+{{else}}
+        return String.valueOf(value);
+{{/if}}
+    }
 }

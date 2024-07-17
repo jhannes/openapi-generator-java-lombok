@@ -4,11 +4,15 @@ import lombok.*;
 
 @Getter
 @RequiredArgsConstructor
-@ToString
 public enum WorkingDogCapabilityDto {
     GUIDE("Guide"),
     RESCUE("Rescue"),
     SEARCH("Search");
 
-    private final String name;
+    private final String value;
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

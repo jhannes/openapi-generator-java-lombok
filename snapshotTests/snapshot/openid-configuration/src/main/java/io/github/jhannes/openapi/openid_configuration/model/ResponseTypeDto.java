@@ -4,7 +4,6 @@ import lombok.*;
 
 @Getter
 @RequiredArgsConstructor
-@ToString
 public enum ResponseTypeDto {
     CODE("code"),
     TOKEN("token"),
@@ -12,5 +11,10 @@ public enum ResponseTypeDto {
     CODE_ID_TOKEN("code id_token"),
     ID_TOKEN_TOKEN("id_token token");
 
-    private final String name;
+    private final String value;
+
+    @Override
+    public String toString() {
+        return value;
+    }
 }

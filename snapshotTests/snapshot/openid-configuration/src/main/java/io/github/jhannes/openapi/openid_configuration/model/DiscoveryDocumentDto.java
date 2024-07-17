@@ -10,36 +10,60 @@ import lombok.*;
 @Data
 public final class DiscoveryDocumentDto {
 
-    @Getter @ToString @RequiredArgsConstructor
+    @Getter
+    @RequiredArgsConstructor
     public enum ResponseModesSupportedEnum {
         QUERY("query"),
         FRAGMENT("fragment"),
         FORM_POST("form_post");
     
-        private final String name;
+        private final String value;
+    
+        @Override
+        public String toString() {
+            return value;
+        }
     }
 
-    @Getter @ToString @RequiredArgsConstructor
+    @Getter
+    @RequiredArgsConstructor
     public enum SubjectTypesSupportedEnum {
         PAIRWISE("pairwise"),
         PUBLIC("public");
     
-        private final String name;
+        private final String value;
+    
+        @Override
+        public String toString() {
+            return value;
+        }
     }
 
-    @Getter @ToString @RequiredArgsConstructor
+    @Getter
+    @RequiredArgsConstructor
     public enum CodeChallengeMethodsSupportedEnum {
         S256("S256"),
         PLAIN("plain");
     
-        private final String name;
+        private final String value;
+    
+        @Override
+        public String toString() {
+            return value;
+        }
     }
 
-    @Getter @ToString @RequiredArgsConstructor
+    @Getter
+    @RequiredArgsConstructor
     public enum IdTokenSigningAlgValuesSupportedEnum {
         RS256("RS256");
     
-        private final String name;
+        private final String value;
+    
+        @Override
+        public String toString() {
+            return value;
+        }
     }
 
     private String issuer = null;
