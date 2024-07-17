@@ -1,0 +1,142 @@
+openapi: 3.0.2
+info:
+  title: "WebSockets"
+  description: "An example of sending requests and commands"
+  version: "0.1.0"
+  contact:
+    name: "Johannes Brodwall"
+    email: "johannes@brodwall.com"
+paths:
+  /commands:
+    get:
+      responses:
+        200:
+          description: "Returns a log of all commands"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WebSocketCommand'
+components:
+  schemas:
+    WebSocketMessage:
+      oneOf:
+        - $ref: '#/components/schemas/WebSocketCommand'
+        - $ref: '#/components/schemas/WebSocketRequest'
+      discriminator:
+        propertyName: command
+    WebSocketRequest:
+      oneOf:
+        - $ref: '#/components/schemas/Subscribe'
+      discriminator:
+        propertyName: request
+    Subscribe:
+      properties:
+        request:
+          enum: [ Subscribe ]
+      required: [ request ]
+    Unsubscribe:
+      properties:
+        request:
+          enum: [ Unsubscribe ]
+      required: [ request ]
+    WebSocketCommand:
+      oneOf:
+        - $ref: '#/components/schemas/CreatePersonCommand'
+        - $ref: '#/components/schemas/UpdatePersonCommand'
+      discriminator:
+        propertyName: command
+        mapping:
+          createPerson: CreatePersonCommand
+          updatePerson: UpdatePersonCommand
+    CreatePersonCommand:
+      properties:
+        command:
+          enum: [ createPerson ]
+        id:
+          type: string
+          format: uuid
+        person:
+          $ref: "#/components/schemas/Person"
+      required: [ command, id, person ]
+    UpdatePersonCommand:
+      properties:
+        command:
+          enum: [ updatePerson ]
+        id:
+          type: string
+          format: uuid
+        person:
+          $ref: "#/components/schemas/Person"
+      required: [ command, id, person ]
+    Recipient:
+      properties:
+        email:
+          type: string
+          format: email
+    Person:
+      allOf:
+        - $ref: "#/components/schemas/Recipient"
+        - type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+            type:
+              type: string
+            name:
+              $ref: "#/components/schemas/PersonName"
+            phone:
+              type: string
+              format: phone
+            birthDate:
+              type: string
+              format: date
+            gender:
+              type: string
+              enum: [ male, female, other, unspecified ]
+    PersonName:
+      properties:
+        givenName:
+          type: string
+        familyName:
+          type: string
+    ChangeTracked:
+      properties:
+        createdAt:
+          type: string
+          format: date-time
+        createdBy:
+          type: string
+          format: username
+        updatedAt:
+          type: string
+          format: date-time
+        updatedBy:
+          type: string
+          format: username
+      required:
+        - createdAt
+        - createdBy
+    PersonSnapshot:
+      allOf:
+        - $ref: "#/components/schemas/ChangeTracked"
+        - $ref: "#/components/schemas/Person"
+        - type: object
+          properties:
+            extra:
+              type: string
+      required:
+        - type
+        - name
+    StringSnapshot:
+      allOf:
+        - $ref: "#/components/schemas/ChangeTracked"
+        - type: object
+          properties:
+            name:
+              type: string
+        - type: object
+          properties:
+            type:
+              type: string

@@ -1,0 +1,12 @@
+.openapi-generator-ignore
+src/main/java/io/github/jhannes/openapi/poly/api/DefaultApi.java
+src/main/java/io/github/jhannes/openapi/poly/model/AnyPartyDto.java
+src/main/java/io/github/jhannes/openapi/poly/model/CreationErrorDto.java
+src/main/java/io/github/jhannes/openapi/poly/model/DuplicateIdentifierErrorDto.java
+src/main/java/io/github/jhannes/openapi/poly/model/GeneralErrorDto.java
+src/main/java/io/github/jhannes/openapi/poly/model/IllegalEmailAddressErrorDto.java
+src/main/java/io/github/jhannes/openapi/poly/model/LogMessageDto.java
+src/main/java/io/github/jhannes/openapi/poly/model/NotFoundErrorDto.java
+src/main/java/io/github/jhannes/openapi/poly/model/OrganizationDto.java
+src/main/java/io/github/jhannes/openapi/poly/model/PersonDto.java
+src/main/java/io/github/jhannes/openapi/poly/model/UpdateErrorDto.java

@@ -1,19 +1,15 @@
 package io.github.jhannes.openapi.openid_configuration.api;
 
-import io.github.jhannes.openapi.openid_configuration.model.GrantTypeDto;
-import io.github.jhannes.openapi.openid_configuration.model.OauthErrorDto;
-import io.github.jhannes.openapi.openid_configuration.model.ResponseTypeDto;
-import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
-import java.net.URI;
-import io.github.jhannes.openapi.openid_configuration.model.UserinfoDto;
+import io.github.jhannes.openapi.openid_configuration.model.*;
 
 import lombok.*;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
+import java.net.URI;
+import java.time.*;
+import java.util.*;
+import java.util.function.*;
 
 import static java.net.URLEncoder.encode;
 import static java.nio.charset.StandardCharsets.UTF_8;

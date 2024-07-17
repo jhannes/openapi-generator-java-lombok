@@ -43,7 +43,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
 
     @Override
     protected void addImports(CodegenModel m, IJsonSchemaValidationProperties type) {
-        if (!type.getIsModel() && !type.getIsEnum() && (type.getItems() == null || type.getItems().getIsEnum())) {
+        if (!type.getIsModel() && !type.getIsEnum() && (type.getItems() == null || type.getItems().getIsEnum() || type.getItems().isContainer)) {
             super.addImports(m, type);
         }
     }

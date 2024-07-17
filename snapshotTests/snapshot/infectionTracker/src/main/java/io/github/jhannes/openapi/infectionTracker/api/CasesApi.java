@@ -1,17 +1,15 @@
 package io.github.jhannes.openapi.infectionTracker.api;
 
-import io.github.jhannes.openapi.infectionTracker.model.ExposureDto;
-import io.github.jhannes.openapi.infectionTracker.model.InfectionDto;
-import io.github.jhannes.openapi.infectionTracker.model.InfectionInformationDto;
-import java.util.UUID;
+import io.github.jhannes.openapi.infectionTracker.model.*;
 
 import lombok.*;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
+import java.net.URI;
+import java.time.*;
+import java.util.*;
+import java.util.function.*;
 
 import static java.net.URLEncoder.encode;
 import static java.nio.charset.StandardCharsets.UTF_8;
