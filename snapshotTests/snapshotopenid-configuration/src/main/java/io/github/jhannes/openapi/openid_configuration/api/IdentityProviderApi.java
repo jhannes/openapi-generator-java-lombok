@@ -7,26 +7,18 @@ import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
 import java.net.URI;
 import io.github.jhannes.openapi.openid_configuration.model.UserinfoDto;
 
-import lombok.*;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
-
 import static java.net.URLEncoder.encode;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public interface IdentityProviderApi {
     /**
-     * @param grant_type  (required)
+     * @param grantType  (required)
      * @param code  (required)
-     * @param client_id  (required)
-     * @param Authorization Used with token-exchange to validate client_name - use Basic authentication with client_id:client_secret (optional)
-     * @param client_secret  (optional)
-     * @param redirect_uri  (optional)
-     * @param subject_token Used with grant_type&#x3D;urn:ietf:params:oauth:grant-type:token-exchange to do a token exchange (optional)
+     * @param clientId  (required)
+     * @param authorization Used with token-exchange to validate client_name - use Basic authentication with client_id:client_secret (optional)
+     * @param clientSecret  (optional)
+     * @param redirectUri  (optional)
+     * @param subjectToken Used with grant_type&#x3D;urn:ietf:params:oauth:grant-type:token-exchange to do a token exchange (optional)
      * @param audience Used with token-exchange to indicate which application the token will be used with (optional)
      * @return TokenResponseDto
      */
@@ -34,27 +26,65 @@ public interface IdentityProviderApi {
             GrantTypeDto grant_type,
             String code,
             String client_id,
-            Optional<String> Authorization,
+            Optional<String> authorization,
             Optional<String> client_secret,
             Optional<URI> redirect_uri,
             Optional<String> subject_token,
             Optional<String> audience
     ) throws IOException;
 
-    @Data
-    class FetchTokenHeaders {
+    public static class FetchTokenHeaders {
         private String authorization;
+
+        public FetchTokenHeaders authorization(String authorization) {
+            this.authorization = authorization;
+            return this;
+        }
     }
 
-    @Data
-    class FetchTokenForm {
+    public static class FetchTokenForm {
         private GrantTypeDto grantType;
+
+        public FetchTokenForm grantType(GrantTypeDto grantType) {
+            this.grantType = grantType;
+            return this;
+        }
         private String code;
+
+        public FetchTokenForm code(String code) {
+            this.code = code;
+            return this;
+        }
         private String clientId;
+
+        public FetchTokenForm clientId(String clientId) {
+            this.clientId = clientId;
+            return this;
+        }
         private String clientSecret;
+
+        public FetchTokenForm clientSecret(String clientSecret) {
+            this.clientSecret = clientSecret;
+            return this;
+        }
         private URI redirectUri;
+
+        public FetchTokenForm redirectUri(URI redirectUri) {
+            this.redirectUri = redirectUri;
+            return this;
+        }
         private String subjectToken;
+
+        public FetchTokenForm subjectToken(String subjectToken) {
+            this.subjectToken = subjectToken;
+            return this;
+        }
         private String audience;
+
+        public FetchTokenForm audience(String audience) {
+            this.audience = audience;
+            return this;
+        }
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
@@ -84,23 +114,27 @@ public interface IdentityProviderApi {
     }
     /**
      * Returns information about the currently logged in user
-     * @param Authorization  (required)
+     * @param authorization  (required)
      * @return UserinfoDto
      */
     UserinfoDto getUserinfo(
-            String Authorization
+            String authorization
     ) throws IOException;
 
-    @Data
-    class GetUserinfoHeaders {
+    public static class GetUserinfoHeaders {
         private String authorization;
+
+        public GetUserinfoHeaders authorization(String authorization) {
+            this.authorization = authorization;
+            return this;
+        }
     }
     /**
      * Starts an authentication flow. If the request is successful, the user is returned to the redirect_uri with a parameter, otherwise the user is redirected with an error parameter
-     * @param client_id  (query) (required)
-     * @param response_type  (query) (optional)
+     * @param clientId  (query) (required)
+     * @param responseType  (query) (optional)
      * @param state  (query) (optional)
-     * @param redirect_uri  (query) (optional)
+     * @param redirectUri  (query) (optional)
      * @param scope  (query) (optional)
      */
     void startAuthorization(
@@ -111,13 +145,37 @@ public interface IdentityProviderApi {
             Optional<String> scope
     ) throws IOException;
 
-    @Data
-    class StartAuthorizationQuery {
+    public static class StartAuthorizationQuery {
         private ResponseTypeDto responseType;
+
+        public StartAuthorizationQuery responseType(ResponseTypeDto responseType) {
+            this.responseType = responseType;
+            return this;
+        }
         private String clientId;
+
+        public StartAuthorizationQuery clientId(String clientId) {
+            this.clientId = clientId;
+            return this;
+        }
         private String state;
+
+        public StartAuthorizationQuery state(String state) {
+            this.state = state;
+            return this;
+        }
         private URI redirectUri;
+
+        public StartAuthorizationQuery redirectUri(URI redirectUri) {
+            this.redirectUri = redirectUri;
+            return this;
+        }
         private String scope;
+
+        public StartAuthorizationQuery scope(String scope) {
+            this.scope = scope;
+            return this;
+        }
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();

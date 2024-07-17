@@ -1,0 +1,97 @@
+package {{package}};
+
+{{#imports}}import {{import}};
+{{/imports}}
+
+import lombok.*;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+
+import static java.net.URLEncoder.encode;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
+{{#operations}}
+public interface {{classname}} {
+{{#operation}}
+    /**
+    {{#summary}}
+     * {{summary}}
+    {{/summary}}
+    {{#notes}}
+     * {{notes}}
+    {{/notes}}
+    {{#allParams}}
+     * @param {{baseName}} {{description}}{{#isQueryParam}} (query){{/isQueryParam}}{{#isPathParam}} (path){{/isPathParam}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/isContainer}}{{/required}}
+    {{/allParams}}
+    {{#returnType}}
+     * @return {{returnType}}
+    {{/returnType}}
+    {{#isDeprecated}}
+     * @deprecated
+    {{/isDeprecated}}
+    {{#externalDocs}}
+     * {{description}}
+     * @see <a href="{{url}}">{{summary}} Documentation</a>
+    {{/externalDocs}}
+     */
+    {{#isDeprecated}}
+    @Deprecated
+    {{/isDeprecated}}
+    {{#if isResponseFile}}byte[] {{else if returnType}}{{{returnType}}} {{else}}void {{/if}}{{operationId}}({{#allParams}}
+            {{#if required}}{{{dataType}}}{{else}}Optional<{{{dataType}}}>{{/if}} {{baseName}}{{#unless @last}},{{/unless}}{{/allParams}}{{#responses}}{{#headers}},
+            Consumer<{{{dataType}}}> set{{nameInPascalCase}}{{/headers}}{{/responses}}
+    ) throws IOException;
+    {{#hasHeaderParams}}
+
+    @Data
+    class {{operationIdCamelCase}}Headers {
+        {{#headerParams}}
+        private {{{dataType}}} {{paramName}};
+        {{/headerParams}}
+    }
+    {{/hasHeaderParams}}
+    {{#hasQueryParams}}
+
+    @Data
+    class {{operationIdCamelCase}}Query {
+        {{#queryParams}}
+        private {{{dataType}}} {{paramName}};
+        {{/queryParams}}
+
+        public String toUrlEncoded() {
+            List<String> parameters = new ArrayList<>();
+        {{#queryParams}}
+            if ({{paramName}} != null) {
+                parameters.add("{{baseName}}=" + encode({{paramName}}.toString(), UTF_8));
+            }
+        {{/queryParams}}
+            return String.join("&", parameters);
+        }
+    }
+    {{/hasQueryParams}}
+    {{#hasFormParams}}
+
+    @Data
+    class {{operationIdCamelCase}}Form {
+        {{#formParams}}
+        private {{{dataType}}} {{paramName}};
+        {{/formParams}}
+
+        public String toUrlEncoded() {
+            List<String> parameters = new ArrayList<>();
+        {{#formParams}}
+            if ({{paramName}} != null) {
+                parameters.add("{{baseName}}=" + encode({{paramName}}.toString(), UTF_8));
+            }
+        {{/formParams}}
+            return String.join("&", parameters);
+        }
+    }
+    {{/hasFormParams}}
+{{/operation}}
+}
+{{/operations}}
