@@ -71,7 +71,7 @@ Add to your `pom.xml`:
 
 ### [Petstore model](https://github.com/jhannes/openapi-generator-java-lombok/tree/main/snapshotTests/snapshot/petstore/src/main/java/io/github/jhannes/openapi/petstore/model)
 
-### [Polymorphism](https://github.com/jhannes/openapi-generator-java-lombok/blob/main/snapshotTests/snapshot/input/poly.yaml)
+### [Polymorphism](https://github.com/jhannes/openapi-generator-java-lombok/blob/main/snapshotTests/input/poly.yaml)
 
 ```yaml
 components:
