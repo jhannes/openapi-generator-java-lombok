@@ -8,6 +8,6 @@ public final class CreatePersonCommandDto implements WebSocketCommandDto {
 
     private String command = "createPerson";
     private UUID id;
-    private PersonDto person;
+    private PersonDto person = new PersonDto();
 
 }

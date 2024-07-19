@@ -66,9 +66,9 @@ public final class DiscoveryDocumentDto {
         }
     }
 
-    private String issuer = null;
-    private URI authorization_endpoint = null;
-    private URI token_endpoint = null;
+    private String issuer;
+    private URI authorization_endpoint;
+    private URI token_endpoint;
     private URI userinfo_endpoint = null;
     private URI end_session_endpoint = null;
     private URI jwks_uri = null;

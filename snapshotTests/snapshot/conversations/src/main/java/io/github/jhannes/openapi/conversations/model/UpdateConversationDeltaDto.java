@@ -8,6 +8,6 @@ public final class UpdateConversationDeltaDto implements DeltaDto {
 
     private String delta = "UpdateConversationDelta";
     private UUID conversationId;
-    private ConversationInfoDto info;
+    private ConversationInfoDto info = new ConversationInfoDto();
 
 }

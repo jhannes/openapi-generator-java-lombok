@@ -1,9 +1,13 @@
 package io.github.jhannes.openapi.openid_configuration.model;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import lombok.*;
 
 @Data
-public final class JwtPayloadDto {
+@EqualsAndHashCode(callSuper = true)
+public final class JwtPayloadDto extends HashMap<String, List> {
 
     /**
      * Issuer - the URI for the login provider

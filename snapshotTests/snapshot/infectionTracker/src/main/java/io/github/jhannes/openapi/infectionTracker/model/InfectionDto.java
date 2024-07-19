@@ -9,7 +9,7 @@ import lombok.*;
 public final class InfectionDto {
 
     private UUID id;
-    private InfectionInformationDto information;
+    private InfectionInformationDto information = new InfectionInformationDto();
     private List<ExposureDto> registeredExposures = new ArrayList<>();
 
 }

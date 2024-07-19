@@ -157,11 +157,20 @@ public class JavaCodegen extends AbstractJavaCodegen {
     @Override
     public Map<String, ModelsMap> postProcessAllModels(Map<String, ModelsMap> objs) {
         Map<String, ModelsMap> result = super.postProcessAllModels(objs);
-        for (CodegenModel codegenModel : getAllModels(result).values()) {
+        Map<String, CodegenModel> allModels = getAllModels(objs);
+        for (CodegenModel codegenModel : allModels.values()) {
             codegenModel.children = new ArrayList<>();
         }
         processOneOfInterfaces(result);
         processSealedClassed(result);
+        for (CodegenModel model : allModels.values()) {
+            for (CodegenProperty var : model.getVars()) {
+                if (var.isModel && var.required && allModels.get(var.dataType).oneOf.isEmpty()) {
+                    var.defaultValue = "new " + var.dataType + "()";
+                }
+            }
+        }
+
         return result;
     }
 

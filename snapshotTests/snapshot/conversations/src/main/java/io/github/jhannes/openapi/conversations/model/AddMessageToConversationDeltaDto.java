@@ -9,6 +9,6 @@ public final class AddMessageToConversationDeltaDto implements DeltaDto {
     private String delta = "AddMessageToConversationDelta";
     private UUID conversationId;
     private UUID messageId;
-    private ConversationMessageDto message;
+    private ConversationMessageDto message = new ConversationMessageDto();
 
 }
