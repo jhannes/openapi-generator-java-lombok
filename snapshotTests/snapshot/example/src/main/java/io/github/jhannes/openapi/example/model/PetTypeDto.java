@@ -5,9 +5,9 @@ import lombok.*;
 @Getter
 @RequiredArgsConstructor
 public enum PetTypeDto {
-    CAT("cat"),
-    DOG("dog"),
-    BIRD("bird");
+    cat("cat"),
+    dog("dog"),
+    bird("bird");
 
     private final String value;
 

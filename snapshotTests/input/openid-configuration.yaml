@@ -15,6 +15,8 @@ paths:
     get:
       tags: [ Discovery ]
       operationId: getDiscoveryDocument
+      externalDocs:
+        url: https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig
       responses:
         200:
           description: The openid discovery document
@@ -26,6 +28,8 @@ paths:
     get:
       tags: [ Discovery ]
       operationId: getJwksDocument
+      externalDocs:
+        url: https://datatracker.ietf.org/doc/html/rfc7517
       responses:
         200:
           description: The cryptographic key description document
@@ -180,8 +184,6 @@ paths:
               properties:
                 grant_type:
                   $ref: "#/components/schemas/GrantType"
-                code:
-                  type: string
                 client_id:
                   type: string
                 client_secret:
@@ -189,6 +191,10 @@ paths:
                 redirect_uri:
                   type: string
                   format: uri
+                code:
+                  type: string
+                refresh_token:
+                  type: string
                 subject_token:
                   type: string
                   description:
@@ -241,12 +247,15 @@ paths:
 components:
   schemas:
     ResponseType:
-      enum:
-        - code
-        - token
-        - id_token
-        - code id_token
-        - id_token token
+      type: string
+      anyOf:
+        - enum:
+            - code
+            - token
+            - id_token
+            - code id_token
+            - id_token token
+        - {}
     GrantType:
       enum:
         - implicit
@@ -340,6 +349,8 @@ components:
         - exp
     DiscoveryDocument:
       type: object
+      externalDocs:
+        url: https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfigurationResponse
       properties:
         issuer:
           type: string
@@ -419,6 +430,8 @@ components:
         - issuer
     JwksDocument:
       type: object
+      externalDocs:
+        url: https://datatracker.ietf.org/doc/html/rfc7517
       properties:
         keys:
           type: array
@@ -428,13 +441,15 @@ components:
         - keys
     JwksKey:
       type: object
+      externalDocs:
+        url: https://datatracker.ietf.org/doc/html/rfc7517#section-4
       properties:
         kty:
           type: string
           example: RSA
         use:
           type: string
-          example: sig
+          example: sig, enc
         kid:
           type: string
         x5c:

@@ -10,11 +10,11 @@ public final class ExposureDto {
     @Getter
     @RequiredArgsConstructor
     public enum StatusEnum {
-        UNIDENTIFIED("unidentified"),
-        IDENTIFIED("identified"),
-        CONTACTED("contacted"),
-        TESTED("tested"),
-        INFECTED("infected");
+        unidentified("unidentified"),
+        identified("identified"),
+        contacted("contacted"),
+        tested("tested"),
+        infected("infected");
     
         private final String value;
     

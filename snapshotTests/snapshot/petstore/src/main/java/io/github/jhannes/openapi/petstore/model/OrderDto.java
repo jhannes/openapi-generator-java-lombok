@@ -12,9 +12,9 @@ public final class OrderDto {
     @Getter
     @RequiredArgsConstructor
     public enum StatusEnum {
-        PLACED("placed"),
-        APPROVED("approved"),
-        DELIVERED("delivered");
+        placed("placed"),
+        approved("approved"),
+        delivered("delivered");
     
         private final String value;
     

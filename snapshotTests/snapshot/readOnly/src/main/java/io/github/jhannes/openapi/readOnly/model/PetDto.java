@@ -13,8 +13,8 @@ public final class PetDto {
     @Getter
     @RequiredArgsConstructor
     public enum PetTypeEnum {
-        CAT("Cat"),
-        DOG("Dog");
+        Cat("Cat"),
+        Dog("Dog");
     
         private final String value;
     
@@ -27,9 +27,9 @@ public final class PetDto {
     @Getter
     @RequiredArgsConstructor
     public enum StatusEnum {
-        PENDING("Pending"),
-        AVAILABLE("Available"),
-        SOLD("Sold");
+        Pending("Pending"),
+        Available("Available"),
+        Sold("Sold");
     
         private final String value;
     

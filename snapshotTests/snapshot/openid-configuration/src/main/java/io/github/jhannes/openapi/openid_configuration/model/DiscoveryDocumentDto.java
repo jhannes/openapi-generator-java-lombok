@@ -13,9 +13,9 @@ public final class DiscoveryDocumentDto {
     @Getter
     @RequiredArgsConstructor
     public enum ResponseModesSupportedEnum {
-        QUERY("query"),
-        FRAGMENT("fragment"),
-        FORM_POST("form_post");
+        query("query"),
+        fragment("fragment"),
+        form_post("form_post");
     
         private final String value;
     
@@ -28,8 +28,8 @@ public final class DiscoveryDocumentDto {
     @Getter
     @RequiredArgsConstructor
     public enum SubjectTypesSupportedEnum {
-        PAIRWISE("pairwise"),
-        PUBLIC("public");
+        pairwise("pairwise"),
+        _public("public");
     
         private final String value;
     
@@ -43,7 +43,7 @@ public final class DiscoveryDocumentDto {
     @RequiredArgsConstructor
     public enum CodeChallengeMethodsSupportedEnum {
         S256("S256"),
-        PLAIN("plain");
+        plain("plain");
     
         private final String value;
     

@@ -11,10 +11,10 @@ public final class PersonDto extends RecipientDto {
     @Getter
     @RequiredArgsConstructor
     public enum GenderEnum {
-        MALE("male"),
-        FEMALE("female"),
-        OTHER("other"),
-        UNSPECIFIED("unspecified");
+        male("male"),
+        female("female"),
+        other("other"),
+        unspecified("unspecified");
     
         private final String value;
     

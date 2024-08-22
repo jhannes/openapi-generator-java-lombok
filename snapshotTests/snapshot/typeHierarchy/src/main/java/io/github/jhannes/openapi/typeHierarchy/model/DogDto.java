@@ -9,10 +9,10 @@ public sealed class DogDto extends PetBaseDto implements PetDto permits WorkingD
     @Getter
     @RequiredArgsConstructor
     public enum BreedEnum {
-        DINGO("Dingo"),
-        HUSKY("Husky"),
-        RETRIEVER("Retriever"),
-        SHEPHERD("Shepherd");
+        Dingo("Dingo"),
+        Husky("Husky"),
+        Retriever("Retriever"),
+        Shepherd("Shepherd");
     
         private final String value;
     

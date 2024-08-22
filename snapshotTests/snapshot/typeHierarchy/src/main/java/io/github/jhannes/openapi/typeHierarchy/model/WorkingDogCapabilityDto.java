@@ -5,9 +5,9 @@ import lombok.*;
 @Getter
 @RequiredArgsConstructor
 public enum WorkingDogCapabilityDto {
-    GUIDE("Guide"),
-    RESCUE("Rescue"),
-    SEARCH("Search");
+    Guide("Guide"),
+    Rescue("Rescue"),
+    Search("Search");
 
     private final String value;
 

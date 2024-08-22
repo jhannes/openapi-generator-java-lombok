@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -41,6 +42,11 @@ public class JavaCodegen extends AbstractJavaCodegen {
         importMapping.put("ToString", "lombok.ToString");
         importMapping.put("Getter", "lombok.Getter");
         importMapping.put("RequiredArgsConstructor", "lombok.RequiredArgsConstructor");
+    }
+
+    @Override
+    public String getName() {
+        return "java-lombok";
     }
 
     @Override
@@ -281,7 +287,39 @@ public class JavaCodegen extends AbstractJavaCodegen {
     }
 
     @Override
-    public String getName() {
-        return "java-lombok";
+    public String toEnumVarName(String value, String datatype) {
+        if (enumNameMapping.containsKey(value)) {
+            return enumNameMapping.get(value);
+        }
+
+        if (value.isEmpty()) {
+            return "EMPTY";
+        }
+
+        // for symbol, e.g. $, #
+        if (getSymbolName(value) != null) {
+            return getSymbolName(value).toUpperCase(Locale.ROOT);
+        }
+
+        if (" ".equals(value)) {
+            return "SPACE";
+        }
+
+        // number
+        if ("Integer".equals(datatype) || "Long".equals(datatype) ||
+            "Float".equals(datatype) || "Double".equals(datatype) || "BigDecimal".equals(datatype)) {
+            String varName = "NUMBER_" + value;
+            varName = varName.replaceAll("-", "MINUS_");
+            varName = varName.replaceAll("\\+", "PLUS_");
+            varName = varName.replaceAll("\\.", "_DOT_");
+            return varName;
+        }
+
+        // string
+        String var = value.replaceAll("\\W+", "_");
+        if (var.matches("\\d.*")) {
+            var = "_" + var;
+        }
+        return reservedWords.contains(var) ? escapeReservedWord(var) : var;
     }
 }

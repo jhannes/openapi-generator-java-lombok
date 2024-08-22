@@ -5,9 +5,9 @@ import lombok.*;
 @Getter
 @RequiredArgsConstructor
 public enum UserRoleDto {
-    ADMINISTRATOR("administrator"),
-    INTERVIEWER("interviewer"),
-    FOLLOWUP("followup");
+    administrator("administrator"),
+    interviewer("interviewer"),
+    followup("followup");
 
     private final String value;
 
