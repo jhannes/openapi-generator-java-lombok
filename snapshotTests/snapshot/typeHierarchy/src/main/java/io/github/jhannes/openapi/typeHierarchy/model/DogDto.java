@@ -26,4 +26,28 @@ public sealed class DogDto extends PetBaseDto implements PetDto permits WorkingD
     private Boolean bark = null;
     private BreedEnum breed = null;
 
+    @Override
+    public DogDto setId(String id) {
+        super.setId(id);
+        return this;
+    }
+
+    @Override
+    public DogDto setName(String name) {
+        super.setName(name);
+        return this;
+    }
+
+    @Override
+    public DogDto setBirth_date(String birthDate) {
+        super.setBirth_date(birthDate);
+        return this;
+    }
+
+    @Override
+    public DogDto setOwnerAddress(AddressDto ownerAddress) {
+        super.setOwnerAddress(ownerAddress);
+        return this;
+    }
+
 }

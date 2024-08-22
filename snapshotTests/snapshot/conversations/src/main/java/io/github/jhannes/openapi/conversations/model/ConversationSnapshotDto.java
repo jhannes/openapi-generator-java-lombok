@@ -14,4 +14,16 @@ public final class ConversationSnapshotDto extends ChangeTrackedDto {
     private ConversationInfoDto info = new ConversationInfoDto();
     private Map<String, ConversationMessageSnapshotDto> messages = new HashMap<>();
 
+    @Override
+    public ConversationSnapshotDto setCreatedAt(OffsetDateTime createdAt) {
+        super.setCreatedAt(createdAt);
+        return this;
+    }
+
+    @Override
+    public ConversationSnapshotDto setUpdatedAt(OffsetDateTime updatedAt) {
+        super.setUpdatedAt(updatedAt);
+        return this;
+    }
+
 }

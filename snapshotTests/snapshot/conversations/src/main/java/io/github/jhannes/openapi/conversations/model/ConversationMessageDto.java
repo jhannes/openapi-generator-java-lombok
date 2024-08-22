@@ -5,7 +5,7 @@ import java.util.Set;
 import lombok.*;
 
 @Data
-public final class ConversationMessageDto {
+public final class ConversationMessageDto implements ConversationMessageInterface {
 
     private String text;
     private Set<String> tags = new LinkedHashSet<>();

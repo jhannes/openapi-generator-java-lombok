@@ -4,7 +4,7 @@ import java.time.OffsetDateTime;
 import lombok.*;
 
 @Data
-public sealed class ChangeTrackedDto permits ConversationSnapshotDto {
+public sealed class ChangeTrackedDto implements ChangeTrackedInterface permits ConversationSnapshotDto {
 
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;

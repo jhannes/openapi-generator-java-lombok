@@ -4,7 +4,7 @@ import java.time.OffsetDateTime;
 import lombok.*;
 
 @Data
-public sealed class ChangeTrackedDto permits StringSnapshotDto {
+public sealed class ChangeTrackedDto implements ChangeTrackedInterface permits StringSnapshotDto {
 
     private OffsetDateTime createdAt;
     private String createdBy;

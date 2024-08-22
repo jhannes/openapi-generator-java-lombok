@@ -6,23 +6,7 @@ import lombok.*;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public final class PersonDto extends RecipientDto {
-
-    @Getter
-    @RequiredArgsConstructor
-    public enum GenderEnum {
-        male("male"),
-        female("female"),
-        other("other"),
-        unspecified("unspecified");
-    
-        private final String value;
-    
-        @Override
-        public String toString() {
-            return value;
-        }
-    }
+public final class PersonDto extends RecipientDto implements PersonInterface {
 
     private UUID id = null;
     private String type = null;
@@ -30,5 +14,11 @@ public final class PersonDto extends RecipientDto {
     private String phone = null;
     private LocalDate birthDate = null;
     private GenderEnum gender = null;
+
+    @Override
+    public PersonDto setEmail(String email) {
+        super.setEmail(email);
+        return this;
+    }
 
 }

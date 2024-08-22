@@ -14,6 +14,8 @@ import lombok.*;
 {{/if}}
 {{#if isEnum}}
 {{>modelEnum}}
+{{else if isMixin}}
+{{>modelMixinInterface}}
 {{else if oneOf}}
 {{>modelOneOf}}
 {{else}}

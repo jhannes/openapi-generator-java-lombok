@@ -10,6 +10,7 @@ import org.openapitools.codegen.IJsonSchemaValidationProperties;
 import org.openapitools.codegen.SupportingFile;
 import org.openapitools.codegen.api.TemplatingEngineAdapter;
 import org.openapitools.codegen.languages.AbstractJavaCodegen;
+import org.openapitools.codegen.model.ModelMap;
 import org.openapitools.codegen.model.ModelsMap;
 import org.openapitools.codegen.utils.ModelUtils;
 
@@ -26,6 +27,8 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class JavaCodegen extends AbstractJavaCodegen {
+
+    private final Set<String> mixinInterfaces = new HashSet<>();
 
     public JavaCodegen() {
         openApiNullable = false;
@@ -95,18 +98,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
         CodegenModel cm = super.fromModel(name, model);
         cm.interfaces = new ArrayList<>();
         cm.interfaceModels = new ArrayList<>();
-
-        for (CodegenProperty property : cm.getVars()) {
-            if (property.get_enum() != null && property.get_enum().size() == 1) {
-                property.defaultValue = "\"" + property.get_enum().getFirst() + "\"";
-                property.dataType = "\"" + property.get_enum().getFirst() + "\"";
-                property.datatypeWithEnum = "String";
-                property.defaultValueWithParam = property.defaultValue;
-                property.isEnum = property.isInnerEnum = false;
-                property.allowableValues = null;
-            }
-        }
-
         cm.imports.remove("ApiModel");
         cm.imports.remove("ApiModelProperty");
 
@@ -116,7 +107,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
             //cm.imports.add("RequiredArgsConstructor");
         } else if ((cm.oneOf == null || cm.oneOf.isEmpty())) {
             //cm.imports.add("Data");
-            for (CodegenProperty property : cm.getVars()) {
+            for (CodegenProperty property : cm.getAllVars()) {
                 if (property.isInnerEnum) {
                     //cm.imports.add("Getter");
                     //cm.imports.add("ToString");
@@ -124,8 +115,21 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 }
             }
         }
+        cm.allVars.removeIf(v -> cm.vars.stream().anyMatch(vv -> vv.name.equals(v.name)));
+        cm.allVars.addAll(cm.vars);
+
 
         return cm;
+    }
+
+    @Override
+    public String toSetter(String name) {
+        return "set" + capitalizeFirst(name);
+    }
+
+    @Override
+    public String toGetter(String name) {
+        return "get" + capitalizeFirst(name);
     }
 
     @Override
@@ -142,16 +146,11 @@ public class JavaCodegen extends AbstractJavaCodegen {
         super.processOpts();
 
         supportingFiles.add(new SupportingFile("lombok.config", sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar), "lombok.config"));
+        //supportingFiles.add(new SupportingFile("data_transfer_object.handlebars", sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar), "DataTransferObject.java"));
     }
 
     @Override
     public void setTemplatingEngine(TemplatingEngineAdapter templatingEngine) {
-    }
-
-    @Override
-    public ModelsMap postProcessModels(ModelsMap objs) {
-        var modelsMap = super.postProcessModels(objs);
-        return modelsMap;
     }
 
     @Override
@@ -161,23 +160,111 @@ public class JavaCodegen extends AbstractJavaCodegen {
     }
 
     @Override
+    public String toModelName(String name) {
+        return mixinInterfaces.contains(name) ? name : super.toModelName(name);
+    }
+
+    @Override
     public Map<String, ModelsMap> postProcessAllModels(Map<String, ModelsMap> objs) {
         Map<String, ModelsMap> result = super.postProcessAllModels(objs);
         Map<String, CodegenModel> allModels = getAllModels(objs);
         for (CodegenModel codegenModel : allModels.values()) {
             codegenModel.children = new ArrayList<>();
         }
+        processAllOfTypes(result, allModels);
         processOneOfInterfaces(result);
         processSealedClassed(result);
-        for (CodegenModel model : allModels.values()) {
-            for (CodegenProperty var : model.getVars()) {
-                if (var.isModel && var.required && allModels.get(var.dataType).oneOf.isEmpty()) {
-                    var.defaultValue = "new " + var.dataType + "()";
+        for (ModelsMap modelsMap : result.values()) {
+            for (ModelMap modelMap : modelsMap.getModels()) {
+                CodegenModel model = modelMap.getModel();
+                for (CodegenProperty var : model.getAllVars()) {
+                    if (var.isModel && var.required && allModels.get(var.dataType).oneOf.isEmpty()) {
+                        var.defaultValue = "new " + var.dataType + "()";
+                    }
+                    if (var.get_enum() != null && var.get_enum().size() == 1) {
+                        var.defaultValue = "\"" + var.get_enum().getFirst() + "\"";
+                        var.dataType = "\"" + var.get_enum().getFirst() + "\"";
+                        var.datatypeWithEnum = "String";
+                        var.defaultValueWithParam = var.defaultValue;
+                        var.isEnum = var.isInnerEnum = false;
+                        var.allowableValues = null;
+                        var.isInherited = false;
+                    }
+                }
+                model.vars = model.getAllVars().stream().filter(v -> !v.isInherited).toList();
+                model.parentVars = model.getAllVars().stream().filter(v -> v.isInherited).toList();
+            }
+        }
+        return result;
+    }
+
+    private void processAllOfTypes(Map<String, ModelsMap> result, Map<String, CodegenModel> allModels) {
+        Map<String, CodegenModel> multiplyInheritedTypes = new HashMap<>();
+        for (CodegenModel codegenModel : allModels.values()) {
+            if (codegenModel.allOf.size() > 1) {
+                for (String implementedInterfaceName : codegenModel.allOf) {
+                    CodegenModel implementedInterface = allModels.get(implementedInterfaceName);
+                    codegenModel.interfaces.add(implementedInterface.name + "Interface");
+                    do {
+                        if (!multiplyInheritedTypes.containsKey(implementedInterface.name)) {
+                            CodegenModel interfaceModel = new CodegenModel() {
+                                public boolean isMixin = true;
+                            };
+                            interfaceModel.children = new ArrayList<>();
+                            interfaceModel.interfaces = new ArrayList<>();
+                            interfaceModel.classname = implementedInterface.name + "Interface";
+                            multiplyInheritedTypes.put(implementedInterface.name, interfaceModel);
+                        }
+                        implementedInterface = implementedInterface.parentModel;
+                    } while (implementedInterface != null);
+                }
+            } else if (!codegenModel.allOf.isEmpty()) {
+                for (CodegenProperty var : codegenModel.allVars) {
+                    if (codegenModel.parentModel.allVars.stream().anyMatch(v -> v.name.equals(var.name))) {
+                        var.isInherited = true;
+                    }
                 }
             }
         }
+        for (String type : multiplyInheritedTypes.keySet()) {
+            ModelsMap modelsMap = result.get(type);
+            CodegenModel dtoModel = modelsMap.getModels().get(0).getModel();
 
-        return result;
+            CodegenModel interfaceModel = multiplyInheritedTypes.get(type);
+            dtoModel.interfaces = List.of(interfaceModel.classname);
+            if (dtoModel.parentModel != null) {
+                interfaceModel.parent = dtoModel.parentModel.name + "Interface";
+                interfaceModel.interfaces.add(dtoModel.parentModel.name + "Interface");
+                if (multiplyInheritedTypes.get(dtoModel.parentModel.name) != null) {
+                    multiplyInheritedTypes.get(dtoModel.parentModel.name).children.add(interfaceModel);
+                }
+            }
+            for (CodegenProperty property : dtoModel.allVars) {
+                CodegenProperty clone = property.clone();
+                interfaceModel.allVars.add(clone);
+            }
+
+            ModelMap modelMap = new ModelMap();
+            modelMap.setModel(interfaceModel);
+            ModelsMap models = new ModelsMap();
+            models.putAll(modelsMap);
+            models.setModels(List.of(modelMap));
+            result.put(interfaceModel.classname, models);
+
+            mixinInterfaces.add(interfaceModel.classname);
+
+            for (CodegenModel codegenModel : allModels.values()) {
+                if (codegenModel.interfaces != null && codegenModel.interfaces.contains(interfaceModel.classname)) {
+                    for (CodegenProperty property : codegenModel.allVars) {
+                        if (property.isEnum) {
+                            property.isEnum = false;
+                            property.dataType = property.datatypeWithEnum;
+                        }
+                    }
+                    interfaceModel.children.add(codegenModel);
+                }
+            }
+        }
     }
 
     private void processSealedClassed(Map<String, ModelsMap> objs) {
@@ -220,7 +307,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
         CodegenDiscriminator discriminator = codegenModel.discriminator;
         if (discriminator != null) {
             discriminator.setPropertyName(discriminator.getPropertyBaseName());
-            discriminator.setPropertyGetter("get" + capitalizeFirst(discriminator.getPropertyBaseName()));
+            discriminator.setPropertyGetter(toGetter(discriminator.getPropertyBaseName()));
         }
         for (String className : codegenModel.oneOf) {
             CodegenModel subModel = allModels.get(className);
@@ -256,7 +343,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 property.dataType = property.datatypeWithEnum = "String";
                 property.required = true;
                 property.defaultValue = "\"" + subModel.name + "\"";
-                subModel.vars.addFirst(property);
+                property.isInherited = false;
                 subModel.allVars.addFirst(property);
             }
         }
