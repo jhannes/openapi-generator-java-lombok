@@ -3,8 +3,7 @@ package io.github.jhannes.openapi.conversations.model;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import lombok.*;
+import lombok.Data;
 
 public sealed interface ChangeTrackedInterface permits ChangeTrackedDto, ConversationMessageSnapshotDto {
 

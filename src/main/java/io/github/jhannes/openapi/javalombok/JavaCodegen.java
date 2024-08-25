@@ -100,28 +100,8 @@ public class JavaCodegen extends AbstractJavaCodegen {
         cm.imports.remove("ApiModel");
         cm.imports.remove("ApiModelProperty");
 
-        if (cm.isEnum) {
-            //cm.imports.add("Getter");
-            //cm.imports.add("ToString");
-            //cm.imports.add("RequiredArgsConstructor");
-        } else if ((cm.oneOf == null || cm.oneOf.isEmpty())) {
-            //cm.imports.add("Data");
-            for (CodegenProperty property : cm.getAllVars()) {
-                if (property.isInnerEnum) {
-                    //cm.imports.add("Getter");
-                    //cm.imports.add("ToString");
-                    //cm.imports.add("RequiredArgsConstructor");
-                }
-            }
-        }
-
-        cm.imports.add("List");
-        cm.imports.add("ArrayList");
-        cm.imports.add("Objects");
-
         cm.allVars.removeIf(v -> cm.vars.stream().anyMatch(vv -> vv.name.equals(v.name)));
         cm.allVars.addAll(cm.vars);
-
 
         return cm;
     }
@@ -177,8 +157,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
     }
 
     private void setupDerivedVariables(Map<String, ModelsMap> result) {
-        Map<String, CodegenModel> allModels = getAllModels(result);
-
         List<CodegenModel> allCodegenModels = getCodegenModels(result.values());
         for (CodegenModel model : allCodegenModels) {
             Set<CodegenModel> children = new TreeSet<>(Comparator.comparing(CodegenModel::getClassname));
@@ -187,35 +165,69 @@ public class JavaCodegen extends AbstractJavaCodegen {
             model.children = new ArrayList<>(children);
         }
 
-        for (CodegenModel model : allCodegenModels) {
-            model.parent = model.additionalPropertiesType != null
-                    ? model.parent // TODO: set parentModel as well?
-                    : model.parentModel != null ? model.parentModel.classname : null;
-            model.interfaces = model.interfaceModels.stream()
-                    .map(CodegenModel::getClassname)
-                    .collect(Collectors.toList());
+        Map<String, CodegenModel> allModels = getAllModels(result);
+        for (ModelsMap modelsMap : result.values()) {
+            for (ModelMap modelMap : modelsMap.getModels()) {
+                CodegenModel model = modelMap.getModel();
+                model.parent = model.additionalPropertiesType != null
+                        ? model.parent // TODO: set parentModel as well?
+                        : model.parentModel != null ? model.parentModel.classname : null;
+                model.interfaces = model.interfaceModels.stream()
+                        .map(CodegenModel::getClassname)
+                        .collect(Collectors.toList());
 
-            for (CodegenProperty var : model.getAllVars()) {
-                if (var.isModel && var.required && allModels.get(var.dataType).oneOf.isEmpty()) {
-                    var.defaultValue = "new " + var.dataType + "()";
+                for (CodegenProperty var : model.getAllVars()) {
+                    if (var.isModel && var.required && allModels.get(var.dataType).oneOf.isEmpty()) {
+                        var.defaultValue = "new " + var.dataType + "()";
+                    }
+                    if (var.get_enum() != null && var.get_enum().size() == 1) {
+                        var.defaultValue = "\"" + var.get_enum().getFirst() + "\"";
+                        var.dataType = "\"" + var.get_enum().getFirst() + "\"";
+                        var.datatypeWithEnum = "String";
+                        var.defaultValueWithParam = var.defaultValue;
+                        var.isEnum = var.isInnerEnum = false;
+                        var.allowableValues = null;
+                        var.isInherited = false;
+                    }
                 }
-                if (var.get_enum() != null && var.get_enum().size() == 1) {
-                    var.defaultValue = "\"" + var.get_enum().getFirst() + "\"";
-                    var.dataType = "\"" + var.get_enum().getFirst() + "\"";
-                    var.datatypeWithEnum = "String";
-                    var.defaultValueWithParam = var.defaultValue;
-                    var.isEnum = var.isInnerEnum = false;
-                    var.allowableValues = null;
-                    var.isInherited = false;
+                model.vars = model.getAllVars().stream().filter(v -> !v.isInherited).toList();
+                model.parentVars = model.getAllVars().stream().filter(v -> v.isInherited).toList();
+                model.requiredVars = model.getVars().stream().filter(v -> v.required).toList();
+                model.hasRequired = !model.requiredVars.isEmpty();
+                model.hasMoreModels = model.vars.stream().anyMatch(v -> v.isModel);
+                model.optionalVars = model.getVars().stream().filter(v -> !v.required).toList();
+                model.hasOptional = !model.optionalVars.isEmpty();
+                model.hasEnums = model.getVars().stream().anyMatch(v -> v.isEnum);
+                model.hasEnums = model.getVars().stream().anyMatch(v -> v.isEnum);
+                boolean hasInnerEnum = model.getVars().stream().anyMatch(v -> v.isInnerEnum && v.isEnum);
+
+                if (!model.isEnum) {
+                    addImport(modelsMap, "java.util.List");
                 }
+                if (model.oneOf.isEmpty() && !model.classname.endsWith("Interface") && !model.isEnum) {
+                    addImport(modelsMap, "lombok.Data");
+                    if (model.parent != null) {
+                        addImport(modelsMap, "lombok.EqualsAndHashCode");
+                    }
+                }
+                if (model.isEnum || hasInnerEnum) {
+                    addImport(modelsMap, "lombok.Getter");
+                    addImport(modelsMap, "lombok.RequiredArgsConstructor");
+                }
+                if (model.hasRequired || model.hasMoreModels) {
+                    addImport(modelsMap, "java.util.ArrayList");
+                }
+                if (model.hasOptional) {
+                    addImport(modelsMap, "java.util.Objects");
+                }
+                modelsMap.getImports().sort(Comparator.comparing(s -> s.get("import")));
             }
-            model.vars = model.getAllVars().stream().filter(v -> !v.isInherited).toList();
-            model.parentVars = model.getAllVars().stream().filter(v -> v.isInherited).toList();
-            model.requiredVars = model.getVars().stream().filter(v -> v.required).toList();
-            model.hasRequired = !model.requiredVars.isEmpty();
-            model.hasMoreModels = model.vars.stream().anyMatch(v -> v.isModel);
-            model.optionalVars = model.getVars().stream().filter(v -> !v.required).toList();
-            model.hasOptional = !model.optionalVars.isEmpty();
+        }
+    }
+
+    private static void addImport(ModelsMap modelsMap, String importedClass) {
+        if (!modelsMap.getImports().contains(Map.of("import", importedClass))) {
+            modelsMap.getImports().add(Map.of("import", importedClass));
         }
     }
 

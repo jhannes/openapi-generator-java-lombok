@@ -2,8 +2,7 @@ package io.github.jhannes.openapi.poly.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import lombok.*;
+import lombok.Data;
 
 @Data
 public final class GeneralErrorDto implements CreationErrorDto, UpdateErrorDto {

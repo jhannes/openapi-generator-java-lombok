@@ -1,10 +1,9 @@
 package io.github.jhannes.openapi.readOnly.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
-import lombok.*;
+import lombok.Data;
 
 @Data
 public final class UserDto {

@@ -4,7 +4,7 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import lombok.*;
+import lombok.Data;
 
 @Data
 public final class DataSourceHealthDetailsDto implements HealthDetailsDto {

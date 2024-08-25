@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
-import lombok.*;
+import lombok.Data;
 
 @Data
 public final class OrganizationDto implements AnyPartyDto {

@@ -1,9 +1,6 @@
 package io.github.jhannes.openapi.serverHealth.model;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import lombok.*;
 
 public sealed interface HealthDetailsDto permits DataSourceHealthDetailsDto, HealthComponentFailureDetailsDto, ThreadHealthDetailsDto {
 

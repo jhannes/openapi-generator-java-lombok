@@ -1,9 +1,8 @@
 package io.github.jhannes.openapi.websockets.model;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import lombok.*;
+import lombok.Data;
 
 @Data
 public sealed class RecipientDto implements RecipientInterface permits PersonDto {

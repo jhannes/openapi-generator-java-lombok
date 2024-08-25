@@ -3,7 +3,7 @@ package io.github.jhannes.openapi.openid_configuration.model;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import lombok.*;
+import lombok.Data;
 
 /**
  * Token response according to https://www.oauth.com/oauth2-servers/access-tokens/access-token-response/

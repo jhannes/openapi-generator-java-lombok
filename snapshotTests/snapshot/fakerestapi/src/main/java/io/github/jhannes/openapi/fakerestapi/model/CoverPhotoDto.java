@@ -1,10 +1,9 @@
 package io.github.jhannes.openapi.fakerestapi.model;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import lombok.*;
+import lombok.Data;
 
 @Data
 public final class CoverPhotoDto {

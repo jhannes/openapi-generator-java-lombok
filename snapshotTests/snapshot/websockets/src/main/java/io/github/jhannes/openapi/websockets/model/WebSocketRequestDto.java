@@ -1,9 +1,6 @@
 package io.github.jhannes.openapi.websockets.model;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import lombok.*;
 
 public sealed interface WebSocketRequestDto permits SubscribeDto {
 

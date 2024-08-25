@@ -5,7 +5,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import lombok.*;
+import lombok.Data;
 
 public sealed interface ConversationMessageInterface permits ConversationMessageDto, ConversationMessageSnapshotDto {
 
