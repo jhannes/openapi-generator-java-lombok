@@ -80,9 +80,9 @@ public class EventSourcingTest {
 
         void copyToPerson(PersonDto o);
 
-        default List<String> missingRequiredFields() {
+        default List<String> missingRequiredFields(String prefix) {
             var result = new ArrayList<String>();
-            if (getAddress() != null) result.addAll(getAddress().missingRequiredFields("address."));
+            if (getAddress() != null) result.addAll(getAddress().missingRequiredFields(prefix + "address."));
             return result;
         }
     }
@@ -234,18 +234,13 @@ public class EventSourcingTest {
         private AddressDto address;
 
         @Override
-        public List<String> missingRequiredFields(String prefix) {
-            return new ArrayList<>();
-        }
-
-        @Override
         public PersonDto putAll(PersonInterface o) {
             o.copyToPerson(this);
             return this;
         }
 
         @Override
-        public List<String> missingRequiredFields() {
+        public List<String> missingRequiredFields(String prefix) {
             return new ArrayList<>();
         }
 
