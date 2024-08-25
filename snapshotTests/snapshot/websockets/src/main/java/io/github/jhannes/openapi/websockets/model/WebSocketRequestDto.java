@@ -1,5 +1,8 @@
 package io.github.jhannes.openapi.websockets.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import lombok.*;
 
 public sealed interface WebSocketRequestDto permits SubscribeDto {
@@ -16,4 +19,7 @@ public sealed interface WebSocketRequestDto permits SubscribeDto {
     static SubscribeDto createSubscribe() {
         return new SubscribeDto().setRequest("Subscribe");
     }
+
+    boolean isEmpty();
+    List<String> missingRequiredFields(String prefix);
 }

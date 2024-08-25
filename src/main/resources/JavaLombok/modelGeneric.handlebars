@@ -37,4 +37,162 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
     }
 {{/parentVars}}
 
+    public boolean isEmpty() {
+{{#if parent}}
+        return super.isEmpty()
+{{#interfaceModels}}
+{{#if isMixin}}
+                && is{{name}}Empty()
+{{/if}}
+{{/interfaceModels}}
+{{#optionalVars}}
+{{#unless isNew}}
+                && {{getter}}() == null
+{{/unless}}
+{{/optionalVars}}
+{{~else if allOf}}
+        return
+{{~#interfaceModels}}
+{{#if isMixin}}
+{{#unless @first}}                &&{{/unless}} is{{name}}Empty()
+{{/if}}
+{{/interfaceModels}}
+{{#optionalVars}}
+{{#unless isNew}}
+                && {{getter}}() == null
+{{/unless}}
+{{/optionalVars}}
+{{~else if hasOptional}}
+        return
+{{~#optionalVars}}
+{{#unless @first}}                &&{{/unless}} {{getter}}() == null
+{{/optionalVars}}
+{{~#interfaceModels}}
+{{#if isMixin}}
+                && is{{name}}Empty()
+{{/if}}
+{{/interfaceModels}}
+{{else}}
+        return false
+{{/if}}
+        ;
+    }
+
+{{#isMixinAllOf allOf}}
+    public {{classname}} putAll({{classname}} o) {
+        o.copyTo{{name}}(this);
+        return this;
+    }
+
+{{else}}
+{{#notMixinDto}}
+    public {{classname}} putAll({{classname}} o) {
+{{#if parent}}
+        super.putAll(o);
+{{/if}}
+{{#interfaceModels}}
+{{#if isMixin}}
+        o.copyTo{{name}}(this);
+{{/if}}
+{{/interfaceModels}}
+{{#vars}}
+{{#unless isNew}}
+        if (o.{{getter}}() != null) {{setter}}(o.{{getter}}());
+{{/unless}}
+{{/vars}}
+        return this;
+    }
+
+{{/notMixinDto}}
+{{/isMixinAllOf}}
+{{#interfaceModels}}
+{{#if isMixin}}
+    @Override
+    public {{../classname}} putAll({{classname}} o) {
+        o.copyTo{{../name}}(this);
+        return this;
+    }
+
+{{/if}}
+{{/interfaceModels}}
+{{#isMixinAllOf}}
+    public {{classname}} removeWhereEqual({{classname}} o) {
+        o.removeWhereEqualFrom{{../name}}(this);
+        return this;
+    }
+
+{{else}}
+{{#notMixinDto}}
+    public {{classname}} removeWhereEqual({{classname}} o) {
+{{#if parent}}
+{{#unless additionalProperties}}
+        super.removeWhereEqual(o);
+{{/unless}}
+{{/if}}
+{{#interfaceModels}}
+{{#if isMixin}}
+        o.removeWhereEqualFrom{{name}}(this);
+{{/if}}
+{{/interfaceModels}}
+{{#optionalVars}}
+{{#unless isNew}}
+        if (Objects.equals({{getter}}(), o.{{getter}}())) {{setter}}(null);
+{{/unless}}
+{{/optionalVars}}
+        return this;
+    }
+
+{{/notMixinDto}}
+{{/isMixinAllOf}}
+{{#interfaceModels}}
+{{#if isMixin}}
+    @Override
+    public {{../classname}} removeWhereEqual({{classname}} o) {
+        o.removeWhereEqualFrom{{../name}}(this);
+        return this;
+    }
+
+{{/if}}
+{{/interfaceModels}}
+    public List<String> missingRequiredFields(String prefix) {
+{{#if hasRequired or hasMoreModels}}
+{{#if additionalProperties}}
+        List<String> fields = new ArrayList<>();
+{{else if parent}}
+        List<String> fields = super.missingRequiredFields(prefix);
+{{else}}
+        List<String> fields = new ArrayList<>();
+{{/if}}
+{{#vars}}
+{{#if required}}
+{{#unless isInherited}}
+        if ({{getter}}() == null) fields.add(prefix + "{{name}}");
+{{/unless}}
+{{else if isModel}}
+        if ({{getter}}() != null) {
+            fields.addAll({{getter}}().missingRequiredFields(prefix + ".{{name}}"));
+        }
+{{/if}}
+{{/vars}}
+        return fields;
+{{else}}
+        return List.of();
+{{/if}}
+    }
+
+{{#gt allOf.length 1}}
+    @Override
+    public void copyTo{{name}}({{classname}} o) {
+{{#interfaceModels}}
+        copyTo{{classname}}(o);
+{{/interfaceModels}}
+    }
+
+    @Override
+    public void removeWhereEqualFrom{{name}}({{classname}} o) {
+{{#interfaceModels}}
+        removeWhereEqualFrom{{classname}}(o);
+{{/interfaceModels}}
+    }
+{{/gt}}
 }

@@ -1,6 +1,9 @@
 package io.github.jhannes.openapi.infectionTracker.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import lombok.*;
 
@@ -61,5 +64,48 @@ public final class ExposureDto {
     private UUID caseWorker = null;
     private StatusEnum status;
     private DelayAfterInfectionEnum delayAfterInfection = null;
+
+    public boolean isEmpty() {
+        return getId() == null
+                && getExposedPersonName() == null
+                && getExposedPersonPhoneNumber() == null
+                && getExposedDate() == null
+                && getExposureLocation() == null
+                && getNotes() == null
+                && getCaseWorker() == null
+                && getDelayAfterInfection() == null
+        ;
+    }
+
+    public ExposureDto putAll(ExposureDto o) {
+        if (o.getId() != null) setId(o.getId());
+        if (o.getExposedPersonName() != null) setExposedPersonName(o.getExposedPersonName());
+        if (o.getExposedPersonPhoneNumber() != null) setExposedPersonPhoneNumber(o.getExposedPersonPhoneNumber());
+        if (o.getExposedDate() != null) setExposedDate(o.getExposedDate());
+        if (o.getExposureLocation() != null) setExposureLocation(o.getExposureLocation());
+        if (o.getNotes() != null) setNotes(o.getNotes());
+        if (o.getCaseWorker() != null) setCaseWorker(o.getCaseWorker());
+        if (o.getStatus() != null) setStatus(o.getStatus());
+        if (o.getDelayAfterInfection() != null) setDelayAfterInfection(o.getDelayAfterInfection());
+        return this;
+    }
+
+    public ExposureDto removeWhereEqual(ExposureDto o) {
+        if (Objects.equals(getId(), o.getId())) setId(null);
+        if (Objects.equals(getExposedPersonName(), o.getExposedPersonName())) setExposedPersonName(null);
+        if (Objects.equals(getExposedPersonPhoneNumber(), o.getExposedPersonPhoneNumber())) setExposedPersonPhoneNumber(null);
+        if (Objects.equals(getExposedDate(), o.getExposedDate())) setExposedDate(null);
+        if (Objects.equals(getExposureLocation(), o.getExposureLocation())) setExposureLocation(null);
+        if (Objects.equals(getNotes(), o.getNotes())) setNotes(null);
+        if (Objects.equals(getCaseWorker(), o.getCaseWorker())) setCaseWorker(null);
+        if (Objects.equals(getDelayAfterInfection(), o.getDelayAfterInfection())) setDelayAfterInfection(null);
+        return this;
+    }
+
+    public List<String> missingRequiredFields(String prefix) {
+        List<String> fields = new ArrayList<>();
+        if (getStatus() == null) fields.add(prefix + "status");
+        return fields;
+    }
 
 }

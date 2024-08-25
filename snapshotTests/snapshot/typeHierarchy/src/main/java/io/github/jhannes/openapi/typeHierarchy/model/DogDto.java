@@ -1,5 +1,8 @@
 package io.github.jhannes.openapi.typeHierarchy.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import lombok.*;
 
 @Data
@@ -48,6 +51,34 @@ public sealed class DogDto extends PetBaseDto implements PetDto permits WorkingD
     public DogDto setOwnerAddress(AddressDto ownerAddress) {
         super.setOwnerAddress(ownerAddress);
         return this;
+    }
+
+    public boolean isEmpty() {
+        return super.isEmpty()
+                && getBark() == null
+                && getBreed() == null
+        ;
+    }
+
+    public DogDto putAll(DogDto o) {
+        super.putAll(o);
+        if (o.getPet_type() != null) setPet_type(o.getPet_type());
+        if (o.getBark() != null) setBark(o.getBark());
+        if (o.getBreed() != null) setBreed(o.getBreed());
+        return this;
+    }
+
+    public DogDto removeWhereEqual(DogDto o) {
+        super.removeWhereEqual(o);
+        if (Objects.equals(getBark(), o.getBark())) setBark(null);
+        if (Objects.equals(getBreed(), o.getBreed())) setBreed(null);
+        return this;
+    }
+
+    public List<String> missingRequiredFields(String prefix) {
+        List<String> fields = super.missingRequiredFields(prefix);
+        if (getPet_type() == null) fields.add(prefix + "petType");
+        return fields;
     }
 
 }

@@ -1,5 +1,8 @@
 package io.github.jhannes.openapi.poly.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import lombok.*;
 
 public sealed interface AnyPartyDto permits OrganizationDto, PersonDto {
@@ -21,4 +24,7 @@ public sealed interface AnyPartyDto permits OrganizationDto, PersonDto {
     static PersonDto createPerson() {
         return new PersonDto().setType("person");
     }
+
+    boolean isEmpty();
+    List<String> missingRequiredFields(String prefix);
 }

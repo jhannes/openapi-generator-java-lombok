@@ -1,5 +1,8 @@
 package io.github.jhannes.openapi.poly.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import lombok.*;
 
 public sealed interface UpdateErrorDto permits DuplicateIdentifierErrorDto, GeneralErrorDto, IllegalEmailAddressErrorDto, NotFoundErrorDto {
@@ -36,4 +39,7 @@ public sealed interface UpdateErrorDto permits DuplicateIdentifierErrorDto, Gene
     static NotFoundErrorDto createNot_found() {
         return new NotFoundErrorDto().setCode("not_found");
     }
+
+    boolean isEmpty();
+    List<String> missingRequiredFields(String prefix);
 }

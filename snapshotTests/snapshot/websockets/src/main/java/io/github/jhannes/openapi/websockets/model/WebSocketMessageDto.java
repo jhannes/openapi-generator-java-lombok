@@ -1,5 +1,8 @@
 package io.github.jhannes.openapi.websockets.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import lombok.*;
 
 public sealed interface WebSocketMessageDto permits WebSocketCommandDto {
@@ -21,4 +24,7 @@ public sealed interface WebSocketMessageDto permits WebSocketCommandDto {
     static CreatePersonCommandDto createCreatePerson() {
         return new CreatePersonCommandDto().setCommand("createPerson");
     }
+
+    boolean isEmpty();
+    List<String> missingRequiredFields(String prefix);
 }

@@ -1,5 +1,8 @@
 package io.github.jhannes.openapi.conversations.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import lombok.*;
 
 public sealed interface DeltaDto permits AddMessageToConversationDeltaDto, CreateConversationDeltaDto, UpdateConversationDeltaDto {
@@ -26,4 +29,7 @@ public sealed interface DeltaDto permits AddMessageToConversationDeltaDto, Creat
     static CreateConversationDeltaDto createCreateConversationDelta() {
         return new CreateConversationDeltaDto().setDelta("CreateConversationDelta");
     }
+
+    boolean isEmpty();
+    List<String> missingRequiredFields(String prefix);
 }

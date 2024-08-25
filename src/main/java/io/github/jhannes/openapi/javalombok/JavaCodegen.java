@@ -16,6 +16,8 @@ import org.openapitools.codegen.utils.ModelUtils;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -23,6 +25,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -80,9 +83,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
                     addVars(m, Map.of(), List.of(), unaliasPropertySchema(properties), required);
                 }
             }
-            if (m.allOf.size() == 1) {
-                m.parent = m.allOf.iterator().next();
-            }
         }
         if (schema.getOneOf() != null) {
             m.oneOf = new TreeSet<>();
@@ -96,7 +96,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
     @Override
     public CodegenModel fromModel(String name, Schema model) {
         CodegenModel cm = super.fromModel(name, model);
-        cm.interfaces = new ArrayList<>();
         cm.interfaceModels = new ArrayList<>();
         cm.imports.remove("ApiModel");
         cm.imports.remove("ApiModelProperty");
@@ -115,6 +114,11 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 }
             }
         }
+
+        cm.imports.add("List");
+        cm.imports.add("ArrayList");
+        cm.imports.add("Objects");
+
         cm.allVars.removeIf(v -> cm.vars.stream().anyMatch(vv -> vv.name.equals(v.name)));
         cm.allVars.addAll(cm.vars);
 
@@ -146,7 +150,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
         super.processOpts();
 
         supportingFiles.add(new SupportingFile("lombok.config", sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar), "lombok.config"));
-        //supportingFiles.add(new SupportingFile("data_transfer_object.handlebars", sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar), "DataTransferObject.java"));
     }
 
     @Override
@@ -167,81 +170,100 @@ public class JavaCodegen extends AbstractJavaCodegen {
     @Override
     public Map<String, ModelsMap> postProcessAllModels(Map<String, ModelsMap> objs) {
         Map<String, ModelsMap> result = super.postProcessAllModels(objs);
-        Map<String, CodegenModel> allModels = getAllModels(objs);
-        for (CodegenModel codegenModel : allModels.values()) {
-            codegenModel.children = new ArrayList<>();
-        }
-        processAllOfTypes(result, allModels);
+        processAllOfTypes(result);
         processOneOfInterfaces(result);
-        processSealedClassed(result);
-        for (ModelsMap modelsMap : result.values()) {
-            for (ModelMap modelMap : modelsMap.getModels()) {
-                CodegenModel model = modelMap.getModel();
-                for (CodegenProperty var : model.getAllVars()) {
-                    if (var.isModel && var.required && allModels.get(var.dataType).oneOf.isEmpty()) {
-                        var.defaultValue = "new " + var.dataType + "()";
-                    }
-                    if (var.get_enum() != null && var.get_enum().size() == 1) {
-                        var.defaultValue = "\"" + var.get_enum().getFirst() + "\"";
-                        var.dataType = "\"" + var.get_enum().getFirst() + "\"";
-                        var.datatypeWithEnum = "String";
-                        var.defaultValueWithParam = var.defaultValue;
-                        var.isEnum = var.isInnerEnum = false;
-                        var.allowableValues = null;
-                        var.isInherited = false;
-                    }
-                }
-                model.vars = model.getAllVars().stream().filter(v -> !v.isInherited).toList();
-                model.parentVars = model.getAllVars().stream().filter(v -> v.isInherited).toList();
-            }
-        }
+        setupDerivedVariables(result);
         return result;
     }
 
-    private void processAllOfTypes(Map<String, ModelsMap> result, Map<String, CodegenModel> allModels) {
+    private void setupDerivedVariables(Map<String, ModelsMap> result) {
+        Map<String, CodegenModel> allModels = getAllModels(result);
+
+        List<CodegenModel> allCodegenModels = getCodegenModels(result.values());
+        for (CodegenModel model : allCodegenModels) {
+            Set<CodegenModel> children = new TreeSet<>(Comparator.comparing(CodegenModel::getClassname));
+            allCodegenModels.stream().filter(c -> c.parentModel == model).forEach(children::add);
+            allCodegenModels.stream().filter(c -> c.interfaceModels.contains(model)).forEach(children::add);
+            model.children = new ArrayList<>(children);
+        }
+
+        for (CodegenModel model : allCodegenModels) {
+            model.parent = model.additionalPropertiesType != null
+                    ? model.parent // TODO: set parentModel as well?
+                    : model.parentModel != null ? model.parentModel.classname : null;
+            model.interfaces = model.interfaceModels.stream()
+                    .map(CodegenModel::getClassname)
+                    .collect(Collectors.toList());
+
+            for (CodegenProperty var : model.getAllVars()) {
+                if (var.isModel && var.required && allModels.get(var.dataType).oneOf.isEmpty()) {
+                    var.defaultValue = "new " + var.dataType + "()";
+                }
+                if (var.get_enum() != null && var.get_enum().size() == 1) {
+                    var.defaultValue = "\"" + var.get_enum().getFirst() + "\"";
+                    var.dataType = "\"" + var.get_enum().getFirst() + "\"";
+                    var.datatypeWithEnum = "String";
+                    var.defaultValueWithParam = var.defaultValue;
+                    var.isEnum = var.isInnerEnum = false;
+                    var.allowableValues = null;
+                    var.isInherited = false;
+                }
+            }
+            model.vars = model.getAllVars().stream().filter(v -> !v.isInherited).toList();
+            model.parentVars = model.getAllVars().stream().filter(v -> v.isInherited).toList();
+            model.requiredVars = model.getVars().stream().filter(v -> v.required).toList();
+            model.hasRequired = !model.requiredVars.isEmpty();
+            model.hasMoreModels = model.vars.stream().anyMatch(v -> v.isModel);
+            model.optionalVars = model.getVars().stream().filter(v -> !v.required).toList();
+            model.hasOptional = !model.optionalVars.isEmpty();
+        }
+    }
+
+    private void processAllOfTypes(Map<String, ModelsMap> result) {
         Map<String, CodegenModel> multiplyInheritedTypes = new HashMap<>();
-        for (CodegenModel codegenModel : allModels.values()) {
+        Map<String, CodegenModel> allModels = getAllModels(result);
+        for (Map.Entry<String, CodegenModel> codegenEntry : allModels.entrySet()) {
+            CodegenModel codegenModel = codegenEntry.getValue();
             if (codegenModel.allOf.size() > 1) {
                 for (String implementedInterfaceName : codegenModel.allOf) {
                     CodegenModel implementedInterface = allModels.get(implementedInterfaceName);
-                    codegenModel.interfaces.add(implementedInterface.name + "Interface");
-                    do {
-                        if (!multiplyInheritedTypes.containsKey(implementedInterface.name)) {
-                            CodegenModel interfaceModel = new CodegenModel() {
-                                public boolean isMixin = true;
-                            };
-                            interfaceModel.children = new ArrayList<>();
-                            interfaceModel.interfaces = new ArrayList<>();
-                            interfaceModel.classname = implementedInterface.name + "Interface";
-                            multiplyInheritedTypes.put(implementedInterface.name, interfaceModel);
+                    codegenModel.interfaceModels.add(multiplyInheritedTypes
+                            .computeIfAbsent(implementedInterface.name, i -> createMixin(implementedInterface)));
+                    CodegenModel parentInterface = implementedInterface.parentModel;
+                    while (parentInterface != null) {
+                        if (!multiplyInheritedTypes.containsKey(parentInterface.name)) {
+                            multiplyInheritedTypes.put(parentInterface.name, createMixin(parentInterface));
                         }
-                        implementedInterface = implementedInterface.parentModel;
-                    } while (implementedInterface != null);
+                        codegenModel.interfaceModels.add(multiplyInheritedTypes.get(parentInterface.name));
+                        parentInterface = parentInterface.parentModel;
+                    }
+                }
+                for (CodegenProperty var : codegenModel.allVars) {
+                    for (CodegenModel interfaceModel : codegenModel.interfaceModels) {
+                        if (interfaceModel.allVars.stream().anyMatch(v -> v.name.equals(var.name))) {
+                            var.isNew = true;
+                        }
+                    }
                 }
             } else if (!codegenModel.allOf.isEmpty()) {
+                codegenModel.parentModel = allModels.get(codegenModel.allOf.iterator().next());
                 for (CodegenProperty var : codegenModel.allVars) {
                     if (codegenModel.parentModel.allVars.stream().anyMatch(v -> v.name.equals(var.name))) {
-                        var.isInherited = true;
+                        var.isInherited = true; // TODO: remove?
+                        var.isNew = true;
                     }
                 }
             }
         }
-        for (String type : multiplyInheritedTypes.keySet()) {
-            ModelsMap modelsMap = result.get(type);
-            CodegenModel dtoModel = modelsMap.getModels().get(0).getModel();
+        for (CodegenModel interfaceModel : multiplyInheritedTypes.values()) {
+            ModelsMap modelsMap = result.get(interfaceModel.name);
 
-            CodegenModel interfaceModel = multiplyInheritedTypes.get(type);
-            dtoModel.interfaces = List.of(interfaceModel.classname);
+            CodegenModel dtoModel = modelsMap.getModels().get(0).getModel();
+            dtoModel.interfaceModels = List.of(interfaceModel);
+            dtoModel.allOf = Set.of();
             if (dtoModel.parentModel != null) {
-                interfaceModel.parent = dtoModel.parentModel.name + "Interface";
-                interfaceModel.interfaces.add(dtoModel.parentModel.name + "Interface");
-                if (multiplyInheritedTypes.get(dtoModel.parentModel.name) != null) {
-                    multiplyInheritedTypes.get(dtoModel.parentModel.name).children.add(interfaceModel);
-                }
-            }
-            for (CodegenProperty property : dtoModel.allVars) {
-                CodegenProperty clone = property.clone();
-                interfaceModel.allVars.add(clone);
+                interfaceModel.parentModel = multiplyInheritedTypes.get(dtoModel.parentModel.name);
+                interfaceModel.interfaceModels.add(interfaceModel.parentModel);
             }
 
             ModelMap modelMap = new ModelMap();
@@ -254,31 +276,57 @@ public class JavaCodegen extends AbstractJavaCodegen {
             mixinInterfaces.add(interfaceModel.classname);
 
             for (CodegenModel codegenModel : allModels.values()) {
-                if (codegenModel.interfaces != null && codegenModel.interfaces.contains(interfaceModel.classname)) {
+                if (codegenModel.interfaceModels.contains(interfaceModel)) {
                     for (CodegenProperty property : codegenModel.allVars) {
                         if (property.isEnum) {
                             property.isEnum = false;
                             property.dataType = property.datatypeWithEnum;
                         }
                     }
-                    interfaceModel.children.add(codegenModel);
                 }
             }
         }
     }
 
-    private void processSealedClassed(Map<String, ModelsMap> objs) {
-        Map<String, List<String>> subclassesOfType = new HashMap<>();
-        for (CodegenModel codegenModel : getAllModels(objs).values()) {
-            if (codegenModel.parentModel != null) {
-                subclassesOfType.computeIfAbsent(codegenModel.parentModel.classname, ignored -> new ArrayList<>())
-                        .add(codegenModel.classname);
-                if (codegenModel.parentModel.children == null) {
-                    codegenModel.parentModel.children = new ArrayList<>();
-                }
-                codegenModel.parentModel.children.add(codegenModel);
+    private static CodegenModel createMixin(CodegenModel dtoModel) {
+        CodegenModel interfaceModel = new CodegenModel() {
+            public boolean isMixin = true;
+
+            public Collection<CodegenModel> getDescendants() {
+                Map<String, CodegenModel> result = new TreeMap<>();
+                putDescendants(this, result);
+                return result.values();
             }
+
+            private void putDescendants(CodegenModel codegenModel, Map<String, CodegenModel> descendants) {
+                for (CodegenModel child : codegenModel.children) {
+                    if (descendants.containsKey(child.name)) {
+                        // prefer interface to implementation
+                        if (descendants.get(child.name).interfaceModels.contains(child)) {
+                            descendants.put(child.name, child);
+                        }
+                    } else {
+                        descendants.put(child.name, child);
+                    }
+                    putDescendants(child, descendants);
+                }
+            }
+        };
+        interfaceModel.name = dtoModel.name;
+        interfaceModel.interfaceModels = new ArrayList<>();
+        interfaceModel.classname = dtoModel.name + "Interface";
+        for (CodegenProperty property : dtoModel.allVars) {
+            CodegenProperty clone = property.clone();
+            interfaceModel.allVars.add(clone);
+            property.isNew = true;
         }
+        return interfaceModel;
+    }
+
+    private static List<CodegenModel> getCodegenModels(Collection<ModelsMap> modelMaps) {
+        return modelMaps.stream()
+                .flatMap(m -> m.getModels().stream().map(ModelMap::getModel))
+                .toList();
     }
 
     private void processOneOfInterfaces(Map<String, ModelsMap> objs) {
@@ -289,15 +337,10 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 postProcessOneOf(codegenModel, interfacesOfSubtypes, allModels);
             }
         }
-        for (Map.Entry<String, CodegenModel> modelEntry : allModels.entrySet()) {
-            modelEntry.getValue().interfaceModels = interfacesOfSubtypes.get(modelEntry.getKey());
-            if (modelEntry.getValue().interfaceModels != null) {
-                modelEntry.getValue().interfaces = modelEntry.getValue().interfaceModels.stream()
-                        .map(CodegenModel::getClassname)
-                        .collect(Collectors.toList());
-            } else if (!modelEntry.getValue().oneOf.isEmpty()) {
-                modelEntry.getValue().interfaces.clear();
-            }
+
+        for (String implementationTypeName : interfacesOfSubtypes.keySet()) {
+            CodegenModel codegenModel = allModels.get(implementationTypeName);
+            codegenModel.interfaceModels = interfacesOfSubtypes.get(codegenModel.classname);
         }
     }
 
@@ -328,10 +371,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 //not matching discriminators, cannot be matched from spec
                 continue;
             }
-            if (codegenModel.children == null) {
-                codegenModel.children = new ArrayList<>();
-            }
-            codegenModel.children.add(subModel);
             List<CodegenModel> subtypeInterfaces = interfacesOfSubtypes.computeIfAbsent(className, k -> new ArrayList<>());
             if (!subtypeInterfaces.contains(codegenModel)) {
                 subtypeInterfaces.add(codegenModel);
@@ -339,11 +378,14 @@ public class JavaCodegen extends AbstractJavaCodegen {
             if (codegenModel.getDiscriminatorName() != null && subModel.allVars.stream().noneMatch(v -> v.baseName.equals(codegenModel.getDiscriminatorName()))) {
                 CodegenProperty property = new CodegenProperty();
                 property.name = property.baseName = codegenModel.getDiscriminatorName();
+                property.getter = toGetter(property.name);
                 property.isString = true;
                 property.dataType = property.datatypeWithEnum = "String";
                 property.required = true;
                 property.defaultValue = "\"" + subModel.name + "\"";
                 property.isInherited = false;
+                property.isNew = true;
+                property.isDiscriminator = true;
                 subModel.allVars.addFirst(property);
             }
         }

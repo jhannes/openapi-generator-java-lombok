@@ -1,0 +1,74 @@
+public sealed interface {{classname}}
+ 	{{~#interfaces}}{{#if @first}} extends {{else}}, {{/if}}{{{.}}}{{/interfaces}}
+ 	{{~#children}}{{#if @first}} permits {{else}}, {{/if}}{{{classname}}}{{/children}} {
+{{#vars}}
+{{#if isEnum}}
+
+{{#if isContainer}}
+{{#mostInnerItems}}
+    {{>modelEnum}}
+{{/mostInnerItems}}
+{{else}}
+    {{>modelEnum}}
+{{/if}}
+
+{{/if}}
+{{/vars}}
+
+{{#vars}}
+{{#if description}}
+    /**
+     * {{description}}
+    */
+{{/if}}
+    {{{datatypeWithEnum}}} {{getter}}();
+{{#isReadOnly}}
+    /** <strong>read only</strong> */
+{{/isReadOnly}}
+    {{classname}} {{setter}}({{{datatypeWithEnum}}} {{name}});
+
+{{/vars}}
+    boolean isEmpty();
+    {{classname}} putAll({{classname}} o);
+    {{classname}} removeWhereEqual({{classname}} o);
+    List<String> missingRequiredFields(String prefix);
+
+{{#descendants}}
+    default void copyTo{{name}}({{classname}} o) {
+        copyTo{{../classname}}(o);
+    }
+{{/descendants}}
+{{#descendants}}
+    default void removeWhereEqualFrom{{name}}({{classname}} o) {
+        removeWhereEqualFrom{{../classname}}(o);
+    }
+{{/descendants}}
+
+    default boolean is{{name}}Empty() {
+{{#if interfaces}}
+        return {{#interfaceModels}}{{#unless @first}}
+	        && {{/unless}}is{{name}}Empty(){{/interfaceModels}}{{#optionalVars}}
+                && {{getter}}() == null{{/optionalVars}};
+{{else if optionalVars}}
+        return {{#optionalVars}}{{#unless @first}}
+                && {{/unless}}{{getter}}() == null{{/optionalVars}};
+{{else}}
+        return false;
+{{/if}}
+    }
+
+    default void copyTo{{classname}}({{classname}} o) {
+{{#interfaces}}
+        copyTo{{.}}(o);
+{{/interfaces}}
+{{#vars}}
+        if ({{getter}}() != null) o.{{setter}}({{getter}}());
+{{/vars}}
+    }
+
+    default void removeWhereEqualFrom{{classname}}({{classname}} o) {
+{{#optionalVars}}
+        if (Objects.equals({{getter}}(), o.{{getter}}())) o.{{setter}}(null);
+{{/optionalVars}}
+    }
+}

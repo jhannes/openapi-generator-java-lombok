@@ -1,5 +1,8 @@
 package io.github.jhannes.openapi.poly.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import lombok.*;
 
 public sealed interface CreationErrorDto permits DuplicateIdentifierErrorDto, GeneralErrorDto, IllegalEmailAddressErrorDto {
@@ -31,4 +34,7 @@ public sealed interface CreationErrorDto permits DuplicateIdentifierErrorDto, Ge
     static GeneralErrorDto createNetwork_error() {
         return new GeneralErrorDto().setCode("network_error");
     }
+
+    boolean isEmpty();
+    List<String> missingRequiredFields(String prefix);
 }

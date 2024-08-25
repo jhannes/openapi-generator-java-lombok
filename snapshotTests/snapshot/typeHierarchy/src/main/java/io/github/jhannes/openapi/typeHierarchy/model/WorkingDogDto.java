@@ -2,6 +2,7 @@ package io.github.jhannes.openapi.typeHierarchy.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import lombok.*;
 
 @Data
@@ -45,6 +46,29 @@ public final class WorkingDogDto extends DogDto implements PetDto {
     public WorkingDogDto setBreed(BreedEnum breed) {
         super.setBreed(breed);
         return this;
+    }
+
+    public boolean isEmpty() {
+        return super.isEmpty()
+        ;
+    }
+
+    public WorkingDogDto putAll(WorkingDogDto o) {
+        super.putAll(o);
+        if (o.getCapabilities() != null) setCapabilities(o.getCapabilities());
+        return this;
+    }
+
+    public WorkingDogDto removeWhereEqual(WorkingDogDto o) {
+        super.removeWhereEqual(o);
+        return this;
+    }
+
+    public List<String> missingRequiredFields(String prefix) {
+        List<String> fields = super.missingRequiredFields(prefix);
+        if (getPet_type() == null) fields.add(prefix + "petType");
+        if (getCapabilities() == null) fields.add(prefix + "capabilities");
+        return fields;
     }
 
 }

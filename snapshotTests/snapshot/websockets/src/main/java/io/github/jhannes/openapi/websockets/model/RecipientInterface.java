@@ -1,10 +1,48 @@
 package io.github.jhannes.openapi.websockets.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import lombok.*;
 
-public sealed interface RecipientInterface permits RecipientDto, PersonInterface {
+public sealed interface RecipientInterface permits PersonInterface, PersonSnapshotDto, RecipientDto {
 
     String getEmail();
     RecipientInterface setEmail(String email);
 
+    boolean isEmpty();
+    RecipientInterface putAll(RecipientInterface o);
+    RecipientInterface removeWhereEqual(RecipientInterface o);
+    List<String> missingRequiredFields(String prefix);
+
+    default void copyToPerson(PersonInterface o) {
+        copyToRecipientInterface(o);
+    }
+    default void copyToPersonSnapshot(PersonSnapshotDto o) {
+        copyToRecipientInterface(o);
+    }
+    default void copyToRecipient(RecipientDto o) {
+        copyToRecipientInterface(o);
+    }
+    default void removeWhereEqualFromPerson(PersonInterface o) {
+        removeWhereEqualFromRecipientInterface(o);
+    }
+    default void removeWhereEqualFromPersonSnapshot(PersonSnapshotDto o) {
+        removeWhereEqualFromRecipientInterface(o);
+    }
+    default void removeWhereEqualFromRecipient(RecipientDto o) {
+        removeWhereEqualFromRecipientInterface(o);
+    }
+
+    default boolean isRecipientEmpty() {
+        return getEmail() == null;
+    }
+
+    default void copyToRecipientInterface(RecipientInterface o) {
+        if (getEmail() != null) o.setEmail(getEmail());
+    }
+
+    default void removeWhereEqualFromRecipientInterface(RecipientInterface o) {
+        if (Objects.equals(getEmail(), o.getEmail())) o.setEmail(null);
+    }
 }

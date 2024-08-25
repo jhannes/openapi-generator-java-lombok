@@ -1,5 +1,8 @@
 package io.github.jhannes.openapi.openid_configuration.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import lombok.*;
 
 @Data
@@ -25,5 +28,27 @@ public final class OauthErrorDto {
 
     private ErrorEnum error;
     private String error_description;
+
+    public boolean isEmpty() {
+        return false
+        ;
+    }
+
+    public OauthErrorDto putAll(OauthErrorDto o) {
+        if (o.getError() != null) setError(o.getError());
+        if (o.getError_description() != null) setError_description(o.getError_description());
+        return this;
+    }
+
+    public OauthErrorDto removeWhereEqual(OauthErrorDto o) {
+        return this;
+    }
+
+    public List<String> missingRequiredFields(String prefix) {
+        List<String> fields = new ArrayList<>();
+        if (getError() == null) fields.add(prefix + "error");
+        if (getError_description() == null) fields.add(prefix + "errorDescription");
+        return fields;
+    }
 
 }

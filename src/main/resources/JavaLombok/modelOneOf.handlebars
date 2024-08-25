@@ -20,4 +20,9 @@ public sealed interface {{classname}}
     }
     {{/mappedModels}}
 {{/with}}
+{{#unless interfaces}}
+
+    boolean isEmpty();
+    List<String> missingRequiredFields(String prefix);
+{{/unless}}
 }

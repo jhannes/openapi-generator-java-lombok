@@ -1,5 +1,8 @@
 package io.github.jhannes.openapi.serverHealth.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import lombok.*;
 
 public sealed interface HealthDetailsDto permits DataSourceHealthDetailsDto, HealthComponentFailureDetailsDto, ThreadHealthDetailsDto {
@@ -26,4 +29,7 @@ public sealed interface HealthDetailsDto permits DataSourceHealthDetailsDto, Hea
     static ThreadHealthDetailsDto createThreadHealthDetails() {
         return new ThreadHealthDetailsDto().setType("ThreadHealthDetails");
     }
+
+    boolean isEmpty();
+    List<String> missingRequiredFields(String prefix);
 }
