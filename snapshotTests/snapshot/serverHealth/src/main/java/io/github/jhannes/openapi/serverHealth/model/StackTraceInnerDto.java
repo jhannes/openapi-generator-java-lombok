@@ -14,7 +14,7 @@ public final class StackTraceInnerDto {
     private BigDecimal lineNumber;
 
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     public StackTraceInnerDto putAll(StackTraceInnerDto o) {

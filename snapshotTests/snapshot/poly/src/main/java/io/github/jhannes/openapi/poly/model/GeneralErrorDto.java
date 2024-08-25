@@ -11,7 +11,7 @@ public final class GeneralErrorDto implements CreationErrorDto, UpdateErrorDto {
     private String description;
 
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     public GeneralErrorDto putAll(GeneralErrorDto o) {

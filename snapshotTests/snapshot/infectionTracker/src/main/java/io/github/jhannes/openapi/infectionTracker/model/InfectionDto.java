@@ -13,7 +13,7 @@ public final class InfectionDto {
     private List<ExposureDto> registeredExposures = new ArrayList<>();
 
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     public InfectionDto putAll(InfectionDto o) {

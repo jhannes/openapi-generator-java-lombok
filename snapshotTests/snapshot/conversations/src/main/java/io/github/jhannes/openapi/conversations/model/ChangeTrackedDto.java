@@ -12,7 +12,7 @@ public sealed class ChangeTrackedDto implements ChangeTrackedInterface permits C
     private OffsetDateTime updatedAt;
 
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     @Override

@@ -10,7 +10,7 @@ This generates creates Java classes using [Project Lombok](https://projectlombok
 
 * Generates concise POJOs using [Project Lombok](https://projectlombok.org/)
 * Generates POJOs without dependencies on JSON serialization frameworks
-* TODO: Models are generated with convenient methods for checking missing required fields and read-only fields with values and to copy between objects
+* Models are generated with convenient methods for checking missing required fields and read-only fields with values and to copy between objects
 * Implements type polymorphism with `oneOf`-types, even supporting multiple inheritance for classes that are included in multiple `oneOf`-types
 * Implements inheritance with `allOf`-types, including multiple levels of inheritance
 * TODO: Generates client code using HttpURLConnection for HTTP and JSONB for JSON deserialization

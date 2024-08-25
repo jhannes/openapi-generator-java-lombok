@@ -13,7 +13,7 @@ public final class CreateConversationDeltaDto implements DeltaDto {
     private ConversationInfoDto info = new ConversationInfoDto();
 
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     public CreateConversationDeltaDto putAll(CreateConversationDeltaDto o) {

@@ -10,7 +10,7 @@ public final class SubscribeDto implements WebSocketRequestDto {
     private String request = "Subscribe";
 
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     public SubscribeDto putAll(SubscribeDto o) {

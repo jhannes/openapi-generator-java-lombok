@@ -14,7 +14,7 @@ public final class HealthSummaryDto {
     private Map<String, HealthComponentDto> components = new HashMap<>();
 
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     public HealthSummaryDto putAll(HealthSummaryDto o) {

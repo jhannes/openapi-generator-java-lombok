@@ -10,7 +10,7 @@ public final class SnapshotSetDto implements MessageFromServerDto {
     private List<ConversationSnapshotDto> conversations = new ArrayList<>();
 
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     public SnapshotSetDto putAll(SnapshotSetDto o) {

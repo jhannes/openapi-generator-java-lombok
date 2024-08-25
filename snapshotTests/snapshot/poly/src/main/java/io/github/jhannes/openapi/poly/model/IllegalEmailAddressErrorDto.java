@@ -12,7 +12,7 @@ public final class IllegalEmailAddressErrorDto implements CreationErrorDto, Upda
     private List<String> validDomains = new ArrayList<>();
 
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     public IllegalEmailAddressErrorDto putAll(IllegalEmailAddressErrorDto o) {

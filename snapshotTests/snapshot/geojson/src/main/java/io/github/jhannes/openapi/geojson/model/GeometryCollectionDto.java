@@ -14,7 +14,7 @@ public final class GeometryCollectionDto {
     private List<GeometryDto> geometries = new ArrayList<>();
 
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     public GeometryCollectionDto putAll(GeometryCollectionDto o) {

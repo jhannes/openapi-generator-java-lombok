@@ -11,7 +11,7 @@ public final class PolygonDto implements GeometryDto {
     private List<List<List<Double>>> coordinates = new ArrayList<>();
 
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     public PolygonDto putAll(PolygonDto o) {
