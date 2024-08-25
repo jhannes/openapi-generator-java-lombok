@@ -45,16 +45,12 @@ public final class StringSnapshotDto extends ChangeTrackedDto {
     }
 
     public StringSnapshotDto putAll(StringSnapshotDto o) {
-        super.putAll(o);
-        if (o.getName() != null) setName(o.getName());
-        if (o.getType() != null) setType(o.getType());
+        o.copyToStringSnapshot(this);
         return this;
     }
 
     public StringSnapshotDto removeWhereEqual(StringSnapshotDto o) {
-        super.removeWhereEqual(o);
-        if (Objects.equals(getName(), o.getName())) setName(null);
-        if (Objects.equals(getType(), o.getType())) setType(null);
+        o.removeWhereEqualFromStringSnapshot(this);
         return this;
     }
 
@@ -62,4 +58,17 @@ public final class StringSnapshotDto extends ChangeTrackedDto {
         return List.of();
     }
 
+    @Override
+    public void copyToStringSnapshot(StringSnapshotDto o) {
+        copyToChangeTracked(o);
+        if (getName() != null) o.setName(getName());
+        if (getType() != null) o.setType(getType());
+    }
+
+    @Override
+    public void removeWhereEqualFromStringSnapshot(StringSnapshotDto o) {
+        removeWhereEqualFromChangeTracked(o);
+        if (Objects.equals(getName(), o.getName())) o.setName(null);
+        if (Objects.equals(getType(), o.getType())) o.setType(null);
+    }
 }

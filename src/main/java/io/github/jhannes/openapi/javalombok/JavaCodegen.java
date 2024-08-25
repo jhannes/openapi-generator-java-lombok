@@ -234,7 +234,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
                         if (!multiplyInheritedTypes.containsKey(parentInterface.name)) {
                             multiplyInheritedTypes.put(parentInterface.name, createMixin(parentInterface));
                         }
-                        codegenModel.interfaceModels.add(multiplyInheritedTypes.get(parentInterface.name));
+                        //codegenModel.interfaceModels.add(multiplyInheritedTypes.get(parentInterface.name));
                         parentInterface = parentInterface.parentModel;
                     }
                 }

@@ -9,7 +9,7 @@ import java.util.UUID;
 import lombok.*;
 
 @Data
-public final class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterface, RecipientInterface {
+public final class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterface {
 
     private OffsetDateTime createdAt;
     private String createdBy;
@@ -27,7 +27,6 @@ public final class PersonSnapshotDto implements ChangeTrackedInterface, PersonIn
     public boolean isEmpty() {
         return isChangeTrackedEmpty()
                 && isPersonEmpty()
-                && isRecipientEmpty()
                 && getExtra() == null
         ;
     }
@@ -92,13 +91,13 @@ public final class PersonSnapshotDto implements ChangeTrackedInterface, PersonIn
     public void copyToPersonSnapshot(PersonSnapshotDto o) {
         copyToChangeTrackedInterface(o);
         copyToPersonInterface(o);
-        copyToRecipientInterface(o);
+        if (getExtra() != null) o.setExtra(getExtra());
     }
 
     @Override
     public void removeWhereEqualFromPersonSnapshot(PersonSnapshotDto o) {
         removeWhereEqualFromChangeTrackedInterface(o);
         removeWhereEqualFromPersonInterface(o);
-        removeWhereEqualFromRecipientInterface(o);
+        if (Objects.equals(getExtra(), o.getExtra())) o.setExtra(null);
     }
 }

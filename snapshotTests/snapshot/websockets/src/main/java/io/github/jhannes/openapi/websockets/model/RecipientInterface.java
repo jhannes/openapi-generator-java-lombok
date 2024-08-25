@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Objects;
 import lombok.*;
 
-public sealed interface RecipientInterface permits PersonInterface, PersonSnapshotDto, RecipientDto {
+public sealed interface RecipientInterface permits PersonInterface, RecipientDto {
 
     String getEmail();
     RecipientInterface setEmail(String email);

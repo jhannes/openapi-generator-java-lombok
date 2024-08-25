@@ -35,15 +35,12 @@ public final class ConversationSnapshotDto extends ChangeTrackedDto {
     }
 
     public ConversationSnapshotDto putAll(ConversationSnapshotDto o) {
-        super.putAll(o);
-        if (o.getId() != null) setId(o.getId());
-        if (o.getInfo() != null) setInfo(o.getInfo());
-        if (o.getMessages() != null) setMessages(o.getMessages());
+        o.copyToConversationSnapshot(this);
         return this;
     }
 
     public ConversationSnapshotDto removeWhereEqual(ConversationSnapshotDto o) {
-        super.removeWhereEqual(o);
+        o.removeWhereEqualFromConversationSnapshot(this);
         return this;
     }
 
@@ -55,4 +52,16 @@ public final class ConversationSnapshotDto extends ChangeTrackedDto {
         return fields;
     }
 
+    @Override
+    public void copyToConversationSnapshot(ConversationSnapshotDto o) {
+        copyToChangeTracked(o);
+        if (getId() != null) o.setId(getId());
+        if (getInfo() != null) o.setInfo(getInfo());
+        if (getMessages() != null) o.setMessages(getMessages());
+    }
+
+    @Override
+    public void removeWhereEqualFromConversationSnapshot(ConversationSnapshotDto o) {
+        removeWhereEqualFromChangeTracked(o);
+    }
 }

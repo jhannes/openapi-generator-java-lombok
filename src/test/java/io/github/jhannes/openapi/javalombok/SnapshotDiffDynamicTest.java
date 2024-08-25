@@ -37,7 +37,7 @@ public class SnapshotDiffDynamicTest implements Executable {
     }
 
     public static DynamicTest createSnapshotDiffTest(Path file, Path outputDir, Path snapshotDir) {
-        return dynamicTest("file " + outputDir.relativize(file), new SnapshotDiffDynamicTest(file, outputDir, snapshotDir));
+        return dynamicTest(file.getFileName() + " in " + outputDir.relativize(file).getParent(), new SnapshotDiffDynamicTest(file, outputDir, snapshotDir));
     }
 
     static DynamicNode compareDirectories(Path spec, Path outputDir, Path snapshotDir) {
@@ -45,11 +45,11 @@ public class SnapshotDiffDynamicTest implements Executable {
         try (Stream<Path> list = Files.walk(outputDir)) {
             files = list.filter(SnapshotDiffDynamicTest::isTextOutput).collect(Collectors.toList());
         } catch (IOException e) {
-            return dynamicTest("Snapshots for " + spec, () -> assertNull(e));
+            return dynamicTest(spec.getFileName() + " in " + spec.getParent(), () -> assertNull(e));
         }
-        return dynamicContainer("Snapshots for " + spec, Stream.of(
+        return dynamicContainer(spec.getFileName() + " in " + spec.getParent(), Stream.of(
                 dynamicTest("Files", () -> compareFiles(outputDir, snapshotDir)),
-                dynamicContainer("File contents in " + outputDir, files.stream().map(file ->
+                dynamicContainer("Files in " + outputDir.getFileName() + " in " + outputDir.getParent(), files.stream().map(file ->
                         createSnapshotDiffTest(file, outputDir, snapshotDir)
                 ))));
     }
