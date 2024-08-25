@@ -48,9 +48,9 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
 {{#optionalVars}}
 {{#unless isNew}}
                 && {{getter}}() == null
-{{/unless}}
-{{/optionalVars}}
-{{~else if allOf}}
+{{/unless}}{{/optionalVars}}
+        ;
+{{else if allOf}}
         return
 {{~#interfaceModels}}
 {{#if isMixin}}
@@ -62,20 +62,21 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
                 && {{getter}}() == null
 {{/unless}}
 {{/optionalVars}}
-{{~else if hasOptional}}
+        ;
+{{else if hasOptional}}
         return
 {{~#optionalVars}}
 {{#unless @first}}                &&{{/unless}} {{getter}}() == null
 {{/optionalVars}}
-{{~#interfaceModels}}
+{{#interfaceModels}}
 {{#if isMixin}}
                 && is{{name}}Empty()
 {{/if}}
 {{/interfaceModels}}
-{{else}}
-        return false
-{{/if}}
         ;
+{{else}}
+        return false;
+{{/if}}
     }
 
 {{#isMixinAllOf allOf}}
