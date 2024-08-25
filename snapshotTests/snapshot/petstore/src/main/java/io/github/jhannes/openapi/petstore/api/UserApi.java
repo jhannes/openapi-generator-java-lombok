@@ -71,12 +71,8 @@ public interface UserApi {
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
-            if (username != null) {
-                parameters.add("username=" + encode(username.toString(), UTF_8));
-            }
-            if (password != null) {
-                parameters.add("password=" + encode(password.toString(), UTF_8));
-            }
+            if (username != null) parameters.add("username=" + encode(username.toString(), UTF_8));
+            if (password != null) parameters.add("password=" + encode(password.toString(), UTF_8));
             return String.join("&", parameters);
         }
     }

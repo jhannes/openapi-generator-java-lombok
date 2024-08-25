@@ -60,9 +60,7 @@ public interface PetApi {
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
-            if (status != null) {
-                parameters.add("status=" + encode(status.toString(), UTF_8));
-            }
+            if (status != null) parameters.add("status=" + encode(status.toString(), UTF_8));
             return String.join("&", parameters);
         }
     }
@@ -84,9 +82,7 @@ public interface PetApi {
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
-            if (tags != null) {
-                parameters.add("tags=" + encode(tags.toString(), UTF_8));
-            }
+            if (tags != null) parameters.add("tags=" + encode(tags.toString(), UTF_8));
             return String.join("&", parameters);
         }
     }
@@ -125,12 +121,8 @@ public interface PetApi {
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
-            if (name != null) {
-                parameters.add("name=" + encode(name.toString(), UTF_8));
-            }
-            if (status != null) {
-                parameters.add("status=" + encode(status.toString(), UTF_8));
-            }
+            if (name != null) parameters.add("name=" + encode(name.toString(), UTF_8));
+            if (status != null) parameters.add("status=" + encode(status.toString(), UTF_8));
             return String.join("&", parameters);
         }
     }
@@ -153,12 +145,8 @@ public interface PetApi {
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
-            if (additionalMetadata != null) {
-                parameters.add("additionalMetadata=" + encode(additionalMetadata.toString(), UTF_8));
-            }
-            if (_file != null) {
-                parameters.add("file=" + encode(_file.toString(), UTF_8));
-            }
+            if (additionalMetadata != null) parameters.add("additionalMetadata=" + encode(additionalMetadata.toString(), UTF_8));
+            if (_file != null) parameters.add("file=" + encode(_file.toString(), UTF_8));
             return String.join("&", parameters);
         }
     }

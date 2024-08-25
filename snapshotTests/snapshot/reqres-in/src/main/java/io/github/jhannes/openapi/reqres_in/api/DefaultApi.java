@@ -54,12 +54,8 @@ public interface DefaultApi {
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
-            if (page != null) {
-                parameters.add("page=" + encode(page.toString(), UTF_8));
-            }
-            if (perPage != null) {
-                parameters.add("per_page=" + encode(perPage.toString(), UTF_8));
-            }
+            if (page != null) parameters.add("page=" + encode(page.toString(), UTF_8));
+            if (perPage != null) parameters.add("per_page=" + encode(perPage.toString(), UTF_8));
             return String.join("&", parameters);
         }
     }

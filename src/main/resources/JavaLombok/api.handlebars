@@ -65,9 +65,7 @@ public interface {{classname}} {
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
         {{#queryParams}}
-            if ({{paramName}} != null) {
-                parameters.add("{{baseName}}=" + encode({{paramName}}.toString(), UTF_8));
-            }
+            if ({{paramName}} != null) parameters.add("{{baseName}}=" + encode({{paramName}}.toString(), UTF_8));
         {{/queryParams}}
             return String.join("&", parameters);
         }
@@ -84,9 +82,7 @@ public interface {{classname}} {
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
         {{#formParams}}
-            if ({{paramName}} != null) {
-                parameters.add("{{baseName}}=" + encode({{paramName}}.toString(), UTF_8));
-            }
+            if ({{paramName}} != null) parameters.add("{{baseName}}=" + encode({{paramName}}.toString(), UTF_8));
         {{/formParams}}
             return String.join("&", parameters);
         }

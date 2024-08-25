@@ -41,12 +41,8 @@ public interface DefaultApi {
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
-            if (name != null) {
-                parameters.add("name=" + encode(name.toString(), UTF_8));
-            }
-            if (status != null) {
-                parameters.add("status=" + encode(status.toString(), UTF_8));
-            }
+            if (name != null) parameters.add("name=" + encode(name.toString(), UTF_8));
+            if (status != null) parameters.add("status=" + encode(status.toString(), UTF_8));
             return String.join("&", parameters);
         }
     }
@@ -77,15 +73,9 @@ public interface DefaultApi {
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
-            if (status != null) {
-                parameters.add("status=" + encode(status.toString(), UTF_8));
-            }
-            if (tags != null) {
-                parameters.add("tags=" + encode(tags.toString(), UTF_8));
-            }
-            if (bornAfter != null) {
-                parameters.add("bornAfter=" + encode(bornAfter.toString(), UTF_8));
-            }
+            if (status != null) parameters.add("status=" + encode(status.toString(), UTF_8));
+            if (tags != null) parameters.add("tags=" + encode(tags.toString(), UTF_8));
+            if (bornAfter != null) parameters.add("bornAfter=" + encode(bornAfter.toString(), UTF_8));
             return String.join("&", parameters);
         }
     }

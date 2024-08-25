@@ -39,9 +39,7 @@ public interface StoreApi {
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
-            if (effectiveDateTime != null) {
-                parameters.add("effectiveDateTime=" + encode(effectiveDateTime.toString(), UTF_8));
-            }
+            if (effectiveDateTime != null) parameters.add("effectiveDateTime=" + encode(effectiveDateTime.toString(), UTF_8));
             return String.join("&", parameters);
         }
     }

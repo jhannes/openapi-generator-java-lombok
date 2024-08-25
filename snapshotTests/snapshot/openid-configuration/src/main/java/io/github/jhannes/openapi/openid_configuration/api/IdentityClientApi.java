@@ -40,18 +40,10 @@ public interface IdentityClientApi {
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
-            if (state != null) {
-                parameters.add("state=" + encode(state.toString(), UTF_8));
-            }
-            if (code != null) {
-                parameters.add("code=" + encode(code.toString(), UTF_8));
-            }
-            if (error != null) {
-                parameters.add("error=" + encode(error.toString(), UTF_8));
-            }
-            if (errorDescription != null) {
-                parameters.add("error_description=" + encode(errorDescription.toString(), UTF_8));
-            }
+            if (state != null) parameters.add("state=" + encode(state.toString(), UTF_8));
+            if (code != null) parameters.add("code=" + encode(code.toString(), UTF_8));
+            if (error != null) parameters.add("error=" + encode(error.toString(), UTF_8));
+            if (errorDescription != null) parameters.add("error_description=" + encode(errorDescription.toString(), UTF_8));
             return String.join("&", parameters);
         }
     }

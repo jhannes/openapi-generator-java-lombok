@@ -32,12 +32,8 @@ public interface ExposuresApi {
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
-            if (exposureDate != null) {
-                parameters.add("exposureDate=" + encode(exposureDate.toString(), UTF_8));
-            }
-            if (maxCount != null) {
-                parameters.add("maxCount=" + encode(maxCount.toString(), UTF_8));
-            }
+            if (exposureDate != null) parameters.add("exposureDate=" + encode(exposureDate.toString(), UTF_8));
+            if (maxCount != null) parameters.add("maxCount=" + encode(maxCount.toString(), UTF_8));
             return String.join("&", parameters);
         }
     }

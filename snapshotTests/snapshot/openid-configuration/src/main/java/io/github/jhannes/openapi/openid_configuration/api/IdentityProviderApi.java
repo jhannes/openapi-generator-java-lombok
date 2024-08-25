@@ -61,39 +61,17 @@ public interface IdentityProviderApi {
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
-            if (responseType != null) {
-                parameters.add("response_type=" + encode(responseType.toString(), UTF_8));
-            }
-            if (responseMode != null) {
-                parameters.add("response_mode=" + encode(responseMode.toString(), UTF_8));
-            }
-            if (clientId != null) {
-                parameters.add("client_id=" + encode(clientId.toString(), UTF_8));
-            }
-            if (state != null) {
-                parameters.add("state=" + encode(state.toString(), UTF_8));
-            }
-            if (redirectUri != null) {
-                parameters.add("redirect_uri=" + encode(redirectUri.toString(), UTF_8));
-            }
-            if (scope != null) {
-                parameters.add("scope=" + encode(scope.toString(), UTF_8));
-            }
-            if (loginHint != null) {
-                parameters.add("login_hint=" + encode(loginHint.toString(), UTF_8));
-            }
-            if (prompt != null) {
-                parameters.add("prompt=" + encode(prompt.toString(), UTF_8));
-            }
-            if (acrValues != null) {
-                parameters.add("acr_values=" + encode(acrValues.toString(), UTF_8));
-            }
-            if (nonce != null) {
-                parameters.add("nonce=" + encode(nonce.toString(), UTF_8));
-            }
-            if (display != null) {
-                parameters.add("display=" + encode(display.toString(), UTF_8));
-            }
+            if (responseType != null) parameters.add("response_type=" + encode(responseType.toString(), UTF_8));
+            if (responseMode != null) parameters.add("response_mode=" + encode(responseMode.toString(), UTF_8));
+            if (clientId != null) parameters.add("client_id=" + encode(clientId.toString(), UTF_8));
+            if (state != null) parameters.add("state=" + encode(state.toString(), UTF_8));
+            if (redirectUri != null) parameters.add("redirect_uri=" + encode(redirectUri.toString(), UTF_8));
+            if (scope != null) parameters.add("scope=" + encode(scope.toString(), UTF_8));
+            if (loginHint != null) parameters.add("login_hint=" + encode(loginHint.toString(), UTF_8));
+            if (prompt != null) parameters.add("prompt=" + encode(prompt.toString(), UTF_8));
+            if (acrValues != null) parameters.add("acr_values=" + encode(acrValues.toString(), UTF_8));
+            if (nonce != null) parameters.add("nonce=" + encode(nonce.toString(), UTF_8));
+            if (display != null) parameters.add("display=" + encode(display.toString(), UTF_8));
             return String.join("&", parameters);
         }
     }
@@ -139,30 +117,14 @@ public interface IdentityProviderApi {
 
         public String toUrlEncoded() {
             List<String> parameters = new ArrayList<>();
-            if (grantType != null) {
-                parameters.add("grant_type=" + encode(grantType.toString(), UTF_8));
-            }
-            if (clientId != null) {
-                parameters.add("client_id=" + encode(clientId.toString(), UTF_8));
-            }
-            if (clientSecret != null) {
-                parameters.add("client_secret=" + encode(clientSecret.toString(), UTF_8));
-            }
-            if (redirectUri != null) {
-                parameters.add("redirect_uri=" + encode(redirectUri.toString(), UTF_8));
-            }
-            if (code != null) {
-                parameters.add("code=" + encode(code.toString(), UTF_8));
-            }
-            if (refreshToken != null) {
-                parameters.add("refresh_token=" + encode(refreshToken.toString(), UTF_8));
-            }
-            if (subjectToken != null) {
-                parameters.add("subject_token=" + encode(subjectToken.toString(), UTF_8));
-            }
-            if (audience != null) {
-                parameters.add("audience=" + encode(audience.toString(), UTF_8));
-            }
+            if (grantType != null) parameters.add("grant_type=" + encode(grantType.toString(), UTF_8));
+            if (clientId != null) parameters.add("client_id=" + encode(clientId.toString(), UTF_8));
+            if (clientSecret != null) parameters.add("client_secret=" + encode(clientSecret.toString(), UTF_8));
+            if (redirectUri != null) parameters.add("redirect_uri=" + encode(redirectUri.toString(), UTF_8));
+            if (code != null) parameters.add("code=" + encode(code.toString(), UTF_8));
+            if (refreshToken != null) parameters.add("refresh_token=" + encode(refreshToken.toString(), UTF_8));
+            if (subjectToken != null) parameters.add("subject_token=" + encode(subjectToken.toString(), UTF_8));
+            if (audience != null) parameters.add("audience=" + encode(audience.toString(), UTF_8));
             return String.join("&", parameters);
         }
     }
