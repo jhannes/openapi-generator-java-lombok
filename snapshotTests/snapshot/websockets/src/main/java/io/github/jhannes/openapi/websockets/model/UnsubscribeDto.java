@@ -11,8 +11,7 @@ public final class UnsubscribeDto {
     private String request = "Unsubscribe";
 
     public boolean isEmpty() {
-        return false
-        ;
+        return false;
     }
 
     public UnsubscribeDto putAll(UnsubscribeDto o) {

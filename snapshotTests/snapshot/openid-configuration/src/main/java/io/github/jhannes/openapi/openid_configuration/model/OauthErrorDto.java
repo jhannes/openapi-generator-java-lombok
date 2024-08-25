@@ -30,8 +30,7 @@ public final class OauthErrorDto {
     private String error_description;
 
     public boolean isEmpty() {
-        return false
-        ;
+        return false;
     }
 
     public OauthErrorDto putAll(OauthErrorDto o) {

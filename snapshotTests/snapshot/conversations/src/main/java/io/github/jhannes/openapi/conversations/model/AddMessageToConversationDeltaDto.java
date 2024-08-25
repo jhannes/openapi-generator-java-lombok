@@ -15,8 +15,7 @@ public final class AddMessageToConversationDeltaDto implements DeltaDto {
     private ConversationMessageDto message = new ConversationMessageDto();
 
     public boolean isEmpty() {
-        return false
-        ;
+        return false;
     }
 
     public AddMessageToConversationDeltaDto putAll(AddMessageToConversationDeltaDto o) {

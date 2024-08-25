@@ -13,8 +13,7 @@ public final class SubscribeRequestDto implements RequestToServerDto {
     private UUID clientId;
 
     public boolean isEmpty() {
-        return false
-        ;
+        return false;
     }
 
     public SubscribeRequestDto putAll(SubscribeRequestDto o) {

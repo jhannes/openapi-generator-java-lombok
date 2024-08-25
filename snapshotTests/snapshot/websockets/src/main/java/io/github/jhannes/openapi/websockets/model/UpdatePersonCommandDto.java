@@ -14,8 +14,7 @@ public final class UpdatePersonCommandDto implements WebSocketCommandDto {
     private PersonDto person = new PersonDto();
 
     public boolean isEmpty() {
-        return false
-        ;
+        return false;
     }
 
     public UpdatePersonCommandDto putAll(UpdatePersonCommandDto o) {

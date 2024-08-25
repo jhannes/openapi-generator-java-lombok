@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,6 +25,7 @@ import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class SnapshotDiffDynamicTest implements Executable {
+    public static final Pattern WHITESPACE = Pattern.compile("\\s*");
     private final Path file;
     private final Path outputDir;
     private final Path snapshotDir;
@@ -88,9 +90,9 @@ public class SnapshotDiffDynamicTest implements Executable {
 
     private static boolean whitespaceOnly(Delta<String> delta) {
         if (delta instanceof InsertDelta) {
-            return delta.getRevised().getLines().stream().allMatch(s -> s == null || s.trim().isEmpty());
+            return delta.getRevised().getLines().stream().allMatch(s -> s == null || WHITESPACE.matcher(s).matches());
         } else if (delta instanceof DeleteDelta) {
-            return delta.getOriginal().getLines().stream().allMatch(s -> s == null || s.trim().isEmpty());
+            return delta.getOriginal().getLines().stream().allMatch(s -> s == null || WHITESPACE.matcher(s).matches());
         } else {
             return false;
         }

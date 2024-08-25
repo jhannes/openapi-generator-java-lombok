@@ -12,8 +12,7 @@ public final class LineStringDto implements GeometryDto {
     private List<List<Double>> coordinates = new ArrayList<>();
 
     public boolean isEmpty() {
-        return false
-        ;
+        return false;
     }
 
     public LineStringDto putAll(LineStringDto o) {

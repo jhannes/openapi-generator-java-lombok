@@ -14,8 +14,7 @@ public final class UpdateConversationDeltaDto implements DeltaDto {
     private ConversationInfoDto info = new ConversationInfoDto();
 
     public boolean isEmpty() {
-        return false
-        ;
+        return false;
     }
 
     public UpdateConversationDeltaDto putAll(UpdateConversationDeltaDto o) {

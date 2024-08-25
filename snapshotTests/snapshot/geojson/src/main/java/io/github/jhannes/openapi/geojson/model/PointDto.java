@@ -15,8 +15,7 @@ public final class PointDto implements GeometryDto {
     private List<Double> coordinates = new ArrayList<>();
 
     public boolean isEmpty() {
-        return false
-        ;
+        return false;
     }
 
     public PointDto putAll(PointDto o) {

@@ -15,8 +15,7 @@ public sealed class CommandToServerDto implements MessageToServerDto permits Eve
     private DeltaDto delta;
 
     public boolean isEmpty() {
-        return false
-        ;
+        return false;
     }
 
     public CommandToServerDto putAll(CommandToServerDto o) {
