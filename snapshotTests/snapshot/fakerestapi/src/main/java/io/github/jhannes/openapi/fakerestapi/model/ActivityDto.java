@@ -13,7 +13,7 @@ public final class ActivityDto {
     private OffsetDateTime dueDate = null;
     private Boolean completed = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getId() == null
                 && getTitle() == null
                 && getDueDate() == null

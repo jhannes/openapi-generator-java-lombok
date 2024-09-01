@@ -9,7 +9,7 @@ public final class UnsubscribeDto {
 
     private String request = "Unsubscribe";
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return true;
     }
 

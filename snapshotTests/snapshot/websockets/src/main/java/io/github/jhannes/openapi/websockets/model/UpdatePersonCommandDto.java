@@ -12,7 +12,7 @@ public final class UpdatePersonCommandDto implements WebSocketCommandDto {
     private UUID id;
     private PersonDto person = new PersonDto();
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return true;
     }
 

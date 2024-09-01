@@ -13,7 +13,7 @@ public sealed interface ChangeTrackedInterface permits ChangeTrackedDto, Convers
     OffsetDateTime getUpdatedAt();
     ChangeTrackedInterface setUpdatedAt(OffsetDateTime updatedAt);
 
-    boolean isEmpty();
+    boolean empty();
     ChangeTrackedInterface putAll(ChangeTrackedInterface o);
     ChangeTrackedInterface removeWhereEqual(ChangeTrackedInterface o);
     List<String> missingRequiredFields(String prefix);

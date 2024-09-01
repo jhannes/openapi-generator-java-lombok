@@ -27,6 +27,6 @@ public sealed interface GeometryDto permits LineStringDto, PointDto, PolygonDto 
         return new LineStringDto().setType("LineString");
     }
 
-    boolean isEmpty();
+    boolean empty();
     List<String> missingRequiredFields(String prefix);
 }

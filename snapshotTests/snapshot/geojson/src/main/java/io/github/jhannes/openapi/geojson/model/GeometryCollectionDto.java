@@ -13,7 +13,7 @@ public final class GeometryCollectionDto {
     private String type = "GeometryCollection";
     private List<GeometryDto> geometries = new ArrayList<>();
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return true;
     }
 

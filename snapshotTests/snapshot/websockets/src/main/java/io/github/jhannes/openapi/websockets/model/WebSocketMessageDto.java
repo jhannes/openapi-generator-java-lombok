@@ -22,6 +22,6 @@ public sealed interface WebSocketMessageDto permits WebSocketCommandDto {
         return new CreatePersonCommandDto().setCommand("createPerson");
     }
 
-    boolean isEmpty();
+    boolean empty();
     List<String> missingRequiredFields(String prefix);
 }

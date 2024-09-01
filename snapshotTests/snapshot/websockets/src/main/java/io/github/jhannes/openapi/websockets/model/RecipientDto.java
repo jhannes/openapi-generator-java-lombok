@@ -9,7 +9,7 @@ public sealed class RecipientDto implements RecipientInterface permits PersonDto
 
     private String email = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getEmail() == null
                 && isRecipientEmpty()
         ;

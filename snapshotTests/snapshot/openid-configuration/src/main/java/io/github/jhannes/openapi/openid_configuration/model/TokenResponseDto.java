@@ -30,7 +30,7 @@ public final class TokenResponseDto {
     private String id_token = null;
     private String refresh_token = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getExpires_in() == null
                 && getScope() == null
                 && getId_token() == null

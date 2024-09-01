@@ -5,6 +5,6 @@ import java.util.List;
 public sealed interface MessageFromServerDto permits EventFromServerDto, SnapshotSetDto {
 
 
-    boolean isEmpty();
+    boolean empty();
     List<String> missingRequiredFields(String prefix);
 }

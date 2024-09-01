@@ -38,8 +38,8 @@ public final class CatDto extends PetBaseDto implements PetDto {
         return this;
     }
 
-    public boolean isEmpty() {
-        return super.isEmpty()
+    public boolean empty() {
+        return super.empty()
                 && getHunts() == null
                 && getAge() == null
         ;

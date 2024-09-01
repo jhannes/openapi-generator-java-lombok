@@ -12,7 +12,7 @@ public final class GoldfishDto implements PetDto {
     private String name = null;
     private String species = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getName() == null
                 && getSpecies() == null
         ;

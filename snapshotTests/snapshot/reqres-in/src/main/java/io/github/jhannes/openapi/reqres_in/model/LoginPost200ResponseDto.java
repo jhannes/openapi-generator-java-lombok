@@ -9,7 +9,7 @@ public final class LoginPost200ResponseDto {
 
     private String token = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getToken() == null
         ;
     }

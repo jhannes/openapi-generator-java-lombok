@@ -28,7 +28,7 @@ public sealed interface {{classname}}
     {{classname}} {{setter}}({{{datatypeWithEnum}}} {{name}});
 
 {{/vars}}
-    boolean isEmpty();
+    boolean empty();
     {{classname}} putAll({{classname}} o);
     {{classname}} removeWhereEqual({{classname}} o);
     List<String> missingRequiredFields(String prefix);

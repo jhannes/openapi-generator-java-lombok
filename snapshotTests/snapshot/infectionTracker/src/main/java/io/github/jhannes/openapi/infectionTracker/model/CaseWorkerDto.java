@@ -15,7 +15,7 @@ public final class CaseWorkerDto {
     private String email;
     private UserRoleDto role;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getId() == null
         ;
     }

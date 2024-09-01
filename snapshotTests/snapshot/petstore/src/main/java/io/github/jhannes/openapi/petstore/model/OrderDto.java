@@ -38,7 +38,7 @@ public final class OrderDto {
     private StatusEnum status = null;
     private Boolean complete = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getId() == null
                 && getPetId() == null
                 && getQuantity() == null

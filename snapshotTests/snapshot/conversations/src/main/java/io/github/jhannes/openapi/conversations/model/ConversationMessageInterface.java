@@ -15,7 +15,7 @@ public sealed interface ConversationMessageInterface permits ConversationMessage
     Set<String> getTags();
     ConversationMessageInterface setTags(Set<String> tags);
 
-    boolean isEmpty();
+    boolean empty();
     ConversationMessageInterface putAll(ConversationMessageInterface o);
     ConversationMessageInterface removeWhereEqual(ConversationMessageInterface o);
     List<String> missingRequiredFields(String prefix);

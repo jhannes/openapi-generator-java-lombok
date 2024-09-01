@@ -16,7 +16,7 @@ public final class ConversationMessageSnapshotDto implements ChangeTrackedInterf
     private String text;
     private Set<String> tags = new LinkedHashSet<>();
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return isChangeTrackedEmpty()
                 && isConversationMessageEmpty()
         ;

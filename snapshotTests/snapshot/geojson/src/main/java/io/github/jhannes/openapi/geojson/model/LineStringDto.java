@@ -10,7 +10,7 @@ public final class LineStringDto implements GeometryDto {
     private String type = "LineString";
     private List<List<Double>> coordinates = new ArrayList<>();
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return true;
     }
 

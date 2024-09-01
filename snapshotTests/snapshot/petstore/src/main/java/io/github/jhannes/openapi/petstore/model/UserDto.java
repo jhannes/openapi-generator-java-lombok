@@ -19,7 +19,7 @@ public final class UserDto {
     */
     private Integer userStatus = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getId() == null
                 && getUsername() == null
                 && getFirstName() == null

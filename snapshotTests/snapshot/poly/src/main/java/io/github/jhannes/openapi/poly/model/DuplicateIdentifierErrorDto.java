@@ -12,7 +12,7 @@ public final class DuplicateIdentifierErrorDto implements CreationErrorDto, Upda
     private String identifierValue = null;
     private String entityType;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getIdentifierValue() == null
         ;
     }

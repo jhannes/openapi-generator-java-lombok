@@ -5,6 +5,6 @@ import java.util.List;
 public sealed interface MessageToServerDto permits CommandToServerDto, RequestToServerDto {
 
 
-    boolean isEmpty();
+    boolean empty();
     List<String> missingRequiredFields(String prefix);
 }

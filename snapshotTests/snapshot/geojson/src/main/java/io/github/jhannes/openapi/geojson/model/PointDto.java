@@ -13,7 +13,7 @@ public final class PointDto implements GeometryDto {
     */
     private List<Double> coordinates = new ArrayList<>();
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return true;
     }
 

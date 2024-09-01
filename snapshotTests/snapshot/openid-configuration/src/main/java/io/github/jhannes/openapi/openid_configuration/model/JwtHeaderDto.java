@@ -20,7 +20,7 @@ public final class JwtHeaderDto {
     */
     private String alg = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getTyp() == null
                 && getKid() == null
                 && getAlg() == null

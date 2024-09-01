@@ -24,7 +24,7 @@ public final class PersonSnapshotDto implements ChangeTrackedInterface, PersonIn
     private GenderEnum gender = null;
     private String extra = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return isChangeTrackedEmpty()
                 && isPersonEmpty()
                 && getExtra() == null

@@ -13,7 +13,7 @@ public final class PetDto {
     private String name = null;
     private LocalDate birth_date = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getName() == null
                 && getBirth_date() == null
         ;

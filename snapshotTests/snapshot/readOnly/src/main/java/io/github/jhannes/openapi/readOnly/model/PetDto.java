@@ -50,7 +50,7 @@ public final class PetDto {
     private List<CommentDto> comments = new ArrayList<>();
     private StatusEnum status = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getId() == null
                 && getName() == null
                 && getBirth_date() == null

@@ -14,7 +14,7 @@ public sealed class ChangeTrackedDto implements ChangeTrackedInterface permits S
     private OffsetDateTime updatedAt = null;
     private String updatedBy = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getUpdatedAt() == null
                 && getUpdatedBy() == null
                 && isChangeTrackedEmpty()

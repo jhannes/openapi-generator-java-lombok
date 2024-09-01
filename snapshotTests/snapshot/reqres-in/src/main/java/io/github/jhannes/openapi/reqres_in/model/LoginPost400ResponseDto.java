@@ -9,7 +9,7 @@ public final class LoginPost400ResponseDto {
 
     private String error = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getError() == null
         ;
     }

@@ -14,7 +14,7 @@ public final class UsersGet200ResponseDto {
     private Integer total_pages = null;
     private List<UserDto> data = new ArrayList<>();
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getPage() == null
                 && getPer_page() == null
                 && getTotal() == null

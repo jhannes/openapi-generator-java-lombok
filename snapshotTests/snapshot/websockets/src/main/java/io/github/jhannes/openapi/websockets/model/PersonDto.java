@@ -27,8 +27,8 @@ public final class PersonDto extends RecipientDto implements PersonInterface {
         return this;
     }
 
-    public boolean isEmpty() {
-        return super.isEmpty()
+    public boolean empty() {
+        return super.empty()
                 && isPersonEmpty()
         ;
     }

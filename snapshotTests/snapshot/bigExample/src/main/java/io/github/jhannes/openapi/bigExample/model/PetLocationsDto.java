@@ -11,7 +11,7 @@ public final class PetLocationsDto {
 
     private Map<String, Map<String, List<Double>>> locations = new HashMap<>();
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getLocations() == null
         ;
     }

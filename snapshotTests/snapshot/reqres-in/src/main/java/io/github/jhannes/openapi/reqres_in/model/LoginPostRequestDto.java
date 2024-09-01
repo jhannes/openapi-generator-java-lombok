@@ -11,7 +11,7 @@ public final class LoginPostRequestDto {
     private String email = null;
     private String password = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getUsername() == null
                 && getEmail() == null
                 && getPassword() == null

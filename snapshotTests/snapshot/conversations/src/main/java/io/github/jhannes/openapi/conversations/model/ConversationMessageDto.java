@@ -13,7 +13,7 @@ public final class ConversationMessageDto implements ConversationMessageInterfac
     private String text;
     private Set<String> tags = new LinkedHashSet<>();
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getTags() == null
                 && isConversationMessageEmpty()
         ;

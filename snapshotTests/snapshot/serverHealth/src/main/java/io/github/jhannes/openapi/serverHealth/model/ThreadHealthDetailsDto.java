@@ -36,7 +36,7 @@ public final class ThreadHealthDetailsDto implements HealthDetailsDto {
     private OffsetDateTime lastFailureTime = null;
     private ExceptionDto lastFailureException = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getThreadState() == null
                 && getStackTrace() == null
                 && getLastAliveTime() == null

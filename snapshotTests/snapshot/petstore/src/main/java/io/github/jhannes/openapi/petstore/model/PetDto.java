@@ -38,7 +38,7 @@ public final class PetDto {
     */
     private StatusEnum status = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getId() == null
                 && getCategory() == null
                 && getTags() == null

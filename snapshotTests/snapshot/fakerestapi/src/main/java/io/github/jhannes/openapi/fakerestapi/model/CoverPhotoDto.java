@@ -12,7 +12,7 @@ public final class CoverPhotoDto {
     private Integer idBook = null;
     private URI url = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getId() == null
                 && getIdBook() == null
                 && getUrl() == null

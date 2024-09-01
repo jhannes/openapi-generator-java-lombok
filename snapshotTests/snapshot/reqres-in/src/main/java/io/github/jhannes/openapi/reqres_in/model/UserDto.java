@@ -13,7 +13,7 @@ public final class UserDto {
     private String last_name = null;
     private String avatar = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getId() == null
                 && getEmail() == null
                 && getFirst_name() == null

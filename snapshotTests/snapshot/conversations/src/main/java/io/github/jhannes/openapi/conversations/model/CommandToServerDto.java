@@ -13,7 +13,7 @@ public sealed class CommandToServerDto implements MessageToServerDto permits Eve
     private OffsetDateTime clientTime;
     private DeltaDto delta;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return true;
     }
 

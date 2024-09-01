@@ -13,7 +13,7 @@ public final class AddMessageToConversationDeltaDto implements DeltaDto {
     private UUID messageId;
     private ConversationMessageDto message = new ConversationMessageDto();
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return true;
     }
 

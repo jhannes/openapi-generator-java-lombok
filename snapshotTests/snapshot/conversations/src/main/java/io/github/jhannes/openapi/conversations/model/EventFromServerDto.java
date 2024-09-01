@@ -32,8 +32,8 @@ public final class EventFromServerDto extends CommandToServerDto implements Mess
         return this;
     }
 
-    public boolean isEmpty() {
-        return super.isEmpty()
+    public boolean empty() {
+        return super.empty()
         ;
     }
 

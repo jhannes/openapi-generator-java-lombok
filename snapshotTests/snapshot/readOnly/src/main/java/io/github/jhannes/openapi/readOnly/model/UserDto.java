@@ -11,7 +11,7 @@ public final class UserDto {
     private UUID id = null;
     private String name = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getId() == null
                 && getName() == null
         ;

@@ -21,7 +21,7 @@ public final class OrganizationDto implements AnyPartyDto {
     private Set<String> emailDomains = new LinkedHashSet<>();
     private String phone = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getId() == null
                 && getOrganizationId() == null
                 && getUrl() == null

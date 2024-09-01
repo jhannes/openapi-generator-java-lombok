@@ -9,7 +9,7 @@ public sealed interface RecipientInterface permits PersonInterface, RecipientDto
     String getEmail();
     RecipientInterface setEmail(String email);
 
-    boolean isEmpty();
+    boolean empty();
     RecipientInterface putAll(RecipientInterface o);
     RecipientInterface removeWhereEqual(RecipientInterface o);
     List<String> missingRequiredFields(String prefix);

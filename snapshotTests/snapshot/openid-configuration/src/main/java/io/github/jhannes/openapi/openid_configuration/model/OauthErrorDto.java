@@ -30,7 +30,7 @@ public final class OauthErrorDto {
     private ErrorEnum error;
     private String error_description;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return true;
     }
 

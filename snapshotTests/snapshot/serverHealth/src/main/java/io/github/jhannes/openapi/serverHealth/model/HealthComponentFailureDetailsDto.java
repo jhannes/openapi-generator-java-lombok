@@ -11,7 +11,7 @@ public final class HealthComponentFailureDetailsDto implements HealthDetailsDto 
     private String type = "HealthComponentFailureDetails";
     private ExceptionDto exception = null;
 
-    public boolean isEmpty() {
+    public boolean empty() {
         return getException() == null
         ;
     }

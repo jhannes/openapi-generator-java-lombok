@@ -56,8 +56,8 @@ public sealed class DogDto extends PetBaseDto implements PetDto permits WorkingD
         return this;
     }
 
-    public boolean isEmpty() {
-        return super.isEmpty()
+    public boolean empty() {
+        return super.empty()
                 && getBark() == null
                 && getBreed() == null
         ;
