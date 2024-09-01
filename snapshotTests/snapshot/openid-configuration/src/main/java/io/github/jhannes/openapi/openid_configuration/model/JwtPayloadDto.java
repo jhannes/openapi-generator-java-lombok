@@ -46,7 +46,7 @@ public final class JwtPayloadDto extends HashMap<String, List> {
     private String pid = null;
 
     public boolean empty() {
-        return super.empty()
+        return super.isEmpty()
                 && getName() == null
                 && getEmail() == null
                 && getOrgId() == null
