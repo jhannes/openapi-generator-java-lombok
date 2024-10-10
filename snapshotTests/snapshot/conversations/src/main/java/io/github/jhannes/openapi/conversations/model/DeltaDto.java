@@ -27,6 +27,6 @@ public sealed interface DeltaDto permits AddMessageToConversationDeltaDto, Creat
         return new CreateConversationDeltaDto().setDelta("CreateConversationDelta");
     }
 
-    boolean empty();
+    boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
 }

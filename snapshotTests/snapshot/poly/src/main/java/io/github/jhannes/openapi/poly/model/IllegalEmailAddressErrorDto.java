@@ -11,7 +11,7 @@ public final class IllegalEmailAddressErrorDto implements CreationErrorDto, Upda
     private String inputEmailAddress;
     private List<String> validDomains = new ArrayList<>();
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return true;
     }
 

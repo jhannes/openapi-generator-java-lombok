@@ -11,7 +11,7 @@ public final class ConversationInfoDto {
     private String title;
     private String summary = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getSummary() == null
         ;
     }

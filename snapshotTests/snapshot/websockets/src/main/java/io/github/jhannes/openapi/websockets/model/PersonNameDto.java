@@ -10,7 +10,7 @@ public final class PersonNameDto {
     private String givenName = null;
     private String familyName = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getGivenName() == null
                 && getFamilyName() == null
         ;

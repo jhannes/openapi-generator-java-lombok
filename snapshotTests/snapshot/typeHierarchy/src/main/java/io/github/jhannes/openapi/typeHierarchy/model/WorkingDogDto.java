@@ -48,8 +48,8 @@ public final class WorkingDogDto extends DogDto implements PetDto {
         return this;
     }
 
-    public boolean empty() {
-        return super.empty()
+    public boolean hasNoOptionalProperties() {
+        return super.hasNoOptionalProperties()
         ;
     }
 

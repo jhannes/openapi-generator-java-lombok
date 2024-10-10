@@ -14,7 +14,7 @@ public final class UsersGet200ResponseDto {
     private Integer total_pages = null;
     private List<UserDto> data = new ArrayList<>();
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getPage() == null
                 && getPer_page() == null
                 && getTotal() == null

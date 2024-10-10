@@ -11,7 +11,7 @@ public final class PetStoreDto {
 
     private Map<String, PetDto> pets = new HashMap<>();
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getPets() == null
         ;
     }

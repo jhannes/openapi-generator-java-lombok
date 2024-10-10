@@ -27,6 +27,6 @@ public sealed interface HealthDetailsDto permits DataSourceHealthDetailsDto, Hea
         return new ThreadHealthDetailsDto().setType("ThreadHealthDetails");
     }
 
-    boolean empty();
+    boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
 }

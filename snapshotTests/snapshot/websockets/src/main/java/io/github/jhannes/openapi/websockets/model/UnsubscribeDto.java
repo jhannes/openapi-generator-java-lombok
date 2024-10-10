@@ -9,7 +9,7 @@ public final class UnsubscribeDto {
 
     private String request = "Unsubscribe";
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return true;
     }
 

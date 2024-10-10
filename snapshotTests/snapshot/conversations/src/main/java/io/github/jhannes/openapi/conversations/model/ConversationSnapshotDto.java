@@ -29,8 +29,8 @@ public final class ConversationSnapshotDto extends ChangeTrackedDto {
         return this;
     }
 
-    public boolean empty() {
-        return super.empty()
+    public boolean hasNoOptionalProperties() {
+        return super.hasNoOptionalProperties()
         ;
     }
 

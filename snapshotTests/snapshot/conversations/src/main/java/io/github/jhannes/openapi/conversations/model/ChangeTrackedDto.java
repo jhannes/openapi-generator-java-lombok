@@ -11,7 +11,7 @@ public sealed class ChangeTrackedDto implements ChangeTrackedInterface permits C
     private OffsetDateTime createdAt;
     private OffsetDateTime updatedAt;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return true;
     }
 

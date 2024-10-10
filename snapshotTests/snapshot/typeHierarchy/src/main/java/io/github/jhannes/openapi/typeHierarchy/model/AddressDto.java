@@ -30,7 +30,7 @@ public final class AddressDto {
     private String country;
     private List<AddressTypesEnum> addressTypes = new ArrayList<>();
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getAddressLine1() == null
                 && getAddressLine2() == null
                 && getAddressTypes() == null

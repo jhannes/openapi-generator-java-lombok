@@ -13,7 +13,7 @@ public final class StackTraceInnerDto {
     private String fileName;
     private BigDecimal lineNumber;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return true;
     }
 

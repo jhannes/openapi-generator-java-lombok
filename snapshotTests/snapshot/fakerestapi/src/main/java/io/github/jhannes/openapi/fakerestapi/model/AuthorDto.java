@@ -12,7 +12,7 @@ public final class AuthorDto {
     private String firstName = null;
     private String lastName = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getId() == null
                 && getIdBook() == null
                 && getFirstName() == null

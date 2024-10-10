@@ -11,7 +11,7 @@ public final class UserDto {
     private String userName = null;
     private String password = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getId() == null
                 && getUserName() == null
                 && getPassword() == null

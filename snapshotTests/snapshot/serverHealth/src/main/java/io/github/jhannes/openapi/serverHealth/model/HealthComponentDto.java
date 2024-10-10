@@ -14,7 +14,7 @@ public final class HealthComponentDto {
     private HealthDetailsDto details;
     private OffsetDateTime time = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getTime() == null
         ;
     }

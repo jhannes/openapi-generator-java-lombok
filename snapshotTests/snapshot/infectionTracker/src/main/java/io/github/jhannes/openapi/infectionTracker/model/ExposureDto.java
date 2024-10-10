@@ -67,7 +67,7 @@ public final class ExposureDto {
     private StatusEnum status;
     private DelayAfterInfectionEnum delayAfterInfection = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getId() == null
                 && getExposedPersonName() == null
                 && getExposedPersonPhoneNumber() == null

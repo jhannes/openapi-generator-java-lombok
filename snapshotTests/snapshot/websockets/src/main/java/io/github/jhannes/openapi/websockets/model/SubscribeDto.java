@@ -9,7 +9,7 @@ public final class SubscribeDto implements WebSocketRequestDto {
 
     private String request = "Subscribe";
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return true;
     }
 

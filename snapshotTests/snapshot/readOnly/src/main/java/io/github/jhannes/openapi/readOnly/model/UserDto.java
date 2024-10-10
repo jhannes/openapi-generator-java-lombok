@@ -11,7 +11,7 @@ public final class UserDto {
     private UUID id = null;
     private String name = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getId() == null
                 && getName() == null
         ;

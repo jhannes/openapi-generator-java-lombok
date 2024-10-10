@@ -11,7 +11,7 @@ public final class SubscribeRequestDto implements RequestToServerDto {
     private String request = "SubscribeRequest";
     private UUID clientId;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return true;
     }
 

@@ -10,7 +10,7 @@ public final class UsersIdGet200ResponseDto {
 
     private UserDto data = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getData() == null
         ;
     }

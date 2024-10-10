@@ -15,7 +15,7 @@ public sealed interface ConversationMessageInterface permits ConversationMessage
     Set<String> getTags();
     ConversationMessageInterface setTags(Set<String> tags);
 
-    boolean empty();
+    boolean hasNoOptionalProperties();
     ConversationMessageInterface putAll(ConversationMessageInterface o);
     ConversationMessageInterface removeWhereEqual(ConversationMessageInterface o);
     List<String> missingRequiredFields(String prefix);
@@ -33,7 +33,7 @@ public sealed interface ConversationMessageInterface permits ConversationMessage
         removeWhereEqualFromConversationMessageInterface(o);
     }
 
-    default boolean isConversationMessageEmpty() {
+    default boolean hasNoOptionalPropertiesForConversationMessage() {
         return getTags() == null;
     }
 

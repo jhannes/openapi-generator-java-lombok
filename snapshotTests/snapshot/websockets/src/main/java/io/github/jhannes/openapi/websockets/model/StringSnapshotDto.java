@@ -37,8 +37,8 @@ public final class StringSnapshotDto extends ChangeTrackedDto {
         return this;
     }
 
-    public boolean empty() {
-        return super.empty()
+    public boolean hasNoOptionalProperties() {
+        return super.hasNoOptionalProperties()
                 && getName() == null
                 && getType() == null
         ;

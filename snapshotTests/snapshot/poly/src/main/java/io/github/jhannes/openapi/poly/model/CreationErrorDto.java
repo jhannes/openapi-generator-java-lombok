@@ -32,6 +32,6 @@ public sealed interface CreationErrorDto permits DuplicateIdentifierErrorDto, Ge
         return new GeneralErrorDto().setCode("network_error");
     }
 
-    boolean empty();
+    boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
 }

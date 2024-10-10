@@ -18,7 +18,7 @@ public final class PersonDto implements AnyPartyDto {
     private String phone = null;
     private LocalDate birthDate = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getId() == null
                 && getEmail() == null
                 && getPhone() == null

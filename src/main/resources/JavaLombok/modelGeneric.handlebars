@@ -37,12 +37,12 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
     }
 {{/parentVars}}
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
 {{#if parent}}
-        return {{#if isAdditionalPropertiesTrue}}super.isEmpty(){{else}}super.empty(){{/if}}
+        return {{#if isAdditionalPropertiesTrue}}super.isEmpty(){{else}}super.hasNoOptionalProperties(){{/if}}
 {{#interfaceModels}}
 {{#if isMixin}}
-                && is{{name}}Empty()
+                && hasNoOptionalPropertiesFor{{name}}()
 {{/if}}
 {{/interfaceModels}}
 {{#optionalVars}}
@@ -54,7 +54,7 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
         return
 {{~#interfaceModels}}
 {{#if isMixin}}
-{{#unless @first}}                &&{{/unless}} is{{name}}Empty()
+{{#unless @first}}                &&{{/unless}} hasNoOptionalPropertiesFor{{name}}()
 {{/if}}
 {{/interfaceModels}}
 {{#optionalVars}}
@@ -70,7 +70,7 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
 {{/optionalVars}}
 {{#interfaceModels}}
 {{#if isMixin}}
-                && is{{name}}Empty()
+                && hasNoOptionalPropertiesFor{{name}}()
 {{/if}}
 {{/interfaceModels}}
         ;

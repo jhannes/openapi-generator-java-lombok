@@ -15,7 +15,7 @@ public final class BookDto {
     private String excerpt = null;
     private OffsetDateTime publishDate = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getId() == null
                 && getTitle() == null
                 && getDescription() == null

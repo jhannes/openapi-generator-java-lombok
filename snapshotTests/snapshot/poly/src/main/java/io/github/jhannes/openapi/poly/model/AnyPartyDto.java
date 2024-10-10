@@ -22,6 +22,6 @@ public sealed interface AnyPartyDto permits OrganizationDto, PersonDto {
         return new PersonDto().setType("person");
     }
 
-    boolean empty();
+    boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
 }

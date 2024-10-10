@@ -13,7 +13,7 @@ public sealed interface ChangeTrackedInterface permits ChangeTrackedDto, Convers
     OffsetDateTime getUpdatedAt();
     ChangeTrackedInterface setUpdatedAt(OffsetDateTime updatedAt);
 
-    boolean empty();
+    boolean hasNoOptionalProperties();
     ChangeTrackedInterface putAll(ChangeTrackedInterface o);
     ChangeTrackedInterface removeWhereEqual(ChangeTrackedInterface o);
     List<String> missingRequiredFields(String prefix);
@@ -37,7 +37,7 @@ public sealed interface ChangeTrackedInterface permits ChangeTrackedDto, Convers
         removeWhereEqualFromChangeTrackedInterface(o);
     }
 
-    default boolean isChangeTrackedEmpty() {
+    default boolean hasNoOptionalPropertiesForChangeTracked() {
         return false;
     }
 

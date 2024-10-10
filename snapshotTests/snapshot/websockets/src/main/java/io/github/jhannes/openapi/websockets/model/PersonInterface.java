@@ -47,7 +47,7 @@ public sealed interface PersonInterface extends RecipientInterface permits Perso
     GenderEnum getGender();
     PersonInterface setGender(GenderEnum gender);
 
-    boolean empty();
+    boolean hasNoOptionalProperties();
     PersonInterface putAll(PersonInterface o);
     PersonInterface removeWhereEqual(PersonInterface o);
     List<String> missingRequiredFields(String prefix);
@@ -65,8 +65,8 @@ public sealed interface PersonInterface extends RecipientInterface permits Perso
         removeWhereEqualFromPersonInterface(o);
     }
 
-    default boolean isPersonEmpty() {
-        return isRecipientEmpty()
+    default boolean hasNoOptionalPropertiesForPerson() {
+        return hasNoOptionalPropertiesForRecipient()
                 && getId() == null
                 && getType() == null
                 && getName() == null

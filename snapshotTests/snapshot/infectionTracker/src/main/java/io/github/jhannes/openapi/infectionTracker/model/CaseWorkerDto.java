@@ -15,7 +15,7 @@ public final class CaseWorkerDto {
     private String email;
     private UserRoleDto role;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getId() == null
         ;
     }

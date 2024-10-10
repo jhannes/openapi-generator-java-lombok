@@ -28,7 +28,7 @@ public sealed interface {{classname}}
     {{classname}} {{setter}}({{{datatypeWithEnum}}} {{name}});
 
 {{/vars}}
-    boolean empty();
+    boolean hasNoOptionalProperties();
     {{classname}} putAll({{classname}} o);
     {{classname}} removeWhereEqual({{classname}} o);
     List<String> missingRequiredFields(String prefix);
@@ -44,10 +44,10 @@ public sealed interface {{classname}}
     }
 {{/descendants}}
 
-    default boolean is{{name}}Empty() {
+    default boolean hasNoOptionalPropertiesFor{{name}}() {
 {{#if interfaces}}
         return {{#interfaceModels}}{{#unless @first}}
-	        && {{/unless}}is{{name}}Empty(){{/interfaceModels}}{{#optionalVars}}
+	        && {{/unless}}hasNoOptionalPropertiesFor{{name}}(){{/interfaceModels}}{{#optionalVars}}
                 && {{getter}}() == null{{/optionalVars}};
 {{else if optionalVars}}
         return {{#optionalVars}}{{#unless @first}}

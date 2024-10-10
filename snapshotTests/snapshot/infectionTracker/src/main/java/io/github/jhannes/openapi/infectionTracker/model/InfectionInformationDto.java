@@ -16,7 +16,7 @@ public final class InfectionInformationDto {
     */
     private String notes = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getPatientName() == null
                 && getPatientPhoneNumber() == null
                 && getLikelyInfectionDate() == null

@@ -20,7 +20,7 @@ public sealed interface ChangeTrackedInterface permits ChangeTrackedDto, PersonS
     String getUpdatedBy();
     ChangeTrackedInterface setUpdatedBy(String updatedBy);
 
-    boolean empty();
+    boolean hasNoOptionalProperties();
     ChangeTrackedInterface putAll(ChangeTrackedInterface o);
     ChangeTrackedInterface removeWhereEqual(ChangeTrackedInterface o);
     List<String> missingRequiredFields(String prefix);
@@ -44,7 +44,7 @@ public sealed interface ChangeTrackedInterface permits ChangeTrackedDto, PersonS
         removeWhereEqualFromChangeTrackedInterface(o);
     }
 
-    default boolean isChangeTrackedEmpty() {
+    default boolean hasNoOptionalPropertiesForChangeTracked() {
         return getUpdatedAt() == null
                 && getUpdatedBy() == null;
     }

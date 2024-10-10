@@ -12,7 +12,7 @@ public final class NotFoundErrorDto implements UpdateErrorDto {
     private String identifierValue = null;
     private String entityType;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getIdentifierValue() == null
         ;
     }

@@ -17,6 +17,6 @@ public sealed interface WebSocketRequestDto permits SubscribeDto {
         return new SubscribeDto().setRequest("Subscribe");
     }
 
-    boolean empty();
+    boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
 }

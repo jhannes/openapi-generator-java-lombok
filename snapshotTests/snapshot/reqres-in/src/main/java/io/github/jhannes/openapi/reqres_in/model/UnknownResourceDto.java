@@ -13,7 +13,7 @@ public final class UnknownResourceDto {
     private String color = null;
     private String pantone_value = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getId() == null
                 && getName() == null
                 && getYear() == null

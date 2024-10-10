@@ -9,7 +9,7 @@ public final class UsersIdPut200ResponseDto {
 
     private String updatedAt = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getUpdatedAt() == null
         ;
     }

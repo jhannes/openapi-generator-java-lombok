@@ -12,7 +12,7 @@ public final class CreateConversationDeltaDto implements DeltaDto {
     private UUID conversationId;
     private ConversationInfoDto info = new ConversationInfoDto();
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return true;
     }
 

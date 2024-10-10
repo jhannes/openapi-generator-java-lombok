@@ -12,7 +12,7 @@ public final class CreatePersonCommandDto implements WebSocketCommandDto {
     private UUID id;
     private PersonDto person = new PersonDto();
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return true;
     }
 

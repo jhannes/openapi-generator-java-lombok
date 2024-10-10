@@ -10,7 +10,7 @@ public final class PolygonDto implements GeometryDto {
     private String type = "Polygon";
     private List<List<List<Double>>> coordinates = new ArrayList<>();
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return true;
     }
 

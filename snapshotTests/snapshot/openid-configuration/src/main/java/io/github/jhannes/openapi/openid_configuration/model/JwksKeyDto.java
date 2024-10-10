@@ -15,7 +15,7 @@ public final class JwksKeyDto {
     private String e = null;
     private String n = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getKty() == null
                 && getUse() == null
                 && getE() == null

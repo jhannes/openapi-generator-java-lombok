@@ -9,9 +9,9 @@ public sealed class RecipientDto implements RecipientInterface permits PersonDto
 
     private String email = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getEmail() == null
-                && isRecipientEmpty()
+                && hasNoOptionalPropertiesForRecipient()
         ;
     }
 

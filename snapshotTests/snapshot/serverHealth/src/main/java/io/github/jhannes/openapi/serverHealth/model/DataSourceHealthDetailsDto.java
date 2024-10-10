@@ -14,7 +14,7 @@ public final class DataSourceHealthDetailsDto implements HealthDetailsDto {
     private OffsetDateTime lastAliveTime = null;
     private ExceptionDto lastFailureException = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getUrl() == null
                 && getLastAliveTime() == null
                 && getLastFailureException() == null

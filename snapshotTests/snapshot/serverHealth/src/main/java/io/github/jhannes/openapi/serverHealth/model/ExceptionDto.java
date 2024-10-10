@@ -12,7 +12,7 @@ public final class ExceptionDto {
     private String message = null;
     private List<StackTraceInnerDto> stackTrace = new ArrayList<>();
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getMessage() == null
                 && getStackTrace() == null
         ;

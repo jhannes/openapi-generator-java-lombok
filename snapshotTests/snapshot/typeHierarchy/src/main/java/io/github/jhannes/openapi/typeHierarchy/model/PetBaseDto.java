@@ -13,7 +13,7 @@ public sealed class PetBaseDto permits CatDto, DogDto {
     private String birth_date = null;
     private AddressDto ownerAddress = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getId() == null
                 && getBirth_date() == null
                 && getOwnerAddress() == null

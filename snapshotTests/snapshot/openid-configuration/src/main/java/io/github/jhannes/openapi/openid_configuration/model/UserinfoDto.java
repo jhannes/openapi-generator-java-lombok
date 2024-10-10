@@ -15,7 +15,7 @@ public final class UserinfoDto {
     private String name = null;
     private Object email = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getName() == null
                 && getEmail() == null
         ;

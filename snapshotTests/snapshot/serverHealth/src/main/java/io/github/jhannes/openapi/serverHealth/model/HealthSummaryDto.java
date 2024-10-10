@@ -13,7 +13,7 @@ public final class HealthSummaryDto {
     private HealthStatusDto status;
     private Map<String, HealthComponentDto> components = new HashMap<>();
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return true;
     }
 

@@ -9,7 +9,7 @@ public final class JwksDocumentDto {
 
     private List<JwksKeyDto> keys = new ArrayList<>();
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return true;
     }
 

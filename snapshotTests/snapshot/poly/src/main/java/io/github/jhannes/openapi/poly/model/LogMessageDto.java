@@ -11,7 +11,7 @@ public final class LogMessageDto {
     private String message;
     private Object error = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getError() == null
         ;
     }

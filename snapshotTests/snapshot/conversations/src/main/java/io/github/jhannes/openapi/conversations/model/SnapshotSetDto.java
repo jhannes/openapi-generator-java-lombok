@@ -9,7 +9,7 @@ public final class SnapshotSetDto implements MessageFromServerDto {
 
     private List<ConversationSnapshotDto> conversations = new ArrayList<>();
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return true;
     }
 

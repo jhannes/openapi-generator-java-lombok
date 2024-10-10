@@ -10,7 +10,7 @@ public final class CategoryDto {
     private Long id = null;
     private String name = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getId() == null
                 && getName() == null
         ;

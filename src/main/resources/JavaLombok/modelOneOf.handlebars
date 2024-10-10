@@ -22,7 +22,7 @@ public sealed interface {{classname}}
 {{/with}}
 {{#unless interfaces}}
 
-    boolean empty();
+    boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
 {{/unless}}
 }

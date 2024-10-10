@@ -14,7 +14,7 @@ public final class PetDto {
     private String name = null;
     private LocalDate birth_date = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getName() == null
                 && getBirth_date() == null
         ;

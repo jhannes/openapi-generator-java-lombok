@@ -27,9 +27,9 @@ public final class PersonDto extends RecipientDto implements PersonInterface {
         return this;
     }
 
-    public boolean empty() {
-        return super.empty()
-                && isPersonEmpty()
+    public boolean hasNoOptionalProperties() {
+        return super.hasNoOptionalProperties()
+                && hasNoOptionalPropertiesForPerson()
         ;
     }
 

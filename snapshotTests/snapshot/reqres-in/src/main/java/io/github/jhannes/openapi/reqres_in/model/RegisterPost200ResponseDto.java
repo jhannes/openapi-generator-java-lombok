@@ -10,7 +10,7 @@ public final class RegisterPost200ResponseDto {
     private String id = null;
     private String token = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getId() == null
                 && getToken() == null
         ;

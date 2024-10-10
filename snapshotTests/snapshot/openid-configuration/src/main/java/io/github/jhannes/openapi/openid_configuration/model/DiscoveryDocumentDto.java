@@ -85,7 +85,7 @@ public final class DiscoveryDocumentDto {
     private List<IdTokenSigningAlgValuesSupportedEnum> id_token_signing_alg_values_supported = new ArrayList<>();
     private String x_sso_frame = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getUserinfo_endpoint() == null
                 && getEnd_session_endpoint() == null
                 && getJwks_uri() == null

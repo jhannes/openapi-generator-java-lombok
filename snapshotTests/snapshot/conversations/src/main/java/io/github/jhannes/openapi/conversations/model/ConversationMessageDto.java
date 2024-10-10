@@ -13,9 +13,9 @@ public final class ConversationMessageDto implements ConversationMessageInterfac
     private String text;
     private Set<String> tags = new LinkedHashSet<>();
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getTags() == null
-                && isConversationMessageEmpty()
+                && hasNoOptionalPropertiesForConversationMessage()
         ;
     }
 

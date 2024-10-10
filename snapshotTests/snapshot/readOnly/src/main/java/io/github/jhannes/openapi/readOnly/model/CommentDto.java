@@ -14,7 +14,7 @@ public final class CommentDto {
     private OffsetDateTime created_at = null;
     private UserDto user = null;
 
-    public boolean empty() {
+    public boolean hasNoOptionalProperties() {
         return getTitle() == null
                 && getComment() == null
                 && getCreated_at() == null
