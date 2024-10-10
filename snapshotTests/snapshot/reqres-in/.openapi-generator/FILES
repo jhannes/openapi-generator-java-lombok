@@ -4,6 +4,8 @@ src/main/java/io/github/jhannes/openapi/reqres_in/model/LoginPost200ResponseDto.
 src/main/java/io/github/jhannes/openapi/reqres_in/model/LoginPost400ResponseDto.java
 src/main/java/io/github/jhannes/openapi/reqres_in/model/LoginPostRequestDto.java
 src/main/java/io/github/jhannes/openapi/reqres_in/model/RegisterPost200ResponseDto.java
+src/main/java/io/github/jhannes/openapi/reqres_in/model/SampleData.java
+src/main/java/io/github/jhannes/openapi/reqres_in/model/SampleModelData.java
 src/main/java/io/github/jhannes/openapi/reqres_in/model/UnknownResourceDto.java
 src/main/java/io/github/jhannes/openapi/reqres_in/model/UserDto.java
 src/main/java/io/github/jhannes/openapi/reqres_in/model/UsersGet200ResponseDto.java

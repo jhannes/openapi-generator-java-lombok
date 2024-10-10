@@ -5,4 +5,6 @@ src/main/java/io/github/jhannes/openapi/geojson/model/GeometryDto.java
 src/main/java/io/github/jhannes/openapi/geojson/model/LineStringDto.java
 src/main/java/io/github/jhannes/openapi/geojson/model/PointDto.java
 src/main/java/io/github/jhannes/openapi/geojson/model/PolygonDto.java
+src/main/java/io/github/jhannes/openapi/geojson/model/SampleData.java
+src/main/java/io/github/jhannes/openapi/geojson/model/SampleModelData.java
 src/main/java/io/github/jhannes/openapi/geojson/model/lombok.config

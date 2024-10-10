@@ -130,6 +130,10 @@ public class JavaCodegen extends AbstractJavaCodegen {
         super.processOpts();
 
         supportingFiles.add(new SupportingFile("lombok.config", sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar), "lombok.config"));
+        if (additionalProperties.get(CodegenConstants.GENERATE_MODEL_TESTS) == Boolean.TRUE) {
+            supportingFiles.add(new SupportingFile("sampleData.handlebars", sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar), "SampleData.java"));
+            supportingFiles.add(new SupportingFile("sampleModelData.handlebars", sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar), "SampleModelData.java"));
+        }
     }
 
     @Override
@@ -391,6 +395,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 CodegenProperty property = new CodegenProperty();
                 property.name = property.baseName = codegenModel.getDiscriminatorName();
                 property.getter = toGetter(property.name);
+                property.setter = toSetter(property.name);
                 property.isString = true;
                 property.dataType = property.datatypeWithEnum = "String";
                 property.required = true;

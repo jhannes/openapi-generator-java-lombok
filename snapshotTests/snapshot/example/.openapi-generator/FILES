@@ -2,4 +2,6 @@
 src/main/java/io/github/jhannes/openapi/example/api/DefaultApi.java
 src/main/java/io/github/jhannes/openapi/example/model/PetDto.java
 src/main/java/io/github/jhannes/openapi/example/model/PetTypeDto.java
+src/main/java/io/github/jhannes/openapi/example/model/SampleData.java
+src/main/java/io/github/jhannes/openapi/example/model/SampleModelData.java
 src/main/java/io/github/jhannes/openapi/example/model/lombok.config

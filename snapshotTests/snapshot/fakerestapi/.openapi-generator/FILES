@@ -8,5 +8,7 @@ src/main/java/io/github/jhannes/openapi/fakerestapi/model/ActivityDto.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/model/AuthorDto.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/model/BookDto.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/model/CoverPhotoDto.java
+src/main/java/io/github/jhannes/openapi/fakerestapi/model/SampleData.java
+src/main/java/io/github/jhannes/openapi/fakerestapi/model/SampleModelData.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/model/UserDto.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/model/lombok.config

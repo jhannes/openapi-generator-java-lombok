@@ -1,0 +1,74 @@
+package {{modelPackage}};
+
+{{#imports}}import {{import}};
+{{/imports}}
+
+import java.util.function.Supplier;
+import java.util.List;
+import java.util.Random;
+
+/**
+ * Model tests for {{appName}}
+ */
+public class SampleModelData extends SampleData {
+
+    public SampleModelData(Random random) {
+    	super(random);
+    }
+
+    public SampleModelData(long seed) {
+        super(seed);
+    }
+
+{{#models}}
+{{#model}}
+{{#unless isMixin}}
+    public {{classname}} sample{{classname}}(String propertyName) {
+        return sample{{classname}}();
+    }
+
+{{#if oneOf}}
+    public {{classname}} sample{{classname}}() {
+        List<Supplier<{{classname}}>> factories = List.of(
+{{#discriminator}}{{#mappedModels}}
+            () -> sample{{modelName}}().set{{capitalizeFirst discriminator.propertyName}}("{{mappingName}}"){{#unless @last}},{{/unless}}
+{{/mappedModels}}{{/discriminator}}
+        );
+        return pickOne(factories).get();
+    }
+
+{{else if isEnum}}
+    public {{classname}} sample{{classname}}() {
+        return pickOne({{classname}}.values());
+    }
+
+{{else}}
+    public {{classname}} sample{{classname}}() {
+        return new {{classname}}()
+{{~#allVars}}
+{{#if isInnerEnum}}
+
+            .{{setter}}({{#if isArray}}{{#if uniqueItems}}pickSubset{{else}}pickSome{{/if}}({{classname}}.{{items.datatypeWithEnum}}.values())){{else}}pickOne({{classname}}.{{datatypeWithEnum}}.values())){{/if}}
+{{~else if isModel}}
+
+            .{{setter}}(sample{{{datatypeWithEnum}}}("{{name}}"))
+{{~else if defaultValue}}
+{{~#unless isContainer}}
+
+            .{{setter}}({{{defaultValue}}})
+{{~/unless}}
+{{~else if isPrimitiveType}}
+
+            .{{setter}}(sample{{{datatypeWithEnum}}}("{{name}}"{{#if isString}}{{#if dataFormat}}, "{{dataFormat}}"{{/if}}{{/if}}))
+{{~else}}
+
+            .{{setter}}(sample{{{datatypeWithEnum}}}("{{name}}"))
+{{~/if}}
+{{~/allVars}};
+    }
+
+{{/if}}
+{{/unless}}
+{{/model}}
+{{/models}}
+}

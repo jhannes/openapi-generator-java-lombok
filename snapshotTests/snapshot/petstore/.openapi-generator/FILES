@@ -5,6 +5,8 @@ src/main/java/io/github/jhannes/openapi/petstore/api/UserApi.java
 src/main/java/io/github/jhannes/openapi/petstore/model/CategoryDto.java
 src/main/java/io/github/jhannes/openapi/petstore/model/OrderDto.java
 src/main/java/io/github/jhannes/openapi/petstore/model/PetDto.java
+src/main/java/io/github/jhannes/openapi/petstore/model/SampleData.java
+src/main/java/io/github/jhannes/openapi/petstore/model/SampleModelData.java
 src/main/java/io/github/jhannes/openapi/petstore/model/TagDto.java
 src/main/java/io/github/jhannes/openapi/petstore/model/UserDto.java
 src/main/java/io/github/jhannes/openapi/petstore/model/lombok.config
