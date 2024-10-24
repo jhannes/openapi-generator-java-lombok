@@ -55,6 +55,11 @@ public final class JwtPayloadDto extends HashMap<String, List> {
         ;
     }
 
+    public JwtPayloadDto putAll(HashMap<String, List> o) {
+        super.putAll(o);
+        return this;
+    }
+
     public JwtPayloadDto putAll(JwtPayloadDto o) {
         super.putAll(o);
         if (o.getIss() != null) setIss(o.getIss());

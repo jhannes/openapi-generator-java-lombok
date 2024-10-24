@@ -63,6 +63,11 @@ public sealed class DogDto extends PetBaseDto implements PetDto permits WorkingD
         ;
     }
 
+    public DogDto putAll(PetBaseDto o) {
+        super.putAll(o);
+        return this;
+    }
+
     public DogDto putAll(DogDto o) {
         super.putAll(o);
         if (o.getPet_type() != null) setPet_type(o.getPet_type());

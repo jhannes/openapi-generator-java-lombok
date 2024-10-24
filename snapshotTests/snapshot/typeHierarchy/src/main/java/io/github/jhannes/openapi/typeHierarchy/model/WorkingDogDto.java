@@ -53,6 +53,11 @@ public final class WorkingDogDto extends DogDto implements PetDto {
         ;
     }
 
+    public WorkingDogDto putAll(DogDto o) {
+        super.putAll(o);
+        return this;
+    }
+
     public WorkingDogDto putAll(WorkingDogDto o) {
         super.putAll(o);
         if (o.getCapabilities() != null) setCapabilities(o.getCapabilities());

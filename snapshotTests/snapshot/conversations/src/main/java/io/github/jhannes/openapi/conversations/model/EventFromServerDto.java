@@ -37,6 +37,11 @@ public final class EventFromServerDto extends CommandToServerDto implements Mess
         ;
     }
 
+    public EventFromServerDto putAll(CommandToServerDto o) {
+        super.putAll(o);
+        return this;
+    }
+
     public EventFromServerDto putAll(EventFromServerDto o) {
         super.putAll(o);
         if (o.getServerTime() != null) setServerTime(o.getServerTime());

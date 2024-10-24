@@ -87,6 +87,13 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
 
 {{else}}
 {{#notMixinDto}}
+{{#if parent}}
+    public {{classname}} putAll({{{parent}}} o) {
+        super.putAll(o);
+        return this;
+    }
+
+{{/if}}
     public {{classname}} putAll({{classname}} o) {
 {{#if parent}}
         super.putAll(o);
