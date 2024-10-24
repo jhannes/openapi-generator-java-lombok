@@ -31,7 +31,11 @@ public final class CreateConversationDeltaDto implements DeltaDto {
         List<String> fields = new ArrayList<>();
         if (getDelta() == null) fields.add(prefix + "delta");
         if (getConversationId() == null) fields.add(prefix + "conversationId");
-        if (getInfo() == null) fields.add(prefix + "info");
+        if (getInfo() != null) {
+            fields.addAll(getInfo().missingRequiredFields(prefix + "info."));
+        } else {
+            fields.add(prefix + "info");
+        }
         return fields;
     }
 

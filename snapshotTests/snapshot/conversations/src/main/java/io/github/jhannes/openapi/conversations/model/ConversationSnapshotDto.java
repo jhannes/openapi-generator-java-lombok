@@ -47,7 +47,11 @@ public final class ConversationSnapshotDto extends ChangeTrackedDto {
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = super.missingRequiredFields(prefix);
         if (getId() == null) fields.add(prefix + "id");
-        if (getInfo() == null) fields.add(prefix + "info");
+        if (getInfo() != null) {
+            fields.addAll(getInfo().missingRequiredFields(prefix + "info."));
+        } else {
+            fields.add(prefix + "info");
+        }
         if (getMessages() == null) fields.add(prefix + "messages");
         return fields;
     }

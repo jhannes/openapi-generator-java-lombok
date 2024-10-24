@@ -32,7 +32,11 @@ public sealed class CommandToServerDto implements MessageToServerDto permits Eve
         List<String> fields = new ArrayList<>();
         if (getId() == null) fields.add(prefix + "id");
         if (getClientTime() == null) fields.add(prefix + "clientTime");
-        if (getDelta() == null) fields.add(prefix + "delta");
+        if (getDelta() != null) {
+            fields.addAll(getDelta().missingRequiredFields(prefix + "delta."));
+        } else {
+            fields.add(prefix + "delta");
+        }
         return fields;
     }
 

@@ -70,7 +70,7 @@ public final class ThreadHealthDetailsDto implements HealthDetailsDto {
         List<String> fields = new ArrayList<>();
         if (getType() == null) fields.add(prefix + "type");
         if (getLastFailureException() != null) {
-            fields.addAll(getLastFailureException().missingRequiredFields(prefix + ".lastFailureException"));
+            fields.addAll(getLastFailureException().missingRequiredFields(prefix + "lastFailureException."));
         }
         return fields;
     }

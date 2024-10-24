@@ -34,7 +34,11 @@ public final class AddMessageToConversationDeltaDto implements DeltaDto {
         if (getDelta() == null) fields.add(prefix + "delta");
         if (getConversationId() == null) fields.add(prefix + "conversationId");
         if (getMessageId() == null) fields.add(prefix + "messageId");
-        if (getMessage() == null) fields.add(prefix + "message");
+        if (getMessage() != null) {
+            fields.addAll(getMessage().missingRequiredFields(prefix + "message."));
+        } else {
+            fields.add(prefix + "message");
+        }
         return fields;
     }
 

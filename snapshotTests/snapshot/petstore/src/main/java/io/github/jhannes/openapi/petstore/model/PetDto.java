@@ -67,7 +67,7 @@ public final class PetDto {
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
         if (getCategory() != null) {
-            fields.addAll(getCategory().missingRequiredFields(prefix + ".category"));
+            fields.addAll(getCategory().missingRequiredFields(prefix + "category."));
         }
         if (getName() == null) fields.add(prefix + "name");
         if (getPhotoUrls() == null) fields.add(prefix + "photoUrls");

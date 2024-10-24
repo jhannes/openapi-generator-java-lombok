@@ -82,7 +82,7 @@ public final class PersonSnapshotDto implements ChangeTrackedInterface, PersonIn
         if (getCreatedAt() == null) fields.add(prefix + "createdAt");
         if (getCreatedBy() == null) fields.add(prefix + "createdBy");
         if (getName() != null) {
-            fields.addAll(getName().missingRequiredFields(prefix + ".name"));
+            fields.addAll(getName().missingRequiredFields(prefix + "name."));
         }
         return fields;
     }

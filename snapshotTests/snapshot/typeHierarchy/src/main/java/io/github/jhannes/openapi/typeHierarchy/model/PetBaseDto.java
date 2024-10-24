@@ -39,7 +39,7 @@ public sealed class PetBaseDto permits CatDto, DogDto {
         List<String> fields = new ArrayList<>();
         if (getName() == null) fields.add(prefix + "name");
         if (getOwnerAddress() != null) {
-            fields.addAll(getOwnerAddress().missingRequiredFields(prefix + ".ownerAddress"));
+            fields.addAll(getOwnerAddress().missingRequiredFields(prefix + "ownerAddress."));
         }
         return fields;
     }

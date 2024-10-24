@@ -30,7 +30,11 @@ public final class InfectionDto {
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
         if (getId() == null) fields.add(prefix + "id");
-        if (getInformation() == null) fields.add(prefix + "information");
+        if (getInformation() != null) {
+            fields.addAll(getInformation().missingRequiredFields(prefix + "information."));
+        } else {
+            fields.add(prefix + "information");
+        }
         if (getRegisteredExposures() == null) fields.add(prefix + "registeredExposures");
         return fields;
     }

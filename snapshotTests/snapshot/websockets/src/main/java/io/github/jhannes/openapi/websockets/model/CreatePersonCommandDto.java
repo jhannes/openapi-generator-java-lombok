@@ -31,7 +31,11 @@ public final class CreatePersonCommandDto implements WebSocketCommandDto {
         List<String> fields = new ArrayList<>();
         if (getCommand() == null) fields.add(prefix + "command");
         if (getId() == null) fields.add(prefix + "id");
-        if (getPerson() == null) fields.add(prefix + "person");
+        if (getPerson() != null) {
+            fields.addAll(getPerson().missingRequiredFields(prefix + "person."));
+        } else {
+            fields.add(prefix + "person");
+        }
         return fields;
     }
 

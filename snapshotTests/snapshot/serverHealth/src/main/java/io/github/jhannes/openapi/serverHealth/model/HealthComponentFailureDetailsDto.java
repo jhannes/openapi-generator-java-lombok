@@ -30,7 +30,7 @@ public final class HealthComponentFailureDetailsDto implements HealthDetailsDto 
         List<String> fields = new ArrayList<>();
         if (getType() == null) fields.add(prefix + "type");
         if (getException() != null) {
-            fields.addAll(getException().missingRequiredFields(prefix + ".exception"));
+            fields.addAll(getException().missingRequiredFields(prefix + "exception."));
         }
         return fields;
     }

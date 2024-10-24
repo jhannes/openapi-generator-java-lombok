@@ -161,15 +161,19 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
         List<String> fields = new ArrayList<>();
 {{/if}}
 {{#vars}}
-{{#if required}}
 {{#unless isInherited}}
-        if ({{getter}}() == null) fields.add(prefix + "{{name}}");
-{{/unless}}
-{{else if isModel}}
+{{#if isModel}}
         if ({{getter}}() != null) {
-            fields.addAll({{getter}}().missingRequiredFields(prefix + ".{{name}}"));
-        }
+            fields.addAll({{getter}}().missingRequiredFields(prefix + "{{name}}."));
+{{#if required}}
+        } else {
+            fields.add(prefix + "{{name}}");
 {{/if}}
+        }
+{{else if required}}
+        if ({{getter}}() == null) fields.add(prefix + "{{name}}");
+{{/if}}
+{{/unless}}
 {{/vars}}
         return fields;
 {{else}}
