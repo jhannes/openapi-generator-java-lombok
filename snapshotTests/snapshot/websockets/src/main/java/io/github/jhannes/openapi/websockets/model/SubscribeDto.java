@@ -14,7 +14,6 @@ public final class SubscribeDto implements WebSocketRequestDto {
     }
 
     public SubscribeDto putAll(SubscribeDto o) {
-        if (o.getRequest() != null) setRequest(o.getRequest());
         return this;
     }
 

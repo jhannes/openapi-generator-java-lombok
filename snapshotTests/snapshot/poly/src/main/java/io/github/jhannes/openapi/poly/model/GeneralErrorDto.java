@@ -15,7 +15,6 @@ public final class GeneralErrorDto implements CreationErrorDto, UpdateErrorDto {
     }
 
     public GeneralErrorDto putAll(GeneralErrorDto o) {
-        if (o.getCode() != null) setCode(o.getCode());
         if (o.getDescription() != null) setDescription(o.getDescription());
         return this;
     }

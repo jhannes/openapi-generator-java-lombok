@@ -15,7 +15,6 @@ public final class PolygonDto implements GeometryDto {
     }
 
     public PolygonDto putAll(PolygonDto o) {
-        if (o.getType() != null) setType(o.getType());
         if (o.getCoordinates() != null) setCoordinates(o.getCoordinates());
         return this;
     }

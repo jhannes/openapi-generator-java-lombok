@@ -17,7 +17,6 @@ public final class CreatePersonCommandDto implements WebSocketCommandDto {
     }
 
     public CreatePersonCommandDto putAll(CreatePersonCommandDto o) {
-        if (o.getCommand() != null) setCommand(o.getCommand());
         if (o.getId() != null) setId(o.getId());
         if (o.getPerson() != null) setPerson(o.getPerson());
         return this;

@@ -18,7 +18,6 @@ public final class DuplicateIdentifierErrorDto implements CreationErrorDto, Upda
     }
 
     public DuplicateIdentifierErrorDto putAll(DuplicateIdentifierErrorDto o) {
-        if (o.getCode() != null) setCode(o.getCode());
         if (o.getIdentifierValue() != null) setIdentifierValue(o.getIdentifierValue());
         if (o.getEntityType() != null) setEntityType(o.getEntityType());
         return this;

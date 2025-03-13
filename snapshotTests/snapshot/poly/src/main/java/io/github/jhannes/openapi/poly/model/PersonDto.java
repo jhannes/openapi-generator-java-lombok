@@ -28,7 +28,6 @@ public final class PersonDto implements AnyPartyDto {
 
     public PersonDto putAll(PersonDto o) {
         if (o.getId() != null) setId(o.getId());
-        if (o.getType() != null) setType(o.getType());
         if (o.getGivenName() != null) setGivenName(o.getGivenName());
         if (o.getFamilyName() != null) setFamilyName(o.getFamilyName());
         if (o.getEmail() != null) setEmail(o.getEmail());

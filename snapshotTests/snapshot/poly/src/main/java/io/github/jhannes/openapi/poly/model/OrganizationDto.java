@@ -33,7 +33,6 @@ public final class OrganizationDto implements AnyPartyDto {
 
     public OrganizationDto putAll(OrganizationDto o) {
         if (o.getId() != null) setId(o.getId());
-        if (o.getType() != null) setType(o.getType());
         if (o.getName() != null) setName(o.getName());
         if (o.getOrganizationId() != null) setOrganizationId(o.getOrganizationId());
         if (o.getUrl() != null) setUrl(o.getUrl());

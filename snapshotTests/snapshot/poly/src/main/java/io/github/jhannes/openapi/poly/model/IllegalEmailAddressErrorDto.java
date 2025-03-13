@@ -16,7 +16,6 @@ public final class IllegalEmailAddressErrorDto implements CreationErrorDto, Upda
     }
 
     public IllegalEmailAddressErrorDto putAll(IllegalEmailAddressErrorDto o) {
-        if (o.getCode() != null) setCode(o.getCode());
         if (o.getInputEmailAddress() != null) setInputEmailAddress(o.getInputEmailAddress());
         if (o.getValidDomains() != null) setValidDomains(o.getValidDomains());
         return this;

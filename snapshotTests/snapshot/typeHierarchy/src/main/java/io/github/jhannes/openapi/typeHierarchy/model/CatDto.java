@@ -52,7 +52,6 @@ public final class CatDto extends PetBaseDto implements PetDto {
 
     public CatDto putAll(CatDto o) {
         super.putAll(o);
-        if (o.getPet_type() != null) setPet_type(o.getPet_type());
         if (o.getHunts() != null) setHunts(o.getHunts());
         if (o.getAge() != null) setAge(o.getAge());
         return this;

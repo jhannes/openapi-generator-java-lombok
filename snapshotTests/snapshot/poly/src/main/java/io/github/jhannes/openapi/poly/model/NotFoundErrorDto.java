@@ -18,7 +18,6 @@ public final class NotFoundErrorDto implements UpdateErrorDto {
     }
 
     public NotFoundErrorDto putAll(NotFoundErrorDto o) {
-        if (o.getCode() != null) setCode(o.getCode());
         if (o.getIdentifierValue() != null) setIdentifierValue(o.getIdentifierValue());
         if (o.getEntityType() != null) setEntityType(o.getEntityType());
         return this;

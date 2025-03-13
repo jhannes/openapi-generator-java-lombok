@@ -17,7 +17,6 @@ public final class UpdateConversationDeltaDto implements DeltaDto {
     }
 
     public UpdateConversationDeltaDto putAll(UpdateConversationDeltaDto o) {
-        if (o.getDelta() != null) setDelta(o.getDelta());
         if (o.getConversationId() != null) setConversationId(o.getConversationId());
         if (o.getInfo() != null) setInfo(o.getInfo());
         return this;

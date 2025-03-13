@@ -24,6 +24,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -397,19 +398,24 @@ public class JavaCodegen extends AbstractJavaCodegen {
             if (!subtypeInterfaces.contains(codegenModel)) {
                 subtypeInterfaces.add(codegenModel);
             }
-            if (codegenModel.getDiscriminatorName() != null && subModel.allVars.stream().noneMatch(v -> v.baseName.equals(codegenModel.getDiscriminatorName()))) {
-                CodegenProperty property = new CodegenProperty();
-                property.name = property.baseName = codegenModel.getDiscriminatorName();
-                property.getter = toGetter(property.name);
-                property.setter = toSetter(property.name);
-                property.isString = true;
-                property.dataType = property.datatypeWithEnum = "String";
-                property.required = true;
-                property.defaultValue = "\"" + subModel.name + "\"";
-                property.isInherited = false;
-                property.isNew = true;
-                property.isDiscriminator = true;
-                subModel.allVars.addFirst(property);
+            if (codegenModel.getDiscriminatorName() != null) {
+                Optional<CodegenProperty> prop = subModel.allVars.stream().filter(v -> v.baseName.equals(codegenModel.getDiscriminatorName())).findFirst();
+                if (prop.isEmpty()) {
+                    CodegenProperty property = new CodegenProperty();
+                    property.name = property.baseName = codegenModel.getDiscriminatorName();
+                    property.getter = toGetter(property.name);
+                    property.setter = toSetter(property.name);
+                    property.isString = true;
+                    property.dataType = property.datatypeWithEnum = "String";
+                    property.required = true;
+                    property.defaultValue = "\"" + subModel.name + "\"";
+                    property.isInherited = false;
+                    property.isNew = true;
+                    property.isDiscriminator = true;
+                    subModel.allVars.addFirst(property);
+                } else {
+                    prop.get().isNew = true;
+                }
             }
         }
         codegenModel.allVars.removeIf(var -> codegenModel.interfaceModels.stream().anyMatch(model -> varNotInImplementation(var, model)));

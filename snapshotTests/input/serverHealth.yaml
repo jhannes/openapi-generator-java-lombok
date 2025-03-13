@@ -60,6 +60,8 @@ components:
 
     ThreadHealthDetails:
       properties:
+        type:
+           enum: [ThreadHealthDetails]
         threadState:
           type: string
           enum: [NEW, RUNNABLE, WAITING, TIMED_WAITING, TERMINATED]
@@ -76,9 +78,12 @@ components:
           format: date-time
         lastFailureException:
           $ref: "#/components/schemas/Exception"
+      required: [type]
 
     DataSourceHealthDetails:
       properties:
+        type:
+          enum: [DataSourceHealthDetails]
         url:
           type: string
         lastAliveTime:
@@ -86,7 +91,7 @@ components:
           format: date-time
         lastFailureException:
           $ref: "#/components/schemas/Exception"
-
+      required: [type]
 
     Exception:
       properties:

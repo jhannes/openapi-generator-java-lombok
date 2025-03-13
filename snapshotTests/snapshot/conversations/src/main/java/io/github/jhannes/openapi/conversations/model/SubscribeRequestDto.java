@@ -16,7 +16,6 @@ public final class SubscribeRequestDto implements RequestToServerDto {
     }
 
     public SubscribeRequestDto putAll(SubscribeRequestDto o) {
-        if (o.getRequest() != null) setRequest(o.getRequest());
         if (o.getClientId() != null) setClientId(o.getClientId());
         return this;
     }

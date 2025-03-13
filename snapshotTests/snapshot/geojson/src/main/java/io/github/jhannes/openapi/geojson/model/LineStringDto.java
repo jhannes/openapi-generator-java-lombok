@@ -15,7 +15,6 @@ public final class LineStringDto implements GeometryDto {
     }
 
     public LineStringDto putAll(LineStringDto o) {
-        if (o.getType() != null) setType(o.getType());
         if (o.getCoordinates() != null) setCoordinates(o.getCoordinates());
         return this;
     }

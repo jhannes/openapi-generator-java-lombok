@@ -18,7 +18,6 @@ public final class PointDto implements GeometryDto {
     }
 
     public PointDto putAll(PointDto o) {
-        if (o.getType() != null) setType(o.getType());
         if (o.getCoordinates() != null) setCoordinates(o.getCoordinates());
         return this;
     }

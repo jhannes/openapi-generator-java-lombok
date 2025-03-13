@@ -18,7 +18,6 @@ public final class AddMessageToConversationDeltaDto implements DeltaDto {
     }
 
     public AddMessageToConversationDeltaDto putAll(AddMessageToConversationDeltaDto o) {
-        if (o.getDelta() != null) setDelta(o.getDelta());
         if (o.getConversationId() != null) setConversationId(o.getConversationId());
         if (o.getMessageId() != null) setMessageId(o.getMessageId());
         if (o.getMessage() != null) setMessage(o.getMessage());
