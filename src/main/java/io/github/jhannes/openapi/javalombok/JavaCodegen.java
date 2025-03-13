@@ -48,6 +48,9 @@ public class JavaCodegen extends AbstractJavaCodegen {
         importMapping.put("ToString", "lombok.ToString");
         importMapping.put("Getter", "lombok.Getter");
         importMapping.put("RequiredArgsConstructor", "lombok.RequiredArgsConstructor");
+        importMapping.put("HashSet", "java.util.HashSet");
+
+        instantiationTypes.put("set", "HashSet");
     }
 
     @Override
@@ -144,6 +147,9 @@ public class JavaCodegen extends AbstractJavaCodegen {
     public void postProcessModelProperty(CodegenModel model, CodegenProperty property) {
         super.postProcessModelProperty(model, property);
         model.imports.remove("Arrays");
+        if (model.imports.remove("LinkedHashSet")) {
+            model.imports.add("HashSet");
+        }
     }
 
     @Override

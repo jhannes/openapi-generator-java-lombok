@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -79,7 +79,7 @@ public class SampleData {
     }
     
     public <T> Set<T> sampleSet(Supplier<T> supplier, int min, int max) {
-        Set<T> result = new LinkedHashSet<>();
+        Set<T> result = new HashSet<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {
             result.add(supplier.get());
@@ -99,11 +99,11 @@ public class SampleData {
     }
     
     public <T> Set<T> pickSubset(T[] alternatives) {
-        return new LinkedHashSet<>(pickSome(alternatives, 1, 4));
+        return new HashSet<>(pickSome(alternatives, 1, 4));
     }
     
     public <T> Set<T> pickSubset(T[] alternatives, int min, int max) {
-        return new LinkedHashSet<>(pickSome(alternatives, min, max));
+        return new HashSet<>(pickSome(alternatives, min, max));
     }
     
     public <T> Map<String, T> sampleMap(Supplier<T> supplier, String propertyName) {

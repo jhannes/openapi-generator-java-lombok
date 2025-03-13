@@ -2,7 +2,7 @@ package io.github.jhannes.openapi.openid_configuration.model;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -75,13 +75,13 @@ public final class DiscoveryDocumentDto {
     private URI userinfo_endpoint = null;
     private URI end_session_endpoint = null;
     private URI jwks_uri = null;
-    private Set<GrantTypeDto> grant_types_supported = new LinkedHashSet<>();
-    private Set<Object> scopes_supported = new LinkedHashSet<>();
-    private Set<Object> claims_supported = new LinkedHashSet<>();
-    private Set<ResponseTypeDto> response_types_supported = new LinkedHashSet<>();
-    private Set<ResponseModesSupportedEnum> response_modes_supported = new LinkedHashSet<>();
-    private Set<SubjectTypesSupportedEnum> subject_types_supported = new LinkedHashSet<>();
-    private Set<CodeChallengeMethodsSupportedEnum> code_challenge_methods_supported = new LinkedHashSet<>();
+    private Set<GrantTypeDto> grant_types_supported = new HashSet<>();
+    private Set<Object> scopes_supported = new HashSet<>();
+    private Set<Object> claims_supported = new HashSet<>();
+    private Set<ResponseTypeDto> response_types_supported = new HashSet<>();
+    private Set<ResponseModesSupportedEnum> response_modes_supported = new HashSet<>();
+    private Set<SubjectTypesSupportedEnum> subject_types_supported = new HashSet<>();
+    private Set<CodeChallengeMethodsSupportedEnum> code_challenge_methods_supported = new HashSet<>();
     private List<IdTokenSigningAlgValuesSupportedEnum> id_token_signing_alg_values_supported = new ArrayList<>();
     private String x_sso_frame = null;
 

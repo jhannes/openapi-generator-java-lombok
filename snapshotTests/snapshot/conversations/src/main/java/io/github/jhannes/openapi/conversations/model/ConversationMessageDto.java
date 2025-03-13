@@ -1,7 +1,7 @@
 package io.github.jhannes.openapi.conversations.model;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -11,7 +11,7 @@ import lombok.Data;
 public final class ConversationMessageDto implements ConversationMessageInterface {
 
     private String text;
-    private Set<String> tags = new LinkedHashSet<>();
+    private Set<String> tags = new HashSet<>();
 
     public boolean hasNoOptionalProperties() {
         return getTags() == null

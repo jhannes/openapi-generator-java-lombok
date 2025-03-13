@@ -2,7 +2,7 @@ package io.github.jhannes.openapi.poly.model;
 
 import java.net.URI;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -18,7 +18,7 @@ public final class OrganizationDto implements AnyPartyDto {
     private String organizationId = null;
     private URI url = null;
     private String email = null;
-    private Set<String> emailDomains = new LinkedHashSet<>();
+    private Set<String> emailDomains = new HashSet<>();
     private String phone = null;
 
     public boolean hasNoOptionalProperties() {
