@@ -1,9 +1,8 @@
 package io.github.jhannes.openapi.javalombok;
 
+import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
-import org.openapitools.codegen.ClientOptInput;
-import org.openapitools.codegen.DefaultGenerator;
 import org.openapitools.codegen.config.CodegenConfigurator;
 
 import javax.tools.DiagnosticCollector;
@@ -21,15 +20,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static io.github.jhannes.openapi.javalombok.AbstractSnapshotTest.cleanDirectory;
-import static io.github.jhannes.openapi.javalombok.AbstractSnapshotTest.createConfigurator;
-import static io.github.jhannes.openapi.javalombok.AbstractSnapshotTest.getModelName;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
-public class CompilerTest {
+public class CompilerTest extends AbstractSnapshotTest {
 
     @TestFactory
     Stream<DynamicNode> outputsFromSpecsShouldCompile() throws IOException {
@@ -50,22 +46,17 @@ public class CompilerTest {
     }
 
     public static DynamicNode createTestFromSpec(Path spec) {
-        String modelName = getModelName(spec);
-        Path outputDir = AbstractSnapshotTest.getCompileDir(spec);
-        var configurator = createConfigurator(modelName, AbstractSnapshotTest.getInputSpec(spec), outputDir);
+        return createTestNode(spec, createConfigurator(getModelName(spec)), getCompileDir(spec));
+    }
+
+    private static DynamicContainer createTestNode(Path spec, CodegenConfigurator configurator, Path outputDir) {
+        configurator.setInputSpec(getInputSpec(spec)).setOutputDir(outputDir.toString());
         return dynamicContainer("Compile " + spec, Arrays.asList(
                 dynamicTest("Clean " + outputDir, () -> cleanDirectory(outputDir)),
                 dynamicTest("Generate " + outputDir, () -> generate(configurator)),
                 dynamicTest("javac " + outputDir, () -> compile(outputDir))
         ));
     }
-
-    static void generate(CodegenConfigurator configurator) {
-        final ClientOptInput clientOptInput = configurator.toClientOptInput();
-        DefaultGenerator generator = new DefaultGenerator();
-        generator.opts(clientOptInput).generate();
-    }
-
 
     static void compile(Path path) throws IOException {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();

@@ -1,6 +1,7 @@
 package io.github.jhannes.openapi.javalombok;
 
-
+import org.openapitools.codegen.ClientOptInput;
+import org.openapitools.codegen.DefaultGenerator;
 import org.openapitools.codegen.config.CodegenConfigurator;
 
 import java.io.File;
@@ -20,18 +21,12 @@ public class AbstractSnapshotTest {
     public static final Path SNAPSHOT_ROOT = Paths.get("snapshotTests");
     public static final Path LOCAL_SNAPSHOT_ROOT = Paths.get("localSnapshotTests");
 
-    protected static CodegenConfigurator createConfigurator(String modelName, String inputSpec, Path outputDir) {
-        return createBaseConfigurator(inputSpec, outputDir)
+    protected static CodegenConfigurator createConfigurator(String modelName) {
+        return new CodegenConfigurator()
                 .setModelNameSuffix("Dto")
                 .addAdditionalProperty("hideGenerationTimestamp", "true")
                 .setGeneratorName("java-lombok")
                 .setPackageName("io.github.jhannes.openapi." + modelName);
-    }
-
-    static CodegenConfigurator createBaseConfigurator(String inputSpec, Path outputDir) {
-        return new CodegenConfigurator()
-                .setInputSpec(inputSpec)
-                .setOutputDir(outputDir.toString());
     }
 
     public static String getInputSpec(Path input) {
@@ -62,9 +57,8 @@ public class AbstractSnapshotTest {
 
     static Path getOutputDir(Path spec) {
         return getBasePath(spec).map(p -> p.resolve("output"))
-                .orElse(spec.getParent().getParent().resolve("output").resolve(SnapshotTests.getModelName(spec)));
+                .orElse(spec.getParent().getParent().resolve("output").resolve(getModelName(spec)));
     }
-
 
     private static Optional<Path> getBasePath(Path spec) {
         if (spec.getFileName().toString().endsWith(".link")) {
@@ -105,5 +99,11 @@ public class AbstractSnapshotTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    static void generate(CodegenConfigurator configurator) {
+        final ClientOptInput clientOptInput = configurator.toClientOptInput();
+        DefaultGenerator generator = new DefaultGenerator();
+        generator.opts(clientOptInput).generate();
     }
 }
