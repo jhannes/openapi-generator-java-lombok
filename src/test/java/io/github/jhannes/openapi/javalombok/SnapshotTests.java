@@ -33,28 +33,17 @@ public class SnapshotTests {
     }
 
     private DynamicNode snapshots(Path testDir) throws IOException {
-        Path inputDir = testDir.resolve("input");
-        Path snapshotDir = testDir.resolve("snapshot");
-        if (!Files.isDirectory(snapshotDir)) {
-            return dynamicTest("No snapshots for " + testDir, () -> {});
-        }
         return dynamicContainer(
                 "Snapshots of " + testDir,
-                Files.list(inputDir)
+                Files.list(testDir.resolve("input"))
                         .filter(p -> p.toFile().isFile())
-                        .map(this::createTestsForSpec)
+                        .map(SnapshotTests::createTestsForSpec)
         );
     }
 
-    public DynamicNode createTestsForSpec(Path spec) {
-        Path rootDir = spec.getParent().getParent();
-        String modelName = getModelName(spec);
-        Path outputDir = rootDir.resolve("output").resolve(modelName);
-        Path snapshotDir = rootDir.resolve("snapshot").resolve(modelName);
-        return createTests(spec, outputDir, snapshotDir, createConfigurator(modelName, spec, outputDir));
-    }
-
-    static DynamicNode createTests(Path spec, Path outputDir, Path snapshotDir, CodegenConfigurator configurator) {
+    public static DynamicNode createTestsForSpec(Path spec) {
+        Path outputDir = AbstractSnapshotTest.getOutputDir(spec);
+        CodegenConfigurator configurator = createConfigurator(getModelName(spec), AbstractSnapshotTest.getInputSpec(spec), outputDir);
         try {
             cleanDirectory(outputDir);
             generate(configurator);
@@ -63,8 +52,7 @@ public class SnapshotTests {
                 throw e;
             });
         }
-
-        return SnapshotDiffDynamicTest.compareDirectories(spec, outputDir, snapshotDir);
+        return SnapshotDiffDynamicTest.compareDirectories(spec, outputDir, AbstractSnapshotTest.getSnapshotDir(spec));
     }
 
     static void generate(CodegenConfigurator configurator) {

@@ -1,6 +1,5 @@
 package io.github.jhannes.openapi.javalombok;
 
-import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
 import org.openapitools.codegen.ClientOptInput;
@@ -46,24 +45,18 @@ public class CompilerTest {
         Path inputDir = testDir.resolve("input");
         return dynamicContainer(
                 "Output should compile: " + testDir,
-                Files.list(inputDir)
-                        .filter(p -> p.toFile().isFile())
-                        .map(this::createTestFromSpec)
+                Files.list(inputDir).filter(p -> p.toFile().isFile()).map(CompilerTest::createTestFromSpec)
         );
     }
 
-    public DynamicNode createTestFromSpec(Path spec) {
+    public static DynamicNode createTestFromSpec(Path spec) {
         String modelName = getModelName(spec);
-        Path outputDir = spec.getParent().getParent().resolve("compile").resolve(modelName);
-        var configurator = createConfigurator(modelName, spec, outputDir);
-        return createTestFromSpec(spec, configurator, outputDir);
-    }
-
-    static DynamicContainer createTestFromSpec(Path spec, CodegenConfigurator configurator, Path outputDir) {
+        Path outputDir = AbstractSnapshotTest.getCompileDir(spec);
+        var configurator = createConfigurator(modelName, AbstractSnapshotTest.getInputSpec(spec), outputDir);
         return dynamicContainer("Compile " + spec, Arrays.asList(
-                dynamicTest("Clean " + spec, () -> cleanDirectory(outputDir)),
-                dynamicTest("Generate " + spec, () -> generate(configurator)),
-                dynamicTest("javac " + spec, () -> compile(outputDir))
+                dynamicTest("Clean " + outputDir, () -> cleanDirectory(outputDir)),
+                dynamicTest("Generate " + outputDir, () -> generate(configurator)),
+                dynamicTest("javac " + outputDir, () -> compile(outputDir))
         ));
     }
 
@@ -85,8 +78,8 @@ public class CompilerTest {
             ).collect(Collectors.toList());
 
             String classpath = Stream.of(
-                    System.getProperty("java.class.path").split(File.pathSeparator)
-            ).filter(p -> p.contains("projectlombok"))
+                            System.getProperty("java.class.path").split(File.pathSeparator)
+                    ).filter(p -> p.contains("projectlombok"))
                     .collect(Collectors.joining(File.pathSeparator));
             List<String> options = List.of(
                     "-Xlint:deprecation",
@@ -94,7 +87,7 @@ public class CompilerTest {
                     "-proc:full",
                     "-classpath", classpath
             );
-            System.out.println("javac " + String.join(" " , options) + " " + files.stream().map(Path::toString).collect(Collectors.joining(" ")));
+            System.out.println("javac " + String.join(" ", options) + " " + files.stream().map(Path::toString).collect(Collectors.joining(" ")));
 
             DiagnosticCollector<JavaFileObject> diagnosticListener = new DiagnosticCollector<>();
             JavaCompiler.CompilationTask task = compiler.getTask(

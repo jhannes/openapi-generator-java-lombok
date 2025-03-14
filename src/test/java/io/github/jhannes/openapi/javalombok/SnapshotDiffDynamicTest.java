@@ -47,7 +47,7 @@ public class SnapshotDiffDynamicTest implements Executable {
         } catch (IOException e) {
             return dynamicTest(spec.getFileName() + " in " + spec.getParent(), () -> assertNull(e));
         }
-        return dynamicContainer(spec.getFileName() + " in " + spec.getParent(), Stream.of(
+        return dynamicContainer(spec.getFileName() + " in " + spec, Stream.of(
                 dynamicTest("Files", () -> compareFiles(outputDir, snapshotDir)),
                 dynamicContainer("Files in " + outputDir.getFileName() + " in " + outputDir.getParent(), files.stream().map(file ->
                         createSnapshotDiffTest(file, outputDir, snapshotDir)
@@ -62,7 +62,7 @@ public class SnapshotDiffDynamicTest implements Executable {
 
     private static String listFiles(Path outputDir) throws IOException {
         try (Stream<Path> walk = Files.walk(outputDir)) {
-            return walk.map(path -> outputDir.getParent().relativize(path).toString()).collect(Collectors.joining("\n"));
+            return walk.map(path -> outputDir.relativize(path).toString()).collect(Collectors.joining("\n"));
         }
     }
 

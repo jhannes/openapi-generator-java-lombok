@@ -25,34 +25,20 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 public class FocusedExampleTest extends AbstractSnapshotTest {
 
     public static final Path SPEC = SNAPSHOT_ROOT.resolve("input/conversations.yaml");
-    public static final Path ROOT_DIR = SPEC.getParent().getParent();
 
     @TestFactory
     DynamicNode snapshotShouldCompile() {
-        Path snapshotDir = ROOT_DIR.resolve("snapshot").resolve(getModelName());
-        return dynamicTest("Compile " + snapshotDir, () -> CompilerTest.compile(snapshotDir));
+        Path snapshotDir = AbstractSnapshotTest.getSnapshotDir(SPEC);
+        return dynamicTest("Compile " + snapshotDir, () -> CompilerTest.compile(AbstractSnapshotTest.getSnapshotDir(SPEC)));
     }
-
 
     @TestFactory
     DynamicNode outputShouldMatchSnapshot() {
-        Path outputDir = ROOT_DIR.resolve("output").resolve(getModelName());
-        Path snapshotDir = ROOT_DIR.resolve("snapshot").resolve(getModelName());
-        return SnapshotTests.createTests(SPEC, outputDir, snapshotDir, createConfigurator(outputDir));
+        return SnapshotTests.createTestsForSpec(SPEC);
     }
 
     @TestFactory
     DynamicNode outputShouldCompile() {
-        var targetRoot = ROOT_DIR.resolve("compile");
-        var configurator = createConfigurator(targetRoot.resolve(getModelName()));
-        return CompilerTest.createTestFromSpec(SPEC, configurator, targetRoot.resolve(getModelName(SPEC)));
-    }
-
-    private static CodegenConfigurator createConfigurator(Path targetDir) {
-        return createConfigurator(getModelName(), SPEC, targetDir);
-    }
-
-    private static String getModelName() {
-        return SnapshotTests.getModelName(SPEC);
+        return CompilerTest.createTestFromSpec(SPEC);
     }
 }
