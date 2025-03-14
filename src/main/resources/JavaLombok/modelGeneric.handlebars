@@ -184,7 +184,7 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
 {{/vars}}
         return fields;
 {{else}}
-        return List.of();
+        return new ArrayList<>();
 {{/if}}
     }
 

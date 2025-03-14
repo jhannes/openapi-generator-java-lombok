@@ -42,7 +42,7 @@ public final class UsersGet200ResponseDto {
     }
 
     public List<String> missingRequiredFields(String prefix) {
-        return List.of();
+        return new ArrayList<>();
     }
 
 }

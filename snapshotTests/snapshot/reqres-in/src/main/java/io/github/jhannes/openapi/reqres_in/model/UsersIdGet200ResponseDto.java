@@ -26,7 +26,7 @@ public final class UsersIdGet200ResponseDto {
     }
 
     public List<String> missingRequiredFields(String prefix) {
-        return List.of();
+        return new ArrayList<>();
     }
 
 }

@@ -46,7 +46,7 @@ public final class PersonDto extends RecipientDto implements PersonInterface {
     }
 
     public List<String> missingRequiredFields(String prefix) {
-        return List.of();
+        return new ArrayList<>();
     }
 
 }

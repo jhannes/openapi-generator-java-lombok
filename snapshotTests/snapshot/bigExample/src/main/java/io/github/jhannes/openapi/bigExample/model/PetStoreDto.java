@@ -1,5 +1,6 @@
 package io.github.jhannes.openapi.bigExample.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,7 @@ public final class PetStoreDto {
     }
 
     public List<String> missingRequiredFields(String prefix) {
-        return List.of();
+        return new ArrayList<>();
     }
 
 }

@@ -1,5 +1,6 @@
 package io.github.jhannes.openapi.readOnly.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
@@ -30,7 +31,7 @@ public final class UserDto {
     }
 
     public List<String> missingRequiredFields(String prefix) {
-        return List.of();
+        return new ArrayList<>();
     }
 
 }

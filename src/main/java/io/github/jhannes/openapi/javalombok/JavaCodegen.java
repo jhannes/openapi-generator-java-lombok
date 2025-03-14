@@ -215,6 +215,9 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 if (!model.isEnum) {
                     addImport(modelsMap, "java.util.List");
                 }
+                if (!model.isEnum && model.oneOf.isEmpty() && !model.hasRequired) {
+                    addImport(modelsMap, "java.util.ArrayList");
+                }
                 if (model.oneOf.isEmpty() && !model.classname.endsWith("Interface") && !model.isEnum) {
                     addImport(modelsMap, "lombok.Data");
                     if (model.parent != null) {

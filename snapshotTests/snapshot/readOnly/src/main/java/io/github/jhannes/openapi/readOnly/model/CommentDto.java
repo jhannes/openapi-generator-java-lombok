@@ -39,7 +39,7 @@ public final class CommentDto {
     }
 
     public List<String> missingRequiredFields(String prefix) {
-        return List.of();
+        return new ArrayList<>();
     }
 
 }

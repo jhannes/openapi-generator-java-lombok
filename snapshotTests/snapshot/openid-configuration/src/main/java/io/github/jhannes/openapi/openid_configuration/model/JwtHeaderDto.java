@@ -1,5 +1,6 @@
 package io.github.jhannes.openapi.openid_configuration.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import lombok.Data;
@@ -42,7 +43,7 @@ public final class JwtHeaderDto {
     }
 
     public List<String> missingRequiredFields(String prefix) {
-        return List.of();
+        return new ArrayList<>();
     }
 
 }

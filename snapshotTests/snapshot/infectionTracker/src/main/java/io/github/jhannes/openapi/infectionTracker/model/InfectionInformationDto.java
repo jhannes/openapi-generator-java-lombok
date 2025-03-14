@@ -1,6 +1,7 @@
 package io.github.jhannes.openapi.infectionTracker.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import lombok.Data;
@@ -41,7 +42,7 @@ public final class InfectionInformationDto {
     }
 
     public List<String> missingRequiredFields(String prefix) {
-        return List.of();
+        return new ArrayList<>();
     }
 
 }

@@ -1,5 +1,6 @@
 package io.github.jhannes.openapi.petstore.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import lombok.Data;
@@ -29,7 +30,7 @@ public final class CategoryDto {
     }
 
     public List<String> missingRequiredFields(String prefix) {
-        return List.of();
+        return new ArrayList<>();
     }
 
 }
