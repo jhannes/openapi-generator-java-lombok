@@ -3,6 +3,7 @@ package io.github.jhannes.openapi.geojson.model;
 
 import java.util.function.Supplier;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -24,7 +25,8 @@ public class SampleModelData extends SampleData {
 
     public GeometryCollectionDto sampleGeometryCollectionDto() {
         return new GeometryCollectionDto()
-            .setType("GeometryCollection");
+            .setType("GeometryCollection")
+            .setGeometries(sampleList(() -> sampleGeometryDto("geometries"), "geometries"));
     }
 
     public GeometryDto sampleGeometryDto(String propertyName) {
@@ -46,7 +48,13 @@ public class SampleModelData extends SampleData {
 
     public LineStringDto sampleLineStringDto() {
         return new LineStringDto()
-            .setType("LineString");
+            .setType("LineString")
+            .setCoordinates(coordinatesForLineStringDto());
+    }
+
+    public List<List<Double>> coordinatesForLineStringDto() {
+        // Too complex to generate automatically. Subclass and override to customize
+        return null;
     }
 
     public PointDto samplePointDto(String propertyName) {
@@ -55,7 +63,8 @@ public class SampleModelData extends SampleData {
 
     public PointDto samplePointDto() {
         return new PointDto()
-            .setType("Point");
+            .setType("Point")
+            .setCoordinates(sampleList(() -> sampleDouble("coordinates"), "coordinates"));
     }
 
     public PolygonDto samplePolygonDto(String propertyName) {
@@ -64,7 +73,13 @@ public class SampleModelData extends SampleData {
 
     public PolygonDto samplePolygonDto() {
         return new PolygonDto()
-            .setType("Polygon");
+            .setType("Polygon")
+            .setCoordinates(coordinatesForPolygonDto());
+    }
+
+    public List<List<List<Double>>> coordinatesForPolygonDto() {
+        // Too complex to generate automatically. Subclass and override to customize
+        return null;
     }
 
 }

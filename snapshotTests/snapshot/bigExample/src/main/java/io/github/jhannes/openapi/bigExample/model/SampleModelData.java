@@ -3,6 +3,7 @@ package io.github.jhannes.openapi.bigExample.model;
 
 import java.util.function.Supplier;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -34,7 +35,13 @@ public class SampleModelData extends SampleData {
     }
 
     public PetLocationsDto samplePetLocationsDto() {
-        return new PetLocationsDto();
+        return new PetLocationsDto()
+            .setLocations(locationsForPetLocationsDto());
+    }
+
+    public Map<String, Map<String, List<Double>>> locationsForPetLocationsDto() {
+        // Too complex to generate automatically. Subclass and override to customize
+        return null;
     }
 
     public PetStoreDto samplePetStoreDto(String propertyName) {
@@ -42,7 +49,8 @@ public class SampleModelData extends SampleData {
     }
 
     public PetStoreDto samplePetStoreDto() {
-        return new PetStoreDto();
+        return new PetStoreDto()
+            .setPets(sampleMap(() -> samplePetDto("pets"), "pets"));
     }
 
 }

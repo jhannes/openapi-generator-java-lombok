@@ -3,6 +3,7 @@ package io.github.jhannes.openapi.serverHealth.model;
 
 import java.util.function.Supplier;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -37,7 +38,8 @@ public class SampleModelData extends SampleData {
     public ExceptionDto sampleExceptionDto() {
         return new ExceptionDto()
             .setType(sampleString("type", "className"))
-            .setMessage(sampleString("message"));
+            .setMessage(sampleString("message"))
+            .setStackTrace(sampleList(() -> sampleStackTraceInnerDto("stackTrace"), "stackTrace"));
     }
 
     public HealthComponentDto sampleHealthComponentDto(String propertyName) {
@@ -88,7 +90,8 @@ public class SampleModelData extends SampleData {
 
     public HealthSummaryDto sampleHealthSummaryDto() {
         return new HealthSummaryDto()
-            .setStatus(sampleHealthStatusDto("status"));
+            .setStatus(sampleHealthStatusDto("status"))
+            .setComponents(sampleMap(() -> sampleHealthComponentDto("components"), "components"));
     }
 
     public StackTraceInnerDto sampleStackTraceInnerDto(String propertyName) {
@@ -111,6 +114,7 @@ public class SampleModelData extends SampleData {
         return new ThreadHealthDetailsDto()
             .setType("ThreadHealthDetails")
             .setThreadState(pickOne(ThreadHealthDetailsDto.ThreadStateEnum.values()))
+            .setStackTrace(sampleList(() -> sampleStackTraceInnerDto("stackTrace"), "stackTrace"))
             .setLastAliveTime(sampleOffsetDateTime("lastAliveTime"))
             .setLastSuccessTime(sampleOffsetDateTime("lastSuccessTime"))
             .setLastFailureTime(sampleOffsetDateTime("lastFailureTime"))

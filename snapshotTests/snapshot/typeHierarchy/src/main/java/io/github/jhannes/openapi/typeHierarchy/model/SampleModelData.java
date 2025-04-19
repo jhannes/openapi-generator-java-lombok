@@ -3,6 +3,7 @@ package io.github.jhannes.openapi.typeHierarchy.model;
 
 import java.util.function.Supplier;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -118,7 +119,8 @@ public class SampleModelData extends SampleData {
             .setOwnerAddress(sampleAddressDto("ownerAddress"))
             .setBark(sampleBoolean("bark"))
             .setBreed(pickOne(WorkingDogDto.BreedEnum.values()))
-            .setPet_type("WorkingDog");
+            .setPet_type("WorkingDog")
+            .setCapabilities(sampleList(() -> sampleWorkingDogCapabilityDto("capabilities"), "capabilities"));
     }
 
 }

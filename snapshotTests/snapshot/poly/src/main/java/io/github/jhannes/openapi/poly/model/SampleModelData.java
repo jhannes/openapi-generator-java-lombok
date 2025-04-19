@@ -3,6 +3,7 @@ package io.github.jhannes.openapi.poly.model;
 
 import java.util.function.Supplier;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -72,7 +73,8 @@ public class SampleModelData extends SampleData {
     public IllegalEmailAddressErrorDto sampleIllegalEmailAddressErrorDto() {
         return new IllegalEmailAddressErrorDto()
             .setCode(sampleString("code"))
-            .setInputEmailAddress(sampleString("inputEmailAddress"));
+            .setInputEmailAddress(sampleString("inputEmailAddress"))
+            .setValidDomains(sampleList(() -> sampleString("validDomains"), "validDomains"));
     }
 
     public LogMessageDto sampleLogMessageDto(String propertyName) {
@@ -108,6 +110,7 @@ public class SampleModelData extends SampleData {
             .setOrganizationId(sampleString("organizationId"))
             .setUrl(sampleURI("url"))
             .setEmail(sampleString("email", "email"))
+            .setEmailDomains(sampleSet(() -> sampleString("emailDomains"), "emailDomains"))
             .setPhone(sampleString("phone", "phone"));
     }
 

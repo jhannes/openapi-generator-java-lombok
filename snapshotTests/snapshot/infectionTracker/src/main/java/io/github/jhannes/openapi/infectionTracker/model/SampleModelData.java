@@ -3,6 +3,7 @@ package io.github.jhannes.openapi.infectionTracker.model;
 
 import java.util.function.Supplier;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -54,7 +55,8 @@ public class SampleModelData extends SampleData {
     public InfectionDto sampleInfectionDto() {
         return new InfectionDto()
             .setId(sampleUUID("id"))
-            .setInformation(sampleInfectionInformationDto("information"));
+            .setInformation(sampleInfectionInformationDto("information"))
+            .setRegisteredExposures(sampleList(() -> sampleExposureDto("registeredExposures"), "registeredExposures"));
     }
 
     public InfectionInformationDto sampleInfectionInformationDto(String propertyName) {

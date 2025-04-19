@@ -3,6 +3,7 @@ package io.github.jhannes.openapi.petstore.model;
 
 import java.util.function.Supplier;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -51,6 +52,8 @@ public class SampleModelData extends SampleData {
             .setId(sampleLong("id"))
             .setCategory(sampleCategoryDto("category"))
             .setName(sampleString("name"))
+            .setPhotoUrls(sampleList(() -> sampleString("photoUrls"), "photoUrls"))
+            .setTags(sampleList(() -> sampleTagDto("tags"), "tags"))
             .setStatus(pickOne(PetDto.StatusEnum.values()));
     }
 

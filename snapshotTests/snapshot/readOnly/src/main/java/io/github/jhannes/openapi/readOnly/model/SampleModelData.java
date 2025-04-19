@@ -3,6 +3,7 @@ package io.github.jhannes.openapi.readOnly.model;
 
 import java.util.function.Supplier;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -41,6 +42,7 @@ public class SampleModelData extends SampleData {
             .setName(sampleString("name"))
             .setBirth_date(sampleLocalDate("birthDate"))
             .setCreated_at(sampleOffsetDateTime("createdAt"))
+            .setComments(sampleList(() -> sampleCommentDto("comments"), "comments"))
             .setStatus(pickOne(PetDto.StatusEnum.values()));
     }
 

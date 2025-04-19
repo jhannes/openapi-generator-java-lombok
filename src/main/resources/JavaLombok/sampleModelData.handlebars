@@ -5,6 +5,7 @@ package {{modelPackage}};
 
 import java.util.function.Supplier;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -52,11 +53,17 @@ public class SampleModelData extends SampleData {
 {{~else if isModel}}
 
             .{{setter}}(sample{{{datatypeWithEnum}}}("{{name}}"))
+{{~else if isContainer}}
+{{~#if items.isContainer}}
+
+            .{{setter}}({{name}}For{{classname}}())
+{{~else}}
+
+            .{{setter}}(sample{{#if uniqueItems}}Set{{else if isMap}}Map{{else}}List{{/if}}(() -> sample{{{items.datatypeWithEnum}}}("{{name}}"), "{{name}}"))
+{{~/if}}
 {{~else if defaultValue}}
-{{~#unless isContainer}}
 
             .{{setter}}({{{defaultValue}}})
-{{~/unless}}
 {{~else if isPrimitiveType}}
 
             .{{setter}}(sample{{{datatypeWithEnum}}}("{{name}}"{{#if isString}}{{#if dataFormat}}, "{{dataFormat}}"{{/if}}{{/if}}))
@@ -67,6 +74,15 @@ public class SampleModelData extends SampleData {
 {{~/allVars}};
     }
 
+{{#allVars}}
+{{#if items.isContainer}}
+    public {{{datatypeWithEnum}}} {{name}}For{{classname}}() {
+        // Too complex to generate automatically. Subclass and override to customize
+        return null;
+    }
+
+{{/if}}
+{{/allVars}}
 {{/if}}
 {{/unless}}
 {{/model}}

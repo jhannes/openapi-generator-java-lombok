@@ -3,6 +3,7 @@ package io.github.jhannes.openapi.conversations.model;
 
 import java.util.function.Supplier;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -67,7 +68,8 @@ public class SampleModelData extends SampleData {
 
     public ConversationMessageDto sampleConversationMessageDto() {
         return new ConversationMessageDto()
-            .setText(sampleString("text"));
+            .setText(sampleString("text"))
+            .setTags(sampleSet(() -> sampleString("tags"), "tags"));
     }
 
     public ConversationMessageSnapshotDto sampleConversationMessageSnapshotDto(String propertyName) {
@@ -78,7 +80,8 @@ public class SampleModelData extends SampleData {
         return new ConversationMessageSnapshotDto()
             .setCreatedAt(sampleOffsetDateTime("createdAt"))
             .setUpdatedAt(sampleOffsetDateTime("updatedAt"))
-            .setText(sampleString("text"));
+            .setText(sampleString("text"))
+            .setTags(sampleSet(() -> sampleString("tags"), "tags"));
     }
 
     public ConversationSnapshotDto sampleConversationSnapshotDto(String propertyName) {
@@ -90,7 +93,8 @@ public class SampleModelData extends SampleData {
             .setCreatedAt(sampleOffsetDateTime("createdAt"))
             .setUpdatedAt(sampleOffsetDateTime("updatedAt"))
             .setId(sampleUUID("id"))
-            .setInfo(sampleConversationInfoDto("info"));
+            .setInfo(sampleConversationInfoDto("info"))
+            .setMessages(sampleMap(() -> sampleConversationMessageSnapshotDto("messages"), "messages"));
     }
 
     public CreateConversationDeltaDto sampleCreateConversationDeltaDto(String propertyName) {
@@ -166,7 +170,8 @@ public class SampleModelData extends SampleData {
     }
 
     public SnapshotSetDto sampleSnapshotSetDto() {
-        return new SnapshotSetDto();
+        return new SnapshotSetDto()
+            .setConversations(sampleList(() -> sampleConversationSnapshotDto("conversations"), "conversations"));
     }
 
     public SubscribeRequestDto sampleSubscribeRequestDto(String propertyName) {

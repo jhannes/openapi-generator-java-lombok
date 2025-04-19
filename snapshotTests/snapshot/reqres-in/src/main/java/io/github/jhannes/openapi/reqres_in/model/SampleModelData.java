@@ -3,6 +3,7 @@ package io.github.jhannes.openapi.reqres_in.model;
 
 import java.util.function.Supplier;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -92,7 +93,8 @@ public class SampleModelData extends SampleData {
             .setPage(sampleInteger("page"))
             .setPer_page(sampleInteger("perPage"))
             .setTotal(sampleInteger("total"))
-            .setTotal_pages(sampleInteger("totalPages"));
+            .setTotal_pages(sampleInteger("totalPages"))
+            .setData(sampleList(() -> sampleUserDto("data"), "data"));
     }
 
     public UsersIdGet200ResponseDto sampleUsersIdGet200ResponseDto(String propertyName) {

@@ -3,6 +3,7 @@ package io.github.jhannes.openapi.openid_configuration.model;
 
 import java.util.function.Supplier;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -30,6 +31,10 @@ public class SampleModelData extends SampleData {
             .setUserinfo_endpoint(sampleURI("userinfoEndpoint"))
             .setEnd_session_endpoint(sampleURI("endSessionEndpoint"))
             .setJwks_uri(sampleURI("jwksUri"))
+            .setGrant_types_supported(sampleSet(() -> sampleGrantTypeDto("grantTypesSupported"), "grantTypesSupported"))
+            .setScopes_supported(sampleSet(() -> sampleObject("scopesSupported"), "scopesSupported"))
+            .setClaims_supported(sampleSet(() -> sampleObject("claimsSupported"), "claimsSupported"))
+            .setResponse_types_supported(sampleSet(() -> sampleResponseTypeDto("responseTypesSupported"), "responseTypesSupported"))
             .setResponse_modes_supported(pickSubset(DiscoveryDocumentDto.ResponseModesSupportedEnum.values()))
             .setSubject_types_supported(pickSubset(DiscoveryDocumentDto.SubjectTypesSupportedEnum.values()))
             .setCode_challenge_methods_supported(pickSubset(DiscoveryDocumentDto.CodeChallengeMethodsSupportedEnum.values()))
@@ -50,7 +55,8 @@ public class SampleModelData extends SampleData {
     }
 
     public JwksDocumentDto sampleJwksDocumentDto() {
-        return new JwksDocumentDto();
+        return new JwksDocumentDto()
+            .setKeys(sampleList(() -> sampleJwksKeyDto("keys"), "keys"));
     }
 
     public JwksKeyDto sampleJwksKeyDto(String propertyName) {
