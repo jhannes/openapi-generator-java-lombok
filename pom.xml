@@ -83,6 +83,7 @@
                 <version>3.3.1</version>
                 <configuration>
                     <argLine>-Xms512m -Xmx1500m</argLine>
+                    <argLine>-Duser.language.format=en</argLine>
                     <parallel>methods</parallel>
                 </configuration>
             </plugin>
