@@ -133,6 +133,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
         }
         super.processOpts();
 
+        supportingFiles.add(new SupportingFile("lombok.config", sourceFolder + File.separator + apiPackage().replace('.', File.separatorChar), "lombok.config"));
         supportingFiles.add(new SupportingFile("lombok.config", sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar), "lombok.config"));
         if (additionalProperties.get(CodegenConstants.GENERATE_MODEL_TESTS) == Boolean.TRUE) {
             supportingFiles.add(new SupportingFile("sampleData.handlebars", sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar), "SampleData.java"));

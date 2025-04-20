@@ -1,5 +1,6 @@
 .openapi-generator-ignore
 src/main/java/io/github/jhannes/openapi/geojson/api/DefaultApi.java
+src/main/java/io/github/jhannes/openapi/geojson/api/lombok.config
 src/main/java/io/github/jhannes/openapi/geojson/model/GeometryCollectionDto.java
 src/main/java/io/github/jhannes/openapi/geojson/model/GeometryDto.java
 src/main/java/io/github/jhannes/openapi/geojson/model/LineStringDto.java

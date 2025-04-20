@@ -2,6 +2,7 @@
 src/main/java/io/github/jhannes/openapi/petstore/api/PetApi.java
 src/main/java/io/github/jhannes/openapi/petstore/api/StoreApi.java
 src/main/java/io/github/jhannes/openapi/petstore/api/UserApi.java
+src/main/java/io/github/jhannes/openapi/petstore/api/lombok.config
 src/main/java/io/github/jhannes/openapi/petstore/model/CategoryDto.java
 src/main/java/io/github/jhannes/openapi/petstore/model/OrderDto.java
 src/main/java/io/github/jhannes/openapi/petstore/model/PetDto.java

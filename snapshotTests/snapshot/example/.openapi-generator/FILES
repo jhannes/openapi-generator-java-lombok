@@ -1,5 +1,6 @@
 .openapi-generator-ignore
 src/main/java/io/github/jhannes/openapi/example/api/DefaultApi.java
+src/main/java/io/github/jhannes/openapi/example/api/lombok.config
 src/main/java/io/github/jhannes/openapi/example/model/PetDto.java
 src/main/java/io/github/jhannes/openapi/example/model/PetTypeDto.java
 src/main/java/io/github/jhannes/openapi/example/model/SampleData.java

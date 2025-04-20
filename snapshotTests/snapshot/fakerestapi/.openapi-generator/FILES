@@ -4,6 +4,7 @@ src/main/java/io/github/jhannes/openapi/fakerestapi/api/AuthorsApi.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/api/BooksApi.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/api/CoverPhotosApi.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/api/UsersApi.java
+src/main/java/io/github/jhannes/openapi/fakerestapi/api/lombok.config
 src/main/java/io/github/jhannes/openapi/fakerestapi/model/ActivityDto.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/model/AuthorDto.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/model/BookDto.java

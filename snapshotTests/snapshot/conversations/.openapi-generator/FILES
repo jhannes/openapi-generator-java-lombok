@@ -1,5 +1,6 @@
 .openapi-generator-ignore
 src/main/java/io/github/jhannes/openapi/conversations/api/DefaultApi.java
+src/main/java/io/github/jhannes/openapi/conversations/api/lombok.config
 src/main/java/io/github/jhannes/openapi/conversations/model/AddMessageToConversationDeltaDto.java
 src/main/java/io/github/jhannes/openapi/conversations/model/ChangeTrackedDto.java
 src/main/java/io/github/jhannes/openapi/conversations/model/ChangeTrackedInterface.java

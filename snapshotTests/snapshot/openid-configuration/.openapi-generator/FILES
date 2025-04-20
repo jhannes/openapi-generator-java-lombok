@@ -2,6 +2,7 @@
 src/main/java/io/github/jhannes/openapi/openid_configuration/api/DiscoveryApi.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/api/IdentityClientApi.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/api/IdentityProviderApi.java
+src/main/java/io/github/jhannes/openapi/openid_configuration/api/lombok.config
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/DiscoveryDocumentDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/GrantTypeDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/JwksDocumentDto.java

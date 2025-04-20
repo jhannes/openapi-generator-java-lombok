@@ -2,6 +2,7 @@
 src/main/java/io/github/jhannes/openapi/infectionTracker/api/CaseWorkersApi.java
 src/main/java/io/github/jhannes/openapi/infectionTracker/api/CasesApi.java
 src/main/java/io/github/jhannes/openapi/infectionTracker/api/ExposuresApi.java
+src/main/java/io/github/jhannes/openapi/infectionTracker/api/lombok.config
 src/main/java/io/github/jhannes/openapi/infectionTracker/model/CaseWorkerDto.java
 src/main/java/io/github/jhannes/openapi/infectionTracker/model/ExposureDto.java
 src/main/java/io/github/jhannes/openapi/infectionTracker/model/InfectionDto.java
