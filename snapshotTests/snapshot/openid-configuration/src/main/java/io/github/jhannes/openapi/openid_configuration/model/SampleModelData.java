@@ -92,6 +92,7 @@ public class SampleModelData extends SampleData {
         return new JwtPayloadDto()
             .setIss(sampleString("iss", "url"))
             .setSub(sampleString("sub"))
+            .setExp(sampleLong("exp"))
             .setAud(sampleString("aud"))
             .setName(sampleString("name"))
             .setEmail(sampleString("email"))

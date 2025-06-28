@@ -21,6 +21,10 @@ public final class JwtPayloadDto extends HashMap<String, List> {
     */
     private String sub;
     /**
+     * Expiry - the unix timestamp after which the JWT should be rejected
+    */
+    private Long exp;
+    /**
      * Audience - the client_id that the JWT was issued to
     */
     private String aud;
@@ -64,6 +68,7 @@ public final class JwtPayloadDto extends HashMap<String, List> {
         super.putAll(o);
         if (o.getIss() != null) setIss(o.getIss());
         if (o.getSub() != null) setSub(o.getSub());
+        if (o.getExp() != null) setExp(o.getExp());
         if (o.getAud() != null) setAud(o.getAud());
         if (o.getName() != null) setName(o.getName());
         if (o.getEmail() != null) setEmail(o.getEmail());
@@ -86,6 +91,7 @@ public final class JwtPayloadDto extends HashMap<String, List> {
         List<String> fields = new ArrayList<>();
         if (getIss() == null) fields.add(prefix + "iss");
         if (getSub() == null) fields.add(prefix + "sub");
+        if (getExp() == null) fields.add(prefix + "exp");
         if (getAud() == null) fields.add(prefix + "aud");
         return fields;
     }
