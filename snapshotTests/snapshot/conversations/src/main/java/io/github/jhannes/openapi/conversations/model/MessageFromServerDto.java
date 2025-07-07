@@ -4,7 +4,6 @@ import java.util.List;
 
 public sealed interface MessageFromServerDto permits EventFromServerDto, SnapshotSetDto {
 
-
     MessageFromServerDto putAll(MessageFromServerDto o);
     MessageFromServerDto removeWhereEqual(MessageFromServerDto o);
     boolean hasNoOptionalProperties();

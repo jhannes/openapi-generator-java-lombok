@@ -381,9 +381,12 @@ public class JavaCodegen extends AbstractJavaCodegen {
         }
         for (String className : codegenModel.oneOf) {
             CodegenModel subModel = allModels.get(className);
+            if (subModel.isAlias) {
+                subModel = allModels.get(subModel.dataType);
+            }
             if (subModel.oneOf.isEmpty()) {
-                mappedModels.add(new CodegenDiscriminator.MappedModel(subModel.name, className));
-                mapping.put(subModel.name, className);
+                mappedModels.add(new CodegenDiscriminator.MappedModel(subModel.name, subModel.classname));
+                mapping.put(subModel.name, subModel.classname);
             } else if (
                     discriminator != null
                     && subModel.discriminator != null
@@ -398,7 +401,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 //not matching discriminators, cannot be matched from spec
                 continue;
             }
-            List<CodegenModel> subtypeInterfaces = interfacesOfSubtypes.computeIfAbsent(className, k -> new ArrayList<>());
+            List<CodegenModel> subtypeInterfaces = interfacesOfSubtypes.computeIfAbsent(subModel.classname, k -> new ArrayList<>());
             if (!subtypeInterfaces.contains(codegenModel)) {
                 subtypeInterfaces.add(codegenModel);
             }
