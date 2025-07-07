@@ -6,7 +6,7 @@ import java.util.UUID;
 import lombok.Data;
 
 @Data
-public final class SubscribeRequestDto implements RequestToServerDto {
+public final class SubscribeRequestDto implements MessageToServerDto {
 
     private String request = "SubscribeRequest";
     private UUID clientId;
@@ -43,6 +43,7 @@ public final class SubscribeRequestDto implements RequestToServerDto {
     }
 
     public void copyToSubscribeRequest(SubscribeRequestDto o) {
+        if (getRequest() != null) o.setRequest(getRequest());
         if (getClientId() != null) o.setClientId(getClientId());
     }
 

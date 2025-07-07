@@ -5,8 +5,9 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public final class SubscribeDto implements WebSocketRequestDto {
+public final class SubscribeDto implements WebSocketMessageDto {
 
+    private String command = "Subscribe";
     private String request = "Subscribe";
 
     public boolean hasNoOptionalProperties() {
@@ -18,7 +19,7 @@ public final class SubscribeDto implements WebSocketRequestDto {
         return this;
     }
 
-    public SubscribeDto putAll(WebSocketRequestDto o) {
+    public SubscribeDto putAll(WebSocketMessageDto o) {
         o.copyToSubscribe(this);
         return this;
     }
@@ -28,18 +29,20 @@ public final class SubscribeDto implements WebSocketRequestDto {
         return this;
     }
 
-    public SubscribeDto removeWhereEqual(WebSocketRequestDto o) {
+    public SubscribeDto removeWhereEqual(WebSocketMessageDto o) {
         o.removeWhereEqualFromSubscribe(this);
         return this;
     }
 
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
+        if (getCommand() == null) fields.add(prefix + "command");
         if (getRequest() == null) fields.add(prefix + "request");
         return fields;
     }
 
     public void copyToSubscribe(SubscribeDto o) {
+        if (getRequest() != null) o.setRequest(getRequest());
     }
 
     public void removeWhereEqualFromSubscribe(SubscribeDto o) {

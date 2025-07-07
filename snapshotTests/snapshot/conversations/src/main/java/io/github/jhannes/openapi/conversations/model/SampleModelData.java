@@ -154,17 +154,6 @@ public class SampleModelData extends SampleData {
         return pickOne(factories).get();
     }
 
-    public RequestToServerDto sampleRequestToServerDto(String propertyName) {
-        return sampleRequestToServerDto();
-    }
-
-    public RequestToServerDto sampleRequestToServerDto() {
-        List<Supplier<RequestToServerDto>> factories = List.of(
-            () -> sampleSubscribeRequestDto().setRequest("SubscribeRequest")
-        );
-        return pickOne(factories).get();
-    }
-
     public SnapshotSetDto sampleSnapshotSetDto(String propertyName) {
         return sampleSnapshotSetDto();
     }

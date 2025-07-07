@@ -18,5 +18,4 @@ src/main/java/io/github/jhannes/openapi/websockets/model/UnsubscribeDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/UpdatePersonCommandDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/WebSocketCommandDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/WebSocketMessageDto.java
-src/main/java/io/github/jhannes/openapi/websockets/model/WebSocketRequestDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/lombok.config

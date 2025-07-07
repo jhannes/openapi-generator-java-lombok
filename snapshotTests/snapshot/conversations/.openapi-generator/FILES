@@ -15,7 +15,6 @@ src/main/java/io/github/jhannes/openapi/conversations/model/DeltaDto.java
 src/main/java/io/github/jhannes/openapi/conversations/model/EventFromServerDto.java
 src/main/java/io/github/jhannes/openapi/conversations/model/MessageFromServerDto.java
 src/main/java/io/github/jhannes/openapi/conversations/model/MessageToServerDto.java
-src/main/java/io/github/jhannes/openapi/conversations/model/RequestToServerDto.java
 src/main/java/io/github/jhannes/openapi/conversations/model/SampleData.java
 src/main/java/io/github/jhannes/openapi/conversations/model/SampleModelData.java
 src/main/java/io/github/jhannes/openapi/conversations/model/SnapshotSetDto.java

@@ -116,6 +116,7 @@ public class SampleModelData extends SampleData {
 
     public SubscribeDto sampleSubscribeDto() {
         return new SubscribeDto()
+            .setCommand("Subscribe")
             .setRequest("Subscribe");
     }
 
@@ -158,18 +159,8 @@ public class SampleModelData extends SampleData {
     public WebSocketMessageDto sampleWebSocketMessageDto() {
         List<Supplier<WebSocketMessageDto>> factories = List.of(
             () -> sampleUpdatePersonCommandDto().setCommand("updatePerson"),
-            () -> sampleCreatePersonCommandDto().setCommand("createPerson")
-        );
-        return pickOne(factories).get();
-    }
-
-    public WebSocketRequestDto sampleWebSocketRequestDto(String propertyName) {
-        return sampleWebSocketRequestDto();
-    }
-
-    public WebSocketRequestDto sampleWebSocketRequestDto() {
-        List<Supplier<WebSocketRequestDto>> factories = List.of(
-            () -> sampleSubscribeDto().setRequest("Subscribe")
+            () -> sampleCreatePersonCommandDto().setCommand("createPerson"),
+            () -> sampleSubscribeDto().setCommand("Subscribe")
         );
         return pickOne(factories).get();
     }

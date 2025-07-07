@@ -2,7 +2,7 @@ package io.github.jhannes.openapi.conversations.model;
 
 import java.util.List;
 
-public sealed interface MessageToServerDto permits CommandToServerDto, RequestToServerDto {
+public sealed interface MessageToServerDto permits CommandToServerDto, SubscribeRequestDto {
 
     MessageToServerDto putAll(MessageToServerDto o);
     MessageToServerDto removeWhereEqual(MessageToServerDto o);

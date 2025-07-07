@@ -2,7 +2,7 @@ package io.github.jhannes.openapi.websockets.model;
 
 import java.util.List;
 
-public sealed interface WebSocketMessageDto permits WebSocketCommandDto {
+public sealed interface WebSocketMessageDto permits SubscribeDto, WebSocketCommandDto {
 
     String getCommand();
 
@@ -10,6 +10,7 @@ public sealed interface WebSocketMessageDto permits WebSocketCommandDto {
         return switch (command) {
             case "updatePerson" -> UpdatePersonCommandDto.class;
             case "createPerson" -> CreatePersonCommandDto.class;
+            case "Subscribe" -> SubscribeDto.class;
             default -> throw new IllegalArgumentException("Illegal command " + command);
         };
     }
@@ -22,6 +23,10 @@ public sealed interface WebSocketMessageDto permits WebSocketCommandDto {
         return new CreatePersonCommandDto().setCommand("createPerson");
     }
 
+    static SubscribeDto createSubscribe() {
+        return new SubscribeDto().setCommand("Subscribe");
+    }
+
     WebSocketMessageDto putAll(WebSocketMessageDto o);
     WebSocketMessageDto removeWhereEqual(WebSocketMessageDto o);
     boolean hasNoOptionalProperties();
@@ -29,9 +34,13 @@ public sealed interface WebSocketMessageDto permits WebSocketCommandDto {
 
     default void copyToCreatePersonCommand(CreatePersonCommandDto o) {
     }
+    default void copyToSubscribe(SubscribeDto o) {
+    }
     default void copyToUpdatePersonCommand(UpdatePersonCommandDto o) {
     }
     default void removeWhereEqualFromCreatePersonCommand(CreatePersonCommandDto o) {
+    }
+    default void removeWhereEqualFromSubscribe(SubscribeDto o) {
     }
     default void removeWhereEqualFromUpdatePersonCommand(UpdatePersonCommandDto o) {
     }
