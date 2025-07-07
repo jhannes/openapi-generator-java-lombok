@@ -19,7 +19,17 @@ public final class PolygonDto implements GeometryDto {
         return this;
     }
 
+    public PolygonDto putAll(GeometryDto o) {
+        if (o instanceof PolygonDto same) putAll(same);
+        return this;
+    }
+
     public PolygonDto removeWhereEqual(PolygonDto o) {
+        return this;
+    }
+
+    public PolygonDto removeWhereEqual(GeometryDto o) {
+        if (o instanceof PolygonDto same) removeWhereEqual(same);
         return this;
     }
 

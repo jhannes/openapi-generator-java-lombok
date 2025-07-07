@@ -23,7 +23,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.Modifier;
-import java.util.Arrays;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -75,7 +74,6 @@ class PatchedHandlebarsEngineAdapter extends HandlebarsEngineAdapter {
         handlebars.registerHelpers(org.openapitools.codegen.templating.handlebars.StringHelpers.class);
         handlebars.registerHelper("notMixinDto", new NotMixinDto());
         handlebars.registerHelper("isMixinAllOf", new IsMixinAllOf());
-        handlebars.registerHelper("mixinInterfaceModels", new MixinInterfaceModelsHelper());
         handlebars.prettyPrint(true);
         Template tmpl = handlebars.compile(templateFile);
         return tmpl.apply(context);
@@ -98,8 +96,8 @@ class PatchedHandlebarsEngineAdapter extends HandlebarsEngineAdapter {
 
     public static class NotMixinDto extends ConditionalModelHelper {
 
-        protected boolean getResult(CodegenModel codegenModel) {
-            return !isMixinDto(codegenModel);
+        protected boolean getResult(CodegenModel model) {
+            return !isMixinDto(model);
         }
     }
 
@@ -110,39 +108,6 @@ class PatchedHandlebarsEngineAdapter extends HandlebarsEngineAdapter {
                    ((model.interfaceModels.size() > 1 && implementsMixin(model))
                     || (model.parentModel != null && implementsMixin(model.parentModel)));
         }
-    }
-
-    public static class MixinInterfaceModelsHelper implements Helper<Object> {
-        @Override
-        public Object apply(Object context, Options options) throws IOException {
-            if (context instanceof CodegenModel model) {
-                applyToModel(options, model, options.hash("base", 0));
-            }
-            return options.inverse();
-        }
-
-        private static int applyToModel(Options options, CodegenModel model, int index) throws IOException {
-            for (CodegenModel interfaceModel : model.interfaceModels) {
-                if (isMixin(interfaceModel)) {
-                    outputWithNewContext(options, interfaceModel, index++);
-                    if (!isMixinDto(model)) {
-                        index = applyToModel(options, interfaceModel, index);
-                    }
-                }
-            }
-            return index;
-        }
-    }
-
-    private static void outputWithNewContext(Options options, Object newContext, int index) throws IOException {
-        Context itCtx = Context.newContext(options.context, newContext)
-                .combine("@key", index)
-                .combine("@index", index)
-                .combine("@first", index == (int) options.hash("base", 0) ? "first" : "")
-                .combine("@odd", index % 2 == 0 ? "" : "odd")
-                .combine("@even", index % 2 != 0 ? "even" : "")
-                .combine("@index_1", index + 1);
-        options.buffer().append(options.apply(options.fn, itCtx, Arrays.asList(newContext, index)));
     }
 
     private static boolean implementsMixin(CodegenModel model) {

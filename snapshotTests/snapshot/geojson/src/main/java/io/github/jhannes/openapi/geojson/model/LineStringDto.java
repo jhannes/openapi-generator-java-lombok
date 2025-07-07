@@ -19,7 +19,17 @@ public final class LineStringDto implements GeometryDto {
         return this;
     }
 
+    public LineStringDto putAll(GeometryDto o) {
+        if (o instanceof LineStringDto same) putAll(same);
+        return this;
+    }
+
     public LineStringDto removeWhereEqual(LineStringDto o) {
+        return this;
+    }
+
+    public LineStringDto removeWhereEqual(GeometryDto o) {
+        if (o instanceof LineStringDto same) removeWhereEqual(same);
         return this;
     }
 

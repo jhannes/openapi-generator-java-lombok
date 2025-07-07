@@ -27,13 +27,11 @@ public final class ConversationMessageSnapshotDto implements ChangeTrackedInterf
         return this;
     }
 
-    @Override
     public ConversationMessageSnapshotDto putAll(ChangeTrackedInterface o) {
         o.copyToConversationMessageSnapshot(this);
         return this;
     }
 
-    @Override
     public ConversationMessageSnapshotDto putAll(ConversationMessageInterface o) {
         o.copyToConversationMessageSnapshot(this);
         return this;
@@ -44,13 +42,11 @@ public final class ConversationMessageSnapshotDto implements ChangeTrackedInterf
         return this;
     }
 
-    @Override
     public ConversationMessageSnapshotDto removeWhereEqual(ChangeTrackedInterface o) {
         o.removeWhereEqualFromConversationMessageSnapshot(this);
         return this;
     }
 
-    @Override
     public ConversationMessageSnapshotDto removeWhereEqual(ConversationMessageInterface o) {
         o.removeWhereEqualFromConversationMessageSnapshot(this);
         return this;

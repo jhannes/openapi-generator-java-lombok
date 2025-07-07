@@ -36,19 +36,11 @@ public final class PersonSnapshotDto implements ChangeTrackedInterface, PersonIn
         return this;
     }
 
-    @Override
     public PersonSnapshotDto putAll(ChangeTrackedInterface o) {
         o.copyToPersonSnapshot(this);
         return this;
     }
 
-    @Override
-    public PersonSnapshotDto putAll(PersonInterface o) {
-        o.copyToPersonSnapshot(this);
-        return this;
-    }
-
-    @Override
     public PersonSnapshotDto putAll(RecipientInterface o) {
         o.copyToPersonSnapshot(this);
         return this;
@@ -59,19 +51,11 @@ public final class PersonSnapshotDto implements ChangeTrackedInterface, PersonIn
         return this;
     }
 
-    @Override
     public PersonSnapshotDto removeWhereEqual(ChangeTrackedInterface o) {
         o.removeWhereEqualFromPersonSnapshot(this);
         return this;
     }
 
-    @Override
-    public PersonSnapshotDto removeWhereEqual(PersonInterface o) {
-        o.removeWhereEqualFromPersonSnapshot(this);
-        return this;
-    }
-
-    @Override
     public PersonSnapshotDto removeWhereEqual(RecipientInterface o) {
         o.removeWhereEqualFromPersonSnapshot(this);
         return this;

@@ -21,8 +21,18 @@ public final class HealthComponentFailureDetailsDto implements HealthDetailsDto 
         return this;
     }
 
+    public HealthComponentFailureDetailsDto putAll(HealthDetailsDto o) {
+        if (o instanceof HealthComponentFailureDetailsDto same) putAll(same);
+        return this;
+    }
+
     public HealthComponentFailureDetailsDto removeWhereEqual(HealthComponentFailureDetailsDto o) {
         if (Objects.equals(getException(), o.getException())) setException(null);
+        return this;
+    }
+
+    public HealthComponentFailureDetailsDto removeWhereEqual(HealthDetailsDto o) {
+        if (o instanceof HealthComponentFailureDetailsDto same) removeWhereEqual(same);
         return this;
     }
 

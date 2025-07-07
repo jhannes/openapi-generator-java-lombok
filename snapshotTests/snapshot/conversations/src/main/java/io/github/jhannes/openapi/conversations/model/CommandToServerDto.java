@@ -24,7 +24,17 @@ public sealed class CommandToServerDto implements MessageToServerDto permits Eve
         return this;
     }
 
+    public CommandToServerDto putAll(MessageToServerDto o) {
+        if (o instanceof CommandToServerDto same) putAll(same);
+        return this;
+    }
+
     public CommandToServerDto removeWhereEqual(CommandToServerDto o) {
+        return this;
+    }
+
+    public CommandToServerDto removeWhereEqual(MessageToServerDto o) {
+        if (o instanceof CommandToServerDto same) removeWhereEqual(same);
         return this;
     }
 

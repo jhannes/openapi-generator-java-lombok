@@ -22,6 +22,8 @@ public sealed interface {{classname}}
 {{/with}}
 {{#unless interfaces}}
 
+    {{classname}} putAll({{classname}} o);
+    {{classname}} removeWhereEqual({{classname}} o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
 {{/unless}}

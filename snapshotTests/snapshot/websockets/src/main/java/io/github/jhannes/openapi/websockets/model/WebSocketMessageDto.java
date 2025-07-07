@@ -22,6 +22,8 @@ public sealed interface WebSocketMessageDto permits WebSocketCommandDto {
         return new CreatePersonCommandDto().setCommand("createPerson");
     }
 
+    WebSocketMessageDto putAll(WebSocketMessageDto o);
+    WebSocketMessageDto removeWhereEqual(WebSocketMessageDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
 }

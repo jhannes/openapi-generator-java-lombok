@@ -17,7 +17,17 @@ public final class SubscribeDto implements WebSocketRequestDto {
         return this;
     }
 
+    public SubscribeDto putAll(WebSocketRequestDto o) {
+        if (o instanceof SubscribeDto same) putAll(same);
+        return this;
+    }
+
     public SubscribeDto removeWhereEqual(SubscribeDto o) {
+        return this;
+    }
+
+    public SubscribeDto removeWhereEqual(WebSocketRequestDto o) {
+        if (o instanceof SubscribeDto same) removeWhereEqual(same);
         return this;
     }
 

@@ -29,8 +29,10 @@ public sealed interface {{classname}}
 
 {{/vars}}
     boolean hasNoOptionalProperties();
+{{#unless interfaces}}
     {{classname}} putAll({{classname}} o);
     {{classname}} removeWhereEqual({{classname}} o);
+{{/unless}}
     List<String> missingRequiredFields(String prefix);
 
 {{#descendants}}

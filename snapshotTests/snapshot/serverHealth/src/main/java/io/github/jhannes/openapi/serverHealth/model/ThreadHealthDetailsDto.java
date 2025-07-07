@@ -56,6 +56,11 @@ public final class ThreadHealthDetailsDto implements HealthDetailsDto {
         return this;
     }
 
+    public ThreadHealthDetailsDto putAll(HealthDetailsDto o) {
+        if (o instanceof ThreadHealthDetailsDto same) putAll(same);
+        return this;
+    }
+
     public ThreadHealthDetailsDto removeWhereEqual(ThreadHealthDetailsDto o) {
         if (Objects.equals(getThreadState(), o.getThreadState())) setThreadState(null);
         if (Objects.equals(getStackTrace(), o.getStackTrace())) setStackTrace(null);
@@ -63,6 +68,11 @@ public final class ThreadHealthDetailsDto implements HealthDetailsDto {
         if (Objects.equals(getLastSuccessTime(), o.getLastSuccessTime())) setLastSuccessTime(null);
         if (Objects.equals(getLastFailureTime(), o.getLastFailureTime())) setLastFailureTime(null);
         if (Objects.equals(getLastFailureException(), o.getLastFailureException())) setLastFailureException(null);
+        return this;
+    }
+
+    public ThreadHealthDetailsDto removeWhereEqual(HealthDetailsDto o) {
+        if (o instanceof ThreadHealthDetailsDto same) removeWhereEqual(same);
         return this;
     }
 

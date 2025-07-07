@@ -48,8 +48,6 @@ public sealed interface PersonInterface extends RecipientInterface permits Perso
     PersonInterface setGender(GenderEnum gender);
 
     boolean hasNoOptionalProperties();
-    PersonInterface putAll(PersonInterface o);
-    PersonInterface removeWhereEqual(PersonInterface o);
     List<String> missingRequiredFields(String prefix);
 
     default void copyToPerson(PersonDto o) {

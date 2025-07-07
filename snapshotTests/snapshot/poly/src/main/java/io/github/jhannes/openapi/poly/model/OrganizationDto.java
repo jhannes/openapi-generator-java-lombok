@@ -42,6 +42,11 @@ public final class OrganizationDto implements AnyPartyDto {
         return this;
     }
 
+    public OrganizationDto putAll(AnyPartyDto o) {
+        if (o instanceof OrganizationDto same) putAll(same);
+        return this;
+    }
+
     public OrganizationDto removeWhereEqual(OrganizationDto o) {
         if (Objects.equals(getId(), o.getId())) setId(null);
         if (Objects.equals(getOrganizationId(), o.getOrganizationId())) setOrganizationId(null);
@@ -49,6 +54,11 @@ public final class OrganizationDto implements AnyPartyDto {
         if (Objects.equals(getEmail(), o.getEmail())) setEmail(null);
         if (Objects.equals(getEmailDomains(), o.getEmailDomains())) setEmailDomains(null);
         if (Objects.equals(getPhone(), o.getPhone())) setPhone(null);
+        return this;
+    }
+
+    public OrganizationDto removeWhereEqual(AnyPartyDto o) {
+        if (o instanceof OrganizationDto same) removeWhereEqual(same);
         return this;
     }
 

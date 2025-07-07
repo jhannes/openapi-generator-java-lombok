@@ -22,7 +22,17 @@ public final class CreatePersonCommandDto implements WebSocketCommandDto {
         return this;
     }
 
+    public CreatePersonCommandDto putAll(WebSocketMessageDto o) {
+        if (o instanceof CreatePersonCommandDto same) putAll(same);
+        return this;
+    }
+
     public CreatePersonCommandDto removeWhereEqual(CreatePersonCommandDto o) {
+        return this;
+    }
+
+    public CreatePersonCommandDto removeWhereEqual(WebSocketMessageDto o) {
+        if (o instanceof CreatePersonCommandDto same) removeWhereEqual(same);
         return this;
     }
 

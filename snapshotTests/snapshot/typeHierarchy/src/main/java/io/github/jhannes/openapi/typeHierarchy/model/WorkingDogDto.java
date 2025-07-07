@@ -64,8 +64,18 @@ public final class WorkingDogDto extends DogDto implements PetDto {
         return this;
     }
 
+    public WorkingDogDto putAll(PetDto o) {
+        if (o instanceof DogDto base) putAll(base);
+        return this;
+    }
+
     public WorkingDogDto removeWhereEqual(WorkingDogDto o) {
         super.removeWhereEqual(o);
+        return this;
+    }
+
+    public WorkingDogDto removeWhereEqual(PetDto o) {
+        if (o instanceof DogDto base) removeWhereEqual(base);
         return this;
     }
 

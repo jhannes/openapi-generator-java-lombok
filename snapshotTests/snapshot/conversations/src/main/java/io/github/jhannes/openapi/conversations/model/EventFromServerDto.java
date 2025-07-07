@@ -49,8 +49,18 @@ public final class EventFromServerDto extends CommandToServerDto implements Mess
         return this;
     }
 
+    public EventFromServerDto putAll(MessageFromServerDto o) {
+        if (o instanceof CommandToServerDto base) putAll(base);
+        return this;
+    }
+
     public EventFromServerDto removeWhereEqual(EventFromServerDto o) {
         super.removeWhereEqual(o);
+        return this;
+    }
+
+    public EventFromServerDto removeWhereEqual(MessageFromServerDto o) {
+        if (o instanceof CommandToServerDto base) removeWhereEqual(base);
         return this;
     }
 

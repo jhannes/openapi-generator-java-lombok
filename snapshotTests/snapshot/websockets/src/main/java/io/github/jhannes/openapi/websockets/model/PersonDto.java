@@ -33,14 +33,12 @@ public final class PersonDto extends RecipientDto implements PersonInterface {
         ;
     }
 
-    @Override
-    public PersonDto putAll(PersonInterface o) {
+    public PersonDto putAll(RecipientInterface o) {
         o.copyToPerson(this);
         return this;
     }
 
-    @Override
-    public PersonDto removeWhereEqual(PersonInterface o) {
+    public PersonDto removeWhereEqual(RecipientInterface o) {
         o.removeWhereEqualFromPerson(this);
         return this;
     }

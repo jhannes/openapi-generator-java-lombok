@@ -27,6 +27,8 @@ public sealed interface HealthDetailsDto permits DataSourceHealthDetailsDto, Hea
         return new ThreadHealthDetailsDto().setType("ThreadHealthDetails");
     }
 
+    HealthDetailsDto putAll(HealthDetailsDto o);
+    HealthDetailsDto removeWhereEqual(HealthDetailsDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
 }

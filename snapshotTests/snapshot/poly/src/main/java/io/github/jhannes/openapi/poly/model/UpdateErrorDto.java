@@ -37,6 +37,8 @@ public sealed interface UpdateErrorDto permits DuplicateIdentifierErrorDto, Gene
         return new NotFoundErrorDto().setCode("not_found");
     }
 
+    UpdateErrorDto putAll(UpdateErrorDto o);
+    UpdateErrorDto removeWhereEqual(UpdateErrorDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
 }

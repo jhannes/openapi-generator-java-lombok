@@ -32,6 +32,8 @@ public sealed interface PetDto permits CatDto, DogDto, GoldfishDto, WorkingDogDt
         return new DogDto().setPet_type("Dog");
     }
 
+    PetDto putAll(PetDto o);
+    PetDto removeWhereEqual(PetDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
 }

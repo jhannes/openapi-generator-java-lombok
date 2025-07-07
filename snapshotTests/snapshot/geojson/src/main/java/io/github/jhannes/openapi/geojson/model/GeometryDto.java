@@ -27,6 +27,8 @@ public sealed interface GeometryDto permits LineStringDto, PointDto, PolygonDto 
         return new LineStringDto().setType("LineString");
     }
 
+    GeometryDto putAll(GeometryDto o);
+    GeometryDto removeWhereEqual(GeometryDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
 }

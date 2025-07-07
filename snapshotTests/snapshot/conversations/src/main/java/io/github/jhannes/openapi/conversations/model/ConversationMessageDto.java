@@ -19,13 +19,11 @@ public final class ConversationMessageDto implements ConversationMessageInterfac
         ;
     }
 
-    @Override
     public ConversationMessageDto putAll(ConversationMessageInterface o) {
         o.copyToConversationMessage(this);
         return this;
     }
 
-    @Override
     public ConversationMessageDto removeWhereEqual(ConversationMessageInterface o) {
         o.removeWhereEqualFromConversationMessage(this);
         return this;

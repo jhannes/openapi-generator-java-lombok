@@ -18,7 +18,17 @@ public final class SnapshotSetDto implements MessageFromServerDto {
         return this;
     }
 
+    public SnapshotSetDto putAll(MessageFromServerDto o) {
+        if (o instanceof SnapshotSetDto same) putAll(same);
+        return this;
+    }
+
     public SnapshotSetDto removeWhereEqual(SnapshotSetDto o) {
+        return this;
+    }
+
+    public SnapshotSetDto removeWhereEqual(MessageFromServerDto o) {
+        if (o instanceof SnapshotSetDto same) removeWhereEqual(same);
         return this;
     }
 

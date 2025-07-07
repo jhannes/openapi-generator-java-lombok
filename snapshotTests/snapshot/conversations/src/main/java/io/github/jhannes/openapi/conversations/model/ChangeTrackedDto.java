@@ -15,13 +15,11 @@ public sealed class ChangeTrackedDto implements ChangeTrackedInterface permits C
         return true;
     }
 
-    @Override
     public ChangeTrackedDto putAll(ChangeTrackedInterface o) {
         o.copyToChangeTracked(this);
         return this;
     }
 
-    @Override
     public ChangeTrackedDto removeWhereEqual(ChangeTrackedInterface o) {
         o.removeWhereEqualFromChangeTracked(this);
         return this;

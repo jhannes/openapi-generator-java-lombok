@@ -24,7 +24,17 @@ public final class AddMessageToConversationDeltaDto implements DeltaDto {
         return this;
     }
 
+    public AddMessageToConversationDeltaDto putAll(DeltaDto o) {
+        if (o instanceof AddMessageToConversationDeltaDto same) putAll(same);
+        return this;
+    }
+
     public AddMessageToConversationDeltaDto removeWhereEqual(AddMessageToConversationDeltaDto o) {
+        return this;
+    }
+
+    public AddMessageToConversationDeltaDto removeWhereEqual(DeltaDto o) {
+        if (o instanceof AddMessageToConversationDeltaDto same) removeWhereEqual(same);
         return this;
     }
 

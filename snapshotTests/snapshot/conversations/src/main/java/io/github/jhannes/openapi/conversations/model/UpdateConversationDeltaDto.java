@@ -22,7 +22,17 @@ public final class UpdateConversationDeltaDto implements DeltaDto {
         return this;
     }
 
+    public UpdateConversationDeltaDto putAll(DeltaDto o) {
+        if (o instanceof UpdateConversationDeltaDto same) putAll(same);
+        return this;
+    }
+
     public UpdateConversationDeltaDto removeWhereEqual(UpdateConversationDeltaDto o) {
+        return this;
+    }
+
+    public UpdateConversationDeltaDto removeWhereEqual(DeltaDto o) {
+        if (o instanceof UpdateConversationDeltaDto same) removeWhereEqual(same);
         return this;
     }
 

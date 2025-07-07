@@ -57,10 +57,20 @@ public final class CatDto extends PetBaseDto implements PetDto {
         return this;
     }
 
+    public CatDto putAll(PetDto o) {
+        if (o instanceof PetBaseDto base) putAll(base);
+        return this;
+    }
+
     public CatDto removeWhereEqual(CatDto o) {
         super.removeWhereEqual(o);
         if (Objects.equals(getHunts(), o.getHunts())) setHunts(null);
         if (Objects.equals(getAge(), o.getAge())) setAge(null);
+        return this;
+    }
+
+    public CatDto removeWhereEqual(PetDto o) {
+        if (o instanceof PetBaseDto base) removeWhereEqual(base);
         return this;
     }
 

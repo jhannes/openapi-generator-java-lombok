@@ -20,7 +20,17 @@ public final class SubscribeRequestDto implements RequestToServerDto {
         return this;
     }
 
+    public SubscribeRequestDto putAll(MessageToServerDto o) {
+        if (o instanceof SubscribeRequestDto same) putAll(same);
+        return this;
+    }
+
     public SubscribeRequestDto removeWhereEqual(SubscribeRequestDto o) {
+        return this;
+    }
+
+    public SubscribeRequestDto removeWhereEqual(MessageToServerDto o) {
+        if (o instanceof SubscribeRequestDto same) removeWhereEqual(same);
         return this;
     }
 

@@ -21,7 +21,27 @@ public final class IllegalEmailAddressErrorDto implements CreationErrorDto, Upda
         return this;
     }
 
+    public IllegalEmailAddressErrorDto putAll(CreationErrorDto o) {
+        if (o instanceof IllegalEmailAddressErrorDto same) putAll(same);
+        return this;
+    }
+
+    public IllegalEmailAddressErrorDto putAll(UpdateErrorDto o) {
+        if (o instanceof IllegalEmailAddressErrorDto same) putAll(same);
+        return this;
+    }
+
     public IllegalEmailAddressErrorDto removeWhereEqual(IllegalEmailAddressErrorDto o) {
+        return this;
+    }
+
+    public IllegalEmailAddressErrorDto removeWhereEqual(CreationErrorDto o) {
+        if (o instanceof IllegalEmailAddressErrorDto same) removeWhereEqual(same);
+        return this;
+    }
+
+    public IllegalEmailAddressErrorDto removeWhereEqual(UpdateErrorDto o) {
+        if (o instanceof IllegalEmailAddressErrorDto same) removeWhereEqual(same);
         return this;
     }
 

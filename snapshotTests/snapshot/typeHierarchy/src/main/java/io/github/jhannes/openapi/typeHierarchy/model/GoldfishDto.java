@@ -24,9 +24,19 @@ public final class GoldfishDto implements PetDto {
         return this;
     }
 
+    public GoldfishDto putAll(PetDto o) {
+        if (o instanceof GoldfishDto same) putAll(same);
+        return this;
+    }
+
     public GoldfishDto removeWhereEqual(GoldfishDto o) {
         if (Objects.equals(getName(), o.getName())) setName(null);
         if (Objects.equals(getSpecies(), o.getSpecies())) setSpecies(null);
+        return this;
+    }
+
+    public GoldfishDto removeWhereEqual(PetDto o) {
+        if (o instanceof GoldfishDto same) removeWhereEqual(same);
         return this;
     }
 

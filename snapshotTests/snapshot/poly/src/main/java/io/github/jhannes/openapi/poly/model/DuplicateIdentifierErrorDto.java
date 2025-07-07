@@ -23,8 +23,28 @@ public final class DuplicateIdentifierErrorDto implements CreationErrorDto, Upda
         return this;
     }
 
+    public DuplicateIdentifierErrorDto putAll(CreationErrorDto o) {
+        if (o instanceof DuplicateIdentifierErrorDto same) putAll(same);
+        return this;
+    }
+
+    public DuplicateIdentifierErrorDto putAll(UpdateErrorDto o) {
+        if (o instanceof DuplicateIdentifierErrorDto same) putAll(same);
+        return this;
+    }
+
     public DuplicateIdentifierErrorDto removeWhereEqual(DuplicateIdentifierErrorDto o) {
         if (Objects.equals(getIdentifierValue(), o.getIdentifierValue())) setIdentifierValue(null);
+        return this;
+    }
+
+    public DuplicateIdentifierErrorDto removeWhereEqual(CreationErrorDto o) {
+        if (o instanceof DuplicateIdentifierErrorDto same) removeWhereEqual(same);
+        return this;
+    }
+
+    public DuplicateIdentifierErrorDto removeWhereEqual(UpdateErrorDto o) {
+        if (o instanceof DuplicateIdentifierErrorDto same) removeWhereEqual(same);
         return this;
     }
 

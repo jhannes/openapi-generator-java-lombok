@@ -22,7 +22,17 @@ public final class PointDto implements GeometryDto {
         return this;
     }
 
+    public PointDto putAll(GeometryDto o) {
+        if (o instanceof PointDto same) putAll(same);
+        return this;
+    }
+
     public PointDto removeWhereEqual(PointDto o) {
+        return this;
+    }
+
+    public PointDto removeWhereEqual(GeometryDto o) {
+        if (o instanceof PointDto same) removeWhereEqual(same);
         return this;
     }
 

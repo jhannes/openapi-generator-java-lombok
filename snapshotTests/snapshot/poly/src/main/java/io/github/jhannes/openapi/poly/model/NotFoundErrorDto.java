@@ -23,8 +23,18 @@ public final class NotFoundErrorDto implements UpdateErrorDto {
         return this;
     }
 
+    public NotFoundErrorDto putAll(UpdateErrorDto o) {
+        if (o instanceof NotFoundErrorDto same) putAll(same);
+        return this;
+    }
+
     public NotFoundErrorDto removeWhereEqual(NotFoundErrorDto o) {
         if (Objects.equals(getIdentifierValue(), o.getIdentifierValue())) setIdentifierValue(null);
+        return this;
+    }
+
+    public NotFoundErrorDto removeWhereEqual(UpdateErrorDto o) {
+        if (o instanceof NotFoundErrorDto same) removeWhereEqual(same);
         return this;
     }
 

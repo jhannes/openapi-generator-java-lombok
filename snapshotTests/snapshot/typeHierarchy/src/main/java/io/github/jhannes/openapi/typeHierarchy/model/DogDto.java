@@ -75,10 +75,20 @@ public sealed class DogDto extends PetBaseDto implements PetDto permits WorkingD
         return this;
     }
 
+    public DogDto putAll(PetDto o) {
+        if (o instanceof PetBaseDto base) putAll(base);
+        return this;
+    }
+
     public DogDto removeWhereEqual(DogDto o) {
         super.removeWhereEqual(o);
         if (Objects.equals(getBark(), o.getBark())) setBark(null);
         if (Objects.equals(getBreed(), o.getBreed())) setBreed(null);
+        return this;
+    }
+
+    public DogDto removeWhereEqual(PetDto o) {
+        if (o instanceof PetBaseDto base) removeWhereEqual(base);
         return this;
     }
 

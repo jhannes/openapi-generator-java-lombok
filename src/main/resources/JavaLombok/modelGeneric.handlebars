@@ -79,7 +79,7 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
 {{/if}}
     }
 
-{{#isMixinAllOf allOf}}
+{{#isMixinAllOf}}
     public {{classname}} putAll({{classname}} o) {
         o.copyTo{{name}}(this);
         return this;
@@ -113,14 +113,19 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
 
 {{/notMixinDto}}
 {{/isMixinAllOf}}
-{{#mixinInterfaceModels}}
-    @Override
-    public {{../classname}} putAll({{classname}} o) {
+{{#interfaceModels}}
+    public {{../classname}} putAll({{#if interfaces}}{{~#interfaces}}{{#if @first}}{{.}}{{/if}}{{/interfaces}}{{else}}{{classname}}{{/if}} o) {
+{{#if isMixin}}
         o.copyTo{{../name}}(this);
+{{else if ../parent}}
+        if (o instanceof {{{../parent}}} base) putAll(base);
+{{else}}
+        if (o instanceof {{{../classname}}} same) putAll(same);
+{{/if}}
         return this;
     }
 
-{{/mixinInterfaceModels}}
+{{/interfaceModels}}
 {{#isMixinAllOf}}
     public {{classname}} removeWhereEqual({{classname}} o) {
         o.removeWhereEqualFrom{{../name}}(this);
@@ -150,14 +155,19 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
 
 {{/notMixinDto}}
 {{/isMixinAllOf}}
-{{#mixinInterfaceModels}}
-    @Override
-    public {{../classname}} removeWhereEqual({{classname}} o) {
+{{#interfaceModels}}
+    public {{../classname}} removeWhereEqual({{#if interfaces}}{{~#interfaces}}{{#if @first}}{{.}}{{/if}}{{/interfaces}}{{else}}{{classname}}{{/if}} o) {
+{{#if isMixin}}
         o.removeWhereEqualFrom{{../name}}(this);
+{{else if ../parent}}
+        if (o instanceof {{{../parent}}} base) removeWhereEqual(base);
+{{else}}
+        if (o instanceof {{{../classname}}} same) removeWhereEqual(same);
+{{/if}}
         return this;
     }
 
-{{/mixinInterfaceModels}}
+{{/interfaceModels}}
     public List<String> missingRequiredFields(String prefix) {
 {{#if hasRequired or hasMoreModels}}
 {{#if additionalProperties}}

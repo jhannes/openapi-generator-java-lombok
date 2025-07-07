@@ -28,10 +28,20 @@ public final class DataSourceHealthDetailsDto implements HealthDetailsDto {
         return this;
     }
 
+    public DataSourceHealthDetailsDto putAll(HealthDetailsDto o) {
+        if (o instanceof DataSourceHealthDetailsDto same) putAll(same);
+        return this;
+    }
+
     public DataSourceHealthDetailsDto removeWhereEqual(DataSourceHealthDetailsDto o) {
         if (Objects.equals(getUrl(), o.getUrl())) setUrl(null);
         if (Objects.equals(getLastAliveTime(), o.getLastAliveTime())) setLastAliveTime(null);
         if (Objects.equals(getLastFailureException(), o.getLastFailureException())) setLastFailureException(null);
+        return this;
+    }
+
+    public DataSourceHealthDetailsDto removeWhereEqual(HealthDetailsDto o) {
+        if (o instanceof DataSourceHealthDetailsDto same) removeWhereEqual(same);
         return this;
     }
 

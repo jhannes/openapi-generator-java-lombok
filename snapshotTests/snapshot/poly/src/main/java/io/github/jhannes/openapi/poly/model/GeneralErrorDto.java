@@ -19,7 +19,27 @@ public final class GeneralErrorDto implements CreationErrorDto, UpdateErrorDto {
         return this;
     }
 
+    public GeneralErrorDto putAll(CreationErrorDto o) {
+        if (o instanceof GeneralErrorDto same) putAll(same);
+        return this;
+    }
+
+    public GeneralErrorDto putAll(UpdateErrorDto o) {
+        if (o instanceof GeneralErrorDto same) putAll(same);
+        return this;
+    }
+
     public GeneralErrorDto removeWhereEqual(GeneralErrorDto o) {
+        return this;
+    }
+
+    public GeneralErrorDto removeWhereEqual(CreationErrorDto o) {
+        if (o instanceof GeneralErrorDto same) removeWhereEqual(same);
+        return this;
+    }
+
+    public GeneralErrorDto removeWhereEqual(UpdateErrorDto o) {
+        if (o instanceof GeneralErrorDto same) removeWhereEqual(same);
         return this;
     }
 

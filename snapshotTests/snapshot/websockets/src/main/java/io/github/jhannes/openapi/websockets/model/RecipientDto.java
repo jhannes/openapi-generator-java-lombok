@@ -16,13 +16,11 @@ public sealed class RecipientDto implements RecipientInterface permits PersonDto
         ;
     }
 
-    @Override
     public RecipientDto putAll(RecipientInterface o) {
         o.copyToRecipient(this);
         return this;
     }
 
-    @Override
     public RecipientDto removeWhereEqual(RecipientInterface o) {
         o.removeWhereEqualFromRecipient(this);
         return this;
