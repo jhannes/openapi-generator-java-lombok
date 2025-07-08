@@ -24,7 +24,13 @@ public final class JwksDocumentDto {
 
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
-        if (getKeys() == null) fields.add(prefix + "keys");
+        if (getKeys() != null) {
+            for (int i = 0; i < getKeys().size(); i++) {
+                fields.addAll(getKeys().get(i).missingRequiredFields(prefix + "keys[" + i + "]."));
+            }
+        } else {
+            fields.add(prefix + "keys");
+        }
         return fields;
     }
 

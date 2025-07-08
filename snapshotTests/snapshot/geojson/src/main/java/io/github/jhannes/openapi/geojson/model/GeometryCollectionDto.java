@@ -30,7 +30,13 @@ public final class GeometryCollectionDto {
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
         if (getType() == null) fields.add(prefix + "type");
-        if (getGeometries() == null) fields.add(prefix + "geometries");
+        if (getGeometries() != null) {
+            for (int i = 0; i < getGeometries().size(); i++) {
+                fields.addAll(getGeometries().get(i).missingRequiredFields(prefix + "geometries[" + i + "]."));
+            }
+        } else {
+            fields.add(prefix + "geometries");
+        }
         return fields;
     }
 

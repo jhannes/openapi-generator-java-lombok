@@ -34,6 +34,11 @@ public final class ExceptionDto {
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
         if (getType() == null) fields.add(prefix + "type");
+        if (getStackTrace() != null) {
+            for (int i = 0; i < getStackTrace().size(); i++) {
+                fields.addAll(getStackTrace().get(i).missingRequiredFields(prefix + "stackTrace[" + i + "]."));
+            }
+        }
         return fields;
     }
 

@@ -76,6 +76,15 @@ public class SampleModelData extends SampleData {
         return pickOne(factories).get();
     }
 
+    public HealthOverviewDto sampleHealthOverviewDto(String propertyName) {
+        return sampleHealthOverviewDto();
+    }
+
+    public HealthOverviewDto sampleHealthOverviewDto() {
+        return new HealthOverviewDto()
+            .setComponents(sampleMap(() -> sampleHealthStatusDto("components"), "components"));
+    }
+
     public HealthStatusDto sampleHealthStatusDto(String propertyName) {
         return sampleHealthStatusDto();
     }

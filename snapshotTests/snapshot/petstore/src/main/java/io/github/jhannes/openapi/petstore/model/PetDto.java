@@ -71,6 +71,11 @@ public final class PetDto {
         }
         if (getName() == null) fields.add(prefix + "name");
         if (getPhotoUrls() == null) fields.add(prefix + "photoUrls");
+        if (getTags() != null) {
+            for (int i = 0; i < getTags().size(); i++) {
+                fields.addAll(getTags().get(i).missingRequiredFields(prefix + "tags[" + i + "]."));
+            }
+        }
         return fields;
     }
 

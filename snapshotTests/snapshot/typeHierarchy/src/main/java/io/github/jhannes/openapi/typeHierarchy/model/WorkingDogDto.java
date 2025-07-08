@@ -81,7 +81,7 @@ public final class WorkingDogDto extends DogDto implements PetDto {
 
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = super.missingRequiredFields(prefix);
-        if (getPet_type() == null) fields.add(prefix + "petType");
+        if (getPet_type() == null) fields.add(prefix + "pet_type");
         if (getCapabilities() == null) fields.add(prefix + "capabilities");
         return fields;
     }

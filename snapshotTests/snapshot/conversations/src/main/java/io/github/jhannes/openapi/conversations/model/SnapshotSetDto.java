@@ -34,7 +34,13 @@ public final class SnapshotSetDto implements MessageFromServerDto {
 
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
-        if (getConversations() == null) fields.add(prefix + "conversations");
+        if (getConversations() != null) {
+            for (int i = 0; i < getConversations().size(); i++) {
+                fields.addAll(getConversations().get(i).missingRequiredFields(prefix + "conversations[" + i + "]."));
+            }
+        } else {
+            fields.add(prefix + "conversations");
+        }
         return fields;
     }
 

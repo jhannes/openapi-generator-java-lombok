@@ -192,6 +192,12 @@ public class JavaCodegen extends AbstractJavaCodegen {
                     if (var.isModel && var.required && allModels.get(var.dataType).oneOf.isEmpty()) {
                         var.defaultValue = "new " + var.dataType + "()";
                     }
+                    if (var.getIsEnumOrRef() || var.isString || var.isNumeric || var.isDate || var.isDateTime) {
+                        var.isPrimitiveType = true;
+                    }
+                    if (var.isString && !var.dataType.equals("String")) {
+                        var.dataFormat = null;
+                    }
                     if (var.get_enum() != null && var.get_enum().size() == 1) {
                         var.defaultValue = "\"" + var.get_enum().getFirst() + "\"";
                         var.dataType = "\"" + var.get_enum().getFirst() + "\"";
@@ -389,8 +395,8 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 mapping.put(subModel.name, subModel.classname);
             } else if (
                     discriminator != null
-                    && subModel.discriminator != null
-                    && subModel.discriminator.getPropertyName().equals(discriminator.getPropertyName())
+                            && subModel.discriminator != null
+                            && subModel.discriminator.getPropertyName().equals(discriminator.getPropertyName())
             ) {
                 if (subModel.discriminator.getMapping() == null) {
                     postProcessOneOf(subModel, interfacesOfSubtypes, allModels);
@@ -472,7 +478,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
 
         // number
         if ("Integer".equals(datatype) || "Long".equals(datatype) ||
-            "Float".equals(datatype) || "Double".equals(datatype) || "BigDecimal".equals(datatype)) {
+                "Float".equals(datatype) || "Double".equals(datatype) || "BigDecimal".equals(datatype)) {
             String varName = "NUMBER_" + value;
             varName = varName.replaceAll("-", "MINUS_");
             varName = varName.replaceAll("\\+", "PLUS_");

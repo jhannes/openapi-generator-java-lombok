@@ -76,7 +76,7 @@ public final class CatDto extends PetBaseDto implements PetDto {
 
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = super.missingRequiredFields(prefix);
-        if (getPet_type() == null) fields.add(prefix + "petType");
+        if (getPet_type() == null) fields.add(prefix + "pet_type");
         return fields;
     }
 

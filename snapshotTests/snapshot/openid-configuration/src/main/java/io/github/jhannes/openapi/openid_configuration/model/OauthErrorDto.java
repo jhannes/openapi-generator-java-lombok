@@ -47,7 +47,7 @@ public final class OauthErrorDto {
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
         if (getError() == null) fields.add(prefix + "error");
-        if (getError_description() == null) fields.add(prefix + "errorDescription");
+        if (getError_description() == null) fields.add(prefix + "error_description");
         return fields;
     }
 

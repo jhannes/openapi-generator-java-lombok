@@ -178,19 +178,35 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
         List<String> fields = new ArrayList<>();
 {{/if}}
 {{#vars}}
-{{#unless isInherited}}
-{{#if isModel}}
+{{#if isPrimitiveType}}
+{{#if required}}
+        if ({{getter}}() == null) fields.add(prefix + "{{baseName}}");
+{{/if}}
+{{else if items.isEnumOrRef}}
+{{#if required}}
+        if ({{getter}}() == null) fields.add(prefix + "{{baseName}}");
+{{/if}}
+{{else if items.isContainer}}
+{{#if required}}
+        if ({{getter}}() == null) fields.add(prefix + "{{baseName}}");
+{{/if}}
+{{else}}
         if ({{getter}}() != null) {
-            fields.addAll({{getter}}().missingRequiredFields(prefix + "{{name}}."));
+{{#if isModel}}
+            fields.addAll({{getter}}().missingRequiredFields(prefix + "{{baseName}}."));
+{{else if isMap}}
+            {{getter}}().forEach((key, value) -> fields.addAll(value.missingRequiredFields(prefix + "{{baseName}}[" + key + "].")));
+{{else if isContainer}}
+            for (int i = 0; i < {{getter}}().size(); i++) {
+                fields.addAll({{getter}}().get(i).missingRequiredFields(prefix + "{{baseName}}[" + i + "]."));
+            }
+{{/if}}
 {{#if required}}
         } else {
-            fields.add(prefix + "{{name}}");
+            fields.add(prefix + "{{baseName}}");
 {{/if}}
         }
-{{else if required}}
-        if ({{getter}}() == null) fields.add(prefix + "{{name}}");
 {{/if}}
-{{/unless}}
 {{/vars}}
         return fields;
 {{else}}

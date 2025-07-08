@@ -35,7 +35,13 @@ public final class InfectionDto {
         } else {
             fields.add(prefix + "information");
         }
-        if (getRegisteredExposures() == null) fields.add(prefix + "registeredExposures");
+        if (getRegisteredExposures() != null) {
+            for (int i = 0; i < getRegisteredExposures().size(); i++) {
+                fields.addAll(getRegisteredExposures().get(i).missingRequiredFields(prefix + "registeredExposures[" + i + "]."));
+            }
+        } else {
+            fields.add(prefix + "registeredExposures");
+        }
         return fields;
     }
 

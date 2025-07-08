@@ -52,7 +52,11 @@ public final class ConversationSnapshotDto extends ChangeTrackedDto {
         } else {
             fields.add(prefix + "info");
         }
-        if (getMessages() == null) fields.add(prefix + "messages");
+        if (getMessages() != null) {
+            getMessages().forEach((key, value) -> fields.addAll(value.missingRequiredFields(prefix + "messages[" + key + "].")));
+        } else {
+            fields.add(prefix + "messages");
+        }
         return fields;
     }
 

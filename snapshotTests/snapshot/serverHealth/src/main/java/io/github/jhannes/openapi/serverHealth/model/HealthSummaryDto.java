@@ -30,7 +30,11 @@ public final class HealthSummaryDto {
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
         if (getStatus() == null) fields.add(prefix + "status");
-        if (getComponents() == null) fields.add(prefix + "components");
+        if (getComponents() != null) {
+            getComponents().forEach((key, value) -> fields.addAll(value.missingRequiredFields(prefix + "components[" + key + "].")));
+        } else {
+            fields.add(prefix + "components");
+        }
         return fields;
     }
 

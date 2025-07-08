@@ -83,7 +83,12 @@ public final class PetDto {
 
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
-        if (getPet_type() == null) fields.add(prefix + "petType");
+        if (getPet_type() == null) fields.add(prefix + "pet_type");
+        if (getComments() != null) {
+            for (int i = 0; i < getComments().size(); i++) {
+                fields.addAll(getComments().get(i).missingRequiredFields(prefix + "comments[" + i + "]."));
+            }
+        }
         return fields;
     }
 

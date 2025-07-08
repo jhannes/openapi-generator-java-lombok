@@ -76,8 +76,8 @@ public final class DiscoveryDocumentDto {
     private URI end_session_endpoint = null;
     private URI jwks_uri = null;
     private Set<GrantTypeDto> grant_types_supported = new HashSet<>();
-    private Set<Object> scopes_supported = new HashSet<>();
-    private Set<Object> claims_supported = new HashSet<>();
+    private Set<String> scopes_supported = new HashSet<>();
+    private Set<String> claims_supported = new HashSet<>();
     private Set<ResponseTypeDto> response_types_supported = new HashSet<>();
     private Set<ResponseModesSupportedEnum> response_modes_supported = new HashSet<>();
     private Set<SubjectTypesSupportedEnum> subject_types_supported = new HashSet<>();
@@ -137,9 +137,9 @@ public final class DiscoveryDocumentDto {
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
         if (getIssuer() == null) fields.add(prefix + "issuer");
-        if (getAuthorization_endpoint() == null) fields.add(prefix + "authorizationEndpoint");
-        if (getToken_endpoint() == null) fields.add(prefix + "tokenEndpoint");
-        if (getResponse_types_supported() == null) fields.add(prefix + "responseTypesSupported");
+        if (getAuthorization_endpoint() == null) fields.add(prefix + "authorization_endpoint");
+        if (getToken_endpoint() == null) fields.add(prefix + "token_endpoint");
+        if (getResponse_types_supported() == null) fields.add(prefix + "response_types_supported");
         return fields;
     }
 

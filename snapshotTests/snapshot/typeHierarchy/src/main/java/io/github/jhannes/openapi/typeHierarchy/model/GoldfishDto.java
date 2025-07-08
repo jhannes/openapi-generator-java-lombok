@@ -42,7 +42,7 @@ public final class GoldfishDto implements PetDto {
 
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
-        if (getPet_type() == null) fields.add(prefix + "petType");
+        if (getPet_type() == null) fields.add(prefix + "pet_type");
         return fields;
     }
 

@@ -94,7 +94,7 @@ public sealed class DogDto extends PetBaseDto implements PetDto permits WorkingD
 
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = super.missingRequiredFields(prefix);
-        if (getPet_type() == null) fields.add(prefix + "petType");
+        if (getPet_type() == null) fields.add(prefix + "pet_type");
         return fields;
     }
 

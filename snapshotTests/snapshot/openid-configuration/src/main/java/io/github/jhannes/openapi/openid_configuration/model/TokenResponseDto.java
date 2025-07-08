@@ -58,8 +58,8 @@ public final class TokenResponseDto {
 
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
-        if (getAccess_token() == null) fields.add(prefix + "accessToken");
-        if (getToken_type() == null) fields.add(prefix + "tokenType");
+        if (getAccess_token() == null) fields.add(prefix + "access_token");
+        if (getToken_type() == null) fields.add(prefix + "token_type");
         return fields;
     }
 
