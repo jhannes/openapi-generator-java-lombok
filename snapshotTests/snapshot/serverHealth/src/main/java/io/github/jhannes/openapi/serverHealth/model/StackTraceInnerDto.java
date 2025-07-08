@@ -1,6 +1,5 @@
 package io.github.jhannes.openapi.serverHealth.model;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
@@ -11,7 +10,7 @@ public final class StackTraceInnerDto {
     private String className;
     private String methodName;
     private String fileName;
-    private BigDecimal lineNumber;
+    private Integer lineNumber;
 
     public boolean hasNoOptionalProperties() {
         return true;

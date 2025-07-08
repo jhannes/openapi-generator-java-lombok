@@ -62,13 +62,16 @@ components:
 
     HealthComponentFailureDetails:
       properties:
+        type:
+          enum: [HealthComponentFailureDetails]
         exception:
           $ref: "#/components/schemas/Exception"
+      required: [type]
 
     ThreadHealthDetails:
       properties:
         type:
-           enum: [ThreadHealthDetails]
+          enum: [ThreadHealthDetails]
         threadState:
           type: string
           enum: [NEW, RUNNABLE, WAITING, TIMED_WAITING, TERMINATED]
@@ -123,5 +126,6 @@ components:
           fileName:
             type: string
           lineNumber:
-            type: number
+            type: integer
+            format: int32
         required: [ className, methodName, fileName, lineNumber ]

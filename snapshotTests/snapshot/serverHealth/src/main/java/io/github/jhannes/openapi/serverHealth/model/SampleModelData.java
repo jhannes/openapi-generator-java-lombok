@@ -112,7 +112,7 @@ public class SampleModelData extends SampleData {
             .setClassName(sampleString("className", "className"))
             .setMethodName(sampleString("methodName"))
             .setFileName(sampleString("fileName"))
-            .setLineNumber(sampleBigDecimal("lineNumber"));
+            .setLineNumber(sampleInteger("lineNumber"));
     }
 
     public ThreadHealthDetailsDto sampleThreadHealthDetailsDto(String propertyName) {
