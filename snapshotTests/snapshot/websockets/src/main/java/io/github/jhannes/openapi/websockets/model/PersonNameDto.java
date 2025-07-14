@@ -18,8 +18,7 @@ public final class PersonNameDto {
     }
 
     public PersonNameDto putAll(PersonNameDto o) {
-        if (o.getGivenName() != null) setGivenName(o.getGivenName());
-        if (o.getFamilyName() != null) setFamilyName(o.getFamilyName());
+        o.copyToPersonName(this);
         return this;
     }
 
@@ -33,4 +32,8 @@ public final class PersonNameDto {
         return new ArrayList<>();
     }
 
+    public void copyToPersonName(PersonNameDto o) {
+        if (getGivenName() != null) o.setGivenName(getGivenName());
+        if (getFamilyName() != null) o.setFamilyName(getFamilyName());
+    }
 }

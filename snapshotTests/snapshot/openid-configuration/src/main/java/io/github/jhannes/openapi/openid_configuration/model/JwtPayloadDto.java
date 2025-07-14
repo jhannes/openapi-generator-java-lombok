@@ -6,11 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-public final class JwtPayloadDto extends HashMap<String, List> {
+public final class JwtPayloadDto {
 
     /**
      * Issuer - the URI for the login provider
@@ -50,8 +48,7 @@ public final class JwtPayloadDto extends HashMap<String, List> {
     private String pid = null;
 
     public boolean hasNoOptionalProperties() {
-        return super.isEmpty()
-                && getName() == null
+        return getName() == null
                 && getEmail() == null
                 && getOrgId() == null
                 && getOrg() == null
@@ -59,22 +56,8 @@ public final class JwtPayloadDto extends HashMap<String, List> {
         ;
     }
 
-    public JwtPayloadDto putAll(HashMap<String, List> o) {
-        super.putAll(o);
-        return this;
-    }
-
     public JwtPayloadDto putAll(JwtPayloadDto o) {
-        super.putAll(o);
-        if (o.getIss() != null) setIss(o.getIss());
-        if (o.getSub() != null) setSub(o.getSub());
-        if (o.getExp() != null) setExp(o.getExp());
-        if (o.getAud() != null) setAud(o.getAud());
-        if (o.getName() != null) setName(o.getName());
-        if (o.getEmail() != null) setEmail(o.getEmail());
-        if (o.getOrgId() != null) setOrgId(o.getOrgId());
-        if (o.getOrg() != null) setOrg(o.getOrg());
-        if (o.getPid() != null) setPid(o.getPid());
+        o.copyToJwtPayload(this);
         return this;
     }
 
@@ -96,4 +79,15 @@ public final class JwtPayloadDto extends HashMap<String, List> {
         return fields;
     }
 
+    public void copyToJwtPayload(JwtPayloadDto o) {
+        if (getIss() != null) o.setIss(getIss());
+        if (getSub() != null) o.setSub(getSub());
+        if (getExp() != null) o.setExp(getExp());
+        if (getAud() != null) o.setAud(getAud());
+        if (getName() != null) o.setName(getName());
+        if (getEmail() != null) o.setEmail(getEmail());
+        if (getOrgId() != null) o.setOrgId(getOrgId());
+        if (getOrg() != null) o.setOrg(getOrg());
+        if (getPid() != null) o.setPid(getPid());
+    }
 }

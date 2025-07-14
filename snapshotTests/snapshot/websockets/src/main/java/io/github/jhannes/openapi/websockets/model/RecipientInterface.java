@@ -21,7 +21,7 @@ public sealed interface RecipientInterface permits PersonInterface, RecipientDto
     default void copyToPersonSnapshot(PersonSnapshotDto o) {
         copyToRecipientInterface(o);
     }
-    default void copyToRecipient(RecipientDto o) {
+    default void copyToRecipient(RecipientInterface o) {
         copyToRecipientInterface(o);
     }
     default void removeWhereEqualFromPerson(PersonInterface o) {
@@ -30,7 +30,7 @@ public sealed interface RecipientInterface permits PersonInterface, RecipientDto
     default void removeWhereEqualFromPersonSnapshot(PersonSnapshotDto o) {
         removeWhereEqualFromRecipientInterface(o);
     }
-    default void removeWhereEqualFromRecipient(RecipientDto o) {
+    default void removeWhereEqualFromRecipient(RecipientInterface o) {
         removeWhereEqualFromRecipientInterface(o);
     }
 

@@ -22,14 +22,12 @@ public final class DataSourceHealthDetailsDto implements HealthDetailsDto {
     }
 
     public DataSourceHealthDetailsDto putAll(DataSourceHealthDetailsDto o) {
-        if (o.getUrl() != null) setUrl(o.getUrl());
-        if (o.getLastAliveTime() != null) setLastAliveTime(o.getLastAliveTime());
-        if (o.getLastFailureException() != null) setLastFailureException(o.getLastFailureException());
+        o.copyToDataSourceHealthDetails(this);
         return this;
     }
 
     public DataSourceHealthDetailsDto putAll(HealthDetailsDto o) {
-        if (o instanceof DataSourceHealthDetailsDto same) putAll(same);
+        o.copyToDataSourceHealthDetails(this);
         return this;
     }
 
@@ -54,4 +52,9 @@ public final class DataSourceHealthDetailsDto implements HealthDetailsDto {
         return fields;
     }
 
+    public void copyToDataSourceHealthDetails(DataSourceHealthDetailsDto o) {
+        if (getUrl() != null) o.setUrl(getUrl());
+        if (getLastAliveTime() != null) o.setLastAliveTime(getLastAliveTime());
+        if (getLastFailureException() != null) o.setLastFailureException(getLastFailureException());
+    }
 }

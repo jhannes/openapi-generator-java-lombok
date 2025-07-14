@@ -26,4 +26,9 @@ public sealed interface AnyPartyDto permits OrganizationDto, PersonDto {
     AnyPartyDto removeWhereEqual(AnyPartyDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
+
+    default void copyToOrganization(OrganizationDto o) {
+    }
+    default void copyToPerson(PersonDto o) {
+    }
 }

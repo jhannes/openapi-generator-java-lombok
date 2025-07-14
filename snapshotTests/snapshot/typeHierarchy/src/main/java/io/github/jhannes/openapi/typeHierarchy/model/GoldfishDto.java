@@ -19,13 +19,12 @@ public final class GoldfishDto implements PetDto {
     }
 
     public GoldfishDto putAll(GoldfishDto o) {
-        if (o.getName() != null) setName(o.getName());
-        if (o.getSpecies() != null) setSpecies(o.getSpecies());
+        o.copyToGoldfish(this);
         return this;
     }
 
     public GoldfishDto putAll(PetDto o) {
-        if (o instanceof GoldfishDto same) putAll(same);
+        o.copyToGoldfish(this);
         return this;
     }
 
@@ -46,4 +45,8 @@ public final class GoldfishDto implements PetDto {
         return fields;
     }
 
+    public void copyToGoldfish(GoldfishDto o) {
+        if (getName() != null) o.setName(getName());
+        if (getSpecies() != null) o.setSpecies(getSpecies());
+    }
 }

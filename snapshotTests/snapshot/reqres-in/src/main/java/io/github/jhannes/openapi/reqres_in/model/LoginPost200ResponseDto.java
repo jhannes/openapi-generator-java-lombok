@@ -16,7 +16,7 @@ public final class LoginPost200ResponseDto {
     }
 
     public LoginPost200ResponseDto putAll(LoginPost200ResponseDto o) {
-        if (o.getToken() != null) setToken(o.getToken());
+        o.copyTo_login_post_200_response(this);
         return this;
     }
 
@@ -29,4 +29,7 @@ public final class LoginPost200ResponseDto {
         return new ArrayList<>();
     }
 
+    public void copyTo_login_post_200_response(LoginPost200ResponseDto o) {
+        if (getToken() != null) o.setToken(getToken());
+    }
 }

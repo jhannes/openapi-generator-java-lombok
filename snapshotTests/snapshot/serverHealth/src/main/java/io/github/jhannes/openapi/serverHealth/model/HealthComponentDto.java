@@ -20,9 +20,7 @@ public final class HealthComponentDto {
     }
 
     public HealthComponentDto putAll(HealthComponentDto o) {
-        if (o.getStatus() != null) setStatus(o.getStatus());
-        if (o.getDetails() != null) setDetails(o.getDetails());
-        if (o.getTime() != null) setTime(o.getTime());
+        o.copyToHealthComponent(this);
         return this;
     }
 
@@ -42,4 +40,9 @@ public final class HealthComponentDto {
         return fields;
     }
 
+    public void copyToHealthComponent(HealthComponentDto o) {
+        if (getStatus() != null) o.setStatus(getStatus());
+        if (getDetails() != null) o.setDetails(getDetails());
+        if (getTime() != null) o.setTime(getTime());
+    }
 }

@@ -18,8 +18,7 @@ public final class RegisterPost200ResponseDto {
     }
 
     public RegisterPost200ResponseDto putAll(RegisterPost200ResponseDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getToken() != null) setToken(o.getToken());
+        o.copyTo_register_post_200_response(this);
         return this;
     }
 
@@ -33,4 +32,8 @@ public final class RegisterPost200ResponseDto {
         return new ArrayList<>();
     }
 
+    public void copyTo_register_post_200_response(RegisterPost200ResponseDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getToken() != null) o.setToken(getToken());
+    }
 }

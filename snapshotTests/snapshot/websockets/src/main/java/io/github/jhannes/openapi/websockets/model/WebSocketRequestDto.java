@@ -21,4 +21,7 @@ public sealed interface WebSocketRequestDto permits SubscribeDto {
     WebSocketRequestDto removeWhereEqual(WebSocketRequestDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
+
+    default void copyToSubscribe(SubscribeDto o) {
+    }
 }

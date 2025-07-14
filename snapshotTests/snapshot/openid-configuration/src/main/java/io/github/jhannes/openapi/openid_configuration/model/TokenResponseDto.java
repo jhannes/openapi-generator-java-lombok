@@ -39,12 +39,7 @@ public final class TokenResponseDto {
     }
 
     public TokenResponseDto putAll(TokenResponseDto o) {
-        if (o.getAccess_token() != null) setAccess_token(o.getAccess_token());
-        if (o.getToken_type() != null) setToken_type(o.getToken_type());
-        if (o.getExpires_in() != null) setExpires_in(o.getExpires_in());
-        if (o.getScope() != null) setScope(o.getScope());
-        if (o.getId_token() != null) setId_token(o.getId_token());
-        if (o.getRefresh_token() != null) setRefresh_token(o.getRefresh_token());
+        o.copyToTokenResponse(this);
         return this;
     }
 
@@ -63,4 +58,12 @@ public final class TokenResponseDto {
         return fields;
     }
 
+    public void copyToTokenResponse(TokenResponseDto o) {
+        if (getAccess_token() != null) o.setAccess_token(getAccess_token());
+        if (getToken_type() != null) o.setToken_type(getToken_type());
+        if (getExpires_in() != null) o.setExpires_in(getExpires_in());
+        if (getScope() != null) o.setScope(getScope());
+        if (getId_token() != null) o.setId_token(getId_token());
+        if (getRefresh_token() != null) o.setRefresh_token(getRefresh_token());
+    }
 }

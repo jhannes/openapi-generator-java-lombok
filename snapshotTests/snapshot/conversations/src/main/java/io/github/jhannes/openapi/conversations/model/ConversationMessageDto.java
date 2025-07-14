@@ -35,4 +35,7 @@ public final class ConversationMessageDto implements ConversationMessageInterfac
         return fields;
     }
 
+    public void copyToConversationMessage(ConversationMessageDto o) {
+        copyToConversationMessageInterface(o);
+    }
 }

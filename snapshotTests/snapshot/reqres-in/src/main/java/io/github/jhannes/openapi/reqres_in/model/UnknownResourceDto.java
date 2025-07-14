@@ -24,11 +24,7 @@ public final class UnknownResourceDto {
     }
 
     public UnknownResourceDto putAll(UnknownResourceDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getName() != null) setName(o.getName());
-        if (o.getYear() != null) setYear(o.getYear());
-        if (o.getColor() != null) setColor(o.getColor());
-        if (o.getPantone_value() != null) setPantone_value(o.getPantone_value());
+        o.copyToUnknownResource(this);
         return this;
     }
 
@@ -45,4 +41,11 @@ public final class UnknownResourceDto {
         return new ArrayList<>();
     }
 
+    public void copyToUnknownResource(UnknownResourceDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getName() != null) o.setName(getName());
+        if (getYear() != null) o.setYear(getYear());
+        if (getColor() != null) o.setColor(getColor());
+        if (getPantone_value() != null) o.setPantone_value(getPantone_value());
+    }
 }

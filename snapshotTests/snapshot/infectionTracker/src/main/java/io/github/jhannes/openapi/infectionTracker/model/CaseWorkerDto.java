@@ -21,10 +21,7 @@ public final class CaseWorkerDto {
     }
 
     public CaseWorkerDto putAll(CaseWorkerDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getFullName() != null) setFullName(o.getFullName());
-        if (o.getEmail() != null) setEmail(o.getEmail());
-        if (o.getRole() != null) setRole(o.getRole());
+        o.copyToCaseWorker(this);
         return this;
     }
 
@@ -41,4 +38,10 @@ public final class CaseWorkerDto {
         return fields;
     }
 
+    public void copyToCaseWorker(CaseWorkerDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getFullName() != null) o.setFullName(getFullName());
+        if (getEmail() != null) o.setEmail(getEmail());
+        if (getRole() != null) o.setRole(getRole());
+    }
 }

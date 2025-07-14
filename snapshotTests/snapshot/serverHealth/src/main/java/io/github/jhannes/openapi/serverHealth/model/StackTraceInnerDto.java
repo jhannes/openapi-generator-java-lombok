@@ -17,10 +17,7 @@ public final class StackTraceInnerDto {
     }
 
     public StackTraceInnerDto putAll(StackTraceInnerDto o) {
-        if (o.getClassName() != null) setClassName(o.getClassName());
-        if (o.getMethodName() != null) setMethodName(o.getMethodName());
-        if (o.getFileName() != null) setFileName(o.getFileName());
-        if (o.getLineNumber() != null) setLineNumber(o.getLineNumber());
+        o.copyToStackTrace_inner(this);
         return this;
     }
 
@@ -37,4 +34,10 @@ public final class StackTraceInnerDto {
         return fields;
     }
 
+    public void copyToStackTrace_inner(StackTraceInnerDto o) {
+        if (getClassName() != null) o.setClassName(getClassName());
+        if (getMethodName() != null) o.setMethodName(getMethodName());
+        if (getFileName() != null) o.setFileName(getFileName());
+        if (getLineNumber() != null) o.setLineNumber(getLineNumber());
+    }
 }

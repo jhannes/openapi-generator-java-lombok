@@ -8,4 +8,11 @@ public sealed interface MessageToServerDto permits CommandToServerDto, RequestTo
     MessageToServerDto removeWhereEqual(MessageToServerDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
+
+    default void copyToCommandToServer(CommandToServerDto o) {
+    }
+    default void copyToEventFromServer(EventFromServerDto o) {
+    }
+    default void copyToSubscribeRequest(SubscribeRequestDto o) {
+    }
 }

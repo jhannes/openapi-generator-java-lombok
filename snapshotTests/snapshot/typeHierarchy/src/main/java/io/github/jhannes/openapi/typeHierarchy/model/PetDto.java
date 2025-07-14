@@ -36,4 +36,13 @@ public sealed interface PetDto permits CatDto, DogDto, GoldfishDto, WorkingDogDt
     PetDto removeWhereEqual(PetDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
+
+    default void copyToCat(CatDto o) {
+    }
+    default void copyToDog(DogDto o) {
+    }
+    default void copyToGoldfish(GoldfishDto o) {
+    }
+    default void copyToWorkingDog(WorkingDogDto o) {
+    }
 }

@@ -16,7 +16,7 @@ public final class UsersIdGet200ResponseDto {
     }
 
     public UsersIdGet200ResponseDto putAll(UsersIdGet200ResponseDto o) {
-        if (o.getData() != null) setData(o.getData());
+        o.copyTo_users__id__get_200_response(this);
         return this;
     }
 
@@ -29,4 +29,7 @@ public final class UsersIdGet200ResponseDto {
         return new ArrayList<>();
     }
 
+    public void copyTo_users__id__get_200_response(UsersIdGet200ResponseDto o) {
+        if (getData() != null) o.setData(getData());
+    }
 }

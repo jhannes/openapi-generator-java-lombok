@@ -32,4 +32,11 @@ public sealed class ChangeTrackedDto implements ChangeTrackedInterface permits C
         return fields;
     }
 
+    public void copyToChangeTracked(ChangeTrackedDto o) {
+        copyToChangeTrackedInterface(o);
+    }
+
+    public void copyToConversationSnapshot(ConversationSnapshotDto o) {
+        copyToChangeTracked(o);
+    }
 }

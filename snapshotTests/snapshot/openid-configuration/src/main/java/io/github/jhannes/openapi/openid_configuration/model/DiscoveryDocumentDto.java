@@ -101,21 +101,7 @@ public final class DiscoveryDocumentDto {
     }
 
     public DiscoveryDocumentDto putAll(DiscoveryDocumentDto o) {
-        if (o.getIssuer() != null) setIssuer(o.getIssuer());
-        if (o.getAuthorization_endpoint() != null) setAuthorization_endpoint(o.getAuthorization_endpoint());
-        if (o.getToken_endpoint() != null) setToken_endpoint(o.getToken_endpoint());
-        if (o.getUserinfo_endpoint() != null) setUserinfo_endpoint(o.getUserinfo_endpoint());
-        if (o.getEnd_session_endpoint() != null) setEnd_session_endpoint(o.getEnd_session_endpoint());
-        if (o.getJwks_uri() != null) setJwks_uri(o.getJwks_uri());
-        if (o.getGrant_types_supported() != null) setGrant_types_supported(o.getGrant_types_supported());
-        if (o.getScopes_supported() != null) setScopes_supported(o.getScopes_supported());
-        if (o.getClaims_supported() != null) setClaims_supported(o.getClaims_supported());
-        if (o.getResponse_types_supported() != null) setResponse_types_supported(o.getResponse_types_supported());
-        if (o.getResponse_modes_supported() != null) setResponse_modes_supported(o.getResponse_modes_supported());
-        if (o.getSubject_types_supported() != null) setSubject_types_supported(o.getSubject_types_supported());
-        if (o.getCode_challenge_methods_supported() != null) setCode_challenge_methods_supported(o.getCode_challenge_methods_supported());
-        if (o.getId_token_signing_alg_values_supported() != null) setId_token_signing_alg_values_supported(o.getId_token_signing_alg_values_supported());
-        if (o.getX_sso_frame() != null) setX_sso_frame(o.getX_sso_frame());
+        o.copyToDiscoveryDocument(this);
         return this;
     }
 
@@ -143,4 +129,21 @@ public final class DiscoveryDocumentDto {
         return fields;
     }
 
+    public void copyToDiscoveryDocument(DiscoveryDocumentDto o) {
+        if (getIssuer() != null) o.setIssuer(getIssuer());
+        if (getAuthorization_endpoint() != null) o.setAuthorization_endpoint(getAuthorization_endpoint());
+        if (getToken_endpoint() != null) o.setToken_endpoint(getToken_endpoint());
+        if (getUserinfo_endpoint() != null) o.setUserinfo_endpoint(getUserinfo_endpoint());
+        if (getEnd_session_endpoint() != null) o.setEnd_session_endpoint(getEnd_session_endpoint());
+        if (getJwks_uri() != null) o.setJwks_uri(getJwks_uri());
+        if (getGrant_types_supported() != null) o.setGrant_types_supported(getGrant_types_supported());
+        if (getScopes_supported() != null) o.setScopes_supported(getScopes_supported());
+        if (getClaims_supported() != null) o.setClaims_supported(getClaims_supported());
+        if (getResponse_types_supported() != null) o.setResponse_types_supported(getResponse_types_supported());
+        if (getResponse_modes_supported() != null) o.setResponse_modes_supported(getResponse_modes_supported());
+        if (getSubject_types_supported() != null) o.setSubject_types_supported(getSubject_types_supported());
+        if (getCode_challenge_methods_supported() != null) o.setCode_challenge_methods_supported(getCode_challenge_methods_supported());
+        if (getId_token_signing_alg_values_supported() != null) o.setId_token_signing_alg_values_supported(getId_token_signing_alg_values_supported());
+        if (getX_sso_frame() != null) o.setX_sso_frame(getX_sso_frame());
+    }
 }

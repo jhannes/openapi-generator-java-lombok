@@ -36,4 +36,11 @@ public sealed interface CreationErrorDto permits DuplicateIdentifierErrorDto, Ge
     CreationErrorDto removeWhereEqual(CreationErrorDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
+
+    default void copyToDuplicateIdentifierError(DuplicateIdentifierErrorDto o) {
+    }
+    default void copyToGeneralError(GeneralErrorDto o) {
+    }
+    default void copyToIllegalEmailAddressError(IllegalEmailAddressErrorDto o) {
+    }
 }

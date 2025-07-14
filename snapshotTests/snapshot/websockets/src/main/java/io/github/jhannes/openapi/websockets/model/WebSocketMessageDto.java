@@ -26,4 +26,9 @@ public sealed interface WebSocketMessageDto permits WebSocketCommandDto {
     WebSocketMessageDto removeWhereEqual(WebSocketMessageDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
+
+    default void copyToCreatePersonCommand(CreatePersonCommandDto o) {
+    }
+    default void copyToUpdatePersonCommand(UpdatePersonCommandDto o) {
+    }
 }

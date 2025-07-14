@@ -37,20 +37,18 @@ public final class EventFromServerDto extends CommandToServerDto implements Mess
         ;
     }
 
-    public EventFromServerDto putAll(CommandToServerDto o) {
-        super.putAll(o);
+    public EventFromServerDto putAll(EventFromServerDto o) {
+        o.copyToEventFromServer(this);
         return this;
     }
 
-    public EventFromServerDto putAll(EventFromServerDto o) {
-        super.putAll(o);
-        if (o.getServerTime() != null) setServerTime(o.getServerTime());
-        if (o.getUsername() != null) setUsername(o.getUsername());
+    public EventFromServerDto putAll(CommandToServerDto o) {
+        o.copyToEventFromServer(this);
         return this;
     }
 
     public EventFromServerDto putAll(MessageFromServerDto o) {
-        if (o instanceof CommandToServerDto base) putAll(base);
+        o.copyToEventFromServer(this);
         return this;
     }
 
@@ -71,4 +69,9 @@ public final class EventFromServerDto extends CommandToServerDto implements Mess
         return fields;
     }
 
+    public void copyToEventFromServer(EventFromServerDto o) {
+        copyToCommandToServer(o);
+        if (getServerTime() != null) o.setServerTime(getServerTime());
+        if (getUsername() != null) o.setUsername(getUsername());
+    }
 }

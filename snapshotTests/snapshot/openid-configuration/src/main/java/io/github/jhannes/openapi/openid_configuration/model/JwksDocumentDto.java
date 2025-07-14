@@ -14,7 +14,7 @@ public final class JwksDocumentDto {
     }
 
     public JwksDocumentDto putAll(JwksDocumentDto o) {
-        if (o.getKeys() != null) setKeys(o.getKeys());
+        o.copyToJwksDocument(this);
         return this;
     }
 
@@ -34,4 +34,7 @@ public final class JwksDocumentDto {
         return fields;
     }
 
+    public void copyToJwksDocument(JwksDocumentDto o) {
+        if (getKeys() != null) o.setKeys(getKeys());
+    }
 }

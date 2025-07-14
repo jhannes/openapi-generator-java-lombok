@@ -31,4 +31,11 @@ public sealed interface HealthDetailsDto permits DataSourceHealthDetailsDto, Hea
     HealthDetailsDto removeWhereEqual(HealthDetailsDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
+
+    default void copyToDataSourceHealthDetails(DataSourceHealthDetailsDto o) {
+    }
+    default void copyToHealthComponentFailureDetails(HealthComponentFailureDetailsDto o) {
+    }
+    default void copyToThreadHealthDetails(ThreadHealthDetailsDto o) {
+    }
 }

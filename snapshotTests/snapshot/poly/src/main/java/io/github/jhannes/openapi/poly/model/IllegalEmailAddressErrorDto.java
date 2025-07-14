@@ -16,18 +16,17 @@ public final class IllegalEmailAddressErrorDto implements CreationErrorDto, Upda
     }
 
     public IllegalEmailAddressErrorDto putAll(IllegalEmailAddressErrorDto o) {
-        if (o.getInputEmailAddress() != null) setInputEmailAddress(o.getInputEmailAddress());
-        if (o.getValidDomains() != null) setValidDomains(o.getValidDomains());
+        o.copyToIllegalEmailAddressError(this);
         return this;
     }
 
     public IllegalEmailAddressErrorDto putAll(CreationErrorDto o) {
-        if (o instanceof IllegalEmailAddressErrorDto same) putAll(same);
+        o.copyToIllegalEmailAddressError(this);
         return this;
     }
 
     public IllegalEmailAddressErrorDto putAll(UpdateErrorDto o) {
-        if (o instanceof IllegalEmailAddressErrorDto same) putAll(same);
+        o.copyToIllegalEmailAddressError(this);
         return this;
     }
 
@@ -53,4 +52,12 @@ public final class IllegalEmailAddressErrorDto implements CreationErrorDto, Upda
         return fields;
     }
 
+    public void copyToIllegalEmailAddressError(IllegalEmailAddressErrorDto o) {
+        if (getInputEmailAddress() != null) o.setInputEmailAddress(getInputEmailAddress());
+        if (getValidDomains() != null) o.setValidDomains(getValidDomains());
+    }
+    public void copyToDuplicateIdentifierError(DuplicateIdentifierErrorDto o) {
+    }
+    public void copyToGeneralError(GeneralErrorDto o) {
+    }
 }

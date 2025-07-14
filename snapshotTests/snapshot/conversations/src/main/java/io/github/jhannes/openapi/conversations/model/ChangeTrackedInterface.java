@@ -18,7 +18,7 @@ public sealed interface ChangeTrackedInterface permits ChangeTrackedDto, Convers
     ChangeTrackedInterface removeWhereEqual(ChangeTrackedInterface o);
     List<String> missingRequiredFields(String prefix);
 
-    default void copyToChangeTracked(ChangeTrackedDto o) {
+    default void copyToChangeTracked(ChangeTrackedInterface o) {
         copyToChangeTrackedInterface(o);
     }
     default void copyToConversationMessageSnapshot(ConversationMessageSnapshotDto o) {
@@ -27,7 +27,7 @@ public sealed interface ChangeTrackedInterface permits ChangeTrackedDto, Convers
     default void copyToConversationSnapshot(ConversationSnapshotDto o) {
         copyToChangeTrackedInterface(o);
     }
-    default void removeWhereEqualFromChangeTracked(ChangeTrackedDto o) {
+    default void removeWhereEqualFromChangeTracked(ChangeTrackedInterface o) {
         removeWhereEqualFromChangeTrackedInterface(o);
     }
     default void removeWhereEqualFromConversationMessageSnapshot(ConversationMessageSnapshotDto o) {

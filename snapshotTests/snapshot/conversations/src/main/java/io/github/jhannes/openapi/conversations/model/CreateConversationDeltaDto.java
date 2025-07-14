@@ -17,13 +17,12 @@ public final class CreateConversationDeltaDto implements DeltaDto {
     }
 
     public CreateConversationDeltaDto putAll(CreateConversationDeltaDto o) {
-        if (o.getConversationId() != null) setConversationId(o.getConversationId());
-        if (o.getInfo() != null) setInfo(o.getInfo());
+        o.copyToCreateConversationDelta(this);
         return this;
     }
 
     public CreateConversationDeltaDto putAll(DeltaDto o) {
-        if (o instanceof CreateConversationDeltaDto same) putAll(same);
+        o.copyToCreateConversationDelta(this);
         return this;
     }
 
@@ -48,4 +47,8 @@ public final class CreateConversationDeltaDto implements DeltaDto {
         return fields;
     }
 
+    public void copyToCreateConversationDelta(CreateConversationDeltaDto o) {
+        if (getConversationId() != null) o.setConversationId(getConversationId());
+        if (getInfo() != null) o.setInfo(getInfo());
+    }
 }

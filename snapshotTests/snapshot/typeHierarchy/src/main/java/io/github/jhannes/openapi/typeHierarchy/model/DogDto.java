@@ -63,20 +63,18 @@ public sealed class DogDto extends PetBaseDto implements PetDto permits WorkingD
         ;
     }
 
-    public DogDto putAll(PetBaseDto o) {
-        super.putAll(o);
+    public DogDto putAll(DogDto o) {
+        o.copyToDog(this);
         return this;
     }
 
-    public DogDto putAll(DogDto o) {
-        super.putAll(o);
-        if (o.getBark() != null) setBark(o.getBark());
-        if (o.getBreed() != null) setBreed(o.getBreed());
+    public DogDto putAll(PetBaseDto o) {
+        o.copyToDog(this);
         return this;
     }
 
     public DogDto putAll(PetDto o) {
-        if (o instanceof PetBaseDto base) putAll(base);
+        o.copyToDog(this);
         return this;
     }
 
@@ -98,4 +96,13 @@ public sealed class DogDto extends PetBaseDto implements PetDto permits WorkingD
         return fields;
     }
 
+    public void copyToDog(DogDto o) {
+        copyToPetBase(o);
+        if (getBark() != null) o.setBark(getBark());
+        if (getBreed() != null) o.setBreed(getBreed());
+    }
+
+    public void copyToWorkingDog(WorkingDogDto o) {
+        copyToDog(o);
+    }
 }

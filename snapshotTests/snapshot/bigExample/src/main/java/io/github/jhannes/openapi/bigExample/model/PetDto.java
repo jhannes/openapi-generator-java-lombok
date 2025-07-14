@@ -20,9 +20,7 @@ public final class PetDto {
     }
 
     public PetDto putAll(PetDto o) {
-        if (o.getPet_type() != null) setPet_type(o.getPet_type());
-        if (o.getName() != null) setName(o.getName());
-        if (o.getBirth_date() != null) setBirth_date(o.getBirth_date());
+        o.copyToPet(this);
         return this;
     }
 
@@ -38,4 +36,9 @@ public final class PetDto {
         return fields;
     }
 
+    public void copyToPet(PetDto o) {
+        if (getPet_type() != null) o.setPet_type(getPet_type());
+        if (getName() != null) o.setName(getName());
+        if (getBirth_date() != null) o.setBirth_date(getBirth_date());
+    }
 }

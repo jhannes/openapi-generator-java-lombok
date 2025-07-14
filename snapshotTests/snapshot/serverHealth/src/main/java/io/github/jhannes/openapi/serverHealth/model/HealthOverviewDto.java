@@ -16,7 +16,7 @@ public final class HealthOverviewDto {
     }
 
     public HealthOverviewDto putAll(HealthOverviewDto o) {
-        if (o.getComponents() != null) setComponents(o.getComponents());
+        o.copyToHealthOverview(this);
         return this;
     }
 
@@ -30,4 +30,7 @@ public final class HealthOverviewDto {
         return fields;
     }
 
+    public void copyToHealthOverview(HealthOverviewDto o) {
+        if (getComponents() != null) o.setComponents(getComponents());
+    }
 }

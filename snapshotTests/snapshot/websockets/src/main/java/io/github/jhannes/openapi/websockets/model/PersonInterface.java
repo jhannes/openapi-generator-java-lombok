@@ -50,13 +50,13 @@ public sealed interface PersonInterface extends RecipientInterface permits Perso
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
 
-    default void copyToPerson(PersonDto o) {
+    default void copyToPerson(PersonInterface o) {
         copyToPersonInterface(o);
     }
     default void copyToPersonSnapshot(PersonSnapshotDto o) {
         copyToPersonInterface(o);
     }
-    default void removeWhereEqualFromPerson(PersonDto o) {
+    default void removeWhereEqualFromPerson(PersonInterface o) {
         removeWhereEqualFromPersonInterface(o);
     }
     default void removeWhereEqualFromPersonSnapshot(PersonSnapshotDto o) {

@@ -14,12 +14,12 @@ public final class SnapshotSetDto implements MessageFromServerDto {
     }
 
     public SnapshotSetDto putAll(SnapshotSetDto o) {
-        if (o.getConversations() != null) setConversations(o.getConversations());
+        o.copyToSnapshotSet(this);
         return this;
     }
 
     public SnapshotSetDto putAll(MessageFromServerDto o) {
-        if (o instanceof SnapshotSetDto same) putAll(same);
+        o.copyToSnapshotSet(this);
         return this;
     }
 
@@ -44,4 +44,7 @@ public final class SnapshotSetDto implements MessageFromServerDto {
         return fields;
     }
 
+    public void copyToSnapshotSet(SnapshotSetDto o) {
+        if (getConversations() != null) o.setConversations(getConversations());
+    }
 }

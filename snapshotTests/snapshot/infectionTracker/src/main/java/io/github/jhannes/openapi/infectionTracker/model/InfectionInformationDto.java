@@ -26,10 +26,7 @@ public final class InfectionInformationDto {
     }
 
     public InfectionInformationDto putAll(InfectionInformationDto o) {
-        if (o.getPatientName() != null) setPatientName(o.getPatientName());
-        if (o.getPatientPhoneNumber() != null) setPatientPhoneNumber(o.getPatientPhoneNumber());
-        if (o.getLikelyInfectionDate() != null) setLikelyInfectionDate(o.getLikelyInfectionDate());
-        if (o.getNotes() != null) setNotes(o.getNotes());
+        o.copyToInfectionInformation(this);
         return this;
     }
 
@@ -45,4 +42,10 @@ public final class InfectionInformationDto {
         return new ArrayList<>();
     }
 
+    public void copyToInfectionInformation(InfectionInformationDto o) {
+        if (getPatientName() != null) o.setPatientName(getPatientName());
+        if (getPatientPhoneNumber() != null) o.setPatientPhoneNumber(getPatientPhoneNumber());
+        if (getLikelyInfectionDate() != null) o.setLikelyInfectionDate(getLikelyInfectionDate());
+        if (getNotes() != null) o.setNotes(getNotes());
+    }
 }

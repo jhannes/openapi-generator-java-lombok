@@ -181,9 +181,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
         for (ModelsMap modelsMap : result.values()) {
             for (ModelMap modelMap : modelsMap.getModels()) {
                 CodegenModel model = modelMap.getModel();
-                model.parent = model.additionalPropertiesType != null
-                        ? model.parent // TODO: set parentModel as well?
-                        : model.parentModel != null ? model.parentModel.classname : null;
+                model.parent = model.parentModel != null ? model.parentModel.classname : null;
                 model.interfaces = model.interfaceModels.stream()
                         .map(CodegenModel::getClassname)
                         .collect(Collectors.toList());
@@ -208,15 +206,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
                         var.isInherited = false;
                     }
                 }
-                model.vars = model.getAllVars().stream().filter(v -> !v.isInherited).toList();
-                model.parentVars = model.getAllVars().stream().filter(v -> v.isInherited).toList();
-                model.requiredVars = model.getVars().stream().filter(v -> v.required).toList();
-                model.hasRequired = !model.requiredVars.isEmpty();
-                model.hasMoreModels = model.vars.stream().anyMatch(v -> v.isModel);
-                model.optionalVars = model.getVars().stream().filter(v -> !v.required).toList();
-                model.hasOptional = !model.optionalVars.isEmpty();
-                model.hasEnums = model.getVars().stream().anyMatch(v -> v.isEnum);
-                model.hasEnums = model.getVars().stream().anyMatch(v -> v.isEnum);
+                updateVariablesLists(model);
                 boolean hasInnerEnum = model.getVars().stream().anyMatch(v -> v.isInnerEnum && v.isEnum);
 
                 if (!model.isEnum) {
@@ -324,26 +314,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
     private static CodegenModel createMixin(CodegenModel dtoModel) {
         CodegenModel interfaceModel = new CodegenModel() {
             public boolean isMixin = true;
-
-            public Collection<CodegenModel> getDescendants() {
-                Map<String, CodegenModel> result = new TreeMap<>();
-                putDescendants(this, result);
-                return result.values();
-            }
-
-            private void putDescendants(CodegenModel codegenModel, Map<String, CodegenModel> descendants) {
-                for (CodegenModel child : codegenModel.children) {
-                    if (descendants.containsKey(child.name)) {
-                        // prefer interface to implementation
-                        if (descendants.get(child.name).interfaceModels.contains(child)) {
-                            descendants.put(child.name, child);
-                        }
-                    } else {
-                        descendants.put(child.name, child);
-                    }
-                    putDescendants(child, descendants);
-                }
-            }
         };
         interfaceModel.name = dtoModel.name;
         interfaceModel.interfaceModels = new ArrayList<>();
@@ -354,6 +324,18 @@ public class JavaCodegen extends AbstractJavaCodegen {
             property.isNew = true;
         }
         return interfaceModel;
+    }
+
+    private static void updateVariablesLists(CodegenModel codegenModel) {
+        codegenModel.vars = codegenModel.getAllVars().stream().filter(v -> !v.isInherited).toList();
+        codegenModel.parentVars = codegenModel.getAllVars().stream().filter(v -> v.isInherited).toList();
+        codegenModel.requiredVars = codegenModel.getVars().stream().filter(v -> v.required).toList();
+        codegenModel.hasRequired = !codegenModel.requiredVars.isEmpty();
+        codegenModel.hasMoreModels = codegenModel.vars.stream().anyMatch(v -> v.isModel);
+        codegenModel.optionalVars = codegenModel.getVars().stream().filter(v -> !v.required).toList();
+        codegenModel.hasOptional = !codegenModel.optionalVars.isEmpty();
+        codegenModel.hasEnums = codegenModel.getVars().stream().anyMatch(v -> v.isEnum);
+        codegenModel.hasEnums = codegenModel.getVars().stream().anyMatch(v -> v.isEnum);
     }
 
     private static List<CodegenModel> getCodegenModels(Collection<ModelsMap> modelMaps) {

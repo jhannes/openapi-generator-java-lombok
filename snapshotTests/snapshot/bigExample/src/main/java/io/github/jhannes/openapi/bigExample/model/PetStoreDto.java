@@ -18,7 +18,7 @@ public final class PetStoreDto {
     }
 
     public PetStoreDto putAll(PetStoreDto o) {
-        if (o.getPets() != null) setPets(o.getPets());
+        o.copyToPetStore(this);
         return this;
     }
 
@@ -31,4 +31,7 @@ public final class PetStoreDto {
         return new ArrayList<>();
     }
 
+    public void copyToPetStore(PetStoreDto o) {
+        if (getPets() != null) o.setPets(getPets());
+    }
 }

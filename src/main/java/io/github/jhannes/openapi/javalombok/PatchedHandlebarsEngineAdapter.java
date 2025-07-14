@@ -23,9 +23,13 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.lang.reflect.Modifier;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * TODO: This fixes a problem in Handlebars 4.2.0 with Java 17. Try to remove it when 1:handlebars:4.4.0 is released
@@ -72,8 +76,10 @@ class PatchedHandlebarsEngineAdapter extends HandlebarsEngineAdapter {
         StringHelpers.register(handlebars);
         handlebars.registerHelpers(ConditionalHelpers.class);
         handlebars.registerHelpers(org.openapitools.codegen.templating.handlebars.StringHelpers.class);
-        handlebars.registerHelper("notMixinDto", new NotMixinDto());
+        handlebars.registerHelper("implementations", new ImplementationsHelper());
+        handlebars.registerHelper("ambiguousRelatedTypes", new AmbiguousRelatedTypesHelper());
         handlebars.registerHelper("isMixinAllOf", new IsMixinAllOf());
+        handlebars.registerHelper("notMixinDto", new NotMixinDto());
         handlebars.prettyPrint(true);
         Template tmpl = handlebars.compile(templateFile);
         return tmpl.apply(context);
@@ -92,6 +98,50 @@ class PatchedHandlebarsEngineAdapter extends HandlebarsEngineAdapter {
         }
 
         protected abstract boolean getResult(CodegenModel model);
+    }
+
+    public static class AmbiguousRelatedTypesHelper implements Helper<Object> {
+        @Override
+        public Object apply(Object context, Options options) throws IOException {
+            if (context instanceof CodegenModel model) {
+                int index = 0;
+                for (CodegenModel interfaceModel : values(model)) {
+                    outputWithNewContext(options, interfaceModel, index++);
+                }
+            }
+            return options.inverse();
+        }
+
+        private Collection<CodegenModel> values(CodegenModel model) {
+            var result = new TreeMap<String, CodegenModel>();
+
+            var encounteredTypes  = new TreeSet<String>();
+            for (var interfaceModel : model.getInterfaceModels()) {
+                for (var descendant : getDescendants(interfaceModel).values()) {
+                    if (encounteredTypes.contains(descendant.name)) {
+                        result.put(descendant.name, descendant);
+                    }
+                    encounteredTypes.add(descendant.name);
+                }
+            }
+            result.remove(model.name);
+            return result.values();
+        }
+    }
+
+    public static class ImplementationsHelper implements Helper<Object> {
+
+        @Override
+        public Object apply(Object context, Options options) throws IOException {
+            if (context instanceof CodegenModel model) {
+                int index = 0;
+                for (var interfaceModel : getDescendants(model).values()) {
+                    outputWithNewContext(options, interfaceModel, index++);
+                }
+            }
+            return options.inverse();
+        }
+
     }
 
     public static class NotMixinDto extends ConditionalModelHelper {
@@ -121,6 +171,30 @@ class PatchedHandlebarsEngineAdapter extends HandlebarsEngineAdapter {
     private static boolean isMixinDto(CodegenModel codegenModel) {
         return codegenModel.interfaceModels.size() == 1 &&
                Objects.equals(codegenModel.interfaceModels.getFirst().name, codegenModel.name);
+    }
+
+    private static Map<String, CodegenModel> getDescendants(CodegenModel model) {
+        var result = new TreeMap<String, CodegenModel>();
+        for (var child : model.children) {
+            if ((child.interfaces.size() == 1 && child.interfaces.getFirst().equals(child.getName() + "Interface"))) {
+                result.put(child.name, child.interfaceModels.getFirst());
+            } else if (child.oneOf.isEmpty()) {
+                result.put(child.name, child);
+            }
+            result.putAll(getDescendants(child));
+        }
+        return result;
+    }
+
+    private static void outputWithNewContext(Options options, Object newContext, int index) throws IOException {
+        Context itCtx = Context.newContext(options.context, newContext)
+                .combine("@key", index)
+                .combine("@index", index)
+                .combine("@first", index == (int) options.hash("base", 0) ? "first" : "")
+                .combine("@odd", index % 2 == 0 ? "" : "odd")
+                .combine("@even", index % 2 != 0 ? "even" : "")
+                .combine("@index_1", index + 1);
+        options.buffer().append(options.apply(options.fn, itCtx, Arrays.asList(newContext, index)));
     }
 
 }

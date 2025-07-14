@@ -50,12 +50,7 @@ public final class OrderDto {
     }
 
     public OrderDto putAll(OrderDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getPetId() != null) setPetId(o.getPetId());
-        if (o.getQuantity() != null) setQuantity(o.getQuantity());
-        if (o.getShipDate() != null) setShipDate(o.getShipDate());
-        if (o.getStatus() != null) setStatus(o.getStatus());
-        if (o.getComplete() != null) setComplete(o.getComplete());
+        o.copyToOrder(this);
         return this;
     }
 
@@ -73,4 +68,12 @@ public final class OrderDto {
         return new ArrayList<>();
     }
 
+    public void copyToOrder(OrderDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getPetId() != null) o.setPetId(getPetId());
+        if (getQuantity() != null) o.setQuantity(getQuantity());
+        if (getShipDate() != null) o.setShipDate(getShipDate());
+        if (getStatus() != null) o.setStatus(getStatus());
+        if (getComplete() != null) o.setComplete(getComplete());
+    }
 }

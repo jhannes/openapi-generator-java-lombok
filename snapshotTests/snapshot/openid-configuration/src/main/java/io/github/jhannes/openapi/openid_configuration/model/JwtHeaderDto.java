@@ -29,9 +29,7 @@ public final class JwtHeaderDto {
     }
 
     public JwtHeaderDto putAll(JwtHeaderDto o) {
-        if (o.getTyp() != null) setTyp(o.getTyp());
-        if (o.getKid() != null) setKid(o.getKid());
-        if (o.getAlg() != null) setAlg(o.getAlg());
+        o.copyToJwtHeader(this);
         return this;
     }
 
@@ -46,4 +44,9 @@ public final class JwtHeaderDto {
         return new ArrayList<>();
     }
 
+    public void copyToJwtHeader(JwtHeaderDto o) {
+        if (getTyp() != null) o.setTyp(getTyp());
+        if (getKid() != null) o.setKid(getKid());
+        if (getAlg() != null) o.setAlg(getAlg());
+    }
 }

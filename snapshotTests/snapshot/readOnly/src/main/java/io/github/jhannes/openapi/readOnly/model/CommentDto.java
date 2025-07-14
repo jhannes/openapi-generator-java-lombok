@@ -23,10 +23,7 @@ public final class CommentDto {
     }
 
     public CommentDto putAll(CommentDto o) {
-        if (o.getTitle() != null) setTitle(o.getTitle());
-        if (o.getComment() != null) setComment(o.getComment());
-        if (o.getCreated_at() != null) setCreated_at(o.getCreated_at());
-        if (o.getUser() != null) setUser(o.getUser());
+        o.copyToComment(this);
         return this;
     }
 
@@ -42,4 +39,10 @@ public final class CommentDto {
         return new ArrayList<>();
     }
 
+    public void copyToComment(CommentDto o) {
+        if (getTitle() != null) o.setTitle(getTitle());
+        if (getComment() != null) o.setComment(getComment());
+        if (getCreated_at() != null) o.setCreated_at(getCreated_at());
+        if (getUser() != null) o.setUser(getUser());
+    }
 }

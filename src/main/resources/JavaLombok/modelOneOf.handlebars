@@ -27,4 +27,9 @@ public sealed interface {{classname}}
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
 {{/unless}}
+
+{{#implementations}}
+    default void copyTo{{name}}({{classname}} o) {
+    }
+{{/implementations}}
 }

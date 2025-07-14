@@ -27,12 +27,7 @@ public final class BookDto {
     }
 
     public BookDto putAll(BookDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getTitle() != null) setTitle(o.getTitle());
-        if (o.getDescription() != null) setDescription(o.getDescription());
-        if (o.getPageCount() != null) setPageCount(o.getPageCount());
-        if (o.getExcerpt() != null) setExcerpt(o.getExcerpt());
-        if (o.getPublishDate() != null) setPublishDate(o.getPublishDate());
+        o.copyToBook(this);
         return this;
     }
 
@@ -50,4 +45,12 @@ public final class BookDto {
         return new ArrayList<>();
     }
 
+    public void copyToBook(BookDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getTitle() != null) o.setTitle(getTitle());
+        if (getDescription() != null) o.setDescription(getDescription());
+        if (getPageCount() != null) o.setPageCount(getPageCount());
+        if (getExcerpt() != null) o.setExcerpt(getExcerpt());
+        if (getPublishDate() != null) o.setPublishDate(getPublishDate());
+    }
 }

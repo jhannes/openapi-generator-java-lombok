@@ -21,9 +21,7 @@ public final class CoverPhotoDto {
     }
 
     public CoverPhotoDto putAll(CoverPhotoDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getIdBook() != null) setIdBook(o.getIdBook());
-        if (o.getUrl() != null) setUrl(o.getUrl());
+        o.copyToCoverPhoto(this);
         return this;
     }
 
@@ -38,4 +36,9 @@ public final class CoverPhotoDto {
         return new ArrayList<>();
     }
 
+    public void copyToCoverPhoto(CoverPhotoDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getIdBook() != null) o.setIdBook(getIdBook());
+        if (getUrl() != null) o.setUrl(getUrl());
+    }
 }

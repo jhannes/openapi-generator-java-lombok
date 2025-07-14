@@ -15,12 +15,12 @@ public final class LineStringDto implements GeometryDto {
     }
 
     public LineStringDto putAll(LineStringDto o) {
-        if (o.getCoordinates() != null) setCoordinates(o.getCoordinates());
+        o.copyToLineString(this);
         return this;
     }
 
     public LineStringDto putAll(GeometryDto o) {
-        if (o instanceof LineStringDto same) putAll(same);
+        o.copyToLineString(this);
         return this;
     }
 
@@ -40,4 +40,7 @@ public final class LineStringDto implements GeometryDto {
         return fields;
     }
 
+    public void copyToLineString(LineStringDto o) {
+        if (getCoordinates() != null) o.setCoordinates(getCoordinates());
+    }
 }

@@ -24,12 +24,7 @@ public final class JwksKeyDto {
     }
 
     public JwksKeyDto putAll(JwksKeyDto o) {
-        if (o.getKty() != null) setKty(o.getKty());
-        if (o.getUse() != null) setUse(o.getUse());
-        if (o.getKid() != null) setKid(o.getKid());
-        if (o.getX5c() != null) setX5c(o.getX5c());
-        if (o.getE() != null) setE(o.getE());
-        if (o.getN() != null) setN(o.getN());
+        o.copyToJwksKey(this);
         return this;
     }
 
@@ -48,4 +43,12 @@ public final class JwksKeyDto {
         return fields;
     }
 
+    public void copyToJwksKey(JwksKeyDto o) {
+        if (getKty() != null) o.setKty(getKty());
+        if (getUse() != null) o.setUse(getUse());
+        if (getKid() != null) o.setKid(getKid());
+        if (getX5c() != null) o.setX5c(getX5c());
+        if (getE() != null) o.setE(getE());
+        if (getN() != null) o.setN(getN());
+    }
 }

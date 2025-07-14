@@ -45,20 +45,18 @@ public final class CatDto extends PetBaseDto implements PetDto {
         ;
     }
 
-    public CatDto putAll(PetBaseDto o) {
-        super.putAll(o);
+    public CatDto putAll(CatDto o) {
+        o.copyToCat(this);
         return this;
     }
 
-    public CatDto putAll(CatDto o) {
-        super.putAll(o);
-        if (o.getHunts() != null) setHunts(o.getHunts());
-        if (o.getAge() != null) setAge(o.getAge());
+    public CatDto putAll(PetBaseDto o) {
+        o.copyToCat(this);
         return this;
     }
 
     public CatDto putAll(PetDto o) {
-        if (o instanceof PetBaseDto base) putAll(base);
+        o.copyToCat(this);
         return this;
     }
 
@@ -80,4 +78,9 @@ public final class CatDto extends PetBaseDto implements PetDto {
         return fields;
     }
 
+    public void copyToCat(CatDto o) {
+        copyToPetBase(o);
+        if (getHunts() != null) o.setHunts(getHunts());
+        if (getAge() != null) o.setAge(getAge());
+    }
 }

@@ -61,13 +61,7 @@ public final class PetDto {
     }
 
     public PetDto putAll(PetDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getPet_type() != null) setPet_type(o.getPet_type());
-        if (o.getName() != null) setName(o.getName());
-        if (o.getBirth_date() != null) setBirth_date(o.getBirth_date());
-        if (o.getCreated_at() != null) setCreated_at(o.getCreated_at());
-        if (o.getComments() != null) setComments(o.getComments());
-        if (o.getStatus() != null) setStatus(o.getStatus());
+        o.copyToPet(this);
         return this;
     }
 
@@ -92,4 +86,13 @@ public final class PetDto {
         return fields;
     }
 
+    public void copyToPet(PetDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getPet_type() != null) o.setPet_type(getPet_type());
+        if (getName() != null) o.setName(getName());
+        if (getBirth_date() != null) o.setBirth_date(getBirth_date());
+        if (getCreated_at() != null) o.setCreated_at(getCreated_at());
+        if (getComments() != null) o.setComments(getComments());
+        if (getStatus() != null) o.setStatus(getStatus());
+    }
 }

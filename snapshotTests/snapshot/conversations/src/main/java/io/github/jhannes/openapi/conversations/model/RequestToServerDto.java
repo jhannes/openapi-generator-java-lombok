@@ -16,4 +16,7 @@ public sealed interface RequestToServerDto extends MessageToServerDto permits Su
     static SubscribeRequestDto createSubscribeRequest() {
         return new SubscribeRequestDto().setRequest("SubscribeRequest");
     }
+
+    default void copyToSubscribeRequest(SubscribeRequestDto o) {
+    }
 }

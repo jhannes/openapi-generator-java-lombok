@@ -79,49 +79,23 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
 {{/if}}
     }
 
-{{#isMixinAllOf}}
-    public {{classname}} putAll({{classname}} o) {
-        o.copyTo{{name}}(this);
-        return this;
-    }
-
-{{else}}
 {{#notMixinDto}}
-{{#if parent}}
-    public {{classname}} putAll({{{parent}}} o) {
-        super.putAll(o);
-        return this;
-    }
-
-{{/if}}
     public {{classname}} putAll({{classname}} o) {
-{{#if parent}}
-        super.putAll(o);
-{{/if}}
-{{#interfaceModels}}
-{{#if isMixin}}
         o.copyTo{{name}}(this);
-{{/if}}
-{{/interfaceModels}}
-{{#vars}}
-{{#unless isNew}}
-        if (o.{{getter}}() != null) {{setter}}(o.{{getter}}());
-{{/unless}}
-{{/vars}}
         return this;
     }
 
 {{/notMixinDto}}
-{{/isMixinAllOf}}
+{{#if parent}}
+    public {{classname}} putAll({{{parent}}} o) {
+        o.copyTo{{name}}(this);
+        return this;
+    }
+
+{{/if}}
 {{#interfaceModels}}
     public {{../classname}} putAll({{#if interfaces}}{{~#interfaces}}{{#if @first}}{{.}}{{/if}}{{/interfaces}}{{else}}{{classname}}{{/if}} o) {
-{{#if isMixin}}
         o.copyTo{{../name}}(this);
-{{else if ../parent}}
-        if (o instanceof {{{../parent}}} base) putAll(base);
-{{else}}
-        if (o instanceof {{{../classname}}} same) putAll(same);
-{{/if}}
         return this;
     }
 
@@ -214,14 +188,14 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
 {{/if}}
     }
 
-{{#isMixinAllOf}}
-    @Override
     public void copyTo{{name}}({{classname}} o) {
 {{#parentModel}}
         copyTo{{name}}(o);
 {{/parentModel}}
 {{#interfaceModels}}
+{{#if isMixin}}
         copyTo{{classname}}(o);
+{{/if}}
 {{/interfaceModels}}
 {{#vars}}
 {{#unless isNew}}
@@ -229,6 +203,17 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
 {{/unless}}
 {{/vars}}
     }
+{{#children}}
+
+    public void copyTo{{name}}({{classname}} o) {
+        copyTo{{../name}}(o);
+    }
+{{/children}}
+{{#ambiguousRelatedTypes}}
+    public void copyTo{{name}}({{classname}} o) {
+    }
+{{/ambiguousRelatedTypes}}
+{{#isMixinAllOf}}
 
     @Override
     public void removeWhereEqualFrom{{name}}({{classname}} o) {

@@ -17,13 +17,12 @@ public final class UpdatePersonCommandDto implements WebSocketCommandDto {
     }
 
     public UpdatePersonCommandDto putAll(UpdatePersonCommandDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getPerson() != null) setPerson(o.getPerson());
+        o.copyToUpdatePersonCommand(this);
         return this;
     }
 
     public UpdatePersonCommandDto putAll(WebSocketMessageDto o) {
-        if (o instanceof UpdatePersonCommandDto same) putAll(same);
+        o.copyToUpdatePersonCommand(this);
         return this;
     }
 
@@ -48,4 +47,8 @@ public final class UpdatePersonCommandDto implements WebSocketCommandDto {
         return fields;
     }
 
+    public void copyToUpdatePersonCommand(UpdatePersonCommandDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getPerson() != null) o.setPerson(getPerson());
+    }
 }

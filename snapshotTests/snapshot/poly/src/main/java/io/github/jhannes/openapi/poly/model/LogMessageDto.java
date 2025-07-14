@@ -17,8 +17,7 @@ public final class LogMessageDto {
     }
 
     public LogMessageDto putAll(LogMessageDto o) {
-        if (o.getMessage() != null) setMessage(o.getMessage());
-        if (o.getError() != null) setError(o.getError());
+        o.copyToLogMessage(this);
         return this;
     }
 
@@ -33,4 +32,8 @@ public final class LogMessageDto {
         return fields;
     }
 
+    public void copyToLogMessage(LogMessageDto o) {
+        if (getMessage() != null) o.setMessage(getMessage());
+        if (getError() != null) o.setError(getError());
+    }
 }

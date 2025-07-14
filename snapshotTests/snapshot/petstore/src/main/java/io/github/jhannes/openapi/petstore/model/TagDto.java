@@ -18,8 +18,7 @@ public final class TagDto {
     }
 
     public TagDto putAll(TagDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getName() != null) setName(o.getName());
+        o.copyToTag(this);
         return this;
     }
 
@@ -33,4 +32,8 @@ public final class TagDto {
         return new ArrayList<>();
     }
 
+    public void copyToTag(TagDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getName() != null) o.setName(getName());
+    }
 }

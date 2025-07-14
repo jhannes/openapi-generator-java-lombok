@@ -31,4 +31,11 @@ public sealed interface DeltaDto permits AddMessageToConversationDeltaDto, Creat
     DeltaDto removeWhereEqual(DeltaDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
+
+    default void copyToAddMessageToConversationDelta(AddMessageToConversationDeltaDto o) {
+    }
+    default void copyToCreateConversationDelta(CreateConversationDeltaDto o) {
+    }
+    default void copyToUpdateConversationDelta(UpdateConversationDeltaDto o) {
+    }
 }

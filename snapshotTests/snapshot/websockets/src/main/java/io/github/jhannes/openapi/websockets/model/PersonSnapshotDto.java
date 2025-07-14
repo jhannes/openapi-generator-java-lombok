@@ -71,7 +71,6 @@ public final class PersonSnapshotDto implements ChangeTrackedInterface, PersonIn
         return fields;
     }
 
-    @Override
     public void copyToPersonSnapshot(PersonSnapshotDto o) {
         copyToChangeTrackedInterface(o);
         copyToPersonInterface(o);

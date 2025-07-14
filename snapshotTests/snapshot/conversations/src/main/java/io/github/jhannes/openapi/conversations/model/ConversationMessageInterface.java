@@ -20,13 +20,13 @@ public sealed interface ConversationMessageInterface permits ConversationMessage
     ConversationMessageInterface removeWhereEqual(ConversationMessageInterface o);
     List<String> missingRequiredFields(String prefix);
 
-    default void copyToConversationMessage(ConversationMessageDto o) {
+    default void copyToConversationMessage(ConversationMessageInterface o) {
         copyToConversationMessageInterface(o);
     }
     default void copyToConversationMessageSnapshot(ConversationMessageSnapshotDto o) {
         copyToConversationMessageInterface(o);
     }
-    default void removeWhereEqualFromConversationMessage(ConversationMessageDto o) {
+    default void removeWhereEqualFromConversationMessage(ConversationMessageInterface o) {
         removeWhereEqualFromConversationMessageInterface(o);
     }
     default void removeWhereEqualFromConversationMessageSnapshot(ConversationMessageSnapshotDto o) {

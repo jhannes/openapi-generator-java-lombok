@@ -38,4 +38,11 @@ public sealed class ChangeTrackedDto implements ChangeTrackedInterface permits S
         return fields;
     }
 
+    public void copyToChangeTracked(ChangeTrackedDto o) {
+        copyToChangeTrackedInterface(o);
+    }
+
+    public void copyToStringSnapshot(StringSnapshotDto o) {
+        copyToChangeTracked(o);
+    }
 }

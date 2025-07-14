@@ -22,9 +22,7 @@ public final class UserinfoDto {
     }
 
     public UserinfoDto putAll(UserinfoDto o) {
-        if (o.getSub() != null) setSub(o.getSub());
-        if (o.getName() != null) setName(o.getName());
-        if (o.getEmail() != null) setEmail(o.getEmail());
+        o.copyToUserinfo(this);
         return this;
     }
 
@@ -40,4 +38,9 @@ public final class UserinfoDto {
         return fields;
     }
 
+    public void copyToUserinfo(UserinfoDto o) {
+        if (getSub() != null) o.setSub(getSub());
+        if (getName() != null) o.setName(getName());
+        if (getEmail() != null) o.setEmail(getEmail());
+    }
 }

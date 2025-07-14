@@ -18,18 +18,17 @@ public final class DuplicateIdentifierErrorDto implements CreationErrorDto, Upda
     }
 
     public DuplicateIdentifierErrorDto putAll(DuplicateIdentifierErrorDto o) {
-        if (o.getIdentifierValue() != null) setIdentifierValue(o.getIdentifierValue());
-        if (o.getEntityType() != null) setEntityType(o.getEntityType());
+        o.copyToDuplicateIdentifierError(this);
         return this;
     }
 
     public DuplicateIdentifierErrorDto putAll(CreationErrorDto o) {
-        if (o instanceof DuplicateIdentifierErrorDto same) putAll(same);
+        o.copyToDuplicateIdentifierError(this);
         return this;
     }
 
     public DuplicateIdentifierErrorDto putAll(UpdateErrorDto o) {
-        if (o instanceof DuplicateIdentifierErrorDto same) putAll(same);
+        o.copyToDuplicateIdentifierError(this);
         return this;
     }
 
@@ -55,4 +54,12 @@ public final class DuplicateIdentifierErrorDto implements CreationErrorDto, Upda
         return fields;
     }
 
+    public void copyToDuplicateIdentifierError(DuplicateIdentifierErrorDto o) {
+        if (getIdentifierValue() != null) o.setIdentifierValue(getIdentifierValue());
+        if (getEntityType() != null) o.setEntityType(getEntityType());
+    }
+    public void copyToGeneralError(GeneralErrorDto o) {
+    }
+    public void copyToIllegalEmailAddressError(IllegalEmailAddressErrorDto o) {
+    }
 }

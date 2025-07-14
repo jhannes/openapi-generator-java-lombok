@@ -16,12 +16,12 @@ public final class SubscribeRequestDto implements RequestToServerDto {
     }
 
     public SubscribeRequestDto putAll(SubscribeRequestDto o) {
-        if (o.getClientId() != null) setClientId(o.getClientId());
+        o.copyToSubscribeRequest(this);
         return this;
     }
 
     public SubscribeRequestDto putAll(MessageToServerDto o) {
-        if (o instanceof SubscribeRequestDto same) putAll(same);
+        o.copyToSubscribeRequest(this);
         return this;
     }
 
@@ -41,4 +41,7 @@ public final class SubscribeRequestDto implements RequestToServerDto {
         return fields;
     }
 
+    public void copyToSubscribeRequest(SubscribeRequestDto o) {
+        if (getClientId() != null) o.setClientId(getClientId());
+    }
 }

@@ -18,13 +18,12 @@ public final class NotFoundErrorDto implements UpdateErrorDto {
     }
 
     public NotFoundErrorDto putAll(NotFoundErrorDto o) {
-        if (o.getIdentifierValue() != null) setIdentifierValue(o.getIdentifierValue());
-        if (o.getEntityType() != null) setEntityType(o.getEntityType());
+        o.copyToNotFoundError(this);
         return this;
     }
 
     public NotFoundErrorDto putAll(UpdateErrorDto o) {
-        if (o instanceof NotFoundErrorDto same) putAll(same);
+        o.copyToNotFoundError(this);
         return this;
     }
 
@@ -45,4 +44,8 @@ public final class NotFoundErrorDto implements UpdateErrorDto {
         return fields;
     }
 
+    public void copyToNotFoundError(NotFoundErrorDto o) {
+        if (getIdentifierValue() != null) o.setIdentifierValue(getIdentifierValue());
+        if (getEntityType() != null) o.setEntityType(getEntityType());
+    }
 }

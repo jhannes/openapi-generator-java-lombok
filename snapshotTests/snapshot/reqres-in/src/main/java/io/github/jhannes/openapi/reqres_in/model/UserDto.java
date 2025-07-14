@@ -24,11 +24,7 @@ public final class UserDto {
     }
 
     public UserDto putAll(UserDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getEmail() != null) setEmail(o.getEmail());
-        if (o.getFirst_name() != null) setFirst_name(o.getFirst_name());
-        if (o.getLast_name() != null) setLast_name(o.getLast_name());
-        if (o.getAvatar() != null) setAvatar(o.getAvatar());
+        o.copyToUser(this);
         return this;
     }
 
@@ -45,4 +41,11 @@ public final class UserDto {
         return new ArrayList<>();
     }
 
+    public void copyToUser(UserDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getEmail() != null) o.setEmail(getEmail());
+        if (getFirst_name() != null) o.setFirst_name(getFirst_name());
+        if (getLast_name() != null) o.setLast_name(getLast_name());
+        if (getAvatar() != null) o.setAvatar(getAvatar());
+    }
 }

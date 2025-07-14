@@ -23,10 +23,7 @@ public final class ActivityDto {
     }
 
     public ActivityDto putAll(ActivityDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getTitle() != null) setTitle(o.getTitle());
-        if (o.getDueDate() != null) setDueDate(o.getDueDate());
-        if (o.getCompleted() != null) setCompleted(o.getCompleted());
+        o.copyToActivity(this);
         return this;
     }
 
@@ -42,4 +39,10 @@ public final class ActivityDto {
         return new ArrayList<>();
     }
 
+    public void copyToActivity(ActivityDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getTitle() != null) o.setTitle(getTitle());
+        if (getDueDate() != null) o.setDueDate(getDueDate());
+        if (getCompleted() != null) o.setCompleted(getCompleted());
+    }
 }

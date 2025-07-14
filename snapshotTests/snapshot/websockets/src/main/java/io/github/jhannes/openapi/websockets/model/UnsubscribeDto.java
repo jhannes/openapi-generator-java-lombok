@@ -14,7 +14,7 @@ public final class UnsubscribeDto {
     }
 
     public UnsubscribeDto putAll(UnsubscribeDto o) {
-        if (o.getRequest() != null) setRequest(o.getRequest());
+        o.copyToUnsubscribe(this);
         return this;
     }
 
@@ -28,4 +28,7 @@ public final class UnsubscribeDto {
         return fields;
     }
 
+    public void copyToUnsubscribe(UnsubscribeDto o) {
+        if (getRequest() != null) o.setRequest(getRequest());
+    }
 }

@@ -18,8 +18,7 @@ public final class CategoryDto {
     }
 
     public CategoryDto putAll(CategoryDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getName() != null) setName(o.getName());
+        o.copyToCategory(this);
         return this;
     }
 
@@ -33,4 +32,8 @@ public final class CategoryDto {
         return new ArrayList<>();
     }
 
+    public void copyToCategory(CategoryDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getName() != null) o.setName(getName());
+    }
 }

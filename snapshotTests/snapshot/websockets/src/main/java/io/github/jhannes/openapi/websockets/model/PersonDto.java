@@ -33,6 +33,11 @@ public final class PersonDto extends RecipientDto implements PersonInterface {
         ;
     }
 
+    public PersonDto putAll(RecipientDto o) {
+        o.copyToPerson(this);
+        return this;
+    }
+
     public PersonDto putAll(RecipientInterface o) {
         o.copyToPerson(this);
         return this;
@@ -47,4 +52,8 @@ public final class PersonDto extends RecipientDto implements PersonInterface {
         return new ArrayList<>();
     }
 
+    public void copyToPerson(PersonDto o) {
+        copyToRecipient(o);
+        copyToPersonInterface(o);
+    }
 }

@@ -15,17 +15,17 @@ public final class GeneralErrorDto implements CreationErrorDto, UpdateErrorDto {
     }
 
     public GeneralErrorDto putAll(GeneralErrorDto o) {
-        if (o.getDescription() != null) setDescription(o.getDescription());
+        o.copyToGeneralError(this);
         return this;
     }
 
     public GeneralErrorDto putAll(CreationErrorDto o) {
-        if (o instanceof GeneralErrorDto same) putAll(same);
+        o.copyToGeneralError(this);
         return this;
     }
 
     public GeneralErrorDto putAll(UpdateErrorDto o) {
-        if (o instanceof GeneralErrorDto same) putAll(same);
+        o.copyToGeneralError(this);
         return this;
     }
 
@@ -50,4 +50,11 @@ public final class GeneralErrorDto implements CreationErrorDto, UpdateErrorDto {
         return fields;
     }
 
+    public void copyToGeneralError(GeneralErrorDto o) {
+        if (getDescription() != null) o.setDescription(getDescription());
+    }
+    public void copyToDuplicateIdentifierError(DuplicateIdentifierErrorDto o) {
+    }
+    public void copyToIllegalEmailAddressError(IllegalEmailAddressErrorDto o) {
+    }
 }

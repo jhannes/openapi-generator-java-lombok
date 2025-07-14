@@ -14,11 +14,12 @@ public final class SubscribeDto implements WebSocketRequestDto {
     }
 
     public SubscribeDto putAll(SubscribeDto o) {
+        o.copyToSubscribe(this);
         return this;
     }
 
     public SubscribeDto putAll(WebSocketRequestDto o) {
-        if (o instanceof SubscribeDto same) putAll(same);
+        o.copyToSubscribe(this);
         return this;
     }
 
@@ -37,4 +38,6 @@ public final class SubscribeDto implements WebSocketRequestDto {
         return fields;
     }
 
+    public void copyToSubscribe(SubscribeDto o) {
+    }
 }

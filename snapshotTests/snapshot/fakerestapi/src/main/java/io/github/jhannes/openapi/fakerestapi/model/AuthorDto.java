@@ -22,10 +22,7 @@ public final class AuthorDto {
     }
 
     public AuthorDto putAll(AuthorDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getIdBook() != null) setIdBook(o.getIdBook());
-        if (o.getFirstName() != null) setFirstName(o.getFirstName());
-        if (o.getLastName() != null) setLastName(o.getLastName());
+        o.copyToAuthor(this);
         return this;
     }
 
@@ -41,4 +38,10 @@ public final class AuthorDto {
         return new ArrayList<>();
     }
 
+    public void copyToAuthor(AuthorDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getIdBook() != null) o.setIdBook(getIdBook());
+        if (getFirstName() != null) o.setFirstName(getFirstName());
+        if (getLastName() != null) o.setLastName(getLastName());
+    }
 }

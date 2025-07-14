@@ -27,17 +27,12 @@ public final class PersonDto implements AnyPartyDto {
     }
 
     public PersonDto putAll(PersonDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getGivenName() != null) setGivenName(o.getGivenName());
-        if (o.getFamilyName() != null) setFamilyName(o.getFamilyName());
-        if (o.getEmail() != null) setEmail(o.getEmail());
-        if (o.getPhone() != null) setPhone(o.getPhone());
-        if (o.getBirthDate() != null) setBirthDate(o.getBirthDate());
+        o.copyToPerson(this);
         return this;
     }
 
     public PersonDto putAll(AnyPartyDto o) {
-        if (o instanceof PersonDto same) putAll(same);
+        o.copyToPerson(this);
         return this;
     }
 
@@ -62,4 +57,12 @@ public final class PersonDto implements AnyPartyDto {
         return fields;
     }
 
+    public void copyToPerson(PersonDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getGivenName() != null) o.setGivenName(getGivenName());
+        if (getFamilyName() != null) o.setFamilyName(getFamilyName());
+        if (getEmail() != null) o.setEmail(getEmail());
+        if (getPhone() != null) o.setPhone(getPhone());
+        if (getBirthDate() != null) o.setBirthDate(getBirthDate());
+    }
 }

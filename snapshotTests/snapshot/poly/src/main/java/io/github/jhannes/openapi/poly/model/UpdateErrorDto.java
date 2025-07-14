@@ -41,4 +41,13 @@ public sealed interface UpdateErrorDto permits DuplicateIdentifierErrorDto, Gene
     UpdateErrorDto removeWhereEqual(UpdateErrorDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
+
+    default void copyToDuplicateIdentifierError(DuplicateIdentifierErrorDto o) {
+    }
+    default void copyToGeneralError(GeneralErrorDto o) {
+    }
+    default void copyToIllegalEmailAddressError(IllegalEmailAddressErrorDto o) {
+    }
+    default void copyToNotFoundError(NotFoundErrorDto o) {
+    }
 }

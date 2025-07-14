@@ -19,9 +19,7 @@ public final class ExceptionDto {
     }
 
     public ExceptionDto putAll(ExceptionDto o) {
-        if (o.getType() != null) setType(o.getType());
-        if (o.getMessage() != null) setMessage(o.getMessage());
-        if (o.getStackTrace() != null) setStackTrace(o.getStackTrace());
+        o.copyToException(this);
         return this;
     }
 
@@ -42,4 +40,9 @@ public final class ExceptionDto {
         return fields;
     }
 
+    public void copyToException(ExceptionDto o) {
+        if (getType() != null) o.setType(getType());
+        if (getMessage() != null) o.setMessage(getMessage());
+        if (getStackTrace() != null) o.setStackTrace(getStackTrace());
+    }
 }

@@ -17,12 +17,12 @@ public final class HealthComponentFailureDetailsDto implements HealthDetailsDto 
     }
 
     public HealthComponentFailureDetailsDto putAll(HealthComponentFailureDetailsDto o) {
-        if (o.getException() != null) setException(o.getException());
+        o.copyToHealthComponentFailureDetails(this);
         return this;
     }
 
     public HealthComponentFailureDetailsDto putAll(HealthDetailsDto o) {
-        if (o instanceof HealthComponentFailureDetailsDto same) putAll(same);
+        o.copyToHealthComponentFailureDetails(this);
         return this;
     }
 
@@ -45,4 +45,7 @@ public final class HealthComponentFailureDetailsDto implements HealthDetailsDto 
         return fields;
     }
 
+    public void copyToHealthComponentFailureDetails(HealthComponentFailureDetailsDto o) {
+        if (getException() != null) o.setException(getException());
+    }
 }

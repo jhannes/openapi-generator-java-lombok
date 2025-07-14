@@ -47,12 +47,7 @@ public final class PetDto {
     }
 
     public PetDto putAll(PetDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getCategory() != null) setCategory(o.getCategory());
-        if (o.getName() != null) setName(o.getName());
-        if (o.getPhotoUrls() != null) setPhotoUrls(o.getPhotoUrls());
-        if (o.getTags() != null) setTags(o.getTags());
-        if (o.getStatus() != null) setStatus(o.getStatus());
+        o.copyToPet(this);
         return this;
     }
 
@@ -79,4 +74,12 @@ public final class PetDto {
         return fields;
     }
 
+    public void copyToPet(PetDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getCategory() != null) o.setCategory(getCategory());
+        if (getName() != null) o.setName(getName());
+        if (getPhotoUrls() != null) o.setPhotoUrls(getPhotoUrls());
+        if (getTags() != null) o.setTags(getTags());
+        if (getStatus() != null) o.setStatus(getStatus());
+    }
 }

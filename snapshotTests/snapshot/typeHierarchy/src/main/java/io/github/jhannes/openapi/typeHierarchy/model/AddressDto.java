@@ -38,11 +38,7 @@ public final class AddressDto {
     }
 
     public AddressDto putAll(AddressDto o) {
-        if (o.getAddressLine1() != null) setAddressLine1(o.getAddressLine1());
-        if (o.getAddressLine2() != null) setAddressLine2(o.getAddressLine2());
-        if (o.getCity() != null) setCity(o.getCity());
-        if (o.getCountry() != null) setCountry(o.getCountry());
-        if (o.getAddressTypes() != null) setAddressTypes(o.getAddressTypes());
+        o.copyToAddress(this);
         return this;
     }
 
@@ -60,4 +56,11 @@ public final class AddressDto {
         return fields;
     }
 
+    public void copyToAddress(AddressDto o) {
+        if (getAddressLine1() != null) o.setAddressLine1(getAddressLine1());
+        if (getAddressLine2() != null) o.setAddressLine2(getAddressLine2());
+        if (getCity() != null) o.setCity(getCity());
+        if (getCountry() != null) o.setCountry(getCountry());
+        if (getAddressTypes() != null) o.setAddressTypes(getAddressTypes());
+    }
 }

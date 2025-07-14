@@ -50,6 +50,11 @@ public final class StringSnapshotDto extends ChangeTrackedDto {
         return this;
     }
 
+    public StringSnapshotDto putAll(ChangeTrackedDto o) {
+        o.copyToStringSnapshot(this);
+        return this;
+    }
+
     public StringSnapshotDto removeWhereEqual(StringSnapshotDto o) {
         o.removeWhereEqualFromStringSnapshot(this);
         return this;
@@ -59,7 +64,6 @@ public final class StringSnapshotDto extends ChangeTrackedDto {
         return new ArrayList<>();
     }
 
-    @Override
     public void copyToStringSnapshot(StringSnapshotDto o) {
         copyToChangeTracked(o);
         if (getName() != null) o.setName(getName());

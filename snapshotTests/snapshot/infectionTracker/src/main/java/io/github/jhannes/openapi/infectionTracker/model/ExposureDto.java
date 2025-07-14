@@ -80,15 +80,7 @@ public final class ExposureDto {
     }
 
     public ExposureDto putAll(ExposureDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getExposedPersonName() != null) setExposedPersonName(o.getExposedPersonName());
-        if (o.getExposedPersonPhoneNumber() != null) setExposedPersonPhoneNumber(o.getExposedPersonPhoneNumber());
-        if (o.getExposedDate() != null) setExposedDate(o.getExposedDate());
-        if (o.getExposureLocation() != null) setExposureLocation(o.getExposureLocation());
-        if (o.getNotes() != null) setNotes(o.getNotes());
-        if (o.getCaseWorker() != null) setCaseWorker(o.getCaseWorker());
-        if (o.getStatus() != null) setStatus(o.getStatus());
-        if (o.getDelayAfterInfection() != null) setDelayAfterInfection(o.getDelayAfterInfection());
+        o.copyToExposure(this);
         return this;
     }
 
@@ -110,4 +102,15 @@ public final class ExposureDto {
         return fields;
     }
 
+    public void copyToExposure(ExposureDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getExposedPersonName() != null) o.setExposedPersonName(getExposedPersonName());
+        if (getExposedPersonPhoneNumber() != null) o.setExposedPersonPhoneNumber(getExposedPersonPhoneNumber());
+        if (getExposedDate() != null) o.setExposedDate(getExposedDate());
+        if (getExposureLocation() != null) o.setExposureLocation(getExposureLocation());
+        if (getNotes() != null) o.setNotes(getNotes());
+        if (getCaseWorker() != null) o.setCaseWorker(getCaseWorker());
+        if (getStatus() != null) o.setStatus(getStatus());
+        if (getDelayAfterInfection() != null) o.setDelayAfterInfection(getDelayAfterInfection());
+    }
 }

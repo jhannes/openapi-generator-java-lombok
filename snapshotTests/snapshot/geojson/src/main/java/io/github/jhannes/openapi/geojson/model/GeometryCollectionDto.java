@@ -18,8 +18,7 @@ public final class GeometryCollectionDto {
     }
 
     public GeometryCollectionDto putAll(GeometryCollectionDto o) {
-        if (o.getType() != null) setType(o.getType());
-        if (o.getGeometries() != null) setGeometries(o.getGeometries());
+        o.copyToGeometryCollection(this);
         return this;
     }
 
@@ -40,4 +39,8 @@ public final class GeometryCollectionDto {
         return fields;
     }
 
+    public void copyToGeometryCollection(GeometryCollectionDto o) {
+        if (getType() != null) o.setType(getType());
+        if (getGeometries() != null) o.setGeometries(getGeometries());
+    }
 }

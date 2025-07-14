@@ -25,7 +25,7 @@ public sealed interface ChangeTrackedInterface permits ChangeTrackedDto, PersonS
     ChangeTrackedInterface removeWhereEqual(ChangeTrackedInterface o);
     List<String> missingRequiredFields(String prefix);
 
-    default void copyToChangeTracked(ChangeTrackedDto o) {
+    default void copyToChangeTracked(ChangeTrackedInterface o) {
         copyToChangeTrackedInterface(o);
     }
     default void copyToPersonSnapshot(PersonSnapshotDto o) {
@@ -34,7 +34,7 @@ public sealed interface ChangeTrackedInterface permits ChangeTrackedDto, PersonS
     default void copyToStringSnapshot(StringSnapshotDto o) {
         copyToChangeTrackedInterface(o);
     }
-    default void removeWhereEqualFromChangeTracked(ChangeTrackedDto o) {
+    default void removeWhereEqualFromChangeTracked(ChangeTrackedInterface o) {
         removeWhereEqualFromChangeTrackedInterface(o);
     }
     default void removeWhereEqualFromPersonSnapshot(PersonSnapshotDto o) {

@@ -30,4 +30,11 @@ public sealed class RecipientDto implements RecipientInterface permits PersonDto
         return new ArrayList<>();
     }
 
+    public void copyToRecipient(RecipientDto o) {
+        copyToRecipientInterface(o);
+    }
+
+    public void copyToPerson(PersonDto o) {
+        copyToRecipient(o);
+    }
 }

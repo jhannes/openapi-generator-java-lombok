@@ -35,16 +35,16 @@ public sealed interface {{classname}}
 {{/unless}}
     List<String> missingRequiredFields(String prefix);
 
-{{#descendants}}
+{{#implementations}}
     default void copyTo{{name}}({{classname}} o) {
         copyTo{{../classname}}(o);
     }
-{{/descendants}}
-{{#descendants}}
+{{/implementations}}
+{{#implementations}}
     default void removeWhereEqualFrom{{name}}({{classname}} o) {
         removeWhereEqualFrom{{../classname}}(o);
     }
-{{/descendants}}
+{{/implementations}}
 
     default boolean hasNoOptionalPropertiesFor{{name}}() {
 {{#if interfaces}}

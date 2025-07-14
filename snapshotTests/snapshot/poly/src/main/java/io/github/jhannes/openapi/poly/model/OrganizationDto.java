@@ -32,18 +32,12 @@ public final class OrganizationDto implements AnyPartyDto {
     }
 
     public OrganizationDto putAll(OrganizationDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getName() != null) setName(o.getName());
-        if (o.getOrganizationId() != null) setOrganizationId(o.getOrganizationId());
-        if (o.getUrl() != null) setUrl(o.getUrl());
-        if (o.getEmail() != null) setEmail(o.getEmail());
-        if (o.getEmailDomains() != null) setEmailDomains(o.getEmailDomains());
-        if (o.getPhone() != null) setPhone(o.getPhone());
+        o.copyToOrganization(this);
         return this;
     }
 
     public OrganizationDto putAll(AnyPartyDto o) {
-        if (o instanceof OrganizationDto same) putAll(same);
+        o.copyToOrganization(this);
         return this;
     }
 
@@ -69,4 +63,13 @@ public final class OrganizationDto implements AnyPartyDto {
         return fields;
     }
 
+    public void copyToOrganization(OrganizationDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getName() != null) o.setName(getName());
+        if (getOrganizationId() != null) o.setOrganizationId(getOrganizationId());
+        if (getUrl() != null) o.setUrl(getUrl());
+        if (getEmail() != null) o.setEmail(getEmail());
+        if (getEmailDomains() != null) o.setEmailDomains(getEmailDomains());
+        if (getPhone() != null) o.setPhone(getPhone());
+    }
 }

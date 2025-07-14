@@ -35,8 +35,7 @@ public final class OauthErrorDto {
     }
 
     public OauthErrorDto putAll(OauthErrorDto o) {
-        if (o.getError() != null) setError(o.getError());
-        if (o.getError_description() != null) setError_description(o.getError_description());
+        o.copyToOauthError(this);
         return this;
     }
 
@@ -51,4 +50,8 @@ public final class OauthErrorDto {
         return fields;
     }
 
+    public void copyToOauthError(OauthErrorDto o) {
+        if (getError() != null) o.setError(getError());
+        if (getError_description() != null) o.setError_description(getError_description());
+    }
 }

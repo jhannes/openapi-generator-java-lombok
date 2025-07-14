@@ -53,19 +53,18 @@ public final class WorkingDogDto extends DogDto implements PetDto {
         ;
     }
 
-    public WorkingDogDto putAll(DogDto o) {
-        super.putAll(o);
+    public WorkingDogDto putAll(WorkingDogDto o) {
+        o.copyToWorkingDog(this);
         return this;
     }
 
-    public WorkingDogDto putAll(WorkingDogDto o) {
-        super.putAll(o);
-        if (o.getCapabilities() != null) setCapabilities(o.getCapabilities());
+    public WorkingDogDto putAll(DogDto o) {
+        o.copyToWorkingDog(this);
         return this;
     }
 
     public WorkingDogDto putAll(PetDto o) {
-        if (o instanceof DogDto base) putAll(base);
+        o.copyToWorkingDog(this);
         return this;
     }
 
@@ -86,4 +85,8 @@ public final class WorkingDogDto extends DogDto implements PetDto {
         return fields;
     }
 
+    public void copyToWorkingDog(WorkingDogDto o) {
+        copyToDog(o);
+        if (getCapabilities() != null) o.setCapabilities(getCapabilities());
+    }
 }

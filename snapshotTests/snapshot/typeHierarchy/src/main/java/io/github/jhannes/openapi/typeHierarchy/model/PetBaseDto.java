@@ -21,10 +21,7 @@ public sealed class PetBaseDto permits CatDto, DogDto {
     }
 
     public PetBaseDto putAll(PetBaseDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getName() != null) setName(o.getName());
-        if (o.getBirth_date() != null) setBirth_date(o.getBirth_date());
-        if (o.getOwnerAddress() != null) setOwnerAddress(o.getOwnerAddress());
+        o.copyToPetBase(this);
         return this;
     }
 
@@ -44,4 +41,18 @@ public sealed class PetBaseDto permits CatDto, DogDto {
         return fields;
     }
 
+    public void copyToPetBase(PetBaseDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getName() != null) o.setName(getName());
+        if (getBirth_date() != null) o.setBirth_date(getBirth_date());
+        if (getOwnerAddress() != null) o.setOwnerAddress(getOwnerAddress());
+    }
+
+    public void copyToCat(CatDto o) {
+        copyToPetBase(o);
+    }
+
+    public void copyToDog(DogDto o) {
+        copyToPetBase(o);
+    }
 }

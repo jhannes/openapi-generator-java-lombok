@@ -20,9 +20,7 @@ public final class UserDto {
     }
 
     public UserDto putAll(UserDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getUserName() != null) setUserName(o.getUserName());
-        if (o.getPassword() != null) setPassword(o.getPassword());
+        o.copyToUser(this);
         return this;
     }
 
@@ -37,4 +35,9 @@ public final class UserDto {
         return new ArrayList<>();
     }
 
+    public void copyToUser(UserDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getUserName() != null) o.setUserName(getUserName());
+        if (getPassword() != null) o.setPassword(getPassword());
+    }
 }

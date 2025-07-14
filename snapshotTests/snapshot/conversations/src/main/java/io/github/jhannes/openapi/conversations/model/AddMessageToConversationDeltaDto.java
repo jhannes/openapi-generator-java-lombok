@@ -18,14 +18,12 @@ public final class AddMessageToConversationDeltaDto implements DeltaDto {
     }
 
     public AddMessageToConversationDeltaDto putAll(AddMessageToConversationDeltaDto o) {
-        if (o.getConversationId() != null) setConversationId(o.getConversationId());
-        if (o.getMessageId() != null) setMessageId(o.getMessageId());
-        if (o.getMessage() != null) setMessage(o.getMessage());
+        o.copyToAddMessageToConversationDelta(this);
         return this;
     }
 
     public AddMessageToConversationDeltaDto putAll(DeltaDto o) {
-        if (o instanceof AddMessageToConversationDeltaDto same) putAll(same);
+        o.copyToAddMessageToConversationDelta(this);
         return this;
     }
 
@@ -51,4 +49,9 @@ public final class AddMessageToConversationDeltaDto implements DeltaDto {
         return fields;
     }
 
+    public void copyToAddMessageToConversationDelta(AddMessageToConversationDeltaDto o) {
+        if (getConversationId() != null) o.setConversationId(getConversationId());
+        if (getMessageId() != null) o.setMessageId(getMessageId());
+        if (getMessage() != null) o.setMessage(getMessage());
+    }
 }

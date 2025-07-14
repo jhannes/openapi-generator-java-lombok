@@ -18,14 +18,12 @@ public sealed class CommandToServerDto implements MessageToServerDto permits Eve
     }
 
     public CommandToServerDto putAll(CommandToServerDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getClientTime() != null) setClientTime(o.getClientTime());
-        if (o.getDelta() != null) setDelta(o.getDelta());
+        o.copyToCommandToServer(this);
         return this;
     }
 
     public CommandToServerDto putAll(MessageToServerDto o) {
-        if (o instanceof CommandToServerDto same) putAll(same);
+        o.copyToCommandToServer(this);
         return this;
     }
 
@@ -50,4 +48,13 @@ public sealed class CommandToServerDto implements MessageToServerDto permits Eve
         return fields;
     }
 
+    public void copyToCommandToServer(CommandToServerDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getClientTime() != null) o.setClientTime(getClientTime());
+        if (getDelta() != null) o.setDelta(getDelta());
+    }
+
+    public void copyToEventFromServer(EventFromServerDto o) {
+        copyToCommandToServer(o);
+    }
 }

@@ -16,7 +16,7 @@ public final class LoginPost400ResponseDto {
     }
 
     public LoginPost400ResponseDto putAll(LoginPost400ResponseDto o) {
-        if (o.getError() != null) setError(o.getError());
+        o.copyTo_login_post_400_response(this);
         return this;
     }
 
@@ -29,4 +29,7 @@ public final class LoginPost400ResponseDto {
         return new ArrayList<>();
     }
 
+    public void copyTo_login_post_400_response(LoginPost400ResponseDto o) {
+        if (getError() != null) o.setError(getError());
+    }
 }

@@ -8,4 +8,9 @@ public sealed interface MessageFromServerDto permits EventFromServerDto, Snapsho
     MessageFromServerDto removeWhereEqual(MessageFromServerDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
+
+    default void copyToEventFromServer(EventFromServerDto o) {
+    }
+    default void copyToSnapshotSet(SnapshotSetDto o) {
+    }
 }

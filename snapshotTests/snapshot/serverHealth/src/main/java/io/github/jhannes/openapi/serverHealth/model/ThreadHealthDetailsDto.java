@@ -47,17 +47,12 @@ public final class ThreadHealthDetailsDto implements HealthDetailsDto {
     }
 
     public ThreadHealthDetailsDto putAll(ThreadHealthDetailsDto o) {
-        if (o.getThreadState() != null) setThreadState(o.getThreadState());
-        if (o.getStackTrace() != null) setStackTrace(o.getStackTrace());
-        if (o.getLastAliveTime() != null) setLastAliveTime(o.getLastAliveTime());
-        if (o.getLastSuccessTime() != null) setLastSuccessTime(o.getLastSuccessTime());
-        if (o.getLastFailureTime() != null) setLastFailureTime(o.getLastFailureTime());
-        if (o.getLastFailureException() != null) setLastFailureException(o.getLastFailureException());
+        o.copyToThreadHealthDetails(this);
         return this;
     }
 
     public ThreadHealthDetailsDto putAll(HealthDetailsDto o) {
-        if (o instanceof ThreadHealthDetailsDto same) putAll(same);
+        o.copyToThreadHealthDetails(this);
         return this;
     }
 
@@ -90,4 +85,12 @@ public final class ThreadHealthDetailsDto implements HealthDetailsDto {
         return fields;
     }
 
+    public void copyToThreadHealthDetails(ThreadHealthDetailsDto o) {
+        if (getThreadState() != null) o.setThreadState(getThreadState());
+        if (getStackTrace() != null) o.setStackTrace(getStackTrace());
+        if (getLastAliveTime() != null) o.setLastAliveTime(getLastAliveTime());
+        if (getLastSuccessTime() != null) o.setLastSuccessTime(getLastSuccessTime());
+        if (getLastFailureTime() != null) o.setLastFailureTime(getLastFailureTime());
+        if (getLastFailureException() != null) o.setLastFailureException(getLastFailureException());
+    }
 }

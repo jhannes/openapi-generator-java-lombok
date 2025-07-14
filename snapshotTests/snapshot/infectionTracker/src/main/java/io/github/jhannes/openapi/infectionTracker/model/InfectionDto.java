@@ -17,9 +17,7 @@ public final class InfectionDto {
     }
 
     public InfectionDto putAll(InfectionDto o) {
-        if (o.getId() != null) setId(o.getId());
-        if (o.getInformation() != null) setInformation(o.getInformation());
-        if (o.getRegisteredExposures() != null) setRegisteredExposures(o.getRegisteredExposures());
+        o.copyToInfection(this);
         return this;
     }
 
@@ -45,4 +43,9 @@ public final class InfectionDto {
         return fields;
     }
 
+    public void copyToInfection(InfectionDto o) {
+        if (getId() != null) o.setId(getId());
+        if (getInformation() != null) o.setInformation(getInformation());
+        if (getRegisteredExposures() != null) o.setRegisteredExposures(getRegisteredExposures());
+    }
 }

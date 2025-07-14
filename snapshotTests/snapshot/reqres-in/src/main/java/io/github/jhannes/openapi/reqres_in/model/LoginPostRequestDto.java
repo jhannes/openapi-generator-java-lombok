@@ -20,9 +20,7 @@ public final class LoginPostRequestDto {
     }
 
     public LoginPostRequestDto putAll(LoginPostRequestDto o) {
-        if (o.getUsername() != null) setUsername(o.getUsername());
-        if (o.getEmail() != null) setEmail(o.getEmail());
-        if (o.getPassword() != null) setPassword(o.getPassword());
+        o.copyTo_login_post_request(this);
         return this;
     }
 
@@ -37,4 +35,9 @@ public final class LoginPostRequestDto {
         return new ArrayList<>();
     }
 
+    public void copyTo_login_post_request(LoginPostRequestDto o) {
+        if (getUsername() != null) o.setUsername(getUsername());
+        if (getEmail() != null) o.setEmail(getEmail());
+        if (getPassword() != null) o.setPassword(getPassword());
+    }
 }

@@ -18,8 +18,7 @@ public final class HealthSummaryDto {
     }
 
     public HealthSummaryDto putAll(HealthSummaryDto o) {
-        if (o.getStatus() != null) setStatus(o.getStatus());
-        if (o.getComponents() != null) setComponents(o.getComponents());
+        o.copyToHealthSummary(this);
         return this;
     }
 
@@ -38,4 +37,8 @@ public final class HealthSummaryDto {
         return fields;
     }
 
+    public void copyToHealthSummary(HealthSummaryDto o) {
+        if (getStatus() != null) o.setStatus(getStatus());
+        if (getComponents() != null) o.setComponents(getComponents());
+    }
 }

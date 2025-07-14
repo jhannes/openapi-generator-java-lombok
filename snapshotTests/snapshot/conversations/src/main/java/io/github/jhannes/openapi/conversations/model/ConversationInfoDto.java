@@ -17,8 +17,7 @@ public final class ConversationInfoDto {
     }
 
     public ConversationInfoDto putAll(ConversationInfoDto o) {
-        if (o.getTitle() != null) setTitle(o.getTitle());
-        if (o.getSummary() != null) setSummary(o.getSummary());
+        o.copyToConversationInfo(this);
         return this;
     }
 
@@ -33,4 +32,8 @@ public final class ConversationInfoDto {
         return fields;
     }
 
+    public void copyToConversationInfo(ConversationInfoDto o) {
+        if (getTitle() != null) o.setTitle(getTitle());
+        if (getSummary() != null) o.setSummary(getSummary());
+    }
 }

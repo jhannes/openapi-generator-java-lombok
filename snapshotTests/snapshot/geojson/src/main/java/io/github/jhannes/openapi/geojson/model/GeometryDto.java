@@ -31,4 +31,11 @@ public sealed interface GeometryDto permits LineStringDto, PointDto, PolygonDto 
     GeometryDto removeWhereEqual(GeometryDto o);
     boolean hasNoOptionalProperties();
     List<String> missingRequiredFields(String prefix);
+
+    default void copyToLineString(LineStringDto o) {
+    }
+    default void copyToPoint(PointDto o) {
+    }
+    default void copyToPolygon(PolygonDto o) {
+    }
 }

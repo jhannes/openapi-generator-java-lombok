@@ -18,12 +18,12 @@ public final class PointDto implements GeometryDto {
     }
 
     public PointDto putAll(PointDto o) {
-        if (o.getCoordinates() != null) setCoordinates(o.getCoordinates());
+        o.copyToPoint(this);
         return this;
     }
 
     public PointDto putAll(GeometryDto o) {
-        if (o instanceof PointDto same) putAll(same);
+        o.copyToPoint(this);
         return this;
     }
 
@@ -43,4 +43,7 @@ public final class PointDto implements GeometryDto {
         return fields;
     }
 
+    public void copyToPoint(PointDto o) {
+        if (getCoordinates() != null) o.setCoordinates(getCoordinates());
+    }
 }

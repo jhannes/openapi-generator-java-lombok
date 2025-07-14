@@ -22,4 +22,9 @@ public sealed interface WebSocketCommandDto extends WebSocketMessageDto permits 
     static UpdatePersonCommandDto createUpdatePerson() {
         return new UpdatePersonCommandDto().setCommand("updatePerson");
     }
+
+    default void copyToCreatePersonCommand(CreatePersonCommandDto o) {
+    }
+    default void copyToUpdatePersonCommand(UpdatePersonCommandDto o) {
+    }
 }

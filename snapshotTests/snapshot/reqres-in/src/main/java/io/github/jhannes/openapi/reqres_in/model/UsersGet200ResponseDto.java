@@ -24,11 +24,7 @@ public final class UsersGet200ResponseDto {
     }
 
     public UsersGet200ResponseDto putAll(UsersGet200ResponseDto o) {
-        if (o.getPage() != null) setPage(o.getPage());
-        if (o.getPer_page() != null) setPer_page(o.getPer_page());
-        if (o.getTotal() != null) setTotal(o.getTotal());
-        if (o.getTotal_pages() != null) setTotal_pages(o.getTotal_pages());
-        if (o.getData() != null) setData(o.getData());
+        o.copyTo_users_get_200_response(this);
         return this;
     }
 
@@ -45,4 +41,11 @@ public final class UsersGet200ResponseDto {
         return new ArrayList<>();
     }
 
+    public void copyTo_users_get_200_response(UsersGet200ResponseDto o) {
+        if (getPage() != null) o.setPage(getPage());
+        if (getPer_page() != null) o.setPer_page(getPer_page());
+        if (getTotal() != null) o.setTotal(getTotal());
+        if (getTotal_pages() != null) o.setTotal_pages(getTotal_pages());
+        if (getData() != null) o.setData(getData());
+    }
 }

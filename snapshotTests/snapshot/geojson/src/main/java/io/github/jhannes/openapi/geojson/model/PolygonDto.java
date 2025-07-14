@@ -15,12 +15,12 @@ public final class PolygonDto implements GeometryDto {
     }
 
     public PolygonDto putAll(PolygonDto o) {
-        if (o.getCoordinates() != null) setCoordinates(o.getCoordinates());
+        o.copyToPolygon(this);
         return this;
     }
 
     public PolygonDto putAll(GeometryDto o) {
-        if (o instanceof PolygonDto same) putAll(same);
+        o.copyToPolygon(this);
         return this;
     }
 
@@ -40,4 +40,7 @@ public final class PolygonDto implements GeometryDto {
         return fields;
     }
 
+    public void copyToPolygon(PolygonDto o) {
+        if (getCoordinates() != null) o.setCoordinates(getCoordinates());
+    }
 }

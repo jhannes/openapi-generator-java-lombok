@@ -60,7 +60,6 @@ public final class ConversationMessageSnapshotDto implements ChangeTrackedInterf
         return fields;
     }
 
-    @Override
     public void copyToConversationMessageSnapshot(ConversationMessageSnapshotDto o) {
         copyToChangeTrackedInterface(o);
         copyToConversationMessageInterface(o);
