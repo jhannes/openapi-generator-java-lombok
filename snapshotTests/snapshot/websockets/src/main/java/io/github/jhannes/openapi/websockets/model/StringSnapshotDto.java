@@ -60,6 +60,11 @@ public final class StringSnapshotDto extends ChangeTrackedDto {
         return this;
     }
 
+    public StringSnapshotDto removeWhereEqual(ChangeTrackedDto o) {
+        o.removeWhereEqualFromStringSnapshot(this);
+        return this;
+    }
+
     public List<String> missingRequiredFields(String prefix) {
         return new ArrayList<>();
     }
@@ -70,7 +75,6 @@ public final class StringSnapshotDto extends ChangeTrackedDto {
         if (getType() != null) o.setType(getType());
     }
 
-    @Override
     public void removeWhereEqualFromStringSnapshot(StringSnapshotDto o) {
         removeWhereEqualFromChangeTracked(o);
         if (Objects.equals(getName(), o.getName())) o.setName(null);

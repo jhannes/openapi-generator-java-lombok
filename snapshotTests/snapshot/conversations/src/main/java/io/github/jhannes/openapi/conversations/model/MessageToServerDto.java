@@ -15,4 +15,10 @@ public sealed interface MessageToServerDto permits CommandToServerDto, RequestTo
     }
     default void copyToSubscribeRequest(SubscribeRequestDto o) {
     }
+    default void removeWhereEqualFromCommandToServer(CommandToServerDto o) {
+    }
+    default void removeWhereEqualFromEventFromServer(EventFromServerDto o) {
+    }
+    default void removeWhereEqualFromSubscribeRequest(SubscribeRequestDto o) {
+    }
 }

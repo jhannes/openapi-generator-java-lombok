@@ -24,11 +24,12 @@ public final class SnapshotSetDto implements MessageFromServerDto {
     }
 
     public SnapshotSetDto removeWhereEqual(SnapshotSetDto o) {
+        o.removeWhereEqualFromSnapshotSet(this);
         return this;
     }
 
     public SnapshotSetDto removeWhereEqual(MessageFromServerDto o) {
-        if (o instanceof SnapshotSetDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromSnapshotSet(this);
         return this;
     }
 
@@ -46,5 +47,8 @@ public final class SnapshotSetDto implements MessageFromServerDto {
 
     public void copyToSnapshotSet(SnapshotSetDto o) {
         if (getConversations() != null) o.setConversations(getConversations());
+    }
+
+    public void removeWhereEqualFromSnapshotSet(SnapshotSetDto o) {
     }
 }

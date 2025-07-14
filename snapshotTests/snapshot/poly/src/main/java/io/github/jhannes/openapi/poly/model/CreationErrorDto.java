@@ -43,4 +43,10 @@ public sealed interface CreationErrorDto permits DuplicateIdentifierErrorDto, Ge
     }
     default void copyToIllegalEmailAddressError(IllegalEmailAddressErrorDto o) {
     }
+    default void removeWhereEqualFromDuplicateIdentifierError(DuplicateIdentifierErrorDto o) {
+    }
+    default void removeWhereEqualFromGeneralError(GeneralErrorDto o) {
+    }
+    default void removeWhereEqualFromIllegalEmailAddressError(IllegalEmailAddressErrorDto o) {
+    }
 }

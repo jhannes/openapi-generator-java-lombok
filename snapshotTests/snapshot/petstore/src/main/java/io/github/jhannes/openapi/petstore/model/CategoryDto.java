@@ -23,8 +23,7 @@ public final class CategoryDto {
     }
 
     public CategoryDto removeWhereEqual(CategoryDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getName(), o.getName())) setName(null);
+        o.removeWhereEqualFromCategory(this);
         return this;
     }
 
@@ -35,5 +34,10 @@ public final class CategoryDto {
     public void copyToCategory(CategoryDto o) {
         if (getId() != null) o.setId(getId());
         if (getName() != null) o.setName(getName());
+    }
+
+    public void removeWhereEqualFromCategory(CategoryDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getName(), o.getName())) o.setName(null);
     }
 }

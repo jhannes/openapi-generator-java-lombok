@@ -39,4 +39,12 @@ public sealed class ChangeTrackedDto implements ChangeTrackedInterface permits C
     public void copyToConversationSnapshot(ConversationSnapshotDto o) {
         copyToChangeTracked(o);
     }
+
+    public void removeWhereEqualFromChangeTracked(ChangeTrackedDto o) {
+        removeWhereEqualFromChangeTrackedInterface(o);
+    }
+
+    public void removeWhereEqualFromConversationSnapshot(ConversationSnapshotDto o) {
+        removeWhereEqualFromChangeTracked(o);
+    }
 }

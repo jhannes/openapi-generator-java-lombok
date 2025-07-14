@@ -38,4 +38,10 @@ public sealed interface HealthDetailsDto permits DataSourceHealthDetailsDto, Hea
     }
     default void copyToThreadHealthDetails(ThreadHealthDetailsDto o) {
     }
+    default void removeWhereEqualFromDataSourceHealthDetails(DataSourceHealthDetailsDto o) {
+    }
+    default void removeWhereEqualFromHealthComponentFailureDetails(HealthComponentFailureDetailsDto o) {
+    }
+    default void removeWhereEqualFromThreadHealthDetails(ThreadHealthDetailsDto o) {
+    }
 }

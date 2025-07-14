@@ -31,4 +31,8 @@ public sealed interface AnyPartyDto permits OrganizationDto, PersonDto {
     }
     default void copyToPerson(PersonDto o) {
     }
+    default void removeWhereEqualFromOrganization(OrganizationDto o) {
+    }
+    default void removeWhereEqualFromPerson(PersonDto o) {
+    }
 }

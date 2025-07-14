@@ -22,6 +22,7 @@ public final class StackTraceInnerDto {
     }
 
     public StackTraceInnerDto removeWhereEqual(StackTraceInnerDto o) {
+        o.removeWhereEqualFromStackTrace_inner(this);
         return this;
     }
 
@@ -39,5 +40,8 @@ public final class StackTraceInnerDto {
         if (getMethodName() != null) o.setMethodName(getMethodName());
         if (getFileName() != null) o.setFileName(getFileName());
         if (getLineNumber() != null) o.setLineNumber(getLineNumber());
+    }
+
+    public void removeWhereEqualFromStackTrace_inner(StackTraceInnerDto o) {
     }
 }

@@ -61,14 +61,17 @@ public final class CatDto extends PetBaseDto implements PetDto {
     }
 
     public CatDto removeWhereEqual(CatDto o) {
-        super.removeWhereEqual(o);
-        if (Objects.equals(getHunts(), o.getHunts())) setHunts(null);
-        if (Objects.equals(getAge(), o.getAge())) setAge(null);
+        o.removeWhereEqualFromCat(this);
+        return this;
+    }
+
+    public CatDto removeWhereEqual(PetBaseDto o) {
+        o.removeWhereEqualFromCat(this);
         return this;
     }
 
     public CatDto removeWhereEqual(PetDto o) {
-        if (o instanceof PetBaseDto base) removeWhereEqual(base);
+        o.removeWhereEqualFromCat(this);
         return this;
     }
 
@@ -82,5 +85,11 @@ public final class CatDto extends PetBaseDto implements PetDto {
         copyToPetBase(o);
         if (getHunts() != null) o.setHunts(getHunts());
         if (getAge() != null) o.setAge(getAge());
+    }
+
+    public void removeWhereEqualFromCat(CatDto o) {
+        removeWhereEqualFromPetBase(o);
+        if (Objects.equals(getHunts(), o.getHunts())) o.setHunts(null);
+        if (Objects.equals(getAge(), o.getAge())) o.setAge(null);
     }
 }

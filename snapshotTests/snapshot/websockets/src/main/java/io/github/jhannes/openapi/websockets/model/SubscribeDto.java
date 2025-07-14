@@ -24,11 +24,12 @@ public final class SubscribeDto implements WebSocketRequestDto {
     }
 
     public SubscribeDto removeWhereEqual(SubscribeDto o) {
+        o.removeWhereEqualFromSubscribe(this);
         return this;
     }
 
     public SubscribeDto removeWhereEqual(WebSocketRequestDto o) {
-        if (o instanceof SubscribeDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromSubscribe(this);
         return this;
     }
 
@@ -39,5 +40,8 @@ public final class SubscribeDto implements WebSocketRequestDto {
     }
 
     public void copyToSubscribe(SubscribeDto o) {
+    }
+
+    public void removeWhereEqualFromSubscribe(SubscribeDto o) {
     }
 }

@@ -28,11 +28,12 @@ public final class PointDto implements GeometryDto {
     }
 
     public PointDto removeWhereEqual(PointDto o) {
+        o.removeWhereEqualFromPoint(this);
         return this;
     }
 
     public PointDto removeWhereEqual(GeometryDto o) {
-        if (o instanceof PointDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromPoint(this);
         return this;
     }
 
@@ -45,5 +46,8 @@ public final class PointDto implements GeometryDto {
 
     public void copyToPoint(PointDto o) {
         if (getCoordinates() != null) o.setCoordinates(getCoordinates());
+    }
+
+    public void removeWhereEqualFromPoint(PointDto o) {
     }
 }

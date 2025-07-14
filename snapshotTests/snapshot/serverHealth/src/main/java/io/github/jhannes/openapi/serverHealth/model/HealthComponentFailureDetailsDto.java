@@ -27,12 +27,12 @@ public final class HealthComponentFailureDetailsDto implements HealthDetailsDto 
     }
 
     public HealthComponentFailureDetailsDto removeWhereEqual(HealthComponentFailureDetailsDto o) {
-        if (Objects.equals(getException(), o.getException())) setException(null);
+        o.removeWhereEqualFromHealthComponentFailureDetails(this);
         return this;
     }
 
     public HealthComponentFailureDetailsDto removeWhereEqual(HealthDetailsDto o) {
-        if (o instanceof HealthComponentFailureDetailsDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromHealthComponentFailureDetails(this);
         return this;
     }
 
@@ -47,5 +47,9 @@ public final class HealthComponentFailureDetailsDto implements HealthDetailsDto 
 
     public void copyToHealthComponentFailureDetails(HealthComponentFailureDetailsDto o) {
         if (getException() != null) o.setException(getException());
+    }
+
+    public void removeWhereEqualFromHealthComponentFailureDetails(HealthComponentFailureDetailsDto o) {
+        if (Objects.equals(getException(), o.getException())) o.setException(null);
     }
 }

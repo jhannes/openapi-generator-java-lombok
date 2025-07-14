@@ -29,13 +29,12 @@ public final class GoldfishDto implements PetDto {
     }
 
     public GoldfishDto removeWhereEqual(GoldfishDto o) {
-        if (Objects.equals(getName(), o.getName())) setName(null);
-        if (Objects.equals(getSpecies(), o.getSpecies())) setSpecies(null);
+        o.removeWhereEqualFromGoldfish(this);
         return this;
     }
 
     public GoldfishDto removeWhereEqual(PetDto o) {
-        if (o instanceof GoldfishDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromGoldfish(this);
         return this;
     }
 
@@ -48,5 +47,10 @@ public final class GoldfishDto implements PetDto {
     public void copyToGoldfish(GoldfishDto o) {
         if (getName() != null) o.setName(getName());
         if (getSpecies() != null) o.setSpecies(getSpecies());
+    }
+
+    public void removeWhereEqualFromGoldfish(GoldfishDto o) {
+        if (Objects.equals(getName(), o.getName())) o.setName(null);
+        if (Objects.equals(getSpecies(), o.getSpecies())) o.setSpecies(null);
     }
 }

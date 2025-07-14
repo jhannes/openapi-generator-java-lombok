@@ -38,14 +38,7 @@ public final class UserDto {
     }
 
     public UserDto removeWhereEqual(UserDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getUsername(), o.getUsername())) setUsername(null);
-        if (Objects.equals(getFirstName(), o.getFirstName())) setFirstName(null);
-        if (Objects.equals(getLastName(), o.getLastName())) setLastName(null);
-        if (Objects.equals(getEmail(), o.getEmail())) setEmail(null);
-        if (Objects.equals(getPassword(), o.getPassword())) setPassword(null);
-        if (Objects.equals(getPhone(), o.getPhone())) setPhone(null);
-        if (Objects.equals(getUserStatus(), o.getUserStatus())) setUserStatus(null);
+        o.removeWhereEqualFromUser(this);
         return this;
     }
 
@@ -62,5 +55,16 @@ public final class UserDto {
         if (getPassword() != null) o.setPassword(getPassword());
         if (getPhone() != null) o.setPhone(getPhone());
         if (getUserStatus() != null) o.setUserStatus(getUserStatus());
+    }
+
+    public void removeWhereEqualFromUser(UserDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getUsername(), o.getUsername())) o.setUsername(null);
+        if (Objects.equals(getFirstName(), o.getFirstName())) o.setFirstName(null);
+        if (Objects.equals(getLastName(), o.getLastName())) o.setLastName(null);
+        if (Objects.equals(getEmail(), o.getEmail())) o.setEmail(null);
+        if (Objects.equals(getPassword(), o.getPassword())) o.setPassword(null);
+        if (Objects.equals(getPhone(), o.getPhone())) o.setPhone(null);
+        if (Objects.equals(getUserStatus(), o.getUserStatus())) o.setUserStatus(null);
     }
 }

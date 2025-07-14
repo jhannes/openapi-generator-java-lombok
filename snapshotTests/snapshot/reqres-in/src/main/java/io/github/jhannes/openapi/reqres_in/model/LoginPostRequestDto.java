@@ -25,9 +25,7 @@ public final class LoginPostRequestDto {
     }
 
     public LoginPostRequestDto removeWhereEqual(LoginPostRequestDto o) {
-        if (Objects.equals(getUsername(), o.getUsername())) setUsername(null);
-        if (Objects.equals(getEmail(), o.getEmail())) setEmail(null);
-        if (Objects.equals(getPassword(), o.getPassword())) setPassword(null);
+        o.removeWhereEqualFrom_login_post_request(this);
         return this;
     }
 
@@ -39,5 +37,11 @@ public final class LoginPostRequestDto {
         if (getUsername() != null) o.setUsername(getUsername());
         if (getEmail() != null) o.setEmail(getEmail());
         if (getPassword() != null) o.setPassword(getPassword());
+    }
+
+    public void removeWhereEqualFrom_login_post_request(LoginPostRequestDto o) {
+        if (Objects.equals(getUsername(), o.getUsername())) o.setUsername(null);
+        if (Objects.equals(getEmail(), o.getEmail())) o.setEmail(null);
+        if (Objects.equals(getPassword(), o.getPassword())) o.setPassword(null);
     }
 }

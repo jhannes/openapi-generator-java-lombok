@@ -29,10 +29,7 @@ public final class JwksKeyDto {
     }
 
     public JwksKeyDto removeWhereEqual(JwksKeyDto o) {
-        if (Objects.equals(getKty(), o.getKty())) setKty(null);
-        if (Objects.equals(getUse(), o.getUse())) setUse(null);
-        if (Objects.equals(getE(), o.getE())) setE(null);
-        if (Objects.equals(getN(), o.getN())) setN(null);
+        o.removeWhereEqualFromJwksKey(this);
         return this;
     }
 
@@ -50,5 +47,12 @@ public final class JwksKeyDto {
         if (getX5c() != null) o.setX5c(getX5c());
         if (getE() != null) o.setE(getE());
         if (getN() != null) o.setN(getN());
+    }
+
+    public void removeWhereEqualFromJwksKey(JwksKeyDto o) {
+        if (Objects.equals(getKty(), o.getKty())) o.setKty(null);
+        if (Objects.equals(getUse(), o.getUse())) o.setUse(null);
+        if (Objects.equals(getE(), o.getE())) o.setE(null);
+        if (Objects.equals(getN(), o.getN())) o.setN(null);
     }
 }

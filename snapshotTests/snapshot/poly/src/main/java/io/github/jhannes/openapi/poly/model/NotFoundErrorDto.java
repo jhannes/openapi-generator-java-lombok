@@ -28,12 +28,12 @@ public final class NotFoundErrorDto implements UpdateErrorDto {
     }
 
     public NotFoundErrorDto removeWhereEqual(NotFoundErrorDto o) {
-        if (Objects.equals(getIdentifierValue(), o.getIdentifierValue())) setIdentifierValue(null);
+        o.removeWhereEqualFromNotFoundError(this);
         return this;
     }
 
     public NotFoundErrorDto removeWhereEqual(UpdateErrorDto o) {
-        if (o instanceof NotFoundErrorDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromNotFoundError(this);
         return this;
     }
 
@@ -47,5 +47,9 @@ public final class NotFoundErrorDto implements UpdateErrorDto {
     public void copyToNotFoundError(NotFoundErrorDto o) {
         if (getIdentifierValue() != null) o.setIdentifierValue(getIdentifierValue());
         if (getEntityType() != null) o.setEntityType(getEntityType());
+    }
+
+    public void removeWhereEqualFromNotFoundError(NotFoundErrorDto o) {
+        if (Objects.equals(getIdentifierValue(), o.getIdentifierValue())) o.setIdentifierValue(null);
     }
 }

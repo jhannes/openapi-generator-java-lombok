@@ -85,14 +85,7 @@ public final class ExposureDto {
     }
 
     public ExposureDto removeWhereEqual(ExposureDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getExposedPersonName(), o.getExposedPersonName())) setExposedPersonName(null);
-        if (Objects.equals(getExposedPersonPhoneNumber(), o.getExposedPersonPhoneNumber())) setExposedPersonPhoneNumber(null);
-        if (Objects.equals(getExposedDate(), o.getExposedDate())) setExposedDate(null);
-        if (Objects.equals(getExposureLocation(), o.getExposureLocation())) setExposureLocation(null);
-        if (Objects.equals(getNotes(), o.getNotes())) setNotes(null);
-        if (Objects.equals(getCaseWorker(), o.getCaseWorker())) setCaseWorker(null);
-        if (Objects.equals(getDelayAfterInfection(), o.getDelayAfterInfection())) setDelayAfterInfection(null);
+        o.removeWhereEqualFromExposure(this);
         return this;
     }
 
@@ -112,5 +105,16 @@ public final class ExposureDto {
         if (getCaseWorker() != null) o.setCaseWorker(getCaseWorker());
         if (getStatus() != null) o.setStatus(getStatus());
         if (getDelayAfterInfection() != null) o.setDelayAfterInfection(getDelayAfterInfection());
+    }
+
+    public void removeWhereEqualFromExposure(ExposureDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getExposedPersonName(), o.getExposedPersonName())) o.setExposedPersonName(null);
+        if (Objects.equals(getExposedPersonPhoneNumber(), o.getExposedPersonPhoneNumber())) o.setExposedPersonPhoneNumber(null);
+        if (Objects.equals(getExposedDate(), o.getExposedDate())) o.setExposedDate(null);
+        if (Objects.equals(getExposureLocation(), o.getExposureLocation())) o.setExposureLocation(null);
+        if (Objects.equals(getNotes(), o.getNotes())) o.setNotes(null);
+        if (Objects.equals(getCaseWorker(), o.getCaseWorker())) o.setCaseWorker(null);
+        if (Objects.equals(getDelayAfterInfection(), o.getDelayAfterInfection())) o.setDelayAfterInfection(null);
     }
 }

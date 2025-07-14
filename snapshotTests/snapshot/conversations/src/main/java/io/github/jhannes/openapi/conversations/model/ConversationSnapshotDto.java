@@ -49,6 +49,11 @@ public final class ConversationSnapshotDto extends ChangeTrackedDto {
         return this;
     }
 
+    public ConversationSnapshotDto removeWhereEqual(ChangeTrackedDto o) {
+        o.removeWhereEqualFromConversationSnapshot(this);
+        return this;
+    }
+
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = super.missingRequiredFields(prefix);
         if (getId() == null) fields.add(prefix + "id");
@@ -72,7 +77,6 @@ public final class ConversationSnapshotDto extends ChangeTrackedDto {
         if (getMessages() != null) o.setMessages(getMessages());
     }
 
-    @Override
     public void removeWhereEqualFromConversationSnapshot(ConversationSnapshotDto o) {
         removeWhereEqualFromChangeTracked(o);
     }

@@ -38,4 +38,8 @@ public final class ConversationMessageDto implements ConversationMessageInterfac
     public void copyToConversationMessage(ConversationMessageDto o) {
         copyToConversationMessageInterface(o);
     }
+
+    public void removeWhereEqualFromConversationMessage(ConversationMessageDto o) {
+        removeWhereEqualFromConversationMessageInterface(o);
+    }
 }

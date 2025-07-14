@@ -21,7 +21,7 @@ public final class LoginPost400ResponseDto {
     }
 
     public LoginPost400ResponseDto removeWhereEqual(LoginPost400ResponseDto o) {
-        if (Objects.equals(getError(), o.getError())) setError(null);
+        o.removeWhereEqualFrom_login_post_400_response(this);
         return this;
     }
 
@@ -31,5 +31,9 @@ public final class LoginPost400ResponseDto {
 
     public void copyTo_login_post_400_response(LoginPost400ResponseDto o) {
         if (getError() != null) o.setError(getError());
+    }
+
+    public void removeWhereEqualFrom_login_post_400_response(LoginPost400ResponseDto o) {
+        if (Objects.equals(getError(), o.getError())) o.setError(null);
     }
 }

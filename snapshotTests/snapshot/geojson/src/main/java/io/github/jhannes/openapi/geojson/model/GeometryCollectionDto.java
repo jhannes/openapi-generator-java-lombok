@@ -23,6 +23,7 @@ public final class GeometryCollectionDto {
     }
 
     public GeometryCollectionDto removeWhereEqual(GeometryCollectionDto o) {
+        o.removeWhereEqualFromGeometryCollection(this);
         return this;
     }
 
@@ -42,5 +43,8 @@ public final class GeometryCollectionDto {
     public void copyToGeometryCollection(GeometryCollectionDto o) {
         if (getType() != null) o.setType(getType());
         if (getGeometries() != null) o.setGeometries(getGeometries());
+    }
+
+    public void removeWhereEqualFromGeometryCollection(GeometryCollectionDto o) {
     }
 }

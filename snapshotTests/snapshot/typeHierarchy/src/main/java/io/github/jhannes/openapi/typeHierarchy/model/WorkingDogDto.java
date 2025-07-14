@@ -69,12 +69,17 @@ public final class WorkingDogDto extends DogDto implements PetDto {
     }
 
     public WorkingDogDto removeWhereEqual(WorkingDogDto o) {
-        super.removeWhereEqual(o);
+        o.removeWhereEqualFromWorkingDog(this);
+        return this;
+    }
+
+    public WorkingDogDto removeWhereEqual(DogDto o) {
+        o.removeWhereEqualFromWorkingDog(this);
         return this;
     }
 
     public WorkingDogDto removeWhereEqual(PetDto o) {
-        if (o instanceof DogDto base) removeWhereEqual(base);
+        o.removeWhereEqualFromWorkingDog(this);
         return this;
     }
 
@@ -88,5 +93,9 @@ public final class WorkingDogDto extends DogDto implements PetDto {
     public void copyToWorkingDog(WorkingDogDto o) {
         copyToDog(o);
         if (getCapabilities() != null) o.setCapabilities(getCapabilities());
+    }
+
+    public void removeWhereEqualFromWorkingDog(WorkingDogDto o) {
+        removeWhereEqualFromDog(o);
     }
 }

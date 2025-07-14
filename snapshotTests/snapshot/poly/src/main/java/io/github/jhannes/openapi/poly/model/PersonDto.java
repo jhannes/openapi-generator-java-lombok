@@ -37,15 +37,12 @@ public final class PersonDto implements AnyPartyDto {
     }
 
     public PersonDto removeWhereEqual(PersonDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getEmail(), o.getEmail())) setEmail(null);
-        if (Objects.equals(getPhone(), o.getPhone())) setPhone(null);
-        if (Objects.equals(getBirthDate(), o.getBirthDate())) setBirthDate(null);
+        o.removeWhereEqualFromPerson(this);
         return this;
     }
 
     public PersonDto removeWhereEqual(AnyPartyDto o) {
-        if (o instanceof PersonDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromPerson(this);
         return this;
     }
 
@@ -64,5 +61,12 @@ public final class PersonDto implements AnyPartyDto {
         if (getEmail() != null) o.setEmail(getEmail());
         if (getPhone() != null) o.setPhone(getPhone());
         if (getBirthDate() != null) o.setBirthDate(getBirthDate());
+    }
+
+    public void removeWhereEqualFromPerson(PersonDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getEmail(), o.getEmail())) o.setEmail(null);
+        if (Objects.equals(getPhone(), o.getPhone())) o.setPhone(null);
+        if (Objects.equals(getBirthDate(), o.getBirthDate())) o.setBirthDate(null);
     }
 }

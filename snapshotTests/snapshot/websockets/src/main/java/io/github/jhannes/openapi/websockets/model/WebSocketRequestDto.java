@@ -24,4 +24,6 @@ public sealed interface WebSocketRequestDto permits SubscribeDto {
 
     default void copyToSubscribe(SubscribeDto o) {
     }
+    default void removeWhereEqualFromSubscribe(SubscribeDto o) {
+    }
 }

@@ -26,8 +26,7 @@ public final class PetDto {
     }
 
     public PetDto removeWhereEqual(PetDto o) {
-        if (Objects.equals(getName(), o.getName())) setName(null);
-        if (Objects.equals(getBirth_date(), o.getBirth_date())) setBirth_date(null);
+        o.removeWhereEqualFromPet(this);
         return this;
     }
 
@@ -41,5 +40,10 @@ public final class PetDto {
         if (getPet_type() != null) o.setPet_type(getPet_type());
         if (getName() != null) o.setName(getName());
         if (getBirth_date() != null) o.setBirth_date(getBirth_date());
+    }
+
+    public void removeWhereEqualFromPet(PetDto o) {
+        if (Objects.equals(getName(), o.getName())) o.setName(null);
+        if (Objects.equals(getBirth_date(), o.getBirth_date())) o.setBirth_date(null);
     }
 }

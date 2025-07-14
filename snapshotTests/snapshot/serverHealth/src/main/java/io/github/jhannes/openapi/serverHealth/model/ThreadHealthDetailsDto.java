@@ -57,17 +57,12 @@ public final class ThreadHealthDetailsDto implements HealthDetailsDto {
     }
 
     public ThreadHealthDetailsDto removeWhereEqual(ThreadHealthDetailsDto o) {
-        if (Objects.equals(getThreadState(), o.getThreadState())) setThreadState(null);
-        if (Objects.equals(getStackTrace(), o.getStackTrace())) setStackTrace(null);
-        if (Objects.equals(getLastAliveTime(), o.getLastAliveTime())) setLastAliveTime(null);
-        if (Objects.equals(getLastSuccessTime(), o.getLastSuccessTime())) setLastSuccessTime(null);
-        if (Objects.equals(getLastFailureTime(), o.getLastFailureTime())) setLastFailureTime(null);
-        if (Objects.equals(getLastFailureException(), o.getLastFailureException())) setLastFailureException(null);
+        o.removeWhereEqualFromThreadHealthDetails(this);
         return this;
     }
 
     public ThreadHealthDetailsDto removeWhereEqual(HealthDetailsDto o) {
-        if (o instanceof ThreadHealthDetailsDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromThreadHealthDetails(this);
         return this;
     }
 
@@ -92,5 +87,14 @@ public final class ThreadHealthDetailsDto implements HealthDetailsDto {
         if (getLastSuccessTime() != null) o.setLastSuccessTime(getLastSuccessTime());
         if (getLastFailureTime() != null) o.setLastFailureTime(getLastFailureTime());
         if (getLastFailureException() != null) o.setLastFailureException(getLastFailureException());
+    }
+
+    public void removeWhereEqualFromThreadHealthDetails(ThreadHealthDetailsDto o) {
+        if (Objects.equals(getThreadState(), o.getThreadState())) o.setThreadState(null);
+        if (Objects.equals(getStackTrace(), o.getStackTrace())) o.setStackTrace(null);
+        if (Objects.equals(getLastAliveTime(), o.getLastAliveTime())) o.setLastAliveTime(null);
+        if (Objects.equals(getLastSuccessTime(), o.getLastSuccessTime())) o.setLastSuccessTime(null);
+        if (Objects.equals(getLastFailureTime(), o.getLastFailureTime())) o.setLastFailureTime(null);
+        if (Objects.equals(getLastFailureException(), o.getLastFailureException())) o.setLastFailureException(null);
     }
 }

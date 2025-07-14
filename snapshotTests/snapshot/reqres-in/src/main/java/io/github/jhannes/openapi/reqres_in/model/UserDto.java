@@ -29,11 +29,7 @@ public final class UserDto {
     }
 
     public UserDto removeWhereEqual(UserDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getEmail(), o.getEmail())) setEmail(null);
-        if (Objects.equals(getFirst_name(), o.getFirst_name())) setFirst_name(null);
-        if (Objects.equals(getLast_name(), o.getLast_name())) setLast_name(null);
-        if (Objects.equals(getAvatar(), o.getAvatar())) setAvatar(null);
+        o.removeWhereEqualFromUser(this);
         return this;
     }
 
@@ -47,5 +43,13 @@ public final class UserDto {
         if (getFirst_name() != null) o.setFirst_name(getFirst_name());
         if (getLast_name() != null) o.setLast_name(getLast_name());
         if (getAvatar() != null) o.setAvatar(getAvatar());
+    }
+
+    public void removeWhereEqualFromUser(UserDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getEmail(), o.getEmail())) o.setEmail(null);
+        if (Objects.equals(getFirst_name(), o.getFirst_name())) o.setFirst_name(null);
+        if (Objects.equals(getLast_name(), o.getLast_name())) o.setLast_name(null);
+        if (Objects.equals(getAvatar(), o.getAvatar())) o.setAvatar(null);
     }
 }

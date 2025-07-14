@@ -43,9 +43,7 @@ public final class AddressDto {
     }
 
     public AddressDto removeWhereEqual(AddressDto o) {
-        if (Objects.equals(getAddressLine1(), o.getAddressLine1())) setAddressLine1(null);
-        if (Objects.equals(getAddressLine2(), o.getAddressLine2())) setAddressLine2(null);
-        if (Objects.equals(getAddressTypes(), o.getAddressTypes())) setAddressTypes(null);
+        o.removeWhereEqualFromAddress(this);
         return this;
     }
 
@@ -62,5 +60,11 @@ public final class AddressDto {
         if (getCity() != null) o.setCity(getCity());
         if (getCountry() != null) o.setCountry(getCountry());
         if (getAddressTypes() != null) o.setAddressTypes(getAddressTypes());
+    }
+
+    public void removeWhereEqualFromAddress(AddressDto o) {
+        if (Objects.equals(getAddressLine1(), o.getAddressLine1())) o.setAddressLine1(null);
+        if (Objects.equals(getAddressLine2(), o.getAddressLine2())) o.setAddressLine2(null);
+        if (Objects.equals(getAddressTypes(), o.getAddressTypes())) o.setAddressTypes(null);
     }
 }

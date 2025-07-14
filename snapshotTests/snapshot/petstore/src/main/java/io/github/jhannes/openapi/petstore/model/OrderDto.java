@@ -55,12 +55,7 @@ public final class OrderDto {
     }
 
     public OrderDto removeWhereEqual(OrderDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getPetId(), o.getPetId())) setPetId(null);
-        if (Objects.equals(getQuantity(), o.getQuantity())) setQuantity(null);
-        if (Objects.equals(getShipDate(), o.getShipDate())) setShipDate(null);
-        if (Objects.equals(getStatus(), o.getStatus())) setStatus(null);
-        if (Objects.equals(getComplete(), o.getComplete())) setComplete(null);
+        o.removeWhereEqualFromOrder(this);
         return this;
     }
 
@@ -75,5 +70,14 @@ public final class OrderDto {
         if (getShipDate() != null) o.setShipDate(getShipDate());
         if (getStatus() != null) o.setStatus(getStatus());
         if (getComplete() != null) o.setComplete(getComplete());
+    }
+
+    public void removeWhereEqualFromOrder(OrderDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getPetId(), o.getPetId())) o.setPetId(null);
+        if (Objects.equals(getQuantity(), o.getQuantity())) o.setQuantity(null);
+        if (Objects.equals(getShipDate(), o.getShipDate())) o.setShipDate(null);
+        if (Objects.equals(getStatus(), o.getStatus())) o.setStatus(null);
+        if (Objects.equals(getComplete(), o.getComplete())) o.setComplete(null);
     }
 }

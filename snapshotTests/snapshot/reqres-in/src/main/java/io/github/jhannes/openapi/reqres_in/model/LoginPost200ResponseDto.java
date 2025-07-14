@@ -21,7 +21,7 @@ public final class LoginPost200ResponseDto {
     }
 
     public LoginPost200ResponseDto removeWhereEqual(LoginPost200ResponseDto o) {
-        if (Objects.equals(getToken(), o.getToken())) setToken(null);
+        o.removeWhereEqualFrom_login_post_200_response(this);
         return this;
     }
 
@@ -31,5 +31,9 @@ public final class LoginPost200ResponseDto {
 
     public void copyTo_login_post_200_response(LoginPost200ResponseDto o) {
         if (getToken() != null) o.setToken(getToken());
+    }
+
+    public void removeWhereEqualFrom_login_post_200_response(LoginPost200ResponseDto o) {
+        if (Objects.equals(getToken(), o.getToken())) o.setToken(null);
     }
 }

@@ -44,10 +44,7 @@ public final class TokenResponseDto {
     }
 
     public TokenResponseDto removeWhereEqual(TokenResponseDto o) {
-        if (Objects.equals(getExpires_in(), o.getExpires_in())) setExpires_in(null);
-        if (Objects.equals(getScope(), o.getScope())) setScope(null);
-        if (Objects.equals(getId_token(), o.getId_token())) setId_token(null);
-        if (Objects.equals(getRefresh_token(), o.getRefresh_token())) setRefresh_token(null);
+        o.removeWhereEqualFromTokenResponse(this);
         return this;
     }
 
@@ -65,5 +62,12 @@ public final class TokenResponseDto {
         if (getScope() != null) o.setScope(getScope());
         if (getId_token() != null) o.setId_token(getId_token());
         if (getRefresh_token() != null) o.setRefresh_token(getRefresh_token());
+    }
+
+    public void removeWhereEqualFromTokenResponse(TokenResponseDto o) {
+        if (Objects.equals(getExpires_in(), o.getExpires_in())) o.setExpires_in(null);
+        if (Objects.equals(getScope(), o.getScope())) o.setScope(null);
+        if (Objects.equals(getId_token(), o.getId_token())) o.setId_token(null);
+        if (Objects.equals(getRefresh_token(), o.getRefresh_token())) o.setRefresh_token(null);
     }
 }

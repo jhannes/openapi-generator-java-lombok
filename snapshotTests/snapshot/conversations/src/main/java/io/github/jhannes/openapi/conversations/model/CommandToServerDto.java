@@ -28,11 +28,12 @@ public sealed class CommandToServerDto implements MessageToServerDto permits Eve
     }
 
     public CommandToServerDto removeWhereEqual(CommandToServerDto o) {
+        o.removeWhereEqualFromCommandToServer(this);
         return this;
     }
 
     public CommandToServerDto removeWhereEqual(MessageToServerDto o) {
-        if (o instanceof CommandToServerDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromCommandToServer(this);
         return this;
     }
 
@@ -56,5 +57,12 @@ public sealed class CommandToServerDto implements MessageToServerDto permits Eve
 
     public void copyToEventFromServer(EventFromServerDto o) {
         copyToCommandToServer(o);
+    }
+
+    public void removeWhereEqualFromCommandToServer(CommandToServerDto o) {
+    }
+
+    public void removeWhereEqualFromEventFromServer(EventFromServerDto o) {
+        removeWhereEqualFromCommandToServer(o);
     }
 }

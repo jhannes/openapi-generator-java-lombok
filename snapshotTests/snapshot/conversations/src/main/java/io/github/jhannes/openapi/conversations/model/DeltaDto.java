@@ -38,4 +38,10 @@ public sealed interface DeltaDto permits AddMessageToConversationDeltaDto, Creat
     }
     default void copyToUpdateConversationDelta(UpdateConversationDeltaDto o) {
     }
+    default void removeWhereEqualFromAddMessageToConversationDelta(AddMessageToConversationDeltaDto o) {
+    }
+    default void removeWhereEqualFromCreateConversationDelta(CreateConversationDeltaDto o) {
+    }
+    default void removeWhereEqualFromUpdateConversationDelta(UpdateConversationDeltaDto o) {
+    }
 }

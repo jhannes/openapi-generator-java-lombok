@@ -77,7 +77,6 @@ public final class PersonSnapshotDto implements ChangeTrackedInterface, PersonIn
         if (getExtra() != null) o.setExtra(getExtra());
     }
 
-    @Override
     public void removeWhereEqualFromPersonSnapshot(PersonSnapshotDto o) {
         removeWhereEqualFromChangeTrackedInterface(o);
         removeWhereEqualFromPersonInterface(o);

@@ -37,4 +37,12 @@ public sealed class RecipientDto implements RecipientInterface permits PersonDto
     public void copyToPerson(PersonDto o) {
         copyToRecipient(o);
     }
+
+    public void removeWhereEqualFromRecipient(RecipientDto o) {
+        removeWhereEqualFromRecipientInterface(o);
+    }
+
+    public void removeWhereEqualFromPerson(PersonDto o) {
+        removeWhereEqualFromRecipient(o);
+    }
 }

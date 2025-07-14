@@ -27,11 +27,12 @@ public final class CreatePersonCommandDto implements WebSocketCommandDto {
     }
 
     public CreatePersonCommandDto removeWhereEqual(CreatePersonCommandDto o) {
+        o.removeWhereEqualFromCreatePersonCommand(this);
         return this;
     }
 
     public CreatePersonCommandDto removeWhereEqual(WebSocketMessageDto o) {
-        if (o instanceof CreatePersonCommandDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromCreatePersonCommand(this);
         return this;
     }
 
@@ -50,5 +51,8 @@ public final class CreatePersonCommandDto implements WebSocketCommandDto {
     public void copyToCreatePersonCommand(CreatePersonCommandDto o) {
         if (getId() != null) o.setId(getId());
         if (getPerson() != null) o.setPerson(getPerson());
+    }
+
+    public void removeWhereEqualFromCreatePersonCommand(CreatePersonCommandDto o) {
     }
 }

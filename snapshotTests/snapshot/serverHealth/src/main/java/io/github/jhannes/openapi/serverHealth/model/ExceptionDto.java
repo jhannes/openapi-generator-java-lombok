@@ -24,8 +24,7 @@ public final class ExceptionDto {
     }
 
     public ExceptionDto removeWhereEqual(ExceptionDto o) {
-        if (Objects.equals(getMessage(), o.getMessage())) setMessage(null);
-        if (Objects.equals(getStackTrace(), o.getStackTrace())) setStackTrace(null);
+        o.removeWhereEqualFromException(this);
         return this;
     }
 
@@ -44,5 +43,10 @@ public final class ExceptionDto {
         if (getType() != null) o.setType(getType());
         if (getMessage() != null) o.setMessage(getMessage());
         if (getStackTrace() != null) o.setStackTrace(getStackTrace());
+    }
+
+    public void removeWhereEqualFromException(ExceptionDto o) {
+        if (Objects.equals(getMessage(), o.getMessage())) o.setMessage(null);
+        if (Objects.equals(getStackTrace(), o.getStackTrace())) o.setStackTrace(null);
     }
 }

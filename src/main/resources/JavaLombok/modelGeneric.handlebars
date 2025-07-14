@@ -100,44 +100,23 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
     }
 
 {{/interfaceModels}}
-{{#isMixinAllOf}}
-    public {{classname}} removeWhereEqual({{classname}} o) {
-        o.removeWhereEqualFrom{{../name}}(this);
-        return this;
-    }
-
-{{else}}
 {{#notMixinDto}}
     public {{classname}} removeWhereEqual({{classname}} o) {
-{{#if parent}}
-{{#unless additionalProperties}}
-        super.removeWhereEqual(o);
-{{/unless}}
-{{/if}}
-{{#interfaceModels}}
-{{#if isMixin}}
         o.removeWhereEqualFrom{{name}}(this);
-{{/if}}
-{{/interfaceModels}}
-{{#optionalVars}}
-{{#unless isNew}}
-        if (Objects.equals({{getter}}(), o.{{getter}}())) {{setter}}(null);
-{{/unless}}
-{{/optionalVars}}
         return this;
     }
 
 {{/notMixinDto}}
-{{/isMixinAllOf}}
+{{#if parent}}
+    public {{classname}} removeWhereEqual({{{parent}}} o) {
+        o.removeWhereEqualFrom{{name}}(this);
+        return this;
+    }
+
+{{/if}}
 {{#interfaceModels}}
     public {{../classname}} removeWhereEqual({{#if interfaces}}{{~#interfaces}}{{#if @first}}{{.}}{{/if}}{{/interfaces}}{{else}}{{classname}}{{/if}} o) {
-{{#if isMixin}}
         o.removeWhereEqualFrom{{../name}}(this);
-{{else if ../parent}}
-        if (o instanceof {{{../parent}}} base) removeWhereEqual(base);
-{{else}}
-        if (o instanceof {{{../classname}}} same) removeWhereEqual(same);
-{{/if}}
         return this;
     }
 
@@ -213,15 +192,15 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
     public void copyTo{{name}}({{classname}} o) {
     }
 {{/ambiguousRelatedTypes}}
-{{#isMixinAllOf}}
 
-    @Override
     public void removeWhereEqualFrom{{name}}({{classname}} o) {
 {{#parentModel}}
         removeWhereEqualFrom{{name}}(o);
 {{/parentModel}}
 {{#interfaceModels}}
+{{#if isMixin}}
         removeWhereEqualFrom{{classname}}(o);
+{{/if}}
 {{/interfaceModels}}
 {{#optionalVars}}
 {{#unless isNew}}
@@ -229,5 +208,14 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
 {{/unless}}
 {{/optionalVars}}
     }
-{{/isMixinAllOf}}
+{{#children}}
+
+    public void removeWhereEqualFrom{{name}}({{classname}} o) {
+        removeWhereEqualFrom{{../name}}(o);
+    }
+{{/children}}
+{{#ambiguousRelatedTypes}}
+    public void removeWhereEqualFrom{{name}}({{classname}} o) {
+    }
+{{/ambiguousRelatedTypes}}
 }

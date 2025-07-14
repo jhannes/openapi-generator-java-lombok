@@ -19,4 +19,6 @@ public sealed interface RequestToServerDto extends MessageToServerDto permits Su
 
     default void copyToSubscribeRequest(SubscribeRequestDto o) {
     }
+    default void removeWhereEqualFromSubscribeRequest(SubscribeRequestDto o) {
+    }
 }

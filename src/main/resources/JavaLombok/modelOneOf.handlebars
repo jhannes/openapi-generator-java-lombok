@@ -32,4 +32,8 @@ public sealed interface {{classname}}
     default void copyTo{{name}}({{classname}} o) {
     }
 {{/implementations}}
+{{#implementations}}
+    default void removeWhereEqualFrom{{name}}({{classname}} o) {
+    }
+{{/implementations}}
 }

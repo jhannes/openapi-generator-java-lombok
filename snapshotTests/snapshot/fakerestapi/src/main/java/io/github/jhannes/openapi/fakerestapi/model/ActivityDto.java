@@ -28,10 +28,7 @@ public final class ActivityDto {
     }
 
     public ActivityDto removeWhereEqual(ActivityDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getTitle(), o.getTitle())) setTitle(null);
-        if (Objects.equals(getDueDate(), o.getDueDate())) setDueDate(null);
-        if (Objects.equals(getCompleted(), o.getCompleted())) setCompleted(null);
+        o.removeWhereEqualFromActivity(this);
         return this;
     }
 
@@ -44,5 +41,12 @@ public final class ActivityDto {
         if (getTitle() != null) o.setTitle(getTitle());
         if (getDueDate() != null) o.setDueDate(getDueDate());
         if (getCompleted() != null) o.setCompleted(getCompleted());
+    }
+
+    public void removeWhereEqualFromActivity(ActivityDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getTitle(), o.getTitle())) o.setTitle(null);
+        if (Objects.equals(getDueDate(), o.getDueDate())) o.setDueDate(null);
+        if (Objects.equals(getCompleted(), o.getCompleted())) o.setCompleted(null);
     }
 }

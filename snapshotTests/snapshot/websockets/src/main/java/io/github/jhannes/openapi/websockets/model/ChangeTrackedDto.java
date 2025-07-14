@@ -45,4 +45,12 @@ public sealed class ChangeTrackedDto implements ChangeTrackedInterface permits S
     public void copyToStringSnapshot(StringSnapshotDto o) {
         copyToChangeTracked(o);
     }
+
+    public void removeWhereEqualFromChangeTracked(ChangeTrackedDto o) {
+        removeWhereEqualFromChangeTrackedInterface(o);
+    }
+
+    public void removeWhereEqualFromStringSnapshot(StringSnapshotDto o) {
+        removeWhereEqualFromChangeTracked(o);
+    }
 }

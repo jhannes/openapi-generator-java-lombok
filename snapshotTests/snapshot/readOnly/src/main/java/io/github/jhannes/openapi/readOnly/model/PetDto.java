@@ -66,12 +66,7 @@ public final class PetDto {
     }
 
     public PetDto removeWhereEqual(PetDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getName(), o.getName())) setName(null);
-        if (Objects.equals(getBirth_date(), o.getBirth_date())) setBirth_date(null);
-        if (Objects.equals(getCreated_at(), o.getCreated_at())) setCreated_at(null);
-        if (Objects.equals(getComments(), o.getComments())) setComments(null);
-        if (Objects.equals(getStatus(), o.getStatus())) setStatus(null);
+        o.removeWhereEqualFromPet(this);
         return this;
     }
 
@@ -94,5 +89,14 @@ public final class PetDto {
         if (getCreated_at() != null) o.setCreated_at(getCreated_at());
         if (getComments() != null) o.setComments(getComments());
         if (getStatus() != null) o.setStatus(getStatus());
+    }
+
+    public void removeWhereEqualFromPet(PetDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getName(), o.getName())) o.setName(null);
+        if (Objects.equals(getBirth_date(), o.getBirth_date())) o.setBirth_date(null);
+        if (Objects.equals(getCreated_at(), o.getCreated_at())) o.setCreated_at(null);
+        if (Objects.equals(getComments(), o.getComments())) o.setComments(null);
+        if (Objects.equals(getStatus(), o.getStatus())) o.setStatus(null);
     }
 }

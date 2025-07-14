@@ -40,6 +40,7 @@ public final class OauthErrorDto {
     }
 
     public OauthErrorDto removeWhereEqual(OauthErrorDto o) {
+        o.removeWhereEqualFromOauthError(this);
         return this;
     }
 
@@ -53,5 +54,8 @@ public final class OauthErrorDto {
     public void copyToOauthError(OauthErrorDto o) {
         if (getError() != null) o.setError(getError());
         if (getError_description() != null) o.setError_description(getError_description());
+    }
+
+    public void removeWhereEqualFromOauthError(OauthErrorDto o) {
     }
 }

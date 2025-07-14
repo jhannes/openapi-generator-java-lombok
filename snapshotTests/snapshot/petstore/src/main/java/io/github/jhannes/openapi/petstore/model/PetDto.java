@@ -52,10 +52,7 @@ public final class PetDto {
     }
 
     public PetDto removeWhereEqual(PetDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getCategory(), o.getCategory())) setCategory(null);
-        if (Objects.equals(getTags(), o.getTags())) setTags(null);
-        if (Objects.equals(getStatus(), o.getStatus())) setStatus(null);
+        o.removeWhereEqualFromPet(this);
         return this;
     }
 
@@ -81,5 +78,12 @@ public final class PetDto {
         if (getPhotoUrls() != null) o.setPhotoUrls(getPhotoUrls());
         if (getTags() != null) o.setTags(getTags());
         if (getStatus() != null) o.setStatus(getStatus());
+    }
+
+    public void removeWhereEqualFromPet(PetDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getCategory(), o.getCategory())) o.setCategory(null);
+        if (Objects.equals(getTags(), o.getTags())) o.setTags(null);
+        if (Objects.equals(getStatus(), o.getStatus())) o.setStatus(null);
     }
 }

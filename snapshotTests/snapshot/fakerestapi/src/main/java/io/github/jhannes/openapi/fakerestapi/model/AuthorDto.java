@@ -27,10 +27,7 @@ public final class AuthorDto {
     }
 
     public AuthorDto removeWhereEqual(AuthorDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getIdBook(), o.getIdBook())) setIdBook(null);
-        if (Objects.equals(getFirstName(), o.getFirstName())) setFirstName(null);
-        if (Objects.equals(getLastName(), o.getLastName())) setLastName(null);
+        o.removeWhereEqualFromAuthor(this);
         return this;
     }
 
@@ -43,5 +40,12 @@ public final class AuthorDto {
         if (getIdBook() != null) o.setIdBook(getIdBook());
         if (getFirstName() != null) o.setFirstName(getFirstName());
         if (getLastName() != null) o.setLastName(getLastName());
+    }
+
+    public void removeWhereEqualFromAuthor(AuthorDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getIdBook(), o.getIdBook())) o.setIdBook(null);
+        if (Objects.equals(getFirstName(), o.getFirstName())) o.setFirstName(null);
+        if (Objects.equals(getLastName(), o.getLastName())) o.setLastName(null);
     }
 }

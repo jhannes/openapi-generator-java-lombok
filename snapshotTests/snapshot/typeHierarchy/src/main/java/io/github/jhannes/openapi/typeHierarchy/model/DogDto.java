@@ -79,14 +79,17 @@ public sealed class DogDto extends PetBaseDto implements PetDto permits WorkingD
     }
 
     public DogDto removeWhereEqual(DogDto o) {
-        super.removeWhereEqual(o);
-        if (Objects.equals(getBark(), o.getBark())) setBark(null);
-        if (Objects.equals(getBreed(), o.getBreed())) setBreed(null);
+        o.removeWhereEqualFromDog(this);
+        return this;
+    }
+
+    public DogDto removeWhereEqual(PetBaseDto o) {
+        o.removeWhereEqualFromDog(this);
         return this;
     }
 
     public DogDto removeWhereEqual(PetDto o) {
-        if (o instanceof PetBaseDto base) removeWhereEqual(base);
+        o.removeWhereEqualFromDog(this);
         return this;
     }
 
@@ -104,5 +107,15 @@ public sealed class DogDto extends PetBaseDto implements PetDto permits WorkingD
 
     public void copyToWorkingDog(WorkingDogDto o) {
         copyToDog(o);
+    }
+
+    public void removeWhereEqualFromDog(DogDto o) {
+        removeWhereEqualFromPetBase(o);
+        if (Objects.equals(getBark(), o.getBark())) o.setBark(null);
+        if (Objects.equals(getBreed(), o.getBreed())) o.setBreed(null);
+    }
+
+    public void removeWhereEqualFromWorkingDog(WorkingDogDto o) {
+        removeWhereEqualFromDog(o);
     }
 }

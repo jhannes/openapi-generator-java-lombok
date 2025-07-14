@@ -53,12 +53,17 @@ public final class EventFromServerDto extends CommandToServerDto implements Mess
     }
 
     public EventFromServerDto removeWhereEqual(EventFromServerDto o) {
-        super.removeWhereEqual(o);
+        o.removeWhereEqualFromEventFromServer(this);
+        return this;
+    }
+
+    public EventFromServerDto removeWhereEqual(CommandToServerDto o) {
+        o.removeWhereEqualFromEventFromServer(this);
         return this;
     }
 
     public EventFromServerDto removeWhereEqual(MessageFromServerDto o) {
-        if (o instanceof CommandToServerDto base) removeWhereEqual(base);
+        o.removeWhereEqualFromEventFromServer(this);
         return this;
     }
 
@@ -73,5 +78,9 @@ public final class EventFromServerDto extends CommandToServerDto implements Mess
         copyToCommandToServer(o);
         if (getServerTime() != null) o.setServerTime(getServerTime());
         if (getUsername() != null) o.setUsername(getUsername());
+    }
+
+    public void removeWhereEqualFromEventFromServer(EventFromServerDto o) {
+        removeWhereEqualFromCommandToServer(o);
     }
 }

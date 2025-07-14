@@ -31,16 +31,17 @@ public final class IllegalEmailAddressErrorDto implements CreationErrorDto, Upda
     }
 
     public IllegalEmailAddressErrorDto removeWhereEqual(IllegalEmailAddressErrorDto o) {
+        o.removeWhereEqualFromIllegalEmailAddressError(this);
         return this;
     }
 
     public IllegalEmailAddressErrorDto removeWhereEqual(CreationErrorDto o) {
-        if (o instanceof IllegalEmailAddressErrorDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromIllegalEmailAddressError(this);
         return this;
     }
 
     public IllegalEmailAddressErrorDto removeWhereEqual(UpdateErrorDto o) {
-        if (o instanceof IllegalEmailAddressErrorDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromIllegalEmailAddressError(this);
         return this;
     }
 
@@ -59,5 +60,12 @@ public final class IllegalEmailAddressErrorDto implements CreationErrorDto, Upda
     public void copyToDuplicateIdentifierError(DuplicateIdentifierErrorDto o) {
     }
     public void copyToGeneralError(GeneralErrorDto o) {
+    }
+
+    public void removeWhereEqualFromIllegalEmailAddressError(IllegalEmailAddressErrorDto o) {
+    }
+    public void removeWhereEqualFromDuplicateIdentifierError(DuplicateIdentifierErrorDto o) {
+    }
+    public void removeWhereEqualFromGeneralError(GeneralErrorDto o) {
     }
 }

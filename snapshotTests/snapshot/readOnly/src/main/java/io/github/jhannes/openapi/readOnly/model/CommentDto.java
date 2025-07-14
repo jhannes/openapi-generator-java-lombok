@@ -28,10 +28,7 @@ public final class CommentDto {
     }
 
     public CommentDto removeWhereEqual(CommentDto o) {
-        if (Objects.equals(getTitle(), o.getTitle())) setTitle(null);
-        if (Objects.equals(getComment(), o.getComment())) setComment(null);
-        if (Objects.equals(getCreated_at(), o.getCreated_at())) setCreated_at(null);
-        if (Objects.equals(getUser(), o.getUser())) setUser(null);
+        o.removeWhereEqualFromComment(this);
         return this;
     }
 
@@ -44,5 +41,12 @@ public final class CommentDto {
         if (getComment() != null) o.setComment(getComment());
         if (getCreated_at() != null) o.setCreated_at(getCreated_at());
         if (getUser() != null) o.setUser(getUser());
+    }
+
+    public void removeWhereEqualFromComment(CommentDto o) {
+        if (Objects.equals(getTitle(), o.getTitle())) o.setTitle(null);
+        if (Objects.equals(getComment(), o.getComment())) o.setComment(null);
+        if (Objects.equals(getCreated_at(), o.getCreated_at())) o.setCreated_at(null);
+        if (Objects.equals(getUser(), o.getUser())) o.setUser(null);
     }
 }

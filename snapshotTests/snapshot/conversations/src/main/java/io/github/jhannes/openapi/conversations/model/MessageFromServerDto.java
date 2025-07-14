@@ -13,4 +13,8 @@ public sealed interface MessageFromServerDto permits EventFromServerDto, Snapsho
     }
     default void copyToSnapshotSet(SnapshotSetDto o) {
     }
+    default void removeWhereEqualFromEventFromServer(EventFromServerDto o) {
+    }
+    default void removeWhereEqualFromSnapshotSet(SnapshotSetDto o) {
+    }
 }

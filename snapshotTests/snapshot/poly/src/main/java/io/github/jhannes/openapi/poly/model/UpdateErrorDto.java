@@ -50,4 +50,12 @@ public sealed interface UpdateErrorDto permits DuplicateIdentifierErrorDto, Gene
     }
     default void copyToNotFoundError(NotFoundErrorDto o) {
     }
+    default void removeWhereEqualFromDuplicateIdentifierError(DuplicateIdentifierErrorDto o) {
+    }
+    default void removeWhereEqualFromGeneralError(GeneralErrorDto o) {
+    }
+    default void removeWhereEqualFromIllegalEmailAddressError(IllegalEmailAddressErrorDto o) {
+    }
+    default void removeWhereEqualFromNotFoundError(NotFoundErrorDto o) {
+    }
 }

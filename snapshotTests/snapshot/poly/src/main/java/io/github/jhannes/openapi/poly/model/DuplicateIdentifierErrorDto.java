@@ -33,17 +33,17 @@ public final class DuplicateIdentifierErrorDto implements CreationErrorDto, Upda
     }
 
     public DuplicateIdentifierErrorDto removeWhereEqual(DuplicateIdentifierErrorDto o) {
-        if (Objects.equals(getIdentifierValue(), o.getIdentifierValue())) setIdentifierValue(null);
+        o.removeWhereEqualFromDuplicateIdentifierError(this);
         return this;
     }
 
     public DuplicateIdentifierErrorDto removeWhereEqual(CreationErrorDto o) {
-        if (o instanceof DuplicateIdentifierErrorDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromDuplicateIdentifierError(this);
         return this;
     }
 
     public DuplicateIdentifierErrorDto removeWhereEqual(UpdateErrorDto o) {
-        if (o instanceof DuplicateIdentifierErrorDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromDuplicateIdentifierError(this);
         return this;
     }
 
@@ -61,5 +61,13 @@ public final class DuplicateIdentifierErrorDto implements CreationErrorDto, Upda
     public void copyToGeneralError(GeneralErrorDto o) {
     }
     public void copyToIllegalEmailAddressError(IllegalEmailAddressErrorDto o) {
+    }
+
+    public void removeWhereEqualFromDuplicateIdentifierError(DuplicateIdentifierErrorDto o) {
+        if (Objects.equals(getIdentifierValue(), o.getIdentifierValue())) o.setIdentifierValue(null);
+    }
+    public void removeWhereEqualFromGeneralError(GeneralErrorDto o) {
+    }
+    public void removeWhereEqualFromIllegalEmailAddressError(IllegalEmailAddressErrorDto o) {
     }
 }

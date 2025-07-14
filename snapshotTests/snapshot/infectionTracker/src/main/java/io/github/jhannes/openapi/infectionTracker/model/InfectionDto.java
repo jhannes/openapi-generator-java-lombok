@@ -22,6 +22,7 @@ public final class InfectionDto {
     }
 
     public InfectionDto removeWhereEqual(InfectionDto o) {
+        o.removeWhereEqualFromInfection(this);
         return this;
     }
 
@@ -47,5 +48,8 @@ public final class InfectionDto {
         if (getId() != null) o.setId(getId());
         if (getInformation() != null) o.setInformation(getInformation());
         if (getRegisteredExposures() != null) o.setRegisteredExposures(getRegisteredExposures());
+    }
+
+    public void removeWhereEqualFromInfection(InfectionDto o) {
     }
 }

@@ -26,11 +26,12 @@ public final class SubscribeRequestDto implements RequestToServerDto {
     }
 
     public SubscribeRequestDto removeWhereEqual(SubscribeRequestDto o) {
+        o.removeWhereEqualFromSubscribeRequest(this);
         return this;
     }
 
     public SubscribeRequestDto removeWhereEqual(MessageToServerDto o) {
-        if (o instanceof SubscribeRequestDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromSubscribeRequest(this);
         return this;
     }
 
@@ -43,5 +44,8 @@ public final class SubscribeRequestDto implements RequestToServerDto {
 
     public void copyToSubscribeRequest(SubscribeRequestDto o) {
         if (getClientId() != null) o.setClientId(getClientId());
+    }
+
+    public void removeWhereEqualFromSubscribeRequest(SubscribeRequestDto o) {
     }
 }

@@ -30,16 +30,17 @@ public final class GeneralErrorDto implements CreationErrorDto, UpdateErrorDto {
     }
 
     public GeneralErrorDto removeWhereEqual(GeneralErrorDto o) {
+        o.removeWhereEqualFromGeneralError(this);
         return this;
     }
 
     public GeneralErrorDto removeWhereEqual(CreationErrorDto o) {
-        if (o instanceof GeneralErrorDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromGeneralError(this);
         return this;
     }
 
     public GeneralErrorDto removeWhereEqual(UpdateErrorDto o) {
-        if (o instanceof GeneralErrorDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromGeneralError(this);
         return this;
     }
 
@@ -56,5 +57,12 @@ public final class GeneralErrorDto implements CreationErrorDto, UpdateErrorDto {
     public void copyToDuplicateIdentifierError(DuplicateIdentifierErrorDto o) {
     }
     public void copyToIllegalEmailAddressError(IllegalEmailAddressErrorDto o) {
+    }
+
+    public void removeWhereEqualFromGeneralError(GeneralErrorDto o) {
+    }
+    public void removeWhereEqualFromDuplicateIdentifierError(DuplicateIdentifierErrorDto o) {
+    }
+    public void removeWhereEqualFromIllegalEmailAddressError(IllegalEmailAddressErrorDto o) {
     }
 }

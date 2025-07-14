@@ -27,8 +27,7 @@ public final class UserinfoDto {
     }
 
     public UserinfoDto removeWhereEqual(UserinfoDto o) {
-        if (Objects.equals(getName(), o.getName())) setName(null);
-        if (Objects.equals(getEmail(), o.getEmail())) setEmail(null);
+        o.removeWhereEqualFromUserinfo(this);
         return this;
     }
 
@@ -42,5 +41,10 @@ public final class UserinfoDto {
         if (getSub() != null) o.setSub(getSub());
         if (getName() != null) o.setName(getName());
         if (getEmail() != null) o.setEmail(getEmail());
+    }
+
+    public void removeWhereEqualFromUserinfo(UserinfoDto o) {
+        if (Objects.equals(getName(), o.getName())) o.setName(null);
+        if (Objects.equals(getEmail(), o.getEmail())) o.setEmail(null);
     }
 }

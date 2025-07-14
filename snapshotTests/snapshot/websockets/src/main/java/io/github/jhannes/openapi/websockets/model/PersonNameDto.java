@@ -23,8 +23,7 @@ public final class PersonNameDto {
     }
 
     public PersonNameDto removeWhereEqual(PersonNameDto o) {
-        if (Objects.equals(getGivenName(), o.getGivenName())) setGivenName(null);
-        if (Objects.equals(getFamilyName(), o.getFamilyName())) setFamilyName(null);
+        o.removeWhereEqualFromPersonName(this);
         return this;
     }
 
@@ -35,5 +34,10 @@ public final class PersonNameDto {
     public void copyToPersonName(PersonNameDto o) {
         if (getGivenName() != null) o.setGivenName(getGivenName());
         if (getFamilyName() != null) o.setFamilyName(getFamilyName());
+    }
+
+    public void removeWhereEqualFromPersonName(PersonNameDto o) {
+        if (Objects.equals(getGivenName(), o.getGivenName())) o.setGivenName(null);
+        if (Objects.equals(getFamilyName(), o.getFamilyName())) o.setFamilyName(null);
     }
 }

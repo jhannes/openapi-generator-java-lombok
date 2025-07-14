@@ -26,9 +26,7 @@ public final class CoverPhotoDto {
     }
 
     public CoverPhotoDto removeWhereEqual(CoverPhotoDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getIdBook(), o.getIdBook())) setIdBook(null);
-        if (Objects.equals(getUrl(), o.getUrl())) setUrl(null);
+        o.removeWhereEqualFromCoverPhoto(this);
         return this;
     }
 
@@ -40,5 +38,11 @@ public final class CoverPhotoDto {
         if (getId() != null) o.setId(getId());
         if (getIdBook() != null) o.setIdBook(getIdBook());
         if (getUrl() != null) o.setUrl(getUrl());
+    }
+
+    public void removeWhereEqualFromCoverPhoto(CoverPhotoDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getIdBook(), o.getIdBook())) o.setIdBook(null);
+        if (Objects.equals(getUrl(), o.getUrl())) o.setUrl(null);
     }
 }

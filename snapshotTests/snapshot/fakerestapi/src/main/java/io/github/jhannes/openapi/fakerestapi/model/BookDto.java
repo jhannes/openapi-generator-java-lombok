@@ -32,12 +32,7 @@ public final class BookDto {
     }
 
     public BookDto removeWhereEqual(BookDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getTitle(), o.getTitle())) setTitle(null);
-        if (Objects.equals(getDescription(), o.getDescription())) setDescription(null);
-        if (Objects.equals(getPageCount(), o.getPageCount())) setPageCount(null);
-        if (Objects.equals(getExcerpt(), o.getExcerpt())) setExcerpt(null);
-        if (Objects.equals(getPublishDate(), o.getPublishDate())) setPublishDate(null);
+        o.removeWhereEqualFromBook(this);
         return this;
     }
 
@@ -52,5 +47,14 @@ public final class BookDto {
         if (getPageCount() != null) o.setPageCount(getPageCount());
         if (getExcerpt() != null) o.setExcerpt(getExcerpt());
         if (getPublishDate() != null) o.setPublishDate(getPublishDate());
+    }
+
+    public void removeWhereEqualFromBook(BookDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getTitle(), o.getTitle())) o.setTitle(null);
+        if (Objects.equals(getDescription(), o.getDescription())) o.setDescription(null);
+        if (Objects.equals(getPageCount(), o.getPageCount())) o.setPageCount(null);
+        if (Objects.equals(getExcerpt(), o.getExcerpt())) o.setExcerpt(null);
+        if (Objects.equals(getPublishDate(), o.getPublishDate())) o.setPublishDate(null);
     }
 }

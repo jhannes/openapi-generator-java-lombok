@@ -25,7 +25,7 @@ public final class HealthComponentDto {
     }
 
     public HealthComponentDto removeWhereEqual(HealthComponentDto o) {
-        if (Objects.equals(getTime(), o.getTime())) setTime(null);
+        o.removeWhereEqualFromHealthComponent(this);
         return this;
     }
 
@@ -44,5 +44,9 @@ public final class HealthComponentDto {
         if (getStatus() != null) o.setStatus(getStatus());
         if (getDetails() != null) o.setDetails(getDetails());
         if (getTime() != null) o.setTime(getTime());
+    }
+
+    public void removeWhereEqualFromHealthComponent(HealthComponentDto o) {
+        if (Objects.equals(getTime(), o.getTime())) o.setTime(null);
     }
 }

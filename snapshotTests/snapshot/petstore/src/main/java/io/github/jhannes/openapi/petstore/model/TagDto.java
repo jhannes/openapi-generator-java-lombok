@@ -23,8 +23,7 @@ public final class TagDto {
     }
 
     public TagDto removeWhereEqual(TagDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getName(), o.getName())) setName(null);
+        o.removeWhereEqualFromTag(this);
         return this;
     }
 
@@ -35,5 +34,10 @@ public final class TagDto {
     public void copyToTag(TagDto o) {
         if (getId() != null) o.setId(getId());
         if (getName() != null) o.setName(getName());
+    }
+
+    public void removeWhereEqualFromTag(TagDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getName(), o.getName())) o.setName(null);
     }
 }

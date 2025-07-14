@@ -24,8 +24,7 @@ public final class UserDto {
     }
 
     public UserDto removeWhereEqual(UserDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getName(), o.getName())) setName(null);
+        o.removeWhereEqualFromUser(this);
         return this;
     }
 
@@ -36,5 +35,10 @@ public final class UserDto {
     public void copyToUser(UserDto o) {
         if (getId() != null) o.setId(getId());
         if (getName() != null) o.setName(getName());
+    }
+
+    public void removeWhereEqualFromUser(UserDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getName(), o.getName())) o.setName(null);
     }
 }

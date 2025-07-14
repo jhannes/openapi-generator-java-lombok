@@ -19,6 +19,7 @@ public final class JwksDocumentDto {
     }
 
     public JwksDocumentDto removeWhereEqual(JwksDocumentDto o) {
+        o.removeWhereEqualFromJwksDocument(this);
         return this;
     }
 
@@ -36,5 +37,8 @@ public final class JwksDocumentDto {
 
     public void copyToJwksDocument(JwksDocumentDto o) {
         if (getKeys() != null) o.setKeys(getKeys());
+    }
+
+    public void removeWhereEqualFromJwksDocument(JwksDocumentDto o) {
     }
 }

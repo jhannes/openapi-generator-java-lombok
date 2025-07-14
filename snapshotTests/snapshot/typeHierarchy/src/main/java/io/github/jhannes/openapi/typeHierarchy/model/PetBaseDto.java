@@ -26,9 +26,7 @@ public sealed class PetBaseDto permits CatDto, DogDto {
     }
 
     public PetBaseDto removeWhereEqual(PetBaseDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getBirth_date(), o.getBirth_date())) setBirth_date(null);
-        if (Objects.equals(getOwnerAddress(), o.getOwnerAddress())) setOwnerAddress(null);
+        o.removeWhereEqualFromPetBase(this);
         return this;
     }
 
@@ -54,5 +52,19 @@ public sealed class PetBaseDto permits CatDto, DogDto {
 
     public void copyToDog(DogDto o) {
         copyToPetBase(o);
+    }
+
+    public void removeWhereEqualFromPetBase(PetBaseDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getBirth_date(), o.getBirth_date())) o.setBirth_date(null);
+        if (Objects.equals(getOwnerAddress(), o.getOwnerAddress())) o.setOwnerAddress(null);
+    }
+
+    public void removeWhereEqualFromCat(CatDto o) {
+        removeWhereEqualFromPetBase(o);
+    }
+
+    public void removeWhereEqualFromDog(DogDto o) {
+        removeWhereEqualFromPetBase(o);
     }
 }

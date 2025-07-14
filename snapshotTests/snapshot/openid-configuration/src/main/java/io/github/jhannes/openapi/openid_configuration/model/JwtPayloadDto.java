@@ -62,11 +62,7 @@ public final class JwtPayloadDto {
     }
 
     public JwtPayloadDto removeWhereEqual(JwtPayloadDto o) {
-        if (Objects.equals(getName(), o.getName())) setName(null);
-        if (Objects.equals(getEmail(), o.getEmail())) setEmail(null);
-        if (Objects.equals(getOrgId(), o.getOrgId())) setOrgId(null);
-        if (Objects.equals(getOrg(), o.getOrg())) setOrg(null);
-        if (Objects.equals(getPid(), o.getPid())) setPid(null);
+        o.removeWhereEqualFromJwtPayload(this);
         return this;
     }
 
@@ -89,5 +85,13 @@ public final class JwtPayloadDto {
         if (getOrgId() != null) o.setOrgId(getOrgId());
         if (getOrg() != null) o.setOrg(getOrg());
         if (getPid() != null) o.setPid(getPid());
+    }
+
+    public void removeWhereEqualFromJwtPayload(JwtPayloadDto o) {
+        if (Objects.equals(getName(), o.getName())) o.setName(null);
+        if (Objects.equals(getEmail(), o.getEmail())) o.setEmail(null);
+        if (Objects.equals(getOrgId(), o.getOrgId())) o.setOrgId(null);
+        if (Objects.equals(getOrg(), o.getOrg())) o.setOrg(null);
+        if (Objects.equals(getPid(), o.getPid())) o.setPid(null);
     }
 }

@@ -27,11 +27,12 @@ public final class UpdateConversationDeltaDto implements DeltaDto {
     }
 
     public UpdateConversationDeltaDto removeWhereEqual(UpdateConversationDeltaDto o) {
+        o.removeWhereEqualFromUpdateConversationDelta(this);
         return this;
     }
 
     public UpdateConversationDeltaDto removeWhereEqual(DeltaDto o) {
-        if (o instanceof UpdateConversationDeltaDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromUpdateConversationDelta(this);
         return this;
     }
 
@@ -50,5 +51,8 @@ public final class UpdateConversationDeltaDto implements DeltaDto {
     public void copyToUpdateConversationDelta(UpdateConversationDeltaDto o) {
         if (getConversationId() != null) o.setConversationId(getConversationId());
         if (getInfo() != null) o.setInfo(getInfo());
+    }
+
+    public void removeWhereEqualFromUpdateConversationDelta(UpdateConversationDeltaDto o) {
     }
 }

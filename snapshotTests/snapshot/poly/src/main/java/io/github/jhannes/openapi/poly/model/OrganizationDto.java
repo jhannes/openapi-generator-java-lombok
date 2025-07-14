@@ -42,17 +42,12 @@ public final class OrganizationDto implements AnyPartyDto {
     }
 
     public OrganizationDto removeWhereEqual(OrganizationDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getOrganizationId(), o.getOrganizationId())) setOrganizationId(null);
-        if (Objects.equals(getUrl(), o.getUrl())) setUrl(null);
-        if (Objects.equals(getEmail(), o.getEmail())) setEmail(null);
-        if (Objects.equals(getEmailDomains(), o.getEmailDomains())) setEmailDomains(null);
-        if (Objects.equals(getPhone(), o.getPhone())) setPhone(null);
+        o.removeWhereEqualFromOrganization(this);
         return this;
     }
 
     public OrganizationDto removeWhereEqual(AnyPartyDto o) {
-        if (o instanceof OrganizationDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromOrganization(this);
         return this;
     }
 
@@ -71,5 +66,14 @@ public final class OrganizationDto implements AnyPartyDto {
         if (getEmail() != null) o.setEmail(getEmail());
         if (getEmailDomains() != null) o.setEmailDomains(getEmailDomains());
         if (getPhone() != null) o.setPhone(getPhone());
+    }
+
+    public void removeWhereEqualFromOrganization(OrganizationDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getOrganizationId(), o.getOrganizationId())) o.setOrganizationId(null);
+        if (Objects.equals(getUrl(), o.getUrl())) o.setUrl(null);
+        if (Objects.equals(getEmail(), o.getEmail())) o.setEmail(null);
+        if (Objects.equals(getEmailDomains(), o.getEmailDomains())) o.setEmailDomains(null);
+        if (Objects.equals(getPhone(), o.getPhone())) o.setPhone(null);
     }
 }

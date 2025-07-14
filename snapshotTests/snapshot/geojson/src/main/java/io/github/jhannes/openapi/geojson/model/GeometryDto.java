@@ -38,4 +38,10 @@ public sealed interface GeometryDto permits LineStringDto, PointDto, PolygonDto 
     }
     default void copyToPolygon(PolygonDto o) {
     }
+    default void removeWhereEqualFromLineString(LineStringDto o) {
+    }
+    default void removeWhereEqualFromPoint(PointDto o) {
+    }
+    default void removeWhereEqualFromPolygon(PolygonDto o) {
+    }
 }

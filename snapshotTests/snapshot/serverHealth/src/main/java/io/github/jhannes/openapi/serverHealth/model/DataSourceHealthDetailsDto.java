@@ -32,14 +32,12 @@ public final class DataSourceHealthDetailsDto implements HealthDetailsDto {
     }
 
     public DataSourceHealthDetailsDto removeWhereEqual(DataSourceHealthDetailsDto o) {
-        if (Objects.equals(getUrl(), o.getUrl())) setUrl(null);
-        if (Objects.equals(getLastAliveTime(), o.getLastAliveTime())) setLastAliveTime(null);
-        if (Objects.equals(getLastFailureException(), o.getLastFailureException())) setLastFailureException(null);
+        o.removeWhereEqualFromDataSourceHealthDetails(this);
         return this;
     }
 
     public DataSourceHealthDetailsDto removeWhereEqual(HealthDetailsDto o) {
-        if (o instanceof DataSourceHealthDetailsDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromDataSourceHealthDetails(this);
         return this;
     }
 
@@ -56,5 +54,11 @@ public final class DataSourceHealthDetailsDto implements HealthDetailsDto {
         if (getUrl() != null) o.setUrl(getUrl());
         if (getLastAliveTime() != null) o.setLastAliveTime(getLastAliveTime());
         if (getLastFailureException() != null) o.setLastFailureException(getLastFailureException());
+    }
+
+    public void removeWhereEqualFromDataSourceHealthDetails(DataSourceHealthDetailsDto o) {
+        if (Objects.equals(getUrl(), o.getUrl())) o.setUrl(null);
+        if (Objects.equals(getLastAliveTime(), o.getLastAliveTime())) o.setLastAliveTime(null);
+        if (Objects.equals(getLastFailureException(), o.getLastFailureException())) o.setLastFailureException(null);
     }
 }

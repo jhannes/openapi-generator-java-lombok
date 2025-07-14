@@ -45,4 +45,12 @@ public sealed interface PetDto permits CatDto, DogDto, GoldfishDto, WorkingDogDt
     }
     default void copyToWorkingDog(WorkingDogDto o) {
     }
+    default void removeWhereEqualFromCat(CatDto o) {
+    }
+    default void removeWhereEqualFromDog(DogDto o) {
+    }
+    default void removeWhereEqualFromGoldfish(GoldfishDto o) {
+    }
+    default void removeWhereEqualFromWorkingDog(WorkingDogDto o) {
+    }
 }

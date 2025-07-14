@@ -23,8 +23,7 @@ public final class RegisterPost200ResponseDto {
     }
 
     public RegisterPost200ResponseDto removeWhereEqual(RegisterPost200ResponseDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getToken(), o.getToken())) setToken(null);
+        o.removeWhereEqualFrom_register_post_200_response(this);
         return this;
     }
 
@@ -35,5 +34,10 @@ public final class RegisterPost200ResponseDto {
     public void copyTo_register_post_200_response(RegisterPost200ResponseDto o) {
         if (getId() != null) o.setId(getId());
         if (getToken() != null) o.setToken(getToken());
+    }
+
+    public void removeWhereEqualFrom_register_post_200_response(RegisterPost200ResponseDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getToken(), o.getToken())) o.setToken(null);
     }
 }

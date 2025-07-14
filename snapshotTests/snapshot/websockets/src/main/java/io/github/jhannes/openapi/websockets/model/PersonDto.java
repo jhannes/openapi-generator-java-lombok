@@ -43,6 +43,11 @@ public final class PersonDto extends RecipientDto implements PersonInterface {
         return this;
     }
 
+    public PersonDto removeWhereEqual(RecipientDto o) {
+        o.removeWhereEqualFromPerson(this);
+        return this;
+    }
+
     public PersonDto removeWhereEqual(RecipientInterface o) {
         o.removeWhereEqualFromPerson(this);
         return this;
@@ -55,5 +60,10 @@ public final class PersonDto extends RecipientDto implements PersonInterface {
     public void copyToPerson(PersonDto o) {
         copyToRecipient(o);
         copyToPersonInterface(o);
+    }
+
+    public void removeWhereEqualFromPerson(PersonDto o) {
+        removeWhereEqualFromRecipient(o);
+        removeWhereEqualFromPersonInterface(o);
     }
 }

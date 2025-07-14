@@ -23,7 +23,7 @@ public final class PetLocationsDto {
     }
 
     public PetLocationsDto removeWhereEqual(PetLocationsDto o) {
-        if (Objects.equals(getLocations(), o.getLocations())) setLocations(null);
+        o.removeWhereEqualFromPetLocations(this);
         return this;
     }
 
@@ -33,5 +33,9 @@ public final class PetLocationsDto {
 
     public void copyToPetLocations(PetLocationsDto o) {
         if (getLocations() != null) o.setLocations(getLocations());
+    }
+
+    public void removeWhereEqualFromPetLocations(PetLocationsDto o) {
+        if (Objects.equals(getLocations(), o.getLocations())) o.setLocations(null);
     }
 }

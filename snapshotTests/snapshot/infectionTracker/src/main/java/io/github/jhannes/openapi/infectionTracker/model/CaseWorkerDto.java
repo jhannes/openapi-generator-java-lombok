@@ -26,7 +26,7 @@ public final class CaseWorkerDto {
     }
 
     public CaseWorkerDto removeWhereEqual(CaseWorkerDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
+        o.removeWhereEqualFromCaseWorker(this);
         return this;
     }
 
@@ -43,5 +43,9 @@ public final class CaseWorkerDto {
         if (getFullName() != null) o.setFullName(getFullName());
         if (getEmail() != null) o.setEmail(getEmail());
         if (getRole() != null) o.setRole(getRole());
+    }
+
+    public void removeWhereEqualFromCaseWorker(CaseWorkerDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
     }
 }

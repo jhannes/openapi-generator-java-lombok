@@ -29,11 +29,7 @@ public final class UnknownResourceDto {
     }
 
     public UnknownResourceDto removeWhereEqual(UnknownResourceDto o) {
-        if (Objects.equals(getId(), o.getId())) setId(null);
-        if (Objects.equals(getName(), o.getName())) setName(null);
-        if (Objects.equals(getYear(), o.getYear())) setYear(null);
-        if (Objects.equals(getColor(), o.getColor())) setColor(null);
-        if (Objects.equals(getPantone_value(), o.getPantone_value())) setPantone_value(null);
+        o.removeWhereEqualFromUnknownResource(this);
         return this;
     }
 
@@ -47,5 +43,13 @@ public final class UnknownResourceDto {
         if (getYear() != null) o.setYear(getYear());
         if (getColor() != null) o.setColor(getColor());
         if (getPantone_value() != null) o.setPantone_value(getPantone_value());
+    }
+
+    public void removeWhereEqualFromUnknownResource(UnknownResourceDto o) {
+        if (Objects.equals(getId(), o.getId())) o.setId(null);
+        if (Objects.equals(getName(), o.getName())) o.setName(null);
+        if (Objects.equals(getYear(), o.getYear())) o.setYear(null);
+        if (Objects.equals(getColor(), o.getColor())) o.setColor(null);
+        if (Objects.equals(getPantone_value(), o.getPantone_value())) o.setPantone_value(null);
     }
 }

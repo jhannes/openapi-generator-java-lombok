@@ -27,4 +27,8 @@ public sealed interface WebSocketCommandDto extends WebSocketMessageDto permits 
     }
     default void copyToUpdatePersonCommand(UpdatePersonCommandDto o) {
     }
+    default void removeWhereEqualFromCreatePersonCommand(CreatePersonCommandDto o) {
+    }
+    default void removeWhereEqualFromUpdatePersonCommand(UpdatePersonCommandDto o) {
+    }
 }

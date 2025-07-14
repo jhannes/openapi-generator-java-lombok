@@ -25,11 +25,12 @@ public final class PolygonDto implements GeometryDto {
     }
 
     public PolygonDto removeWhereEqual(PolygonDto o) {
+        o.removeWhereEqualFromPolygon(this);
         return this;
     }
 
     public PolygonDto removeWhereEqual(GeometryDto o) {
-        if (o instanceof PolygonDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromPolygon(this);
         return this;
     }
 
@@ -42,5 +43,8 @@ public final class PolygonDto implements GeometryDto {
 
     public void copyToPolygon(PolygonDto o) {
         if (getCoordinates() != null) o.setCoordinates(getCoordinates());
+    }
+
+    public void removeWhereEqualFromPolygon(PolygonDto o) {
     }
 }

@@ -29,11 +29,7 @@ public final class UsersGet200ResponseDto {
     }
 
     public UsersGet200ResponseDto removeWhereEqual(UsersGet200ResponseDto o) {
-        if (Objects.equals(getPage(), o.getPage())) setPage(null);
-        if (Objects.equals(getPer_page(), o.getPer_page())) setPer_page(null);
-        if (Objects.equals(getTotal(), o.getTotal())) setTotal(null);
-        if (Objects.equals(getTotal_pages(), o.getTotal_pages())) setTotal_pages(null);
-        if (Objects.equals(getData(), o.getData())) setData(null);
+        o.removeWhereEqualFrom_users_get_200_response(this);
         return this;
     }
 
@@ -47,5 +43,13 @@ public final class UsersGet200ResponseDto {
         if (getTotal() != null) o.setTotal(getTotal());
         if (getTotal_pages() != null) o.setTotal_pages(getTotal_pages());
         if (getData() != null) o.setData(getData());
+    }
+
+    public void removeWhereEqualFrom_users_get_200_response(UsersGet200ResponseDto o) {
+        if (Objects.equals(getPage(), o.getPage())) o.setPage(null);
+        if (Objects.equals(getPer_page(), o.getPer_page())) o.setPer_page(null);
+        if (Objects.equals(getTotal(), o.getTotal())) o.setTotal(null);
+        if (Objects.equals(getTotal_pages(), o.getTotal_pages())) o.setTotal_pages(null);
+        if (Objects.equals(getData(), o.getData())) o.setData(null);
     }
 }

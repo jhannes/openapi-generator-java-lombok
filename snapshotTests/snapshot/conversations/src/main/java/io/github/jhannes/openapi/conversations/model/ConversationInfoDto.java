@@ -22,7 +22,7 @@ public final class ConversationInfoDto {
     }
 
     public ConversationInfoDto removeWhereEqual(ConversationInfoDto o) {
-        if (Objects.equals(getSummary(), o.getSummary())) setSummary(null);
+        o.removeWhereEqualFromConversationInfo(this);
         return this;
     }
 
@@ -35,5 +35,9 @@ public final class ConversationInfoDto {
     public void copyToConversationInfo(ConversationInfoDto o) {
         if (getTitle() != null) o.setTitle(getTitle());
         if (getSummary() != null) o.setSummary(getSummary());
+    }
+
+    public void removeWhereEqualFromConversationInfo(ConversationInfoDto o) {
+        if (Objects.equals(getSummary(), o.getSummary())) o.setSummary(null);
     }
 }

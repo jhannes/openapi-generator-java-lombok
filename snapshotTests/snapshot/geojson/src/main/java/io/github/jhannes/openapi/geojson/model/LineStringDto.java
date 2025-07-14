@@ -25,11 +25,12 @@ public final class LineStringDto implements GeometryDto {
     }
 
     public LineStringDto removeWhereEqual(LineStringDto o) {
+        o.removeWhereEqualFromLineString(this);
         return this;
     }
 
     public LineStringDto removeWhereEqual(GeometryDto o) {
-        if (o instanceof LineStringDto same) removeWhereEqual(same);
+        o.removeWhereEqualFromLineString(this);
         return this;
     }
 
@@ -42,5 +43,8 @@ public final class LineStringDto implements GeometryDto {
 
     public void copyToLineString(LineStringDto o) {
         if (getCoordinates() != null) o.setCoordinates(getCoordinates());
+    }
+
+    public void removeWhereEqualFromLineString(LineStringDto o) {
     }
 }

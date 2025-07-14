@@ -34,9 +34,7 @@ public final class JwtHeaderDto {
     }
 
     public JwtHeaderDto removeWhereEqual(JwtHeaderDto o) {
-        if (Objects.equals(getTyp(), o.getTyp())) setTyp(null);
-        if (Objects.equals(getKid(), o.getKid())) setKid(null);
-        if (Objects.equals(getAlg(), o.getAlg())) setAlg(null);
+        o.removeWhereEqualFromJwtHeader(this);
         return this;
     }
 
@@ -48,5 +46,11 @@ public final class JwtHeaderDto {
         if (getTyp() != null) o.setTyp(getTyp());
         if (getKid() != null) o.setKid(getKid());
         if (getAlg() != null) o.setAlg(getAlg());
+    }
+
+    public void removeWhereEqualFromJwtHeader(JwtHeaderDto o) {
+        if (Objects.equals(getTyp(), o.getTyp())) o.setTyp(null);
+        if (Objects.equals(getKid(), o.getKid())) o.setKid(null);
+        if (Objects.equals(getAlg(), o.getAlg())) o.setAlg(null);
     }
 }

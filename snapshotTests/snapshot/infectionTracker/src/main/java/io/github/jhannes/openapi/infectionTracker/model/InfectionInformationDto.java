@@ -31,10 +31,7 @@ public final class InfectionInformationDto {
     }
 
     public InfectionInformationDto removeWhereEqual(InfectionInformationDto o) {
-        if (Objects.equals(getPatientName(), o.getPatientName())) setPatientName(null);
-        if (Objects.equals(getPatientPhoneNumber(), o.getPatientPhoneNumber())) setPatientPhoneNumber(null);
-        if (Objects.equals(getLikelyInfectionDate(), o.getLikelyInfectionDate())) setLikelyInfectionDate(null);
-        if (Objects.equals(getNotes(), o.getNotes())) setNotes(null);
+        o.removeWhereEqualFromInfectionInformation(this);
         return this;
     }
 
@@ -47,5 +44,12 @@ public final class InfectionInformationDto {
         if (getPatientPhoneNumber() != null) o.setPatientPhoneNumber(getPatientPhoneNumber());
         if (getLikelyInfectionDate() != null) o.setLikelyInfectionDate(getLikelyInfectionDate());
         if (getNotes() != null) o.setNotes(getNotes());
+    }
+
+    public void removeWhereEqualFromInfectionInformation(InfectionInformationDto o) {
+        if (Objects.equals(getPatientName(), o.getPatientName())) o.setPatientName(null);
+        if (Objects.equals(getPatientPhoneNumber(), o.getPatientPhoneNumber())) o.setPatientPhoneNumber(null);
+        if (Objects.equals(getLikelyInfectionDate(), o.getLikelyInfectionDate())) o.setLikelyInfectionDate(null);
+        if (Objects.equals(getNotes(), o.getNotes())) o.setNotes(null);
     }
 }

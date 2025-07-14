@@ -23,6 +23,7 @@ public final class HealthSummaryDto {
     }
 
     public HealthSummaryDto removeWhereEqual(HealthSummaryDto o) {
+        o.removeWhereEqualFromHealthSummary(this);
         return this;
     }
 
@@ -40,5 +41,8 @@ public final class HealthSummaryDto {
     public void copyToHealthSummary(HealthSummaryDto o) {
         if (getStatus() != null) o.setStatus(getStatus());
         if (getComponents() != null) o.setComponents(getComponents());
+    }
+
+    public void removeWhereEqualFromHealthSummary(HealthSummaryDto o) {
     }
 }

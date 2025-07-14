@@ -21,7 +21,7 @@ public final class UsersIdPut200ResponseDto {
     }
 
     public UsersIdPut200ResponseDto removeWhereEqual(UsersIdPut200ResponseDto o) {
-        if (Objects.equals(getUpdatedAt(), o.getUpdatedAt())) setUpdatedAt(null);
+        o.removeWhereEqualFrom_users__id__put_200_response(this);
         return this;
     }
 
@@ -31,5 +31,9 @@ public final class UsersIdPut200ResponseDto {
 
     public void copyTo_users__id__put_200_response(UsersIdPut200ResponseDto o) {
         if (getUpdatedAt() != null) o.setUpdatedAt(getUpdatedAt());
+    }
+
+    public void removeWhereEqualFrom_users__id__put_200_response(UsersIdPut200ResponseDto o) {
+        if (Objects.equals(getUpdatedAt(), o.getUpdatedAt())) o.setUpdatedAt(null);
     }
 }

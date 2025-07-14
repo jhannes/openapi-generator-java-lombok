@@ -19,6 +19,7 @@ public final class UnsubscribeDto {
     }
 
     public UnsubscribeDto removeWhereEqual(UnsubscribeDto o) {
+        o.removeWhereEqualFromUnsubscribe(this);
         return this;
     }
 
@@ -30,5 +31,8 @@ public final class UnsubscribeDto {
 
     public void copyToUnsubscribe(UnsubscribeDto o) {
         if (getRequest() != null) o.setRequest(getRequest());
+    }
+
+    public void removeWhereEqualFromUnsubscribe(UnsubscribeDto o) {
     }
 }

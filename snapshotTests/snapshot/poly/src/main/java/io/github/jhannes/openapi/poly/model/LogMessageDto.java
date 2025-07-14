@@ -22,7 +22,7 @@ public final class LogMessageDto {
     }
 
     public LogMessageDto removeWhereEqual(LogMessageDto o) {
-        if (Objects.equals(getError(), o.getError())) setError(null);
+        o.removeWhereEqualFromLogMessage(this);
         return this;
     }
 
@@ -35,5 +35,9 @@ public final class LogMessageDto {
     public void copyToLogMessage(LogMessageDto o) {
         if (getMessage() != null) o.setMessage(getMessage());
         if (getError() != null) o.setError(getError());
+    }
+
+    public void removeWhereEqualFromLogMessage(LogMessageDto o) {
+        if (Objects.equals(getError(), o.getError())) o.setError(null);
     }
 }
