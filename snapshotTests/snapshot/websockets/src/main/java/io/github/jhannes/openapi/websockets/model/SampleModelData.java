@@ -48,7 +48,7 @@ public class SampleModelData extends SampleData {
 
     public PersonDto samplePersonDto() {
         return new PersonDto()
-            .setEmail(sampleString("email", "email"))
+            .putAll(sampleRecipientDto())
             .setId(sampleUUID("id"))
             .setType(sampleString("type"))
             .setName(samplePersonNameDto("name"))
@@ -102,10 +102,7 @@ public class SampleModelData extends SampleData {
 
     public StringSnapshotDto sampleStringSnapshotDto() {
         return new StringSnapshotDto()
-            .setCreatedAt(sampleOffsetDateTime("createdAt"))
-            .setCreatedBy(sampleString("createdBy", "username"))
-            .setUpdatedAt(sampleOffsetDateTime("updatedAt"))
-            .setUpdatedBy(sampleString("updatedBy", "username"))
+            .putAll(sampleChangeTrackedDto())
             .setName(sampleString("name"))
             .setType(sampleString("type"));
     }

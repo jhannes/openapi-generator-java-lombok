@@ -38,10 +38,7 @@ public class SampleModelData extends SampleData {
 
     public CatDto sampleCatDto() {
         return new CatDto()
-            .setId(sampleString("id"))
-            .setName(sampleString("name"))
-            .setBirth_date(sampleString("birthDate"))
-            .setOwnerAddress(sampleAddressDto("ownerAddress"))
+            .putAll(samplePetBaseDto())
             .setPet_type("Cat")
             .setHunts(sampleBoolean("hunts"))
             .setAge(sampleInteger("age"));
@@ -53,10 +50,7 @@ public class SampleModelData extends SampleData {
 
     public DogDto sampleDogDto() {
         return new DogDto()
-            .setId(sampleString("id"))
-            .setName(sampleString("name"))
-            .setBirth_date(sampleString("birthDate"))
-            .setOwnerAddress(sampleAddressDto("ownerAddress"))
+            .putAll(samplePetBaseDto())
             .setPet_type("Dog")
             .setBark(sampleBoolean("bark"))
             .setBreed(pickOne(DogDto.BreedEnum.values()));
@@ -113,12 +107,7 @@ public class SampleModelData extends SampleData {
 
     public WorkingDogDto sampleWorkingDogDto() {
         return new WorkingDogDto()
-            .setId(sampleString("id"))
-            .setName(sampleString("name"))
-            .setBirth_date(sampleString("birthDate"))
-            .setOwnerAddress(sampleAddressDto("ownerAddress"))
-            .setBark(sampleBoolean("bark"))
-            .setBreed(pickOne(WorkingDogDto.BreedEnum.values()))
+            .putAll(sampleDogDto())
             .setPet_type("WorkingDog")
             .setCapabilities(sampleList(() -> sampleWorkingDogCapabilityDto("capabilities"), "capabilities"));
     }

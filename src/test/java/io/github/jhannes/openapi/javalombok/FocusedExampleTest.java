@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
  */
 public class FocusedExampleTest extends AbstractSnapshotTest {
 
-    public static final Path SPEC = SNAPSHOT_ROOT.resolve("input/serverHealth.yaml");
+    public static final Path SPEC = SNAPSHOT_ROOT.resolve("input/typeHierarchy.yaml");
 
     @TestFactory
     DynamicNode snapshotShouldCompile() {

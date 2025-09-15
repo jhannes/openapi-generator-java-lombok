@@ -90,8 +90,7 @@ public class SampleModelData extends SampleData {
 
     public ConversationSnapshotDto sampleConversationSnapshotDto() {
         return new ConversationSnapshotDto()
-            .setCreatedAt(sampleOffsetDateTime("createdAt"))
-            .setUpdatedAt(sampleOffsetDateTime("updatedAt"))
+            .putAll(sampleChangeTrackedDto())
             .setId(sampleUUID("id"))
             .setInfo(sampleConversationInfoDto("info"))
             .setMessages(sampleMap(() -> sampleConversationMessageSnapshotDto("messages"), "messages"));
@@ -127,9 +126,7 @@ public class SampleModelData extends SampleData {
 
     public EventFromServerDto sampleEventFromServerDto() {
         return new EventFromServerDto()
-            .setId(sampleUUID("id"))
-            .setClientTime(sampleOffsetDateTime("clientTime"))
-            .setDelta(sampleDeltaDto("delta"))
+            .putAll(sampleCommandToServerDto())
             .setServerTime(sampleOffsetDateTime("serverTime"))
             .setUsername(sampleString("username"));
     }

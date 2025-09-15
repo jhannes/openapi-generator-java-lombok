@@ -46,7 +46,11 @@ public class SampleModelData extends SampleData {
 {{else}}
     public {{classname}} sample{{classname}}() {
         return new {{classname}}()
-{{~#allVars}}
+{{~#if parent}}
+
+            .putAll(sample{{{parent}}}())
+{{~/if~}}
+{{~#vars}}
 {{#if isInnerEnum}}
 
             .{{setter}}({{#if isArray}}{{#if uniqueItems}}pickSubset{{else}}pickSome{{/if}}({{classname}}.{{items.datatypeWithEnum}}.values())){{else}}pickOne({{classname}}.{{datatypeWithEnum}}.values())){{/if}}
@@ -71,7 +75,7 @@ public class SampleModelData extends SampleData {
 
             .{{setter}}(sample{{{datatypeWithEnum}}}("{{name}}"))
 {{~/if}}
-{{~/allVars}};
+{{~/vars}};
     }
 
 {{#allVars}}

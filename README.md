@@ -58,7 +58,7 @@ Add to your `pom.xml`:
                     <dependency>
                         <groupId>io.github.jhannes.openapi</groupId>
                         <artifactId>openapi-generator-java-lombok</artifactId>
-                        <version>0.4.0</version>
+                        <version>0.4.1</version>
                     </dependency>
                 </dependencies>
             </plugin>
