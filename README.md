@@ -1,5 +1,6 @@
 [![Java CI with Maven](https://github.com/jhannes/openapi-generator-java-lombok/actions/workflows/maven.yml/badge.svg)](https://github.com/jhannes/openapi-generator-java-lombok/actions/workflows/maven.yml)
 [![Apache 2.0 License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Sonatype Central](https://maven-badges.sml.io/sonatype-central/io.github.jhannes.openapi/openapi-generator-java-lombok/badge.svg)](https://maven-badges.sml.io/sonatype-central/io.github.jhannes.openapi/openapi-generator-java-lombok/)
 
 # OpenAPI Generator for Java with support for nested allOf-types and multiple inheritance with oneOf
 
@@ -58,7 +59,7 @@ Add to your `pom.xml`:
                     <dependency>
                         <groupId>io.github.jhannes.openapi</groupId>
                         <artifactId>openapi-generator-java-lombok</artifactId>
-                        <version>0.4.1</version>
+                        <version>0.4.2</version>
                     </dependency>
                 </dependencies>
             </plugin>
