@@ -8,19 +8,19 @@ public sealed interface WebSocketMessageDto permits SubscribeDto, WebSocketComma
 
     static Class<? extends WebSocketMessageDto> getType(String command) {
         return switch (command) {
-            case "updatePerson" -> UpdatePersonCommandDto.class;
             case "createPerson" -> CreatePersonCommandDto.class;
+            case "updatePerson" -> UpdatePersonCommandDto.class;
             case "Subscribe" -> SubscribeDto.class;
             default -> throw new IllegalArgumentException("Illegal command " + command);
         };
     }
 
-    static UpdatePersonCommandDto createUpdatePerson() {
-        return new UpdatePersonCommandDto().setCommand("updatePerson");
-    }
-
     static CreatePersonCommandDto createCreatePerson() {
         return new CreatePersonCommandDto().setCommand("createPerson");
+    }
+
+    static UpdatePersonCommandDto createUpdatePerson() {
+        return new UpdatePersonCommandDto().setCommand("updatePerson");
     }
 
     static SubscribeDto createSubscribe() {

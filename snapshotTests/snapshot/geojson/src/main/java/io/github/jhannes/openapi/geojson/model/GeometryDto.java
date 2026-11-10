@@ -8,11 +8,15 @@ public sealed interface GeometryDto permits LineStringDto, PointDto, PolygonDto 
 
     static Class<? extends GeometryDto> getType(String type) {
         return switch (type) {
+            case "LineString" -> LineStringDto.class;
             case "Point" -> PointDto.class;
             case "Polygon" -> PolygonDto.class;
-            case "LineString" -> LineStringDto.class;
             default -> throw new IllegalArgumentException("Illegal type " + type);
         };
+    }
+
+    static LineStringDto createLineString() {
+        return new LineStringDto().setType("LineString");
     }
 
     static PointDto createPoint() {
@@ -21,10 +25,6 @@ public sealed interface GeometryDto permits LineStringDto, PointDto, PolygonDto 
 
     static PolygonDto createPolygon() {
         return new PolygonDto().setType("Polygon");
-    }
-
-    static LineStringDto createLineString() {
-        return new LineStringDto().setType("LineString");
     }
 
     GeometryDto putAll(GeometryDto o);

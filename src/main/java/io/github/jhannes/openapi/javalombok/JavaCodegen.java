@@ -21,6 +21,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -360,7 +361,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
     }
 
     public void postProcessOneOf(CodegenModel codegenModel, Map<String, List<CodegenModel>> interfacesOfSubtypes, Map<String, CodegenModel> allModels) {
-        Set<CodegenDiscriminator.MappedModel> mappedModels = new HashSet<>();
+        Set<CodegenDiscriminator.MappedModel> mappedModels = new LinkedHashSet<>();
         HashMap<String, String> mapping = new HashMap<>();
         CodegenDiscriminator discriminator = codegenModel.discriminator;
         if (discriminator != null) {

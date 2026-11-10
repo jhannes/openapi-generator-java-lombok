@@ -35,9 +35,9 @@ public class SampleModelData extends SampleData {
 
     public GeometryDto sampleGeometryDto() {
         List<Supplier<GeometryDto>> factories = List.of(
+            () -> sampleLineStringDto().setType("LineString"),
             () -> samplePointDto().setType("Point"),
-            () -> samplePolygonDto().setType("Polygon"),
-            () -> sampleLineStringDto().setType("LineString")
+            () -> samplePolygonDto().setType("Polygon")
         );
         return pickOne(factories).get();
     }

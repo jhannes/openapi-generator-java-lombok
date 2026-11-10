@@ -155,8 +155,8 @@ public class SampleModelData extends SampleData {
 
     public WebSocketMessageDto sampleWebSocketMessageDto() {
         List<Supplier<WebSocketMessageDto>> factories = List.of(
-            () -> sampleUpdatePersonCommandDto().setCommand("updatePerson"),
             () -> sampleCreatePersonCommandDto().setCommand("createPerson"),
+            () -> sampleUpdatePersonCommandDto().setCommand("updatePerson"),
             () -> sampleSubscribeDto().setCommand("Subscribe")
         );
         return pickOne(factories).get();

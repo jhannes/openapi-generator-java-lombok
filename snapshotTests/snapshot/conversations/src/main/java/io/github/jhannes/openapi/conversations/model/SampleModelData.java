@@ -114,8 +114,8 @@ public class SampleModelData extends SampleData {
     public DeltaDto sampleDeltaDto() {
         List<Supplier<DeltaDto>> factories = List.of(
             () -> sampleAddMessageToConversationDeltaDto().setDelta("AddMessageToConversationDelta"),
-            () -> sampleUpdateConversationDeltaDto().setDelta("UpdateConversationDelta"),
-            () -> sampleCreateConversationDeltaDto().setDelta("CreateConversationDelta")
+            () -> sampleCreateConversationDeltaDto().setDelta("CreateConversationDelta"),
+            () -> sampleUpdateConversationDeltaDto().setDelta("UpdateConversationDelta")
         );
         return pickOne(factories).get();
     }

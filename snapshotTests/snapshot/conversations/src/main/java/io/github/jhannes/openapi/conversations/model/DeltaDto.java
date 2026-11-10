@@ -9,8 +9,8 @@ public sealed interface DeltaDto permits AddMessageToConversationDeltaDto, Creat
     static Class<? extends DeltaDto> getType(String delta) {
         return switch (delta) {
             case "AddMessageToConversationDelta" -> AddMessageToConversationDeltaDto.class;
-            case "UpdateConversationDelta" -> UpdateConversationDeltaDto.class;
             case "CreateConversationDelta" -> CreateConversationDeltaDto.class;
+            case "UpdateConversationDelta" -> UpdateConversationDeltaDto.class;
             default -> throw new IllegalArgumentException("Illegal delta " + delta);
         };
     }
@@ -19,12 +19,12 @@ public sealed interface DeltaDto permits AddMessageToConversationDeltaDto, Creat
         return new AddMessageToConversationDeltaDto().setDelta("AddMessageToConversationDelta");
     }
 
-    static UpdateConversationDeltaDto createUpdateConversationDelta() {
-        return new UpdateConversationDeltaDto().setDelta("UpdateConversationDelta");
-    }
-
     static CreateConversationDeltaDto createCreateConversationDelta() {
         return new CreateConversationDeltaDto().setDelta("CreateConversationDelta");
+    }
+
+    static UpdateConversationDeltaDto createUpdateConversationDelta() {
+        return new UpdateConversationDeltaDto().setDelta("UpdateConversationDelta");
     }
 
     DeltaDto putAll(DeltaDto o);

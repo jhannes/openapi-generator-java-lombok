@@ -85,10 +85,10 @@ public class SampleModelData extends SampleData {
 
     public PetDto samplePetDto() {
         List<Supplier<PetDto>> factories = List.of(
-            () -> sampleWorkingDogDto().setPet_type("WorkingDog"),
             () -> sampleCatDto().setPet_type("Cat"),
+            () -> sampleDogDto().setPet_type("Dog"),
             () -> sampleGoldfishDto().setPet_type("Goldfish"),
-            () -> sampleDogDto().setPet_type("Dog")
+            () -> sampleWorkingDogDto().setPet_type("WorkingDog")
         );
         return pickOne(factories).get();
     }
