@@ -2,7 +2,6 @@ package io.github.jhannes.openapi.javalombok;
 
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
-import org.openapitools.codegen.config.CodegenConfigurator;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
-import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class SnapshotTests extends AbstractSnapshotTest {
 
@@ -36,25 +34,7 @@ public class SnapshotTests extends AbstractSnapshotTest {
     }
 
     protected DynamicNode createTests(Path spec) {
-        return createTestNode(spec);
-    }
-
-    public static DynamicNode createTestNode(Path spec) {
-        return createTestNode(spec, createConfigurator(getModelName(spec)), getOutputDir(spec), getSnapshotDir(spec));
-    }
-
-    protected static DynamicNode createTestNode(Path spec, CodegenConfigurator configurator, Path outputDir, Path snapshotDir) {
-        configurator.setInputSpec(getInputSpec(spec));
-        configurator.setOutputDir(outputDir.toString());
-        try {
-            cleanDirectory(outputDir);
-            generate(configurator);
-        } catch (Exception e) {
-            return dynamicTest("Generator for " + spec, () -> {
-                throw e;
-            });
-        }
-        return SnapshotDiffDynamicTest.compareDirectories(spec, outputDir, snapshotDir);
+        return createTestNode(spec, createConfigurator(getModelName(spec)), getOutputDir(spec), getSnapshotDir(spec), false);
     }
 
 }

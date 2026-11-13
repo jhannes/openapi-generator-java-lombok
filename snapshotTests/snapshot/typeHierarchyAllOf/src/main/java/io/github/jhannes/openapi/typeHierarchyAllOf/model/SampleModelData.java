@@ -1,0 +1,113 @@
+package io.github.jhannes.openapi.typeHierarchyAllOf.model;
+
+
+import java.util.function.Supplier;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
+/**
+ * Model tests for Sample API
+ */
+public class SampleModelData extends SampleData {
+
+    public SampleModelData(Random random) {
+    	super(random);
+    }
+
+    public SampleModelData(long seed) {
+        super(seed);
+    }
+
+    public AddressDto sampleAddressDto(String propertyName) {
+        return sampleAddressDto();
+    }
+
+    public AddressDto sampleAddressDto() {
+        return new AddressDto()
+            .setAddressLine1(sampleString("addressLine1"))
+            .setAddressLine2(sampleString("addressLine2"))
+            .setCity(sampleString("city"))
+            .setCountry(sampleString("country"))
+            .setAddressTypes(pickSome(AddressDto.AddressTypesEnum.values()));
+    }
+
+    public CatDto sampleCatDto(String propertyName) {
+        return sampleCatDto();
+    }
+
+    public CatDto sampleCatDto() {
+        return new CatDto()
+            .putAll(samplePetBaseDto())
+            .setHunts(sampleBoolean("hunts"))
+            .setAge(sampleInteger("age"));
+    }
+
+    public DogDto sampleDogDto(String propertyName) {
+        return sampleDogDto();
+    }
+
+    public DogDto sampleDogDto() {
+        return new DogDto()
+            .putAll(samplePetBaseDto())
+            .setBark(sampleBoolean("bark"))
+            .setBreed(pickOne(DogDto.BreedEnum.values()));
+    }
+
+    public GoldfishDto sampleGoldfishDto(String propertyName) {
+        return sampleGoldfishDto();
+    }
+
+    public GoldfishDto sampleGoldfishDto() {
+        return new GoldfishDto()
+            .putAll(samplePetDto())
+            .setName(sampleString("name"))
+            .setSpecies(sampleString("species"));
+    }
+
+    public PetBaseDto samplePetBaseDto(String propertyName) {
+        return samplePetBaseDto();
+    }
+
+    public PetBaseDto samplePetBaseDto() {
+        return new PetBaseDto()
+            .putAll(samplePetDto())
+            .setId(sampleString("id"))
+            .setName(sampleString("name"))
+            .setBirth_date(sampleString("birthDate"))
+            .setOwnerAddress(sampleAddressDto("ownerAddress"));
+    }
+
+    public PetDto samplePetDto(String propertyName) {
+        return samplePetDto();
+    }
+
+    public PetDto samplePetDto() {
+        List<Supplier<PetDto>> factories = List.of(
+            () -> sampleCatDto().setPetType("Cat"),
+            () -> sampleDogDto().setPetType("Dog"),
+            () -> sampleGoldfishDto().setPetType("Goldfish"),
+            () -> sampleWorkingDogDto().setPetType("WorkingDog")
+        );
+        return pickOne(factories).get();
+    }
+
+    public WorkingDogCapabilityDto sampleWorkingDogCapabilityDto(String propertyName) {
+        return sampleWorkingDogCapabilityDto();
+    }
+
+    public WorkingDogCapabilityDto sampleWorkingDogCapabilityDto() {
+        return pickOne(WorkingDogCapabilityDto.values());
+    }
+
+    public WorkingDogDto sampleWorkingDogDto(String propertyName) {
+        return sampleWorkingDogDto();
+    }
+
+    public WorkingDogDto sampleWorkingDogDto() {
+        return new WorkingDogDto()
+            .putAll(sampleDogDto())
+            .setCapabilities(sampleList(() -> sampleWorkingDogCapabilityDto("capabilities"), "capabilities"));
+    }
+
+}

@@ -6,6 +6,23 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
 	{{~#if parent}} extends {{{parent}}}{{/if}}
  	{{~#interfaces}}{{#if @first}} implements {{else}}, {{/if}}{{{.}}}{{/interfaces}}
  	{{~#children}}{{#if @first}} permits {{else}}, {{/if}}{{{classname}}}{{/children}} {
+{{#with discriminator}}
+
+    public static Class<? extends {{{classname}}}> getType(String {{propertyName}}) {
+        return switch ({{propertyName}}) {
+{{#mappedModels}}
+            case "{{mappingName}}" -> {{modelName}}.class;
+{{/mappedModels}}
+            default -> throw new IllegalArgumentException("Illegal {{propertyName}} " + {{propertyName}});
+        };
+    }
+    {{#mappedModels}}
+
+    public static {{{modelName}}} create{{capitalizeFirst mappingName}}() {
+        return new {{{modelName}}}().set{{capitalizeFirst propertyName}}("{{mappingName}}");
+    }
+    {{/mappedModels}}
+{{/with}}
 {{#vars}}
 {{#if isEnum}}
 
@@ -121,13 +138,12 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
     }
 
 {{/interfaceModels}}
-    public List<String> missingRequiredFields(String prefix) {
 {{#if hasRequired or hasMoreModels}}
-{{#if additionalProperties}}
-        List<String> fields = new ArrayList<>();
-{{else if parent}}
+{{#if parent}}
+    public List<String> missingRequiredFields(String prefix) {
         List<String> fields = super.missingRequiredFields(prefix);
 {{else}}
+    public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
 {{/if}}
 {{#vars}}
@@ -162,11 +178,14 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
 {{/if}}
 {{/vars}}
         return fields;
-{{else}}
-        return new ArrayList<>();
-{{/if}}
     }
 
+{{else unless parent}}
+    public List<String> missingRequiredFields(String prefix) {
+        return new ArrayList<>();
+    }
+
+{{/if}}
     public void copyTo{{name}}({{classname}} o) {
 {{#parentModel}}
         copyTo{{name}}(o);

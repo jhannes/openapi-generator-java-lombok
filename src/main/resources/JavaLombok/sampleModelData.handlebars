@@ -28,8 +28,8 @@ public class SampleModelData extends SampleData {
         return sample{{classname}}();
     }
 
-{{#if oneOf}}
     public {{classname}} sample{{classname}}() {
+{{#if discriminator.mappedModels}}
         List<Supplier<{{classname}}>> factories = List.of(
 {{#discriminator}}{{#mappedModels}}
             () -> sample{{modelName}}().set{{capitalizeFirst discriminator.propertyName}}("{{mappingName}}"){{#unless @last}},{{/unless}}
@@ -38,13 +38,15 @@ public class SampleModelData extends SampleData {
         return pickOne(factories).get();
     }
 
+{{else if oneOf}}
+        throw new RuntimeException("Unsupported: oneOf without discriminator: {{className}}");
+    }
+
 {{else if isEnum}}
-    public {{classname}} sample{{classname}}() {
         return pickOne({{classname}}.values());
     }
 
 {{else}}
-    public {{classname}} sample{{classname}}() {
         return new {{classname}}()
 {{~#if parent}}
 

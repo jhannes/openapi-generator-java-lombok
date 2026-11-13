@@ -65,10 +65,6 @@ public final class StringSnapshotDto extends ChangeTrackedDto {
         return this;
     }
 
-    public List<String> missingRequiredFields(String prefix) {
-        return new ArrayList<>();
-    }
-
     public void copyToStringSnapshot(StringSnapshotDto o) {
         copyToChangeTracked(o);
         if (getName() != null) o.setName(getName());

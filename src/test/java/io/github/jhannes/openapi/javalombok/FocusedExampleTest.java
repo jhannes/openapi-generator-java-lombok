@@ -1,5 +1,6 @@
 package io.github.jhannes.openapi.javalombok;
 
+import io.github.jhannes.openapi.javalombok.testsupport.GeneratorTestFactory;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
 
@@ -33,13 +34,12 @@ public class FocusedExampleTest extends AbstractSnapshotTest {
 
     @TestFactory
     DynamicNode snapshotShouldCompile() {
-        Path snapshotDir = AbstractSnapshotTest.getSnapshotDir(SPEC);
-        return dynamicTest("Compile " + snapshotDir, () -> CompilerTest.compile(snapshotDir));
+        return GeneratorTestFactory.createCompileTest(getSnapshotDir(SPEC));
     }
 
     @TestFactory
     DynamicNode outputShouldMatchSnapshot() {
-        return SnapshotTests.createTestNode(SPEC);
+        return createTestNode(SPEC, createConfigurator(getModelName(SPEC)), getOutputDir(SPEC), getSnapshotDir(SPEC), false);
     }
 
     @TestFactory

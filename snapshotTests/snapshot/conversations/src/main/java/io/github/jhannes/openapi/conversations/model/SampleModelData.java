@@ -136,9 +136,7 @@ public class SampleModelData extends SampleData {
     }
 
     public MessageFromServerDto sampleMessageFromServerDto() {
-        List<Supplier<MessageFromServerDto>> factories = List.of(
-        );
-        return pickOne(factories).get();
+        throw new RuntimeException("Unsupported: oneOf without discriminator: ");
     }
 
     public MessageToServerDto sampleMessageToServerDto(String propertyName) {
@@ -146,9 +144,7 @@ public class SampleModelData extends SampleData {
     }
 
     public MessageToServerDto sampleMessageToServerDto() {
-        List<Supplier<MessageToServerDto>> factories = List.of(
-        );
-        return pickOne(factories).get();
+        throw new RuntimeException("Unsupported: oneOf without discriminator: ");
     }
 
     public SnapshotSetDto sampleSnapshotSetDto(String propertyName) {

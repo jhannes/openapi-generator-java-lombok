@@ -53,10 +53,6 @@ public final class PersonDto extends RecipientDto implements PersonInterface {
         return this;
     }
 
-    public List<String> missingRequiredFields(String prefix) {
-        return new ArrayList<>();
-    }
-
     public void copyToPerson(PersonDto o) {
         copyToRecipient(o);
         copyToPersonInterface(o);
