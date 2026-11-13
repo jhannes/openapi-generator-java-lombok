@@ -36,7 +36,7 @@ Add to your `pom.xml`:
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>7.14.0</version>
+                <version>7.27.0</version>
                 <executions>
                     <execution>
                         <id>openapi-java</id>
@@ -59,7 +59,7 @@ Add to your `pom.xml`:
                     <dependency>
                         <groupId>io.github.jhannes.openapi</groupId>
                         <artifactId>openapi-generator-java-lombok</artifactId>
-                        <version>0.4.2</version>
+                        <version>0.5.1</version>
                     </dependency>
                 </dependencies>
             </plugin>

@@ -365,6 +365,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
         HashMap<String, String> mapping = new HashMap<>();
         CodegenDiscriminator discriminator = codegenModel.discriminator;
         if (discriminator != null) {
+            discriminator.setPropertyType("String");
             discriminator.setPropertyName(discriminator.getPropertyBaseName());
             discriminator.setPropertyGetter(toGetter(discriminator.getPropertyBaseName()));
         }
