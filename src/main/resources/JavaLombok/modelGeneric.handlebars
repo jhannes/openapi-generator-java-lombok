@@ -3,9 +3,9 @@
 @EqualsAndHashCode(callSuper = true)
 {{/if}}
 public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
-	{{~#if parent}} extends {{{parent}}}{{/if}}
- 	{{~#interfaces}}{{#if @first}} implements {{else}}, {{/if}}{{{.}}}{{/interfaces}}
- 	{{~#children}}{{#if @first}} permits {{else}}, {{/if}}{{{classname}}}{{/children}} {
+    {{~#if parent}} extends {{{parent}}}{{/if}}
+    {{~#interfaces}}{{#if @first}} implements {{else}}, {{/if}}{{{.}}}{{/interfaces}}
+    {{~#children}}{{#if @first}} permits {{else}}, {{/if}}{{{classname}}}{{/children}} {
 {{#with discriminator}}
 
     public static Class<? extends {{{classname}}}> getType(String {{propertyName}}) {

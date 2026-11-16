@@ -1,6 +1,6 @@
 public sealed interface {{classname}}
- 	{{~#interfaces}}{{#if @first}} extends {{else}}, {{/if}}{{{.}}}{{/interfaces}}
- 	{{~#children}}{{#if @first}} permits {{else}}, {{/if}}{{{classname}}}{{/children}} {
+    {{~#interfaces}}{{#if @first}} extends {{else}}, {{/if}}{{{.}}}{{/interfaces}}
+    {{~#children}}{{#if @first}} permits {{else}}, {{/if}}{{{classname}}}{{/children}} {
 {{#vars}}
 {{#if isEnum}}
 
@@ -49,7 +49,7 @@ public sealed interface {{classname}}
     default boolean hasNoOptionalPropertiesFor{{name}}() {
 {{#if interfaces}}
         return {{#interfaceModels}}{{#unless @first}}
-	        && {{/unless}}hasNoOptionalPropertiesFor{{name}}(){{/interfaceModels}}{{#optionalVars}}
+            && {{/unless}}hasNoOptionalPropertiesFor{{name}}(){{/interfaceModels}}{{#optionalVars}}
                 && {{getter}}() == null{{/optionalVars}};
 {{else if optionalVars}}
         return {{#optionalVars}}{{#unless @first}}

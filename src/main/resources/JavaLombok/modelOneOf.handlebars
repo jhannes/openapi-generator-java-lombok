@@ -1,6 +1,6 @@
 public sealed interface {{classname}}
- 	{{~#interfaces}}{{#if @first}} extends {{else}}, {{/if}}{{{.}}}{{/interfaces}}
- 	{{~#children}}{{#if @first}} permits {{else}}, {{/if}}{{{classname}}}{{/children}} {
+    {{~#interfaces}}{{#if @first}} extends {{else}}, {{/if}}{{{.}}}{{/interfaces}}
+    {{~#children}}{{#if @first}} permits {{else}}, {{/if}}{{{classname}}}{{/children}} {
 {{#with discriminator}}
 
     {{{propertyType}}} {{propertyGetter}}();

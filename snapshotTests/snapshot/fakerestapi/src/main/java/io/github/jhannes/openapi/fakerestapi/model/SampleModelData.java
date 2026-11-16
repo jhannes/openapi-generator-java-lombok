@@ -12,7 +12,7 @@ import java.util.Random;
 public class SampleModelData extends SampleData {
 
     public SampleModelData(Random random) {
-    	super(random);
+        super(random);
     }
 
     public SampleModelData(long seed) {
