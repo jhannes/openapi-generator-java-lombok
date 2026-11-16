@@ -11,10 +11,8 @@ public final class WorkingDogDto extends DogDto {
 
     private List<WorkingDogCapabilityDto> capabilities = new ArrayList<>();
 
-    @Override
-    public WorkingDogDto setPetType(String petType) {
-        super.setPetType(petType);
-        return this;
+    public WorkingDogDto() {
+        super("WorkingDog");
     }
 
     @Override

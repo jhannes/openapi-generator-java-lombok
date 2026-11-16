@@ -14,10 +14,12 @@ public sealed interface {{classname}}
         };
     }
     {{#mappedModels}}
+    {{#unless model.discriminator}}
 
     static {{{modelName}}} create{{capitalizeFirst mappingName}}() {
-        return new {{{modelName}}}().set{{capitalizeFirst propertyName}}("{{mappingName}}");
+        return new {{{modelName}}}(){{#if model.interfaces}}{{#if (gt model.interfaces.length 1)}}.set{{capitalizeFirst propertyName}}("{{mappingName}}"){{/if}}{{/if}};
     }
+    {{/unless}}
     {{/mappedModels}}
 {{/with}}
 {{#unless interfaces}}

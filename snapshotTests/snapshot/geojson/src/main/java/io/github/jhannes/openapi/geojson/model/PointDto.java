@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public final class PointDto implements GeometryDto {
 
-    private String type = "Point";
+    private final String type = "Point";
     /**
      * Point in 3D space
     */

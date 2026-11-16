@@ -80,12 +80,13 @@ components:
           organization: Organization
     Person:
       properties:
+        type:
+          type: string
+          enum: [person]
         id:
           type: string
           format: uuid
           readOnly: true
-        type:
-          type: string
         givenName:
           type: string
         familyName:
@@ -109,8 +110,6 @@ components:
           type: string
           format: uuid
           readOnly: true
-        type:
-          type: string
         name:
           type: string
         organizationId:
@@ -132,7 +131,6 @@ components:
           type: string
           format: phone
       required:
-        - type
         - name
     CreationError:
       oneOf:

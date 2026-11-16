@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 public final class DataSourceHealthDetailsDto implements HealthDetailsDto {
 
-    private String type = "DataSourceHealthDetails";
+    private final String type = "DataSourceHealthDetails";
     private String url = null;
     private OffsetDateTime lastAliveTime = null;
     private ExceptionDto lastFailureException = null;

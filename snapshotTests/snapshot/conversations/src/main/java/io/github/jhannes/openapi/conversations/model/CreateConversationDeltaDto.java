@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public final class CreateConversationDeltaDto implements DeltaDto {
 
-    private String delta = "CreateConversationDelta";
+    private final String delta = "CreateConversationDelta";
     private UUID conversationId;
     private ConversationInfoDto info = new ConversationInfoDto();
 

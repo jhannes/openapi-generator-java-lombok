@@ -13,10 +13,8 @@ public final class GoldfishDto extends PetDto {
     private String name = null;
     private String species;
 
-    @Override
-    public GoldfishDto setPetType(String petType) {
-        super.setPetType(petType);
-        return this;
+    public GoldfishDto() {
+        super("Goldfish");
     }
 
     public boolean hasNoOptionalProperties() {

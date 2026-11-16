@@ -39,7 +39,6 @@ public class SampleModelData extends SampleData {
     public CatDto sampleCatDto() {
         return new CatDto()
             .putAll(samplePetBaseDto())
-            .setPet_type("Cat")
             .setHunts(sampleBoolean("hunts"))
             .setAge(sampleInteger("age"));
     }
@@ -51,7 +50,6 @@ public class SampleModelData extends SampleData {
     public DogDto sampleDogDto() {
         return new DogDto()
             .putAll(samplePetBaseDto())
-            .setPet_type("Dog")
             .setBark(sampleBoolean("bark"))
             .setBreed(pickOne(DogDto.BreedEnum.values()));
     }
@@ -62,7 +60,6 @@ public class SampleModelData extends SampleData {
 
     public GoldfishDto sampleGoldfishDto() {
         return new GoldfishDto()
-            .setPet_type("Goldfish")
             .setName(sampleString("name"))
             .setSpecies(sampleString("species"));
     }
@@ -85,10 +82,10 @@ public class SampleModelData extends SampleData {
 
     public PetDto samplePetDto() {
         List<Supplier<PetDto>> factories = List.of(
-            () -> sampleCatDto().setPet_type("Cat"),
-            () -> sampleDogDto().setPet_type("Dog"),
-            () -> sampleGoldfishDto().setPet_type("Goldfish"),
-            () -> sampleWorkingDogDto().setPet_type("WorkingDog")
+            () -> sampleCatDto(),
+            () -> sampleDogDto(),
+            () -> sampleGoldfishDto(),
+            () -> sampleWorkingDogDto()
         );
         return pickOne(factories).get();
     }
@@ -108,7 +105,6 @@ public class SampleModelData extends SampleData {
     public WorkingDogDto sampleWorkingDogDto() {
         return new WorkingDogDto()
             .putAll(sampleDogDto())
-            .setPet_type("WorkingDog")
             .setCapabilities(sampleList(() -> sampleWorkingDogCapabilityDto("capabilities"), "capabilities"));
     }
 

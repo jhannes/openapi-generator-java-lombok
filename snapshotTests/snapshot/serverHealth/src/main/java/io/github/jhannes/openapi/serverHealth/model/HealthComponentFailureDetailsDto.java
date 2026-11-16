@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public final class HealthComponentFailureDetailsDto implements HealthDetailsDto {
 
-    private String type = "HealthComponentFailureDetails";
+    private final String type = "HealthComponentFailureDetails";
     private ExceptionDto exception = null;
 
     public boolean hasNoOptionalProperties() {

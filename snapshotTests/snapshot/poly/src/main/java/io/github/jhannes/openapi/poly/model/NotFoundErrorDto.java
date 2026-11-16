@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public final class NotFoundErrorDto implements UpdateErrorDto {
 
-    private String code;
+    private final String code = "not_found";
     private String identifierValue = null;
     private String entityType;
 

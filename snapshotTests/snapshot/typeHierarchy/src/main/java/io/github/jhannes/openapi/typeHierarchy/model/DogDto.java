@@ -28,7 +28,7 @@ public sealed class DogDto extends PetBaseDto implements PetDto permits WorkingD
         }
     }
 
-    private String pet_type = "Dog";
+    private final String pet_type = "Dog";
     private Boolean bark = null;
     private BreedEnum breed = null;
 

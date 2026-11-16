@@ -16,15 +16,15 @@ public sealed interface HealthDetailsDto permits DataSourceHealthDetailsDto, Hea
     }
 
     static DataSourceHealthDetailsDto createDataSourceHealthDetails() {
-        return new DataSourceHealthDetailsDto().setType("DataSourceHealthDetails");
+        return new DataSourceHealthDetailsDto();
     }
 
     static HealthComponentFailureDetailsDto createHealthComponentFailureDetails() {
-        return new HealthComponentFailureDetailsDto().setType("HealthComponentFailureDetails");
+        return new HealthComponentFailureDetailsDto();
     }
 
     static ThreadHealthDetailsDto createThreadHealthDetails() {
-        return new ThreadHealthDetailsDto().setType("ThreadHealthDetails");
+        return new ThreadHealthDetailsDto();
     }
 
     HealthDetailsDto putAll(HealthDetailsDto o);

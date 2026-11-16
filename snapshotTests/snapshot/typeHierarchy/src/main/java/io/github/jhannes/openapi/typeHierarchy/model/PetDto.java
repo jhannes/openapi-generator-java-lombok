@@ -17,19 +17,19 @@ public sealed interface PetDto permits CatDto, DogDto, GoldfishDto, WorkingDogDt
     }
 
     static CatDto createCat() {
-        return new CatDto().setPet_type("Cat");
+        return new CatDto();
     }
 
     static DogDto createDog() {
-        return new DogDto().setPet_type("Dog");
+        return new DogDto();
     }
 
     static GoldfishDto createGoldfish() {
-        return new GoldfishDto().setPet_type("Goldfish");
+        return new GoldfishDto();
     }
 
     static WorkingDogDto createWorkingDog() {
-        return new WorkingDogDto().setPet_type("WorkingDog");
+        return new WorkingDogDto();
     }
 
     PetDto putAll(PetDto o);

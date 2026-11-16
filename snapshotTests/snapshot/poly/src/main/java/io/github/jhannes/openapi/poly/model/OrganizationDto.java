@@ -12,8 +12,8 @@ import lombok.Data;
 @Data
 public final class OrganizationDto implements AnyPartyDto {
 
+    private final String type = "organization";
     private UUID id = null;
-    private String type;
     private String name;
     private String organizationId = null;
     private URI url = null;

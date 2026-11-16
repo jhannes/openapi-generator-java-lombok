@@ -10,8 +10,8 @@ import lombok.Data;
 @Data
 public final class PersonDto implements AnyPartyDto {
 
+    private final String type = "person";
     private UUID id = null;
-    private String type;
     private String givenName;
     private String familyName;
     private String email = null;

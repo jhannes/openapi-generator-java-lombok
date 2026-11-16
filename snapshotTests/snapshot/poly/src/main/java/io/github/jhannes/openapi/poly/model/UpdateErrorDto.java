@@ -34,7 +34,7 @@ public sealed interface UpdateErrorDto permits DuplicateIdentifierErrorDto, Gene
     }
 
     static NotFoundErrorDto createNot_found() {
-        return new NotFoundErrorDto().setCode("not_found");
+        return new NotFoundErrorDto();
     }
 
     UpdateErrorDto putAll(UpdateErrorDto o);

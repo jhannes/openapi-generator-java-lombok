@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public final class UpdatePersonCommandDto implements WebSocketCommandDto {
 
-    private String command = "updatePerson";
+    private final String command = "updatePerson";
     private UUID id;
     private PersonDto person = new PersonDto();
 

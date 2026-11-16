@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public final class SubscribeDto implements WebSocketMessageDto {
 
-    private String command = "Subscribe";
+    private final String command = "Subscribe";
     private String request = "Subscribe";
 
     public boolean hasNoOptionalProperties() {

@@ -5,7 +5,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public sealed class PetDto permits GoldfishDto, PetBaseDto {
+public abstract sealed class PetDto implements ItemDto permits GoldfishDto, PetBaseDto {
 
     public static Class<? extends PetDto> getType(String petType) {
         return switch (petType) {
@@ -18,22 +18,23 @@ public sealed class PetDto permits GoldfishDto, PetBaseDto {
     }
 
     public static CatDto createCat() {
-        return new CatDto().setPetType("Cat");
+        return new CatDto();
     }
 
     public static DogDto createDog() {
-        return new DogDto().setPetType("Dog");
+        return new DogDto();
     }
 
     public static GoldfishDto createGoldfish() {
-        return new GoldfishDto().setPetType("Goldfish");
+        return new GoldfishDto();
     }
 
     public static WorkingDogDto createWorkingDog() {
-        return new WorkingDogDto().setPetType("WorkingDog");
+        return new WorkingDogDto();
     }
 
-    private String petType;
+    private final String type = "Pet";
+    private final String petType;
 
     public boolean hasNoOptionalProperties() {
         return true;
@@ -44,19 +45,32 @@ public sealed class PetDto permits GoldfishDto, PetBaseDto {
         return this;
     }
 
+    public PetDto putAll(ItemDto o) {
+        o.copyToPet(this);
+        return this;
+    }
+
     public PetDto removeWhereEqual(PetDto o) {
+        o.removeWhereEqualFromPet(this);
+        return this;
+    }
+
+    public PetDto removeWhereEqual(ItemDto o) {
         o.removeWhereEqualFromPet(this);
         return this;
     }
 
     public List<String> missingRequiredFields(String prefix) {
         List<String> fields = new ArrayList<>();
+        if (getType() == null) fields.add(prefix + "type");
         if (getPetType() == null) fields.add(prefix + "petType");
         return fields;
     }
 
     public void copyToPet(PetDto o) {
-        if (getPetType() != null) o.setPetType(getPetType());
+        if (!getPetType().equals(o.getPetType())) {
+            throw new IllegalArgumentException("Cannot copy " + getPetType() + " to " + o.getPetType());
+        }
     }
 
     public void copyToGoldfish(GoldfishDto o) {

@@ -35,9 +35,9 @@ public class SampleModelData extends SampleData {
 
     public GeometryDto sampleGeometryDto() {
         List<Supplier<GeometryDto>> factories = List.of(
-            () -> sampleLineStringDto().setType("LineString"),
-            () -> samplePointDto().setType("Point"),
-            () -> samplePolygonDto().setType("Polygon")
+            () -> sampleLineStringDto(),
+            () -> samplePointDto(),
+            () -> samplePolygonDto()
         );
         return pickOne(factories).get();
     }
@@ -48,7 +48,6 @@ public class SampleModelData extends SampleData {
 
     public LineStringDto sampleLineStringDto() {
         return new LineStringDto()
-            .setType("LineString")
             .setCoordinates(coordinatesForLineStringDto());
     }
 
@@ -63,7 +62,6 @@ public class SampleModelData extends SampleData {
 
     public PointDto samplePointDto() {
         return new PointDto()
-            .setType("Point")
             .setCoordinates(sampleList(() -> sampleDouble("coordinates"), "coordinates"));
     }
 
@@ -73,7 +71,6 @@ public class SampleModelData extends SampleData {
 
     public PolygonDto samplePolygonDto() {
         return new PolygonDto()
-            .setType("Polygon")
             .setCoordinates(coordinatesForPolygonDto());
     }
 

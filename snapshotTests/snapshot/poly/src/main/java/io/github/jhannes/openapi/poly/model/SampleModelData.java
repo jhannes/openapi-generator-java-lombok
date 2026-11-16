@@ -25,8 +25,8 @@ public class SampleModelData extends SampleData {
 
     public AnyPartyDto sampleAnyPartyDto() {
         List<Supplier<AnyPartyDto>> factories = List.of(
-            () -> sampleOrganizationDto().setType("organization"),
-            () -> samplePersonDto().setType("person")
+            () -> sampleOrganizationDto(),
+            () -> samplePersonDto()
         );
         return pickOne(factories).get();
     }
@@ -93,7 +93,6 @@ public class SampleModelData extends SampleData {
 
     public NotFoundErrorDto sampleNotFoundErrorDto() {
         return new NotFoundErrorDto()
-            .setCode(sampleString("code"))
             .setIdentifierValue(sampleString("identifierValue"))
             .setEntityType(sampleString("entityType"));
     }
@@ -105,7 +104,6 @@ public class SampleModelData extends SampleData {
     public OrganizationDto sampleOrganizationDto() {
         return new OrganizationDto()
             .setId(sampleUUID("id"))
-            .setType(sampleString("type"))
             .setName(sampleString("name"))
             .setOrganizationId(sampleString("organizationId"))
             .setUrl(sampleURI("url"))
@@ -121,7 +119,6 @@ public class SampleModelData extends SampleData {
     public PersonDto samplePersonDto() {
         return new PersonDto()
             .setId(sampleUUID("id"))
-            .setType(sampleString("type"))
             .setGivenName(sampleString("givenName"))
             .setFamilyName(sampleString("familyName"))
             .setEmail(sampleString("email", "email"))
@@ -139,7 +136,7 @@ public class SampleModelData extends SampleData {
             () -> sampleGeneralErrorDto().setCode("general_error"),
             () -> sampleIllegalEmailAddressErrorDto().setCode("illegal_address"),
             () -> sampleGeneralErrorDto().setCode("network_error"),
-            () -> sampleNotFoundErrorDto().setCode("not_found")
+            () -> sampleNotFoundErrorDto()
         );
         return pickOne(factories).get();
     }

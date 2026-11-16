@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public final class LineStringDto implements GeometryDto {
 
-    private String type = "LineString";
+    private final String type = "LineString";
     private List<List<Double>> coordinates = new ArrayList<>();
 
     public boolean hasNoOptionalProperties() {

@@ -16,11 +16,11 @@ public sealed interface WebSocketCommandDto extends WebSocketMessageDto permits 
     }
 
     static CreatePersonCommandDto createCreatePerson() {
-        return new CreatePersonCommandDto().setCommand("createPerson");
+        return new CreatePersonCommandDto();
     }
 
     static UpdatePersonCommandDto createUpdatePerson() {
-        return new UpdatePersonCommandDto().setCommand("updatePerson");
+        return new UpdatePersonCommandDto();
     }
 
     default void copyToCreatePersonCommand(CreatePersonCommandDto o) {

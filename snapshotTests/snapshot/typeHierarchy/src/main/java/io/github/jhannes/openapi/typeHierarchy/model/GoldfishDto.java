@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public final class GoldfishDto implements PetDto {
 
-    private String pet_type = "Goldfish";
+    private final String pet_type = "Goldfish";
     private String name = null;
     private String species = null;
 

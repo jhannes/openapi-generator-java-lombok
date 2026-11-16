@@ -2,11 +2,12 @@
 {{#if parent}}
 @EqualsAndHashCode(callSuper = true)
 {{/if}}
-public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
+public {{#if children}}{{#if discriminator}}abstract {{/if}}sealed{{else}}final{{/if}} class {{classname}}
     {{~#if parent}} extends {{{parent}}}{{/if}}
     {{~#interfaces}}{{#if @first}} implements {{else}}, {{/if}}{{{.}}}{{/interfaces}}
     {{~#children}}{{#if @first}} permits {{else}}, {{/if}}{{{classname}}}{{/children}} {
 {{#with discriminator}}
+{{#if mappedModels}}
 
     public static Class<? extends {{{classname}}}> getType(String {{propertyName}}) {
         return switch ({{propertyName}}) {
@@ -19,9 +20,10 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
     {{#mappedModels}}
 
     public static {{{modelName}}} create{{capitalizeFirst mappingName}}() {
-        return new {{{modelName}}}().set{{capitalizeFirst propertyName}}("{{mappingName}}");
+        return new {{{modelName}}}();
     }
     {{/mappedModels}}
+{{/if}}
 {{/with}}
 {{#vars}}
 {{#if isEnum}}
@@ -43,15 +45,30 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
      * {{description}}
     */
 {{/if}}
-    private {{{datatypeWithEnum}}} {{baseName}}{{#if defaultValue}} = {{{defaultValue}}}{{else unless required}} = null{{/if}};
+    private {{#if (and isDiscriminator (or defaultValue children))}}final {{/if}}{{{datatypeWithEnum}}} {{baseName}}{{#if defaultValue}} = {{{defaultValue}}}{{else unless required}} = null{{/if}};
 {{/vars}}
 {{#parentVars}}
+{{#if isDiscriminator}}
+{{#if children}}
+
+    public {{classname}}({{datatypeWithEnum}} {{baseName}}) {
+        super({{baseName}});
+    }
+{{/if}}
+{{#if defaultValue}}
+
+    public {{classname}}() {
+        super("{{defaultValue}}");
+    }
+{{/if}}
+{{else}}
 
     @Override
     public {{classname}} {{setter}}({{{datatypeWithEnum}}} {{name}}) {
         super.{{setter}}({{name}});
         return this;
     }
+{{/if}}
 {{/parentVars}}
 
     public boolean hasNoOptionalProperties() {
@@ -197,7 +214,13 @@ public {{#if children}}sealed{{else}}final{{/if}} class {{classname}}
 {{/interfaceModels}}
 {{#vars}}
 {{#unless isNew}}
+{{#if isDiscriminator}}
+        if (!{{getter}}().equals(o.{{getter}}())) {
+            throw new IllegalArgumentException("Cannot copy " + {{getter}}() + " to " + o.{{getter}}());
+        }
+{{else}}
         if ({{getter}}() != null) o.{{setter}}({{getter}}());
+{{/if}}
 {{/unless}}
 {{/vars}}
     }

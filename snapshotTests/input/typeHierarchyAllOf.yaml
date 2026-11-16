@@ -21,6 +21,17 @@ paths:
           description: Updated
 components:
   schemas:
+    Item:
+      oneOf:
+        - $ref: "#/components/schemas/Pet"
+        - $ref: "#/components/schemas/Food"
+      discriminator:
+        propertyName: type
+    PetMessage:
+      properties:
+        pet:
+          $ref: "#/components/schemas/Pet"
+      required: [pet]
     Address:
       properties:
         addressLine1:
@@ -111,3 +122,12 @@ components:
           Dog: '#/components/schemas/Dog'
           WorkingDog: '#/components/schemas/WorkingDog'
           Goldfish: '#/components/schemas/Goldfish'
+    Food:
+      type: object
+      properties:
+        type:
+          type: string
+          enum: [Food]
+        itemCode:
+          type: string
+      required: [type, itemCode]

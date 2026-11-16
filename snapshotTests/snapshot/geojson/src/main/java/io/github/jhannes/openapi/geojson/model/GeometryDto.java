@@ -16,15 +16,15 @@ public sealed interface GeometryDto permits LineStringDto, PointDto, PolygonDto 
     }
 
     static LineStringDto createLineString() {
-        return new LineStringDto().setType("LineString");
+        return new LineStringDto();
     }
 
     static PointDto createPoint() {
-        return new PointDto().setType("Point");
+        return new PointDto();
     }
 
     static PolygonDto createPolygon() {
-        return new PolygonDto().setType("Polygon");
+        return new PolygonDto();
     }
 
     GeometryDto putAll(GeometryDto o);

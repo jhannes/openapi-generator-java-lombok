@@ -25,7 +25,6 @@ public class SampleModelData extends SampleData {
 
     public AddMessageToConversationDeltaDto sampleAddMessageToConversationDeltaDto() {
         return new AddMessageToConversationDeltaDto()
-            .setDelta("AddMessageToConversationDelta")
             .setConversationId(sampleUUID("conversationId"))
             .setMessageId(sampleUUID("messageId"))
             .setMessage(sampleConversationMessageDto("message"));
@@ -102,7 +101,6 @@ public class SampleModelData extends SampleData {
 
     public CreateConversationDeltaDto sampleCreateConversationDeltaDto() {
         return new CreateConversationDeltaDto()
-            .setDelta("CreateConversationDelta")
             .setConversationId(sampleUUID("conversationId"))
             .setInfo(sampleConversationInfoDto("info"));
     }
@@ -113,9 +111,9 @@ public class SampleModelData extends SampleData {
 
     public DeltaDto sampleDeltaDto() {
         List<Supplier<DeltaDto>> factories = List.of(
-            () -> sampleAddMessageToConversationDeltaDto().setDelta("AddMessageToConversationDelta"),
-            () -> sampleCreateConversationDeltaDto().setDelta("CreateConversationDelta"),
-            () -> sampleUpdateConversationDeltaDto().setDelta("UpdateConversationDelta")
+            () -> sampleAddMessageToConversationDeltaDto(),
+            () -> sampleCreateConversationDeltaDto(),
+            () -> sampleUpdateConversationDeltaDto()
         );
         return pickOne(factories).get();
     }
@@ -172,7 +170,6 @@ public class SampleModelData extends SampleData {
 
     public UpdateConversationDeltaDto sampleUpdateConversationDeltaDto() {
         return new UpdateConversationDeltaDto()
-            .setDelta("UpdateConversationDelta")
             .setConversationId(sampleUUID("conversationId"))
             .setInfo(sampleConversationInfoDto("info"));
     }

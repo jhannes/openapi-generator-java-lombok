@@ -25,7 +25,6 @@ public class SampleModelData extends SampleData {
 
     public DataSourceHealthDetailsDto sampleDataSourceHealthDetailsDto() {
         return new DataSourceHealthDetailsDto()
-            .setType("DataSourceHealthDetails")
             .setUrl(sampleString("url"))
             .setLastAliveTime(sampleOffsetDateTime("lastAliveTime"))
             .setLastFailureException(sampleExceptionDto("lastFailureException"));
@@ -59,7 +58,6 @@ public class SampleModelData extends SampleData {
 
     public HealthComponentFailureDetailsDto sampleHealthComponentFailureDetailsDto() {
         return new HealthComponentFailureDetailsDto()
-            .setType("HealthComponentFailureDetails")
             .setException(sampleExceptionDto("exception"));
     }
 
@@ -69,9 +67,9 @@ public class SampleModelData extends SampleData {
 
     public HealthDetailsDto sampleHealthDetailsDto() {
         List<Supplier<HealthDetailsDto>> factories = List.of(
-            () -> sampleDataSourceHealthDetailsDto().setType("DataSourceHealthDetails"),
-            () -> sampleHealthComponentFailureDetailsDto().setType("HealthComponentFailureDetails"),
-            () -> sampleThreadHealthDetailsDto().setType("ThreadHealthDetails")
+            () -> sampleDataSourceHealthDetailsDto(),
+            () -> sampleHealthComponentFailureDetailsDto(),
+            () -> sampleThreadHealthDetailsDto()
         );
         return pickOne(factories).get();
     }
@@ -121,7 +119,6 @@ public class SampleModelData extends SampleData {
 
     public ThreadHealthDetailsDto sampleThreadHealthDetailsDto() {
         return new ThreadHealthDetailsDto()
-            .setType("ThreadHealthDetails")
             .setThreadState(pickOne(ThreadHealthDetailsDto.ThreadStateEnum.values()))
             .setStackTrace(sampleList(() -> sampleStackTraceInnerDto("stackTrace"), "stackTrace"))
             .setLastAliveTime(sampleOffsetDateTime("lastAliveTime"))

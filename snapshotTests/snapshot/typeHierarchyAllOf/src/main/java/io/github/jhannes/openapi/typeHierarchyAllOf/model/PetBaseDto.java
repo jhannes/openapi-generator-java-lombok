@@ -8,17 +8,15 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-public sealed class PetBaseDto extends PetDto permits CatDto, DogDto {
+public abstract sealed class PetBaseDto extends PetDto permits CatDto, DogDto {
 
     private String id = null;
     private String name;
     private String birth_date = null;
     private AddressDto ownerAddress = null;
 
-    @Override
-    public PetBaseDto setPetType(String petType) {
-        super.setPetType(petType);
-        return this;
+    public PetBaseDto(String petType) {
+        super(petType);
     }
 
     public boolean hasNoOptionalProperties() {

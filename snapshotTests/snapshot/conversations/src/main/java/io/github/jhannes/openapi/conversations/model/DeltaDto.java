@@ -16,15 +16,15 @@ public sealed interface DeltaDto permits AddMessageToConversationDeltaDto, Creat
     }
 
     static AddMessageToConversationDeltaDto createAddMessageToConversationDelta() {
-        return new AddMessageToConversationDeltaDto().setDelta("AddMessageToConversationDelta");
+        return new AddMessageToConversationDeltaDto();
     }
 
     static CreateConversationDeltaDto createCreateConversationDelta() {
-        return new CreateConversationDeltaDto().setDelta("CreateConversationDelta");
+        return new CreateConversationDeltaDto();
     }
 
     static UpdateConversationDeltaDto createUpdateConversationDelta() {
-        return new UpdateConversationDeltaDto().setDelta("UpdateConversationDelta");
+        return new UpdateConversationDeltaDto();
     }
 
     DeltaDto putAll(DeltaDto o);

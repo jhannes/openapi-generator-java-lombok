@@ -16,15 +16,15 @@ public sealed interface WebSocketMessageDto permits SubscribeDto, WebSocketComma
     }
 
     static CreatePersonCommandDto createCreatePerson() {
-        return new CreatePersonCommandDto().setCommand("createPerson");
+        return new CreatePersonCommandDto();
     }
 
     static UpdatePersonCommandDto createUpdatePerson() {
-        return new UpdatePersonCommandDto().setCommand("updatePerson");
+        return new UpdatePersonCommandDto();
     }
 
     static SubscribeDto createSubscribe() {
-        return new SubscribeDto().setCommand("Subscribe");
+        return new SubscribeDto();
     }
 
     WebSocketMessageDto putAll(WebSocketMessageDto o);

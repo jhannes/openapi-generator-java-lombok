@@ -38,7 +38,6 @@ public class SampleModelData extends SampleData {
 
     public CatDto sampleCatDto() {
         return new CatDto()
-            .putAll(samplePetBaseDto())
             .setHunts(sampleBoolean("hunts"))
             .setAge(sampleInteger("age"));
     }
@@ -49,9 +48,17 @@ public class SampleModelData extends SampleData {
 
     public DogDto sampleDogDto() {
         return new DogDto()
-            .putAll(samplePetBaseDto())
             .setBark(sampleBoolean("bark"))
             .setBreed(pickOne(DogDto.BreedEnum.values()));
+    }
+
+    public FoodDto sampleFoodDto(String propertyName) {
+        return sampleFoodDto();
+    }
+
+    public FoodDto sampleFoodDto() {
+        return new FoodDto()
+            .setItemCode(sampleString("itemCode"));
     }
 
     public GoldfishDto sampleGoldfishDto(String propertyName) {
@@ -60,22 +67,20 @@ public class SampleModelData extends SampleData {
 
     public GoldfishDto sampleGoldfishDto() {
         return new GoldfishDto()
-            .putAll(samplePetDto())
             .setName(sampleString("name"))
             .setSpecies(sampleString("species"));
     }
 
-    public PetBaseDto samplePetBaseDto(String propertyName) {
-        return samplePetBaseDto();
+    public ItemDto sampleItemDto(String propertyName) {
+        return sampleItemDto();
     }
 
-    public PetBaseDto samplePetBaseDto() {
-        return new PetBaseDto()
-            .putAll(samplePetDto())
-            .setId(sampleString("id"))
-            .setName(sampleString("name"))
-            .setBirth_date(sampleString("birthDate"))
-            .setOwnerAddress(sampleAddressDto("ownerAddress"));
+    public ItemDto sampleItemDto() {
+        List<Supplier<ItemDto>> factories = List.of(
+            () -> sampleFoodDto(),
+            () -> samplePetDto()
+        );
+        return pickOne(factories).get();
     }
 
     public PetDto samplePetDto(String propertyName) {
@@ -84,12 +89,21 @@ public class SampleModelData extends SampleData {
 
     public PetDto samplePetDto() {
         List<Supplier<PetDto>> factories = List.of(
-            () -> sampleCatDto().setPetType("Cat"),
-            () -> sampleDogDto().setPetType("Dog"),
-            () -> sampleGoldfishDto().setPetType("Goldfish"),
-            () -> sampleWorkingDogDto().setPetType("WorkingDog")
+            () -> sampleCatDto(),
+            () -> sampleDogDto(),
+            () -> sampleGoldfishDto(),
+            () -> sampleWorkingDogDto()
         );
         return pickOne(factories).get();
+    }
+
+    public PetMessageDto samplePetMessageDto(String propertyName) {
+        return samplePetMessageDto();
+    }
+
+    public PetMessageDto samplePetMessageDto() {
+        return new PetMessageDto()
+            .setPet(samplePetDto("pet"));
     }
 
     public WorkingDogCapabilityDto sampleWorkingDogCapabilityDto(String propertyName) {

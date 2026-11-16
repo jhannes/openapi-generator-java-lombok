@@ -27,7 +27,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -164,7 +163,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
     public Map<String, ModelsMap> postProcessAllModels(Map<String, ModelsMap> objs) {
         Map<String, ModelsMap> result = super.postProcessAllModels(objs);
         processAllOfTypes(result);
-        processOneOfInterfaces(result);
+        processDiscriminatedTypes(result);
         setupDerivedVariables(result);
         return result;
     }
@@ -188,8 +187,12 @@ public class JavaCodegen extends AbstractJavaCodegen {
                         .collect(Collectors.toList());
 
                 for (CodegenProperty var : model.getAllVars()) {
-                    if (var.isModel && var.required && allModels.get(var.dataType).oneOf.isEmpty()) {
-                        var.defaultValue = "new " + var.dataType + "()";
+                    CodegenModel varModel = allModels.get(var.dataType);
+                    if (var.isModel && var.required && varModel.oneOf.isEmpty()) {
+                        var nonAbstract = varModel.discriminator == null ||
+                                varModel.discriminator.getPropertyName() == null ||
+                                varModel.allVars.stream().filter(v -> v.name.equals(varModel.discriminator.getPropertyName())).findFirst().orElseThrow().defaultValue != null;
+                        if (nonAbstract) var.defaultValue = "new " + var.dataType + "()";
                     }
                     if (var.getIsEnumOrRef() || var.isString || var.isNumeric || var.isDate || var.isDateTime) {
                         var.isPrimitiveType = true;
@@ -197,12 +200,16 @@ public class JavaCodegen extends AbstractJavaCodegen {
                     if (var.isString && !var.dataType.equals("String")) {
                         var.dataFormat = null;
                     }
-                    if (var.get_enum() != null && var.get_enum().size() == 1) {
-                        var.defaultValue = "\"" + var.get_enum().getFirst() + "\"";
-                        var.dataType = "\"" + var.get_enum().getFirst() + "\"";
+                    if (var.get_enum() != null && (var.isDiscriminator || var._enum.size() == 1)) {
+                        Set<String> enumValues = new TreeSet<>(var.get_enum());
+                        if (enumValues.size() == 1 && (model.interfaces == null || model.interfaces.size() <= 1)) {
+                            var.defaultValue = "\"" + var.get_enum().getFirst() + "\"";
+                            var.dataType = "\"" + var.get_enum().getFirst() + "\"";
+                        }
                         var.datatypeWithEnum = "String";
                         var.defaultValueWithParam = var.defaultValue;
                         var.isEnum = var.isInnerEnum = false;
+                        var._enum = null;
                         var.allowableValues = null;
                         var.isInherited = false;
                     }
@@ -345,12 +352,37 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 .toList();
     }
 
-    private void processOneOfInterfaces(Map<String, ModelsMap> objs) {
+    private void processDiscriminatedTypes(Map<String, ModelsMap> objs) {
         Map<String, List<CodegenModel>> interfacesOfSubtypes = new HashMap<>();
         Map<String, CodegenModel> allModels = getAllModels(objs);
         for (CodegenModel codegenModel : allModels.values()) {
+            var discriminator = codegenModel.discriminator;
             if (!codegenModel.oneOf.isEmpty()) {
-                postProcessOneOf(codegenModel, interfacesOfSubtypes, allModels);
+                processDiscriminatedTypes(codegenModel, interfacesOfSubtypes, allModels);
+            } else if (discriminator != null && !discriminator.getMappedModels().isEmpty()) {
+                for (CodegenDiscriminator.MappedModel mappedModel : discriminator.getMappedModels()) {
+                    mappedModel.getModel().allVars.stream().filter(v -> v.name.equals(discriminator.getPropertyName())).findFirst()
+                            .ifPresentOrElse(v -> {
+                                v.isDiscriminator = true;
+                                v.defaultValue = mappedModel.getMappingName();
+                            }, () -> {
+                                throw new IllegalArgumentException("Help!");
+                            });
+                    var parentModel = mappedModel.getModel().getParentModel();
+                    while (parentModel != null && parentModel != codegenModel) {
+                        parentModel.allVars.stream().filter(v -> v.name.equals(discriminator.getPropertyName())).findFirst()
+                                .ifPresent(v -> {
+                                    v.isDiscriminator = true;
+                                });
+                        if (parentModel.allVars.stream().anyMatch(v -> v.name.equals(discriminator.getPropertyName()) && v.defaultValue == null)) {
+                            parentModel.discriminator = new CodegenDiscriminator();
+                            parentModel.discriminator.setPropertyBaseName(discriminator.getPropertyBaseName());
+                            parentModel.discriminator.setPropertyName(discriminator.getPropertyName());
+                            parentModel.discriminator.setPropertyType(discriminator.getPropertyType());
+                        }
+                        parentModel = parentModel.getParentModel();
+                    }
+                }
             }
         }
 
@@ -360,7 +392,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
         }
     }
 
-    public void postProcessOneOf(CodegenModel codegenModel, Map<String, List<CodegenModel>> interfacesOfSubtypes, Map<String, CodegenModel> allModels) {
+    public void processDiscriminatedTypes(CodegenModel codegenModel, Map<String, List<CodegenModel>> interfacesOfSubtypes, Map<String, CodegenModel> allModels) {
         Set<CodegenDiscriminator.MappedModel> mappedModels = new LinkedHashSet<>();
         HashMap<String, String> mapping = new HashMap<>();
         CodegenDiscriminator discriminator = codegenModel.discriminator;
@@ -375,7 +407,9 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 subModel = allModels.get(subModel.dataType);
             }
             if (subModel.oneOf.isEmpty()) {
-                mappedModels.add(new CodegenDiscriminator.MappedModel(subModel.name, subModel.classname));
+                var mappedModel = new CodegenDiscriminator.MappedModel(subModel.name, subModel.classname, true);
+                mappedModel.setModel(subModel);
+                mappedModels.add(mappedModel);
                 mapping.put(subModel.name, subModel.classname);
             } else if (
                     discriminator != null
@@ -383,7 +417,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
                             && subModel.discriminator.getPropertyName().equals(discriminator.getPropertyName())
             ) {
                 if (subModel.discriminator.getMapping() == null) {
-                    postProcessOneOf(subModel, interfacesOfSubtypes, allModels);
+                    processDiscriminatedTypes(subModel, interfacesOfSubtypes, allModels);
                 }
                 mappedModels.addAll(subModel.discriminator.getMappedModels());
                 mapping.putAll(subModel.discriminator.getMapping());
@@ -396,6 +430,13 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 subtypeInterfaces.add(codegenModel);
             }
             if (codegenModel.getDiscriminatorName() != null) {
+                String mappingName = subModel.name;
+                if (codegenModel.getDiscriminator() != null) {
+                    mappingName = codegenModel.getDiscriminator().getMappedModels().stream()
+                            .filter(m -> m.getModel().classname.equals(className)).findFirst()
+                            .map(CodegenDiscriminator.MappedModel::getMappingName)
+                            .orElse(subModel.name);
+                }
                 Optional<CodegenProperty> prop = subModel.allVars.stream().filter(v -> v.baseName.equals(codegenModel.getDiscriminatorName())).findFirst();
                 if (prop.isEmpty()) {
                     CodegenProperty property = new CodegenProperty();
@@ -405,12 +446,16 @@ public class JavaCodegen extends AbstractJavaCodegen {
                     property.isString = true;
                     property.dataType = property.datatypeWithEnum = "String";
                     property.required = true;
+                    property.set_enum(new ArrayList<>(List.of(mappingName)));
                     property.defaultValue = "\"" + subModel.name + "\"";
                     property.isInherited = false;
                     property.isNew = true;
                     property.isDiscriminator = true;
                     subModel.allVars.addFirst(property);
                 } else {
+                    if (!prop.get().isDiscriminator) prop.get().set_enum(new ArrayList<>());
+                    prop.get().get_enum().add(mappingName);
+                    prop.get().isDiscriminator = true;
                     prop.get().isNew = true;
                 }
             }

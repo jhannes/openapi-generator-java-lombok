@@ -13,10 +13,8 @@ public final class CatDto extends PetBaseDto {
     private Boolean hunts;
     private Integer age = null;
 
-    @Override
-    public CatDto setPetType(String petType) {
-        super.setPetType(petType);
-        return this;
+    public CatDto() {
+        super("Cat");
     }
 
     @Override

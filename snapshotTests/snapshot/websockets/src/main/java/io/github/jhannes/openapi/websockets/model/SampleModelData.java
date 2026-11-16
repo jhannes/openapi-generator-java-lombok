@@ -37,7 +37,6 @@ public class SampleModelData extends SampleData {
 
     public CreatePersonCommandDto sampleCreatePersonCommandDto() {
         return new CreatePersonCommandDto()
-            .setCommand("createPerson")
             .setId(sampleUUID("id"))
             .setPerson(samplePersonDto("person"));
     }
@@ -113,7 +112,6 @@ public class SampleModelData extends SampleData {
 
     public SubscribeDto sampleSubscribeDto() {
         return new SubscribeDto()
-            .setCommand("Subscribe")
             .setRequest("Subscribe");
     }
 
@@ -132,7 +130,6 @@ public class SampleModelData extends SampleData {
 
     public UpdatePersonCommandDto sampleUpdatePersonCommandDto() {
         return new UpdatePersonCommandDto()
-            .setCommand("updatePerson")
             .setId(sampleUUID("id"))
             .setPerson(samplePersonDto("person"));
     }
@@ -143,8 +140,8 @@ public class SampleModelData extends SampleData {
 
     public WebSocketCommandDto sampleWebSocketCommandDto() {
         List<Supplier<WebSocketCommandDto>> factories = List.of(
-            () -> sampleCreatePersonCommandDto().setCommand("createPerson"),
-            () -> sampleUpdatePersonCommandDto().setCommand("updatePerson")
+            () -> sampleCreatePersonCommandDto(),
+            () -> sampleUpdatePersonCommandDto()
         );
         return pickOne(factories).get();
     }
@@ -155,9 +152,9 @@ public class SampleModelData extends SampleData {
 
     public WebSocketMessageDto sampleWebSocketMessageDto() {
         List<Supplier<WebSocketMessageDto>> factories = List.of(
-            () -> sampleCreatePersonCommandDto().setCommand("createPerson"),
-            () -> sampleUpdatePersonCommandDto().setCommand("updatePerson"),
-            () -> sampleSubscribeDto().setCommand("Subscribe")
+            () -> sampleCreatePersonCommandDto(),
+            () -> sampleUpdatePersonCommandDto(),
+            () -> sampleSubscribeDto()
         );
         return pickOne(factories).get();
     }

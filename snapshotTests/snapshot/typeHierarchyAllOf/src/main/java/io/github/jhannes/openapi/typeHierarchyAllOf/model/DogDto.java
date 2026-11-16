@@ -31,10 +31,12 @@ public sealed class DogDto extends PetBaseDto permits WorkingDogDto {
     private Boolean bark = null;
     private BreedEnum breed = null;
 
-    @Override
-    public DogDto setPetType(String petType) {
-        super.setPetType(petType);
-        return this;
+    public DogDto(String petType) {
+        super(petType);
+    }
+
+    public DogDto() {
+        super("Dog");
     }
 
     @Override

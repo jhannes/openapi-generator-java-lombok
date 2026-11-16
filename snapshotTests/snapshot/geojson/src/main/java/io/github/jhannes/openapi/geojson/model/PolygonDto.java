@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public final class PolygonDto implements GeometryDto {
 
-    private String type = "Polygon";
+    private final String type = "Polygon";
     private List<List<List<Double>>> coordinates = new ArrayList<>();
 
     public boolean hasNoOptionalProperties() {

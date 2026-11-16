@@ -28,7 +28,7 @@ public final class ThreadHealthDetailsDto implements HealthDetailsDto {
         }
     }
 
-    private String type = "ThreadHealthDetails";
+    private final String type = "ThreadHealthDetails";
     private ThreadStateEnum threadState = null;
     private List<StackTraceInnerDto> stackTrace = new ArrayList<>();
     private OffsetDateTime lastAliveTime = null;

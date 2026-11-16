@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public final class CatDto extends PetBaseDto implements PetDto {
 
-    private String pet_type = "Cat";
+    private final String pet_type = "Cat";
     private Boolean hunts = null;
     private Integer age = null;
 

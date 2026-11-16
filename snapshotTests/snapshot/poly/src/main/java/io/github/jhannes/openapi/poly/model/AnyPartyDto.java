@@ -15,11 +15,11 @@ public sealed interface AnyPartyDto permits OrganizationDto, PersonDto {
     }
 
     static OrganizationDto createOrganization() {
-        return new OrganizationDto().setType("organization");
+        return new OrganizationDto();
     }
 
     static PersonDto createPerson() {
-        return new PersonDto().setType("person");
+        return new PersonDto();
     }
 
     AnyPartyDto putAll(AnyPartyDto o);

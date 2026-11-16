@@ -24,21 +24,29 @@ public class SampleModelData extends SampleData {
 {{#models}}
 {{#model}}
 {{#unless isMixin}}
+{{#if discriminator}}
+{{#if discriminator.mappedModels}}
     public {{classname}} sample{{classname}}(String propertyName) {
         return sample{{classname}}();
     }
 
     public {{classname}} sample{{classname}}() {
-{{#if discriminator.mappedModels}}
         List<Supplier<{{classname}}>> factories = List.of(
 {{#discriminator}}{{#mappedModels}}
-            () -> sample{{modelName}}().set{{capitalizeFirst discriminator.propertyName}}("{{mappingName}}"){{#unless @last}},{{/unless}}
+            () -> sample{{modelName}}(){{#if model.interfaces}}{{#if (gt model.interfaces.length 1)}}.set{{capitalizeFirst propertyName}}("{{mappingName}}"){{/if}}{{/if}}{{#unless @last}},{{/unless}}
 {{/mappedModels}}{{/discriminator}}
         );
         return pickOne(factories).get();
     }
 
-{{else if oneOf}}
+{{/if}}
+{{else}}
+    public {{classname}} sample{{classname}}(String propertyName) {
+        return sample{{classname}}();
+    }
+
+    public {{classname}} sample{{classname}}() {
+{{#if oneOf}}
         throw new RuntimeException("Unsupported: oneOf without discriminator: {{className}}");
     }
 
@@ -48,9 +56,11 @@ public class SampleModelData extends SampleData {
 
 {{else}}
         return new {{classname}}()
-{{~#if parent}}
+{{~#if parentModel}}
+{{~#unless parentModel.discriminator}}
 
             .putAll(sample{{{parent}}}())
+{{~/unless~}}
 {{~/if~}}
 {{~#vars}}
 {{#if isInnerEnum}}
@@ -68,8 +78,10 @@ public class SampleModelData extends SampleData {
             .{{setter}}(sample{{#if uniqueItems}}Set{{else if isMap}}Map{{else}}List{{/if}}(() -> sample{{{items.datatypeWithEnum}}}("{{name}}"), "{{name}}"))
 {{~/if}}
 {{~else if defaultValue}}
+{{~#unless isDiscriminator}}
 
             .{{setter}}({{{defaultValue}}})
+{{~/unless}}
 {{~else if isPrimitiveType}}
 
             .{{setter}}(sample{{{datatypeWithEnum}}}("{{name}}"{{#if isString}}{{#if dataFormat}}, "{{dataFormat}}"{{/if}}{{/if}}))
@@ -80,6 +92,7 @@ public class SampleModelData extends SampleData {
 {{~/vars}};
     }
 
+{{/if}}
 {{#allVars}}
 {{#if items.isContainer}}
     public {{{datatypeWithEnum}}} {{name}}For{{classname}}() {

@@ -9,7 +9,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 public final class WorkingDogDto extends DogDto implements PetDto {
 
-    private String pet_type = "WorkingDog";
+    private final String pet_type = "WorkingDog";
     private List<WorkingDogCapabilityDto> capabilities = new ArrayList<>();
 
     @Override
