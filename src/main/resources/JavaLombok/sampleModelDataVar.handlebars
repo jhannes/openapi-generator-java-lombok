@@ -1,0 +1,26 @@
+{{#if isInnerEnum}}
+
+            .{{setter}}({{#if isArray}}{{#if uniqueItems}}pickSubset{{else}}pickSome{{/if}}({{classname}}.{{items.datatypeWithEnum}}.values())){{else}}pickOne({{classname}}.{{datatypeWithEnum}}.values())){{/if}}
+{{~else if isModel}}
+
+            .{{setter}}(sample{{{datatypeWithEnum}}}("{{name}}"))
+{{~else if isContainer}}
+{{~#if items.isContainer}}
+
+            .{{setter}}({{name}}For{{classname}}())
+{{~else}}
+
+            .{{setter}}(sample{{#if uniqueItems}}Set{{else if isMap}}Map{{else}}List{{/if}}(() -> sample{{{items.datatypeWithEnum}}}("{{name}}"), "{{name}}"))
+{{~/if}}
+{{~else if defaultValue}}
+{{~#unless isDiscriminator}}
+
+            .{{setter}}({{{defaultValue}}})
+{{~/unless}}
+{{~else if isPrimitiveType}}
+
+            .{{setter}}(sample{{{datatypeWithEnum}}}("{{name}}"{{#if isString}}{{#if dataFormat}}, "{{dataFormat}}"{{/if}}{{/if}}))
+{{~else}}
+
+            .{{setter}}(sample{{{datatypeWithEnum}}}("{{name}}"))
+{{~/if}}

@@ -80,6 +80,11 @@ public sealed class DogDto extends PetBaseDto permits WorkingDogDto {
         return this;
     }
 
+    public DogDto putAll(PetDto o) {
+        o.copyToDog(this);
+        return this;
+    }
+
     public DogDto removeWhereEqual(DogDto o) {
         o.removeWhereEqualFromDog(this);
         return this;

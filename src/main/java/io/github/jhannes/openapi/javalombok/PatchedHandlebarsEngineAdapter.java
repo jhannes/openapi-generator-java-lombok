@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
@@ -77,6 +78,8 @@ class PatchedHandlebarsEngineAdapter extends HandlebarsEngineAdapter {
         handlebars.registerHelpers(ConditionalHelpers.class);
         handlebars.registerHelpers(org.openapitools.codegen.templating.handlebars.StringHelpers.class);
         handlebars.registerHelper("implementations", new ImplementationsHelper());
+        handlebars.registerHelper("ancestors", new AncestorTypesHelper());
+        handlebars.registerHelper("descendants", new DescendantTypesHelper());
         handlebars.registerHelper("ambiguousRelatedTypes", new AmbiguousRelatedTypesHelper());
         handlebars.registerHelper("isMixinAllOf", new IsMixinAllOf());
         handlebars.registerHelper("notMixinDto", new NotMixinDto());
@@ -98,6 +101,42 @@ class PatchedHandlebarsEngineAdapter extends HandlebarsEngineAdapter {
         }
 
         protected abstract boolean getResult(CodegenModel model);
+    }
+
+    public static class AncestorTypesHelper implements Helper<Object> {
+        @Override
+        public Object apply(Object context, Options options) throws IOException {
+            if (context instanceof CodegenModel model) {
+                int index = 0;
+                CodegenModel parent = model.parentModel;
+                while (parent != null) {
+                    outputWithNewContext(options, parent, index++);
+                    parent = parent.parentModel;
+                }
+            }
+            return options.inverse();
+        }
+    }
+
+    public static class DescendantTypesHelper implements Helper<Object> {
+        @Override
+        public Object apply(Object context, Options options) throws IOException {
+            if (context instanceof CodegenModel model) {
+                int index = 0;
+                outputWithChildren(options, model.children, index);
+            }
+            return options.inverse();
+        }
+
+        private void outputWithChildren(Options options, List<CodegenModel> children, int index) throws IOException {
+            if (children == null) return;
+            for (CodegenModel child : children) {
+                outputWithNewContext(options, child, index++);
+            }
+            for (CodegenModel child : children) {
+                outputWithChildren(options, child.children, index++);
+            }
+        }
     }
 
     public static class AmbiguousRelatedTypesHelper implements Helper<Object> {

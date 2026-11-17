@@ -63,6 +63,11 @@ public final class WorkingDogDto extends DogDto implements PetDto {
         return this;
     }
 
+    public WorkingDogDto putAll(PetBaseDto o) {
+        o.copyToWorkingDog(this);
+        return this;
+    }
+
     public WorkingDogDto putAll(PetDto o) {
         o.copyToWorkingDog(this);
         return this;

@@ -66,6 +66,16 @@ public final class WorkingDogDto extends DogDto {
         return this;
     }
 
+    public WorkingDogDto putAll(PetBaseDto o) {
+        o.copyToWorkingDog(this);
+        return this;
+    }
+
+    public WorkingDogDto putAll(PetDto o) {
+        o.copyToWorkingDog(this);
+        return this;
+    }
+
     public WorkingDogDto removeWhereEqual(WorkingDogDto o) {
         o.removeWhereEqualFromWorkingDog(this);
         return this;

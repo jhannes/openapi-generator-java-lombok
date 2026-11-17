@@ -57,6 +57,11 @@ public final class CatDto extends PetBaseDto {
         return this;
     }
 
+    public CatDto putAll(PetDto o) {
+        o.copyToCat(this);
+        return this;
+    }
+
     public CatDto removeWhereEqual(CatDto o) {
         o.removeWhereEqualFromCat(this);
         return this;

@@ -38,6 +38,10 @@ public class SampleModelData extends SampleData {
 
     public CatDto sampleCatDto() {
         return new CatDto()
+            .setId(sampleString("id"))
+            .setName(sampleString("name"))
+            .setBirth_date(sampleString("birthDate"))
+            .setOwnerAddress(sampleAddressDto("ownerAddress"))
             .setHunts(sampleBoolean("hunts"))
             .setAge(sampleInteger("age"));
     }
@@ -48,6 +52,10 @@ public class SampleModelData extends SampleData {
 
     public DogDto sampleDogDto() {
         return new DogDto()
+            .setId(sampleString("id"))
+            .setName(sampleString("name"))
+            .setBirth_date(sampleString("birthDate"))
+            .setOwnerAddress(sampleAddressDto("ownerAddress"))
             .setBark(sampleBoolean("bark"))
             .setBreed(pickOne(DogDto.BreedEnum.values()));
     }

@@ -120,13 +120,13 @@ public {{#if children}}{{#if discriminator}}abstract {{/if}}sealed{{else}}final{
     }
 
 {{/notMixinDto}}
-{{#if parent}}
-    public {{classname}} putAll({{{parent}}} o) {
-        o.copyTo{{name}}(this);
+{{#ancestors}}
+    public {{../classname}} putAll({{{classname}}} o) {
+        o.copyTo{{../name}}(this);
         return this;
     }
 
-{{/if}}
+{{/ancestors}}
 {{#interfaceModels}}
     public {{../classname}} putAll({{#if interfaces}}{{~#interfaces}}{{#if @first}}{{.}}{{/if}}{{/interfaces}}{{else}}{{classname}}{{/if}} o) {
         o.copyTo{{../name}}(this);
@@ -220,12 +220,12 @@ public {{#if children}}{{#if discriminator}}abstract {{/if}}sealed{{else}}final{
 {{/unless}}
 {{/vars}}
     }
-{{#children}}
+{{#descendants}}
 
     public void copyTo{{name}}({{classname}} o) {
         copyTo{{../name}}(o);
     }
-{{/children}}
+{{/descendants}}
 {{#ambiguousRelatedTypes}}
     public void copyTo{{name}}({{classname}} o) {
     }

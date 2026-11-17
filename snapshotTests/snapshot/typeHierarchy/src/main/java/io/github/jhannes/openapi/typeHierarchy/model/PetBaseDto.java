@@ -54,6 +54,10 @@ public sealed class PetBaseDto permits CatDto, DogDto {
         copyToPetBase(o);
     }
 
+    public void copyToWorkingDog(WorkingDogDto o) {
+        copyToPetBase(o);
+    }
+
     public void removeWhereEqualFromPetBase(PetBaseDto o) {
         if (Objects.equals(getId(), o.getId())) o.setId(null);
         if (Objects.equals(getBirth_date(), o.getBirth_date())) o.setBirth_date(null);

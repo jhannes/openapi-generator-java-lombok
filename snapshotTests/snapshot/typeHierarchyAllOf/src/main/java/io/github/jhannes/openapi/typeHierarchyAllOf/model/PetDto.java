@@ -78,6 +78,18 @@ public abstract sealed class PetDto implements ItemDto permits GoldfishDto, PetB
         copyToPet(o);
     }
 
+    public void copyToCat(CatDto o) {
+        copyToPet(o);
+    }
+
+    public void copyToDog(DogDto o) {
+        copyToPet(o);
+    }
+
+    public void copyToWorkingDog(WorkingDogDto o) {
+        copyToPet(o);
+    }
+
     public void removeWhereEqualFromPet(PetDto o) {
     }
 

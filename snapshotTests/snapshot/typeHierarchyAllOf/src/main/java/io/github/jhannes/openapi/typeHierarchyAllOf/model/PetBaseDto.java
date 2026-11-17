@@ -72,6 +72,10 @@ public abstract sealed class PetBaseDto extends PetDto permits CatDto, DogDto {
         copyToPetBase(o);
     }
 
+    public void copyToWorkingDog(WorkingDogDto o) {
+        copyToPetBase(o);
+    }
+
     public void removeWhereEqualFromPetBase(PetBaseDto o) {
         removeWhereEqualFromPet(o);
         if (Objects.equals(getId(), o.getId())) o.setId(null);
