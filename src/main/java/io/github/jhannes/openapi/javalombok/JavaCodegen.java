@@ -370,16 +370,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
                             });
                     var parentModel = mappedModel.getModel().getParentModel();
                     while (parentModel != null && parentModel != codegenModel) {
-                        parentModel.allVars.stream().filter(v -> v.name.equals(discriminator.getPropertyName())).findFirst()
-                                .ifPresent(v -> {
-                                    v.isDiscriminator = true;
-                                });
-                        if (parentModel.allVars.stream().anyMatch(v -> v.name.equals(discriminator.getPropertyName()) && v.defaultValue == null)) {
-                            parentModel.discriminator = new CodegenDiscriminator();
-                            parentModel.discriminator.setPropertyBaseName(discriminator.getPropertyBaseName());
-                            parentModel.discriminator.setPropertyName(discriminator.getPropertyName());
-                            parentModel.discriminator.setPropertyType(discriminator.getPropertyType());
-                        }
+                        setupParentDiscriminatorProperty(parentModel, discriminator);
                         parentModel = parentModel.getParentModel();
                     }
                 }
@@ -389,6 +380,19 @@ public class JavaCodegen extends AbstractJavaCodegen {
         for (String implementationTypeName : interfacesOfSubtypes.keySet()) {
             CodegenModel codegenModel = allModels.get(implementationTypeName);
             codegenModel.interfaceModels = interfacesOfSubtypes.get(codegenModel.classname);
+        }
+    }
+
+    private static void setupParentDiscriminatorProperty(CodegenModel parentModel, CodegenDiscriminator discriminator) {
+        parentModel.allVars.stream().filter(v -> v.name.equals(discriminator.getPropertyName())).findFirst()
+                .ifPresent(v -> {
+                    v.isDiscriminator = true;
+                });
+        if (parentModel.allVars.stream().anyMatch(v -> v.name.equals(discriminator.getPropertyName()) && discriminator.getMappedModels().stream().noneMatch(m -> m.getModel() == parentModel))) {
+            parentModel.discriminator = new CodegenDiscriminator();
+            parentModel.discriminator.setPropertyBaseName(discriminator.getPropertyBaseName());
+            parentModel.discriminator.setPropertyName(discriminator.getPropertyName());
+            parentModel.discriminator.setPropertyType(discriminator.getPropertyType());
         }
     }
 
