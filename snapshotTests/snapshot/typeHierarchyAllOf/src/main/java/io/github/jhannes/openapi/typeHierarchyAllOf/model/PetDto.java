@@ -68,9 +68,6 @@ public abstract sealed class PetDto implements ItemDto permits GoldfishDto, PetB
     }
 
     public void copyToPet(PetDto o) {
-        if (!getPetType().equals(o.getPetType())) {
-            throw new IllegalArgumentException("Cannot copy " + getPetType() + " to " + o.getPetType());
-        }
     }
 
     public void copyToGoldfish(GoldfishDto o) {

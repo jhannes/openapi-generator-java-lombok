@@ -214,13 +214,9 @@ public {{#if children}}{{#if discriminator}}abstract {{/if}}sealed{{else}}final{
 {{/interfaceModels}}
 {{#vars}}
 {{#unless isNew}}
-{{#if isDiscriminator}}
-        if (!{{getter}}().equals(o.{{getter}}())) {
-            throw new IllegalArgumentException("Cannot copy " + {{getter}}() + " to " + o.{{getter}}());
-        }
-{{else}}
+{{#unless isDiscriminator}}
         if ({{getter}}() != null) o.{{setter}}({{getter}}());
-{{/if}}
+{{/unless}}
 {{/unless}}
 {{/vars}}
     }
